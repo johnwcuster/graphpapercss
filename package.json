@@ -1,0 +1,16 @@
+{
+  "name": "graphpapercss",
+  "version": "1.0.0-prototype.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-layouts.mjs && node scripts/build.mjs",
+    "layouts:build": "node scripts/build-layouts.mjs",
+    "inventory": "node scripts/inventory.mjs",
+    "size": "node scripts/size-report.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test",
+    "check": "node scripts/inventory.mjs --check && node scripts/build-layouts.mjs --check && node scripts/build.mjs --check && node scripts/validate.mjs && node --test",
+    "dev": "node scripts/serve.mjs"
+  }
+}

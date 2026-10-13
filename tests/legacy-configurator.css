@@ -1,0 +1,68 @@
+.legacy-flow-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+  gap: 0.75rem;
+}
+
+.legacy-flow-option {
+  display: grid;
+  gap: 0.35rem;
+  min-height: 5.5rem;
+  padding: 0.75rem;
+  border: 1px solid #a9afa9;
+  background: #fff;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.legacy-flow-option[aria-pressed="true"] {
+  border-color: #17211d;
+  box-shadow: 0 0 0 2px #17211d;
+}
+
+.legacy-flow-option small {
+  color: #68716d;
+  line-height: 1.35;
+}
+
+.legacy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.legacy-actions a,
+.legacy-actions button {
+  display: inline-block;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #17211d;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.legacy-frame-viewport {
+  width: 100%;
+  overflow-x: auto;
+  padding: 1rem 0 2rem;
+}
+
+#legacy-frame {
+  display: block;
+  width: var(--legacy-preview-width, 960px);
+  min-width: var(--legacy-preview-width, 960px);
+  height: 32rem;
+  margin-inline: auto;
+  border: 0;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(23 33 29 / 12%);
+}
+
+@media (max-width: 42rem) {
+  .result-heading {
+    display: grid;
+  }
+}

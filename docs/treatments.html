@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph Paper rules and micro-alignment</title>
+    <link rel="stylesheet" href="../css/next.css">
+    <link rel="stylesheet" href="./docs.css">
+  </head>
+  <body>
+    <main class="docs-shell">
+      <nav class="docs-nav" aria-label="Prototype documentation">
+        <a href="./configurator.html">Configurator</a>
+        <a href="./grids.html">Grid catalog</a>
+        <a href="./canvas.html">Canvas &amp; rhythm</a>
+        <a href="./subgrid.html">Subgrid</a>
+        <a href="./treatments.html" aria-current="page">Treatments</a>
+        <a href="../tests/legacy-configurator.html">Legacy configurator</a>
+        <a href="../tests/browser-geometry.html">Geometry checks</a>
+      </nav>
+
+      <header class="intro catalog-intro">
+        <p class="eyebrow">Rules and micro-alignment</p>
+        <h1>Make the exception explicit.</h1>
+        <p>
+          Rules are a visual treatment, not a fourth spacing rhythm. A small
+          set of deliberate escape hatches handles the editorial exceptions
+          that grid, set, and flow should not have to encode.
+        </p>
+      </header>
+
+      <section class="concept-section" aria-labelledby="rules-title">
+        <div class="concept-heading">
+          <p class="eyebrow">Rule treatment</p>
+          <h2 id="rules-title">Name the edge that receives the rule</h2>
+          <p>
+            The legacy stylesheet inferred borders through a large
+            grid/set/flow selector matrix. The 1.0 model gives items explicit
+            start and end rules. Each one-pixel marker is offset by half of the
+            active gap, placing it at the gutter’s center without changing item
+            geometry.
+          </p>
+        </div>
+
+        <div class="rule-demo gp_canvas">
+          <section class="grid_03a--01 gp_treatment--rule rule-demo-grid">
+            <article class="gp_rule--end rule-demo-card rule-demo-card--lead">
+              <p class="story-kicker">Analysis</p>
+              <h3>The border belongs to this edge</h3>
+              <p>The wide rhythm remains intact; the rule sits halfway across its gap.</p>
+            </article>
+            <article class="rule-demo-card">
+              <p class="story-kicker">Evidence</p>
+              <h3>Unchanged content</h3>
+              <p>The parent treatment positions rules without changing this item’s box.</p>
+            </article>
+            <article class="gp_rule--start rule-demo-card">
+              <p class="story-kicker">Context</p>
+              <h3>Start edge</h3>
+              <p>Logical properties keep the treatment writing-mode aware.</p>
+            </article>
+          </section>
+        </div>
+
+        <pre><code>&lt;main class="gp_canvas"&gt;
+  &lt;section class="grid_03a--01 gp_treatment--rule"&gt;
+    &lt;article class="gp_rule--end"&gt;…&lt;/article&gt;
+    &lt;article&gt;…&lt;/article&gt;
+    &lt;article class="gp_rule--start"&gt;…&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+      </section>
+
+      <section class="concept-section" aria-labelledby="escape-title">
+        <div class="concept-heading">
+          <p class="eyebrow">Constrained escape hatches</p>
+          <h2 id="escape-title">Three adjustments, three different jobs</h2>
+          <p>
+            These utilities do not form a general-purpose spacing or placement
+            framework. Each answers a recurring editorial need using the
+            coordinate system already established by Graph Paper.
+          </p>
+        </div>
+
+        <div class="escape-examples">
+          <article class="escape-example">
+            <header><code>gp_inset--bit</code><h3>Create a content gutter</h3></header>
+            <div class="gp_canvas gp_rhythm--neat escape-canvas">
+              <section class="grid_02">
+                <div class="gp_inset--bit escape-block escape-block--dark">One-bit inline inset</div>
+                <div class="gp_inset--bit escape-block">Track widths stay unchanged</div>
+              </section>
+            </div>
+            <p>Use the ruler’s bit when content needs air inside gapless neat geometry.</p>
+          </article>
+
+          <article class="escape-example">
+            <header><code>gp_place</code><h3>Override one exceptional item</h3></header>
+            <div class="gp_canvas escape-canvas escape-canvas--placement">
+              <section class="grid_03a--01 escape-placement-grid">
+                <div class="escape-block escape-block--dark">Default macro 1</div>
+                <div class="escape-block">Default macro 2</div>
+                <div class="gp_place escape-block escape-block--accent" style="--gp-column-start: 7; --gp-column-end: 19; --gp-row-start: 2; --gp-row-end: 3">Explicit lines 7 / 19</div>
+              </section>
+            </div>
+            <p>The helper consumes four custom properties instead of shipping dozens of line utilities.</p>
+          </article>
+
+          <article class="escape-example">
+            <header><code>gp_optical</code><h3>Correct type without moving layout</h3></header>
+            <div class="optical-demo">
+              <i aria-hidden="true"></i>
+              <p><span class="gp_optical" style="--gp-optical-x: -0.04em; --gp-optical-y: -0.05cap">A city read from the river</span></p>
+            </div>
+            <p>Font-relative translation changes the glyphs’ optical position, not their grid placement.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="concept-section" aria-labelledby="api-title">
+        <div class="concept-heading">
+          <p class="eyebrow">Small public surface</p>
+          <h2 id="api-title">What Phase 8 adds—and stops at</h2>
+        </div>
+        <dl class="treatment-api">
+          <div><dt><code>gp_treatment--rule</code></dt><dd>Positions rule markers halfway across the active grid gap.</dd></div>
+          <div><dt><code>gp_rule--start</code> / <code>gp_rule--end</code></dt><dd>Add non-geometric rule markers on the named logical edge.</dd></div>
+          <div><dt><code>gp_inset--bit</code></dt><dd>Add one bit of inline content inset.</dd></div>
+          <div><dt><code>gp_place</code></dt><dd>Consumes explicit column and row start/end custom properties.</dd></div>
+          <div><dt><code>gp_optical</code></dt><dd>Consumes optical x/y translation custom properties.</dd></div>
+        </dl>
+        <div class="guidance-callout">
+          There are deliberately no cell variants, bleed matrix, alignment
+          matrix, or per-line placement classes yet. Additions need a real
+          editorial example rather than symmetry with another utility.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,788 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "tests/fixtures/legacy-main.css",
+  "source": {
+    "bytes": 39291,
+    "lines": 1263,
+    "sha256": "8bcfdcd401bfa53752569c4eb6c01400b20e27f4d36b87b53db7cf9b1cac60dc"
+  },
+  "summary": {
+    "concreteClassCount": 94,
+    "concreteGridClassCount": 72,
+    "flowClassCount": 7,
+    "importantDeclarationCount": 16,
+    "setClassCount": 4,
+    "substringSelectorCount": 541,
+    "utilityClassCount": 11
+  },
+  "classes": {
+    "grids": [
+      "grid_02",
+      "grid_02a",
+      "grid_02a--01",
+      "grid_02a--02",
+      "grid_02a--03",
+      "grid_02a--04",
+      "grid_02a--05",
+      "grid_02a--06",
+      "grid_02b",
+      "grid_02b--01",
+      "grid_02b--02",
+      "grid_02b--03",
+      "grid_02b--04",
+      "grid_02b--05",
+      "grid_02b--06",
+      "grid_03",
+      "grid_03a",
+      "grid_03a--01",
+      "grid_03a--02",
+      "grid_03a--03",
+      "grid_03a--04",
+      "grid_03a--05",
+      "grid_03a--06",
+      "grid_03a--07",
+      "grid_03a--08",
+      "grid_03b",
+      "grid_03b--01",
+      "grid_03b--02",
+      "grid_03b--03",
+      "grid_03b--04",
+      "grid_03b--05",
+      "grid_03b--06",
+      "grid_03b--07",
+      "grid_03b--08",
+      "grid_03c",
+      "grid_03c--01",
+      "grid_03c--02",
+      "grid_03c--03",
+      "grid_03c--04",
+      "grid_03c--05",
+      "grid_03c--06",
+      "grid_03c--07",
+      "grid_03c--08",
+      "grid_03d",
+      "grid_03d--01",
+      "grid_03d--02",
+      "grid_03d--03",
+      "grid_03d--04",
+      "grid_03d--05",
+      "grid_03d--06",
+      "grid_03d--07",
+      "grid_03d--08",
+      "grid_04",
+      "grid_04a",
+      "grid_04a--01",
+      "grid_04a--02",
+      "grid_04a--03",
+      "grid_04a--04",
+      "grid_04b",
+      "grid_04b--01",
+      "grid_04b--02",
+      "grid_04b--03",
+      "grid_04b--04",
+      "grid_04c",
+      "grid_04c--01",
+      "grid_04c--02",
+      "grid_04c--03",
+      "grid_04c--04",
+      "grid_04d--01",
+      "grid_04d--02",
+      "grid_04d--03",
+      "grid_04d--04"
+    ],
+    "sets": [
+      "set_03",
+      "set_04",
+      "set_05",
+      "set_06"
+    ],
+    "flows": [
+      "flow_01",
+      "flow_02",
+      "flow_03",
+      "flow_04",
+      "flow_05",
+      "flow_06",
+      "flow_07"
+    ],
+    "utilities": [
+      "fit-img",
+      "flow",
+      "grid",
+      "print-only",
+      "row-gap--cell",
+      "row-gap--line",
+      "rowgap--cell",
+      "rowgap--line",
+      "set",
+      "subtitle",
+      "title"
+    ]
+  },
+  "gridGeometry": {
+    "grid_02": {
+      "lattice": 20,
+      "spans": [
+        10,
+        10
+      ]
+    },
+    "grid_02a": {
+      "lattice": 20,
+      "spans": [
+        10,
+        10
+      ]
+    },
+    "grid_02a--01": {
+      "lattice": 24,
+      "spans": [
+        14,
+        10
+      ]
+    },
+    "grid_02a--02": {
+      "lattice": 20,
+      "spans": [
+        12,
+        8
+      ]
+    },
+    "grid_02a--03": {
+      "lattice": 24,
+      "spans": [
+        16,
+        8
+      ]
+    },
+    "grid_02a--04": {
+      "lattice": 20,
+      "spans": [
+        14,
+        6
+      ]
+    },
+    "grid_02a--05": {
+      "lattice": 24,
+      "spans": [
+        18,
+        6
+      ]
+    },
+    "grid_02a--06": {
+      "lattice": 20,
+      "spans": [
+        16,
+        4
+      ]
+    },
+    "grid_02b": {
+      "lattice": 20,
+      "spans": [
+        10,
+        10
+      ]
+    },
+    "grid_02b--01": {
+      "lattice": 24,
+      "spans": [
+        10,
+        14
+      ]
+    },
+    "grid_02b--02": {
+      "lattice": 20,
+      "spans": [
+        8,
+        12
+      ]
+    },
+    "grid_02b--03": {
+      "lattice": 24,
+      "spans": [
+        8,
+        16
+      ]
+    },
+    "grid_02b--04": {
+      "lattice": 20,
+      "spans": [
+        6,
+        14
+      ]
+    },
+    "grid_02b--05": {
+      "lattice": 24,
+      "spans": [
+        6,
+        18
+      ]
+    },
+    "grid_02b--06": {
+      "lattice": 20,
+      "spans": [
+        4,
+        16
+      ]
+    },
+    "grid_03": {
+      "lattice": 24,
+      "spans": [
+        8,
+        8,
+        8
+      ]
+    },
+    "grid_03a": {
+      "lattice": 24,
+      "spans": [
+        10,
+        7,
+        7
+      ]
+    },
+    "grid_03a--01": {
+      "lattice": 24,
+      "spans": [
+        10,
+        8,
+        6
+      ]
+    },
+    "grid_03a--02": {
+      "lattice": 20,
+      "spans": [
+        10,
+        6,
+        4
+      ]
+    },
+    "grid_03a--03": {
+      "lattice": 24,
+      "spans": [
+        12,
+        8,
+        4
+      ]
+    },
+    "grid_03a--04": {
+      "lattice": 24,
+      "spans": [
+        14,
+        6,
+        4
+      ]
+    },
+    "grid_03a--05": {
+      "lattice": 20,
+      "spans": [
+        8,
+        6,
+        6
+      ]
+    },
+    "grid_03a--06": {
+      "lattice": 24,
+      "spans": [
+        12,
+        6,
+        6
+      ]
+    },
+    "grid_03a--07": {
+      "lattice": 20,
+      "spans": [
+        12,
+        4,
+        4
+      ]
+    },
+    "grid_03a--08": {
+      "lattice": 24,
+      "spans": [
+        16,
+        4,
+        4
+      ]
+    },
+    "grid_03b": {
+      "lattice": 24,
+      "spans": [
+        7,
+        7,
+        10
+      ]
+    },
+    "grid_03b--01": {
+      "lattice": 24,
+      "spans": [
+        6,
+        8,
+        10
+      ]
+    },
+    "grid_03b--02": {
+      "lattice": 20,
+      "spans": [
+        4,
+        6,
+        10
+      ]
+    },
+    "grid_03b--03": {
+      "lattice": 24,
+      "spans": [
+        4,
+        8,
+        12
+      ]
+    },
+    "grid_03b--04": {
+      "lattice": 24,
+      "spans": [
+        4,
+        6,
+        14
+      ]
+    },
+    "grid_03b--05": {
+      "lattice": 20,
+      "spans": [
+        6,
+        6,
+        8
+      ]
+    },
+    "grid_03b--06": {
+      "lattice": 24,
+      "spans": [
+        6,
+        6,
+        12
+      ]
+    },
+    "grid_03b--07": {
+      "lattice": 20,
+      "spans": [
+        4,
+        4,
+        12
+      ]
+    },
+    "grid_03b--08": {
+      "lattice": 24,
+      "spans": [
+        4,
+        4,
+        16
+      ]
+    },
+    "grid_03c": {
+      "lattice": 24,
+      "spans": [
+        7,
+        10,
+        7
+      ]
+    },
+    "grid_03c--01": {
+      "lattice": 24,
+      "spans": [
+        8,
+        10,
+        6
+      ]
+    },
+    "grid_03c--02": {
+      "lattice": 20,
+      "spans": [
+        6,
+        10,
+        4
+      ]
+    },
+    "grid_03c--03": {
+      "lattice": 24,
+      "spans": [
+        8,
+        12,
+        4
+      ]
+    },
+    "grid_03c--04": {
+      "lattice": 24,
+      "spans": [
+        6,
+        14,
+        4
+      ]
+    },
+    "grid_03c--05": {
+      "lattice": 20,
+      "spans": [
+        6,
+        8,
+        6
+      ]
+    },
+    "grid_03c--06": {
+      "lattice": 24,
+      "spans": [
+        6,
+        12,
+        6
+      ]
+    },
+    "grid_03c--07": {
+      "lattice": 20,
+      "spans": [
+        4,
+        12,
+        4
+      ]
+    },
+    "grid_03c--08": {
+      "lattice": 24,
+      "spans": [
+        4,
+        16,
+        4
+      ]
+    },
+    "grid_03d": {
+      "lattice": 24,
+      "spans": [
+        7,
+        10,
+        7
+      ]
+    },
+    "grid_03d--01": {
+      "lattice": 24,
+      "spans": [
+        6,
+        10,
+        8
+      ]
+    },
+    "grid_03d--02": {
+      "lattice": 20,
+      "spans": [
+        4,
+        10,
+        6
+      ]
+    },
+    "grid_03d--03": {
+      "lattice": 24,
+      "spans": [
+        4,
+        12,
+        8
+      ]
+    },
+    "grid_03d--04": {
+      "lattice": 24,
+      "spans": [
+        4,
+        14,
+        6
+      ]
+    },
+    "grid_03d--05": {
+      "lattice": 20,
+      "spans": [
+        6,
+        8,
+        6
+      ]
+    },
+    "grid_03d--06": {
+      "lattice": 24,
+      "spans": [
+        6,
+        12,
+        6
+      ]
+    },
+    "grid_03d--07": {
+      "lattice": 20,
+      "spans": [
+        4,
+        12,
+        4
+      ]
+    },
+    "grid_03d--08": {
+      "lattice": 24,
+      "spans": [
+        4,
+        16,
+        4
+      ]
+    },
+    "grid_04": {
+      "lattice": 24,
+      "spans": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    "grid_04a": {
+      "lattice": 24,
+      "spans": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    "grid_04a--01": {
+      "lattice": 24,
+      "spans": [
+        8,
+        6,
+        6,
+        4
+      ]
+    },
+    "grid_04a--02": {
+      "lattice": 20,
+      "spans": [
+        7,
+        5,
+        4,
+        4
+      ]
+    },
+    "grid_04a--03": {
+      "lattice": 24,
+      "spans": [
+        10,
+        6,
+        4,
+        4
+      ]
+    },
+    "grid_04a--04": {
+      "lattice": 20,
+      "spans": [
+        8,
+        6,
+        3,
+        3
+      ]
+    },
+    "grid_04b": {
+      "lattice": 24,
+      "spans": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    "grid_04b--01": {
+      "lattice": 24,
+      "spans": [
+        4,
+        6,
+        8,
+        6
+      ]
+    },
+    "grid_04b--02": {
+      "lattice": 20,
+      "spans": [
+        4,
+        4,
+        7,
+        5
+      ]
+    },
+    "grid_04b--03": {
+      "lattice": 24,
+      "spans": [
+        4,
+        4,
+        10,
+        6
+      ]
+    },
+    "grid_04b--04": {
+      "lattice": 20,
+      "spans": [
+        3,
+        3,
+        8,
+        6
+      ]
+    },
+    "grid_04c": {
+      "lattice": 24,
+      "spans": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    "grid_04c--01": {
+      "lattice": 24,
+      "spans": [
+        6,
+        8,
+        6,
+        4
+      ]
+    },
+    "grid_04c--02": {
+      "lattice": 20,
+      "spans": [
+        5,
+        7,
+        4,
+        4
+      ]
+    },
+    "grid_04c--03": {
+      "lattice": 24,
+      "spans": [
+        6,
+        10,
+        4,
+        4
+      ]
+    },
+    "grid_04c--04": {
+      "lattice": 20,
+      "spans": [
+        6,
+        8,
+        3,
+        3
+      ]
+    },
+    "grid_04d--01": {
+      "lattice": 24,
+      "spans": [
+        6,
+        6,
+        8,
+        4
+      ]
+    },
+    "grid_04d--02": {
+      "lattice": 20,
+      "spans": [
+        4,
+        5,
+        7,
+        4
+      ]
+    },
+    "grid_04d--03": {
+      "lattice": 24,
+      "spans": [
+        4,
+        6,
+        10,
+        4
+      ]
+    },
+    "grid_04d--04": {
+      "lattice": 20,
+      "spans": [
+        3,
+        6,
+        8,
+        3
+      ]
+    }
+  },
+  "substringSelectors": [
+    "--neat",
+    "--rule",
+    "--thin",
+    "02a",
+    "02b",
+    "03a",
+    "03b",
+    "03c",
+    "03d",
+    "04b",
+    "04d",
+    "3a",
+    "3b",
+    "_03c",
+    "_03d",
+    "display-block-on",
+    "flow",
+    "flow_",
+    "flow_01",
+    "flow_06",
+    "grid_",
+    "grid_0",
+    "grid_02",
+    "grid_02a",
+    "grid_02b",
+    "grid_03",
+    "grid_03a",
+    "grid_03b",
+    "grid_03c",
+    "grid_03d",
+    "grid_04",
+    "grid_04a",
+    "grid_04b",
+    "grid_04c",
+    "grid_04d",
+    "pad",
+    "rule",
+    "set",
+    "set_",
+    "set_05"
+  ],
+  "mediaQueries": [
+    "(max-width: 29.999rem)",
+    "print",
+    "print and (orientation: landscape)",
+    "print and (orientation: portrait)",
+    "screen and (min-width: 30rem)",
+    "screen and (min-width: 30rem) and (max-width: 59.9999999999rem)",
+    "screen and (min-width: 60rem)"
+  ],
+  "globalSelectors": [
+    "body",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "p",
+    "header",
+    "footer",
+    "form",
+    "main",
+    "article",
+    "img",
+    "svg",
+    "table"
+  ],
+  "knownAnomalies": [
+    {
+      "id": "neat-24-track-w20",
+      "line": 161,
+      "status": "requires-review",
+      "note": "The sequence advances by 2.5fr but --w-20-24 is 40fr rather than 50fr."
+    },
+    {
+      "id": "grid-03-set-03-selector",
+      "line": 652,
+      "status": "requires-review",
+      "note": "A likely missing comma turns two intended selectors into one descendant selector."
+    }
+  ]
+}

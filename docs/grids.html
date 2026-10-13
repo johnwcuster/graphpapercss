@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph Paper CSS grid catalog</title>
+    <link rel="stylesheet" href="../css/next.css">
+    <link rel="stylesheet" href="./docs.css">
+    <script type="module" src="./grids.js"></script>
+  </head>
+  <body>
+    <main class="docs-shell">
+      <nav class="docs-nav" aria-label="Prototype documentation">
+        <a href="./configurator.html">Configurator</a>
+        <a href="./grids.html" aria-current="page">Grid catalog</a>
+        <a href="./canvas.html">Canvas &amp; rhythm</a>
+        <a href="./subgrid.html">Subgrid</a>
+        <a href="./treatments.html">Treatments</a>
+        <a href="../tests/legacy-configurator.html">Legacy configurator</a>
+        <a href="../tests/browser-geometry.html">Geometry checks</a>
+      </nav>
+
+      <header class="intro catalog-intro">
+        <p class="eyebrow">Manifest coverage</p>
+        <h1>Every field in the legacy vocabulary.</h1>
+        <p>
+          These thumbnails are rendered by the generated 1.0 CSS. Each neutral
+          block occupies one macro column; JavaScript supplies classes and
+          metadata but does not calculate geometry.
+        </p>
+      </header>
+
+      <section class="catalog-controls" aria-labelledby="filter-title">
+        <h2 id="filter-title">Filter recipes</h2>
+        <label>
+          Search by ID
+          <input id="grid-search" type="search" placeholder="grid_03a--07">
+        </label>
+        <label>
+          Lattice
+          <select id="lattice-filter">
+            <option value="all">20 and 24 tracks</option>
+            <option value="20">20 tracks</option>
+            <option value="24">24 tracks</option>
+          </select>
+        </label>
+        <p><strong id="result-count">72</strong> recipes shown</p>
+      </section>
+
+      <div id="grid-catalog" class="grid-catalog"></div>
+      <p id="copy-status" class="visually-hidden" role="status" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

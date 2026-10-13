@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Graph Paper browser geometry checks</title>
+    <link rel="stylesheet" href="../css/next.css">
+    <style>
+      html { font-size: 16px; }
+      body { font-family: system-ui, sans-serif; }
+      .fixtures { position: absolute; left: -10000px; top: 0; }
+      .fixture-item { min-height: 1rem; }
+      .manifest-item { min-height: 0; }
+      .subgrid-fixture > :first-child { grid-column: 1 / 7; }
+      .subgrid-fixture > :last-child { grid-column: 7 / -1; }
+      .subgrid-fixture--24 > :first-child { grid-column: 1 / 5; }
+      .subgrid-fixture--24 > :last-child { grid-column: 5 / -1; }
+      .treatment-fixture { --gp-rule-color: rgb(18, 52, 86); }
+      .pass { color: green; }
+      .fail { color: #b00020; }
+    </style>
+  </head>
+  <body>
+    <h1>Browser geometry checks</h1>
+    <p id="summary">Running…</p>
+    <pre id="results"></pre>
+
+    <div class="fixtures" aria-hidden="true">
+      <div class="gp_canvas" data-case="expanded-02" style="width: 960px">
+        <div class="grid_02a--06">
+          <i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas" data-case="expanded-24" style="width: 960px">
+        <div class="grid_03a--01 set_06 flow_03">
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas" data-case="expanded-20" style="width: 960px">
+        <div class="grid_03a--07 set_06 flow_03">
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas" data-case="expanded-04" style="width: 960px">
+        <div class="grid_04d--04">
+          <i class="fixture-item"></i><i class="fixture-item"></i>
+          <i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas" data-case="compact" style="width: 640px">
+        <div class="grid_03a--01 set_06 flow_03">
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas" data-case="stacked" style="width: 400px">
+        <div class="grid_03a--01 set_06 flow_03">
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas gp_rhythm--thin" data-case="thin-20" style="width: 960px">
+        <div class="grid_02a--06">
+          <i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas gp_rhythm--thin" data-case="thin-24" style="width: 960px">
+        <div class="grid_03a--01">
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas gp_rhythm--neat" data-case="neat-20" style="width: 960px">
+        <div class="grid_02a--06">
+          <i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas gp_rhythm--neat" data-case="neat-24" style="width: 960px">
+        <div class="grid_03a--01">
+          <i class="fixture-item"></i><i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+      </div>
+      <div class="gp_canvas gp_rhythm--thin" data-case="nested-rebase" style="width: 960px">
+        <div class="grid_02" data-nested-grid="outer">
+          <i class="fixture-item"></i><i class="fixture-item"></i>
+        </div>
+        <div class="gp_canvas" data-nested-canvas style="width: 640px">
+          <div class="grid_02" data-nested-grid="inner">
+            <i class="fixture-item"></i><i class="fixture-item"></i>
+          </div>
+        </div>
+      </div>
+      <div class="gp_canvas" data-case="subgrid-20" style="width: 960px">
+        <section class="grid_03a--07">
+          <article class="gp_subgrid subgrid-fixture" data-subgrid="20">
+            <header class="fixture-item"></header>
+            <div class="fixture-item"></div>
+          </article>
+          <aside class="fixture-item"></aside>
+          <aside class="fixture-item"></aside>
+        </section>
+      </div>
+      <div class="gp_canvas" data-case="subgrid-24" style="width: 960px">
+        <section class="grid_03a--01">
+          <article class="gp_subgrid subgrid-fixture subgrid-fixture--24" data-subgrid="24">
+            <header class="fixture-item"></header>
+            <div class="fixture-item"></div>
+          </article>
+          <aside class="fixture-item"></aside>
+          <aside class="fixture-item"></aside>
+        </section>
+      </div>
+      <div class="gp_canvas" data-case="treatments" style="width: 960px">
+        <section class="grid_03a--07 treatment-fixture gp_treatment--rule">
+          <article class="fixture-item gp_rule--end" data-treatment="rule-end"></article>
+          <aside class="fixture-item gp_inset--bit" data-treatment="inset"></aside>
+          <aside class="fixture-item gp_rule--start" data-treatment="rule-start"></aside>
+        </section>
+      </div>
+      <div class="gp_canvas" data-case="placement-override" style="width: 960px">
+        <section class="grid_03a--07 set_03">
+          <article class="fixture-item gp_place" style="--gp-column-start: 5; --gp-column-end: 13; --gp-row-start: 2; --gp-row-end: 3" data-treatment="placement"></article>
+          <aside class="fixture-item"></aside>
+          <aside class="fixture-item"></aside>
+        </section>
+      </div>
+      <div data-treatment="optical-layout">
+        <span class="gp_optical" style="--gp-optical-x: -0.04em; --gp-optical-y: -0.05em">Optical</span>
+      </div>
+    </div>
+    <script type="module" src="./browser-geometry.js"></script>
+  </body>
+</html>

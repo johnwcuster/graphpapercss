@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph Paper frozen legacy configurator</title>
+    <link rel="stylesheet" href="../docs/docs.css">
+    <link rel="stylesheet" href="./legacy-configurator.css">
+    <script type="module" src="./legacy-configurator.js"></script>
+  </head>
+  <body>
+    <main class="docs-shell">
+      <nav class="docs-nav" aria-label="Prototype documentation">
+        <a href="../docs/configurator.html">Configurator</a>
+        <a href="../docs/grids.html">Grid catalog</a>
+        <a href="../docs/canvas.html">Canvas &amp; rhythm</a>
+        <a href="../docs/subgrid.html">Subgrid</a>
+        <a href="../docs/treatments.html">Treatments</a>
+        <a href="./legacy-configurator.html" aria-current="page">Legacy configurator</a>
+        <a href="./browser-geometry.html">Geometry checks</a>
+      </nav>
+
+      <header class="intro catalog-intro">
+        <p class="eyebrow">Frozen v0.2.3 behavior</p>
+        <h1>Inspect the legacy cascade.</h1>
+        <p>
+          This explorer renders the frozen legacy stylesheet inside a resizable
+          iframe, so its viewport breakpoints and <code>vw</code>-based ruler
+          behave as they did originally.
+        </p>
+      </header>
+
+      <section class="controls" aria-labelledby="legacy-controls-title">
+        <h2 id="legacy-controls-title">Legacy configuration</h2>
+
+        <div class="configuration-fields">
+          <label class="select-control" for="legacy-set-select">
+            <span>Items</span>
+            <select id="legacy-set-select">
+              <option value="set_03">3 items · set_03</option>
+              <option value="set_04">4 items · set_04</option>
+              <option value="set_05">5 items · set_05</option>
+              <option value="set_06">6 items · set_06</option>
+            </select>
+          </label>
+
+          <label class="select-control" for="legacy-grid-select">
+            <span>Grid</span>
+            <select id="legacy-grid-select"></select>
+          </label>
+
+          <label class="select-control" for="legacy-rhythm-select">
+            <span>Legacy rhythm</span>
+            <select id="legacy-rhythm-select">
+              <option value="wide">Default / wide</option>
+              <option value="thin">Thin</option>
+              <option value="neat">Neat</option>
+            </select>
+          </label>
+
+          <p id="legacy-grid-summary" class="configuration-summary"></p>
+        </div>
+
+        <fieldset class="flow-fieldset">
+          <legend>Legacy flow classes</legend>
+          <p class="control-help">
+            All seven historical flow IDs are shown. Labels are derived from
+            the frozen browser capture, including aliases and no-op classes.
+          </p>
+          <div id="legacy-flow-options" class="legacy-flow-options" aria-label="Legacy flow classes"></div>
+        </fieldset>
+
+        <label class="width-control" for="legacy-preview-width">
+          <span>Legacy viewport width</span>
+          <input id="legacy-preview-width" type="range" min="280" max="1200" step="8" value="960">
+          <output id="legacy-width-output" for="legacy-preview-width">960px</output>
+        </label>
+      </section>
+
+      <section class="result" aria-labelledby="legacy-preview-title">
+        <div class="result-heading">
+          <div>
+            <h2 id="legacy-preview-title">Frozen legacy preview</h2>
+            <p>
+              State: <strong id="legacy-state-output">expanded</strong>
+              · <span id="legacy-equivalence-output"></span>
+            </p>
+          </div>
+          <div class="legacy-actions">
+            <a id="open-current" href="../docs/configurator.html">Open in 1.0</a>
+            <button id="legacy-copy-markup" type="button">Copy markup</button>
+          </div>
+        </div>
+
+        <div class="legacy-frame-viewport">
+          <iframe id="legacy-frame" title="Frozen legacy Graph Paper preview"></iframe>
+        </div>
+
+        <pre><code id="legacy-markup-output"></code></pre>
+        <p id="legacy-copy-status" class="visually-hidden" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+  </body>
+</html>

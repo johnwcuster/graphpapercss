@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph Paper CSS 1.0 geometry prototype</title>
+    <link rel="stylesheet" href="../css/next.css">
+    <link rel="stylesheet" href="./docs.css">
+    <script type="module" src="./configurator.js"></script>
+  </head>
+  <body>
+    <main class="docs-shell">
+      <nav class="docs-nav" aria-label="Prototype documentation">
+        <a href="./configurator.html" aria-current="page">Configurator</a>
+        <a href="./grids.html">Grid catalog</a>
+        <a href="./canvas.html">Canvas &amp; rhythm</a>
+        <a href="./subgrid.html">Subgrid</a>
+        <a href="./treatments.html">Treatments</a>
+        <a href="../tests/legacy-configurator.html">Legacy configurator</a>
+        <a href="../tests/browser-geometry.html">Geometry checks</a>
+      </nav>
+
+      <header class="intro">
+        <p class="eyebrow">Graph Paper CSS 1.0 prototype</p>
+        <h1>Choose a field. Keep the page in rhythm.</h1>
+        <p>
+          Choose a grid, item count, and compatible visual flow. The preview
+          uses the generated Graph Paper CSS directly; resize its canvas to
+          exercise the container-based states.
+        </p>
+      </header>
+
+      <section class="controls" aria-labelledby="controls-title">
+        <h2 id="controls-title">Configuration</h2>
+
+        <div class="configuration-fields">
+          <label class="select-control" for="set-select">
+            <span>Items</span>
+            <select id="set-select">
+              <option value="set_03">3 items · set_03</option>
+              <option value="set_04">4 items · set_04</option>
+              <option value="set_05">5 items · set_05</option>
+              <option value="set_06">6 items · set_06</option>
+            </select>
+          </label>
+
+          <label class="select-control" for="grid-select">
+            <span>Grid</span>
+            <select id="grid-select"></select>
+          </label>
+
+          <label class="select-control" for="rhythm-select">
+            <span>Canvas rhythm</span>
+            <select id="rhythm-select">
+              <option value="wide">Default / wide</option>
+              <option value="thin">Thin</option>
+              <option value="neat">Neat</option>
+            </select>
+          </label>
+
+          <label class="select-control" for="treatment-select">
+            <span>Visual treatment</span>
+            <select id="treatment-select">
+              <option value="none">None</option>
+              <option value="rule">Rules</option>
+            </select>
+          </label>
+
+          <p id="grid-summary" class="configuration-summary"></p>
+        </div>
+
+        <fieldset class="flow-fieldset">
+          <legend>Compatible flows</legend>
+          <p class="control-help">
+            Numbered blocks show source order. “Default” omits a flow class.
+            Equivalent legacy IDs remain available and are labeled as aliases.
+          </p>
+          <div id="flow-options" class="recipe-options" aria-label="Compatible flows">
+          </div>
+        </fieldset>
+
+        <label class="width-control" for="preview-width">
+          <span>Canvas width</span>
+          <input id="preview-width" type="range" min="280" max="1200" step="8" value="960">
+          <output id="width-output" for="preview-width">960px</output>
+        </label>
+
+        <fieldset class="guide-controls">
+          <legend>Documentation overlays</legend>
+          <label class="toggle-control"><input type="checkbox" data-guide="bits">64-bit ruler</label>
+          <label class="toggle-control"><input type="checkbox" data-guide="lattice">20/24 lattice</label>
+          <label class="toggle-control"><input type="checkbox" data-guide="macro">Macro columns</label>
+          <label class="toggle-control"><input type="checkbox" data-guide="source" checked>Source-order labels</label>
+        </fieldset>
+      </section>
+
+      <section class="result" aria-labelledby="preview-title">
+        <div class="result-heading">
+          <div>
+            <h2 id="preview-title">Preview</h2>
+            <p>
+              State: <strong id="state-output">expanded</strong>
+              · <span id="metadata-output">24-track lattice</span>
+            </p>
+          </div>
+          <div class="result-actions">
+            <a id="open-legacy" href="../tests/legacy-configurator.html">Open in legacy</a>
+            <button id="copy-markup" type="button">Copy markup</button>
+          </div>
+        </div>
+
+        <div class="preview-viewport">
+          <div id="preview-shell" class="preview-shell">
+            <div id="preview-canvas" class="gp_canvas">
+              <section id="preview-grid" class="grid_03a--01 set_06 flow_03">
+                <article class="demo-card demo-card--lead">
+                  <span class="source-label">DOM 1</span>
+                  <p class="kicker">Analysis</p>
+                  <h3>A long lead story establishes the composition</h3>
+                  <p>Uneven content makes track behavior and vertical relationships easier to judge.</p>
+                </article>
+                <article class="demo-card"><span class="source-label">DOM 2</span><h3>Brief update</h3><p>A concise secondary item.</p></article>
+                <article class="demo-card"><span class="source-label">DOM 3</span><h3>Research note with a longer headline</h3><p>Two lines of supporting context reveal how the middle stack behaves.</p></article>
+                <article class="demo-card"><span class="source-label">DOM 4</span><h3>Data point</h3><p>Short content.</p></article>
+                <article class="demo-card"><span class="source-label">DOM 5</span><h3>Field report</h3><p>A final stacked item with moderately long supporting text.</p></article>
+                <article class="demo-card demo-card--feature"><span class="source-label">DOM 6</span><p class="kicker">Perspective</p><h3>A second prominent story balances the outer edge</h3><p>The DOM sequence remains visible even when visual prominence differs.</p></article>
+              </section>
+              <div class="guide-layer guide-layer--bits" data-guide-layer="bits" hidden aria-hidden="true"></div>
+              <div id="lattice-guide" class="guide-layer guide-layer--lattice" data-guide-layer="lattice" hidden aria-hidden="true"></div>
+              <div id="macro-guide" class="guide-layer guide-layer--macro" data-guide-layer="macro" hidden aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <pre><code id="markup-output">&lt;section class="grid_03a--01 set_06 flow_03"&gt;</code></pre>
+        <p id="copy-status" class="visually-hidden" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+  </body>
+</html>

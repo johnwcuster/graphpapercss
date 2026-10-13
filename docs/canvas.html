@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph Paper canvas and rhythm</title>
+    <link rel="stylesheet" href="../css/next.css">
+    <link rel="stylesheet" href="./docs.css">
+    <script type="module" src="./canvas.js"></script>
+  </head>
+  <body>
+    <main class="docs-shell">
+      <nav class="docs-nav" aria-label="Prototype documentation">
+        <a href="./configurator.html">Configurator</a>
+        <a href="./grids.html">Grid catalog</a>
+        <a href="./canvas.html" aria-current="page">Canvas &amp; rhythm</a>
+        <a href="./subgrid.html">Subgrid</a>
+        <a href="./treatments.html">Treatments</a>
+        <a href="../tests/legacy-configurator.html">Legacy configurator</a>
+        <a href="../tests/browser-geometry.html">Geometry checks</a>
+      </nav>
+
+      <header class="intro catalog-intro">
+        <p class="eyebrow">Canvas rhythm and nested composition</p>
+        <h1>Share a ruler. Rebase deliberately.</h1>
+        <p>
+          A page canvas gives unrelated regions one 64-bit horizontal measure.
+          A nested canvas starts a new measure for local composition, trading
+          page-level alignment for modularity inside a narrower container.
+        </p>
+      </header>
+
+      <section class="concept-section" aria-labelledby="shared-canvas-title">
+        <div class="concept-heading">
+          <p class="eyebrow">Recommended default</p>
+          <h2 id="shared-canvas-title">One page canvas, one rhythm</h2>
+          <p>
+            Consecutive 20- and 24-track projections inherit the same ruler.
+            Their internal lines form related polyrhythms; their outer measure
+            remains shared.
+          </p>
+        </div>
+
+        <div class="canvas-demo gp_canvas" data-measure-canvas>
+          <div class="guide-layer guide-layer--bits" aria-hidden="true"></div>
+          <p class="canvas-measurement" data-canvas-measurement></p>
+          <section class="grid_03a--01 set_03 canvas-demo-grid">
+            <article class="canvas-demo-card canvas-demo-card--dark"><span>DOM 1</span><h3>24-track lead</h3></article>
+            <article class="canvas-demo-card"><span>DOM 2</span><h3>Eight tracks</h3></article>
+            <article class="canvas-demo-card"><span>DOM 3</span><h3>Six tracks</h3></article>
+          </section>
+          <section class="grid_03a--07 set_03 canvas-demo-grid">
+            <article class="canvas-demo-card canvas-demo-card--dark"><span>DOM 1</span><h3>20-track lead</h3></article>
+            <article class="canvas-demo-card"><span>DOM 2</span><h3>Four tracks</h3></article>
+            <article class="canvas-demo-card"><span>DOM 3</span><h3>Four tracks</h3></article>
+          </section>
+        </div>
+      </section>
+
+      <section class="concept-section" aria-labelledby="rhythms-title">
+        <div class="concept-heading">
+          <p class="eyebrow">Spacing regimes</p>
+          <h2 id="rhythms-title">The lattice stays real in every rhythm</h2>
+          <p>
+            Rhythm belongs to the canvas, not an individual section. Wide is
+            the default; thin narrows the gap asymmetrically; neat removes the
+            gap while preserving the 64-bit closure.
+          </p>
+        </div>
+
+        <div class="rhythm-comparison">
+          <article class="rhythm-example">
+            <header><h3>Wide</h3><code>gp_canvas</code><small>3 / 3-bit edges · 2-bit gap</small></header>
+            <div class="rhythm-canvas gp_canvas">
+              <div class="guide-layer guide-layer--lattice" data-lattice-guide="24" aria-hidden="true"></div>
+              <div class="grid_03a--01 rhythm-grid"><i>10</i><i>8</i><i>6</i></div>
+            </div>
+          </article>
+          <article class="rhythm-example">
+            <header><h3>Thin</h3><code>gp_rhythm--thin</code><small>2 / 3-bit edges · 1-bit gap</small></header>
+            <div class="rhythm-canvas gp_canvas gp_rhythm--thin">
+              <div class="guide-layer guide-layer--lattice" data-lattice-guide="24" aria-hidden="true"></div>
+              <div class="grid_03a--01 rhythm-grid"><i>10</i><i>8</i><i>6</i></div>
+            </div>
+          </article>
+          <article class="rhythm-example">
+            <header><h3>Neat</h3><code>gp_rhythm--neat</code><small>2 / 2-bit edges · no gap</small></header>
+            <div class="rhythm-canvas gp_canvas gp_rhythm--neat">
+              <div class="guide-layer guide-layer--lattice" data-lattice-guide="24" aria-hidden="true"></div>
+              <div class="grid_03a--01 rhythm-grid"><i>10</i><i>8</i><i>6</i></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="concept-section" aria-labelledby="nested-title">
+        <div class="concept-heading">
+          <p class="eyebrow">Explicit rebase</p>
+          <h2 id="nested-title">A nested canvas owns new coordinates</h2>
+          <p>
+            The outer canvas below remains expanded. Its narrower nested canvas
+            responds to its own width, resets to the wide rhythm, and then opts
+            into thin explicitly. Its 64 divisions no longer coincide with the
+            parent’s divisions.
+          </p>
+        </div>
+
+        <div class="nested-demo gp_canvas" data-measure-canvas>
+          <div class="guide-layer guide-layer--bits" aria-hidden="true"></div>
+          <p class="canvas-measurement" data-canvas-measurement></p>
+          <section class="grid_02a--01 canvas-demo-grid">
+            <article class="canvas-demo-card canvas-demo-card--dark"><span>Parent</span><h3>Shared page coordinates</h3><p>This region remains tied to the outer ruler.</p></article>
+            <article class="canvas-demo-card"><span>Parent</span><h3>Independent content</h3><p>The nested example below deliberately starts over.</p></article>
+          </section>
+
+          <aside class="nested-local gp_canvas gp_rhythm--thin" data-measure-canvas>
+            <div class="guide-layer guide-layer--bits canvas-guide--local" aria-hidden="true"></div>
+            <p class="canvas-measurement" data-canvas-measurement></p>
+            <section class="grid_03 set_03 canvas-demo-grid">
+              <article class="canvas-demo-card canvas-demo-card--local"><span>Local 1</span><h3>Nested lead</h3></article>
+              <article class="canvas-demo-card"><span>Local 2</span><h3>Local item</h3></article>
+              <article class="canvas-demo-card"><span>Local 3</span><h3>Local item</h3></article>
+            </section>
+          </aside>
+        </div>
+
+        <div class="guidance-callout">
+          <strong>Guidance:</strong> use one page canvas and one rhythm by
+          default. Introduce a nested canvas only when a region should respond
+          and align as an independent module.
+        </div>
+        <pre><code>&lt;main class="gp_canvas"&gt;
+  &lt;section class="grid_03a--07 set_06 flow_04"&gt;…&lt;/section&gt;
+
+  &lt;aside class="gp_canvas gp_rhythm--thin"&gt;
+    &lt;section class="grid_03 set_03"&gt;…&lt;/section&gt;
+  &lt;/aside&gt;
+&lt;/main&gt;</code></pre>
+      </section>
+    </main>
+  </body>
+</html>
