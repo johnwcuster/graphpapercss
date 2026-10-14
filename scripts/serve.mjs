@@ -1,5 +1,5 @@
 import { createReadStream } from "node:fs";
-import { stat, writeFile } from "node:fs/promises";
+import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, resolve, sep } from "node:path";
 
@@ -15,30 +15,6 @@ const contentTypes = {
 
 const server = createServer(async (request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
-
-  if (request.method === "POST" && pathname === "/__graphpaper_capture") {
-    const chunks = [];
-    let size = 0;
-
-    for await (const chunk of request) {
-      size += chunk.length;
-      if (size > 2_000_000) {
-        response.writeHead(413).end("Capture is too large");
-        return;
-      }
-      chunks.push(chunk);
-    }
-
-    try {
-      const capture = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-      const formatted = `${JSON.stringify(capture)}\n`;
-      await writeFile(resolve(root, "tests/fixtures/legacy-layout-capture.json"), formatted);
-      response.writeHead(204).end();
-    } catch {
-      response.writeHead(400).end("Invalid capture JSON");
-    }
-    return;
-  }
 
   const requestedPath = pathname === "/" ? "/docs/configurator.html" : pathname;
   const filePath = resolve(root, `.${requestedPath}`);
@@ -62,6 +38,5 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Graph Paper prototype: http://127.0.0.1:${port}/docs/configurator.html`);
-  console.log(`Legacy gallery: http://127.0.0.1:${port}/tests/legacy-gallery.html`);
+  console.log(`Graph Paper configurator: http://127.0.0.1:${port}/docs/configurator.html`);
 });

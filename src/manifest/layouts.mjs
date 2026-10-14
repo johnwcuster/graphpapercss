@@ -1,5 +1,5 @@
 // GENERATED FILE — DO NOT EDIT DIRECTLY
-// Source: legacy-layout-capture.json + compatibility.mjs
+// Source: 0.2.3 legacy-layouts.json + compatibility.mjs
 // Placement tuples: [source item, macro-column range, row range]
 function defineLayout(id, families, set, flow, compact, placementTuples) {
   return {

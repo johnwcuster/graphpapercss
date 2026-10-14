@@ -1,0 +1,1642 @@
+{
+  "source": {
+    "version": "0.2.3",
+    "path": "css/legacy/main.css",
+    "url": "https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css",
+    "sha256": "8bcfdcd401bfa53752569c4eb6c01400b20e27f4d36b87b53db7cf9b1cac60dc"
+  },
+  "records": [
+    {
+      "id": "grid_02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--05",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--05",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--05",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--06",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--06",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02a--06",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--05",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--05",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--05",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--06",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--06",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_02b--06",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a",
+      "field": "neat",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 27
+        },
+        {
+          "start": 27,
+          "end": 44.5
+        },
+        {
+          "start": 44.5,
+          "end": 62
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 27
+        },
+        {
+          "start": 27,
+          "end": 45
+        },
+        {
+          "start": 45,
+          "end": 62
+        }
+      ]
+    },
+    {
+      "id": "grid_03a",
+      "field": "thin",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 26
+        },
+        {
+          "start": 27,
+          "end": 43.5
+        },
+        {
+          "start": 44.5,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 26
+        },
+        {
+          "start": 27,
+          "end": 44
+        },
+        {
+          "start": 45,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03a",
+      "field": "wide",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 3,
+          "end": 26
+        },
+        {
+          "start": 28,
+          "end": 43.5
+        },
+        {
+          "start": 45.5,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 3,
+          "end": 26
+        },
+        {
+          "start": 28,
+          "end": 44
+        },
+        {
+          "start": 46,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03b",
+      "field": "neat",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 19.5
+        },
+        {
+          "start": 19.5,
+          "end": 37
+        },
+        {
+          "start": 37,
+          "end": 62
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 20
+        },
+        {
+          "start": 20,
+          "end": 37
+        },
+        {
+          "start": 37,
+          "end": 62
+        }
+      ]
+    },
+    {
+      "id": "grid_03b",
+      "field": "thin",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 18.5
+        },
+        {
+          "start": 19.5,
+          "end": 36
+        },
+        {
+          "start": 37,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 19
+        },
+        {
+          "start": 20,
+          "end": 36
+        },
+        {
+          "start": 37,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03b",
+      "field": "wide",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 3,
+          "end": 18.5
+        },
+        {
+          "start": 20.5,
+          "end": 36
+        },
+        {
+          "start": 38,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 3,
+          "end": 19
+        },
+        {
+          "start": 21,
+          "end": 36
+        },
+        {
+          "start": 38,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03c",
+      "field": "neat",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 19.5
+        },
+        {
+          "start": 19.5,
+          "end": 44.5
+        },
+        {
+          "start": 44.5,
+          "end": 62
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 20
+        },
+        {
+          "start": 20,
+          "end": 45
+        },
+        {
+          "start": 45,
+          "end": 62
+        }
+      ]
+    },
+    {
+      "id": "grid_03c",
+      "field": "thin",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 18.5
+        },
+        {
+          "start": 19.5,
+          "end": 43.5
+        },
+        {
+          "start": 44.5,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 19
+        },
+        {
+          "start": 20,
+          "end": 44
+        },
+        {
+          "start": 45,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03c",
+      "field": "wide",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 3,
+          "end": 18.5
+        },
+        {
+          "start": 20.5,
+          "end": 43.5
+        },
+        {
+          "start": 45.5,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 3,
+          "end": 19
+        },
+        {
+          "start": 21,
+          "end": 44
+        },
+        {
+          "start": 46,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03d",
+      "field": "neat",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 19.5
+        },
+        {
+          "start": 19.5,
+          "end": 44.5
+        },
+        {
+          "start": 44.5,
+          "end": 62
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 20
+        },
+        {
+          "start": 20,
+          "end": 45
+        },
+        {
+          "start": 45,
+          "end": 62
+        }
+      ]
+    },
+    {
+      "id": "grid_03d",
+      "field": "thin",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 2,
+          "end": 18.5
+        },
+        {
+          "start": 19.5,
+          "end": 43.5
+        },
+        {
+          "start": 44.5,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 2,
+          "end": 19
+        },
+        {
+          "start": 20,
+          "end": 44
+        },
+        {
+          "start": 45,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03d",
+      "field": "wide",
+      "classification": "ACCEPTED",
+      "displacement": 0.5,
+      "legacy": [
+        {
+          "start": 3,
+          "end": 18.5
+        },
+        {
+          "start": 20.5,
+          "end": 43.5
+        },
+        {
+          "start": 45.5,
+          "end": 61
+        }
+      ],
+      "candidate": [
+        {
+          "start": 3,
+          "end": 19
+        },
+        {
+          "start": 21,
+          "end": 44
+        },
+        {
+          "start": 46,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "id": "grid_03a--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--05",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--05",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--05",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--06",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--06",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--06",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--07",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--07",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--07",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--08",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--08",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03a--08",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--05",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--05",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--05",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--06",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--06",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--06",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--07",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--07",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--07",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--08",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--08",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03b--08",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--05",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--05",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--05",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--06",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--06",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--06",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--07",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--07",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--07",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--08",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--08",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03c--08",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--05",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--05",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--05",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--06",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--06",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--06",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--07",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--07",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--07",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--08",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--08",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_03d--08",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04a--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04b--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04c--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--01",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--01",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--01",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--02",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--02",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--02",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--03",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--03",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--03",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--04",
+      "field": "neat",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--04",
+      "field": "thin",
+      "classification": "EXACT",
+      "displacement": 0
+    },
+    {
+      "id": "grid_04d--04",
+      "field": "wide",
+      "classification": "EXACT",
+      "displacement": 0
+    }
+  ]
+}

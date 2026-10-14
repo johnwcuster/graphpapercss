@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0.2.3 legacy reference</title><link rel="stylesheet" href="../css/legacy/main.css"><link rel="stylesheet" href="./docs.css"></head>
+<body style="background: #ebe5d6"><div id="reference"></div>
+<script type="module">
+import { grids } from "../src/manifest/grids.mjs";
+import { layouts } from "../src/manifest/layouts.mjs";
+const query = new URLSearchParams(location.search);
+const id = query.get("grid"), set = query.get("set"), flow = query.get("flow");
+const root = document.getElementById("reference");
+const recipe = grids[id];
+const layout = recipe && layouts.find(l => l.families.includes(recipe.family) && l.set === set && (l.flow ?? "") === flow);
+if (!layout) root.textContent = "This 1.0 recipe has no 0.2.3 counterpart.";
+else {
+  const rhythm = ["wide", "thin", "neat"].includes(query.get("rhythm")) ? query.get("rhythm") : "wide";
+  root.style.width = `${Math.min(1200, Math.max(280, Number(query.get("width")) || 1024))}px`;
+  const grid = document.createElement("section"); grid.className = [id, set, flow, rhythm === "wide" ? null : `--${rhythm}`].filter(Boolean).join(" ");
+  for (let i = 0; i < layout.items; i++) {
+    const article = document.createElement("article"); article.className = "tile";
+    article.innerHTML = `<span class="source-number">Source ${i + 1}</span><h3>${["Lead story", "Perspective", "Dispatch", "Analysis", "Interview", "Field notes"][i]}</h3><p>Editorial content keeps its logical DOM position.</p>`;
+    grid.append(article);
+  }
+  root.append(grid);
+}
+</script></body></html>

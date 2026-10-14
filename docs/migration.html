@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Migrating Graph Paper 0.2.3 to 1.0</title><link rel="stylesheet" href="./docs.css"></head>
+<body><main>
+<nav><a href="./configurator.html">Configurator</a> · <a href="./architecture.md">Architecture</a> · <a href="./geometry-changes.md">Geometry changes</a></nav>
+<h1>Migrating from 0.2.3 to 1.0</h1>
+<p>Existing sites can keep the <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">pinned 0.2.3 release</a>. Modern 1.0 requires updated markup and browsers with container queries, container units, and subgrid.</p>
+<h2>Add a canvas and field</h2>
+<p>Keep the grid, set, and compatible flow IDs. Add a canvas wrapper and a field:</p>
+<pre>&lt;div class="gp_canvas"&gt;
+  &lt;section class="gp_field gp_field--wide grid_03a--01 set_06 flow_04"&gt;
+    …
+  &lt;/section&gt;
+&lt;/div&gt;</pre>
+<p>A field is a direct canvas child and uses exactly one modifier: full (64 bits), neat (60), thin (59), wide (58), or ruled (56). The 0.2.3 thin/neat modifiers become field modifiers. Gutters occupy ruler bits; do not add a horizontal CSS gap to the canvas or field.</p>
+<p>The canvas supplies the coordinate system and responsive context. Subgrid continues a semantic wrapper's inherited tracks using local line indices. A nested canvas explicitly starts a new ruler and selects its own field. A full-bleed background and inset content can share one canvas row.</p>
+<h2>Responsive layouts and reading order</h2>
+<p>Layouts respond to canvas width instead of viewport width: expanded at 60rem, compact at 30rem, and source-order stacking below 30rem. Normalized flows and their known aliases remain. Keep logical DOM order; visual hierarchy does not change focus order.</p>
+<h2>Twelve intentional geometry changes</h2>
+<p>All 72 released recipes are represented. Of 216 neat/thin/wide comparisons, 204 match exactly. The twelve changes affect grid_03a, grid_03b, grid_03c, and grid_03d in each field: edges shift by at most half a bit and two formerly equal small columns differ by one bit. The <a href="./geometry-changes.md">concise coordinate record</a> specifies the accepted replacements. Full and ruled are new field policies.</p>
+<h2>Rules and host-controlled spacing</h2>
+<p>Use gp_field--ruled and explicitly assign gp_rule--start or gp_rule--end to one owner per internal gutter. The ruled field reserves two bits per gutter and centers rules on whole-bit lines. Markers suppress themselves at field boundaries, on responsive full-span items, and in stacked mode. Rule color and width remain host-overridable.</p>
+<p>Replace 0.2.3's combined rule modifier with this explicit ruled-field model. Core provides no global typography, image helpers, print theme, row gaps, or stacked margins. Add vertical spacing in your project:</p>
+<pre>.editorial .gp_field { row-gap: 1.5rem; }
+@container gp-canvas (width &lt; 30rem) {
+  .editorial .gp_field &gt; * + * { margin-block-start: 1.5rem; }
+}</pre>
+<h2>Compatibility and cascade layers</h2>
+<p>compat.css is an alternative 0.2.3 profile, including its globals and viewport behavior. It is not a modern-field polyfill; do not load it alongside modern core in the same document. css/legacy/main.css retains the released baseline.</p>
+<p>main.layer.min.css provides modern core inside the graph-paper cascade layer. Declare its order relative to your project's layers. Ordinary unlayered host styles override normal layered declarations.</p>
+</main></body></html>

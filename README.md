@@ -1,40 +1,85 @@
 # Graph Paper CSS
 
-Graph Paper is a small CSS library for editorial spatial composition. Its public vocabulary combines a grid field, an item set, and a visual flow.
+A small, framework-agnostic CSS library for editorial spatial composition.
+A 64-bit ruler connects the page: canvas, field, grid, set, and flow arrange
+content; subgrid preserves alignment through semantic nesting.
 
-## 1.0 geometry prototype
+The 1.0 release candidate is prepared locally but not published. The previous
+released version is [0.2.3](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css).
+Pin exact releases for production rather than using `@latest`.
 
-The current 0.2 stylesheet remains unchanged at `css/main.css`. Work toward 1.0 lives in a separate generated prototype at `css/next.css`.
+## Quick start
 
-Requirements: Node.js 20 or newer. There are no package dependencies.
+Copy `css/main.min.css` into your project:
+
+```html
+<link rel="stylesheet" href="/css/main.min.css">
+<div class="gp_canvas">
+  <section class="gp_field gp_field--wide grid_03a--01 set_06">
+    <article>First story</article>
+    <article>Second story</article>
+    <article>Third story</article>
+    <article>Fourth story</article>
+    <article>Fifth story</article>
+    <article>Sixth story</article>
+  </section>
+</div>
+```
+
+No JavaScript, npm dependency, framework, or consumer build step is required.
+Your project owns typography, colors, components, and vertical spacing. Keep
+logical source order even when a flow changes visual prominence.
+
+Fields are full 64, neat 60, thin 59, wide 58, and ruled 56 bits. All 72 released
+grid IDs are supported, with equal five/six columns and the 5:3 `grid_02a--07`
+added in 1.0. Layouts expand at a canvas width of 60rem, become compact at 30rem,
+and stack in source order below 30rem.
+
+See [architecture](docs/architecture.md), [migration from 0.2.3](docs/migration.html),
+[geometry changes](docs/geometry-changes.md), [browser support](docs/browser-support.md),
+and [release notes](CHANGELOG.md).
+
+## Builds
+
+| Files | Purpose |
+| --- | --- |
+| `css/main.css`, `main.min.css` | Modern canvas-native core |
+| `css/main.layer.css`, `main.layer.min.css` | Core inside `@layer graph-paper` |
+| `css/compat.css`, `compat.min.css` | Alternative 0.2.3 standalone profile |
+| `css/legacy/main.css`, `main.min.css` | Released 0.2.3 reference and generated minification |
+
+Choose a modern build or the legacy profile per document. Compatibility keeps
+0.2.3 globals and viewport behavior; it is not an additive modern-core shim.
+The canonical historical source is `css/legacy/main.css`, verified against the
+released CDN file. The compatibility files are generated from that one source.
+
+## Development
+
+Contributor tooling requires Node.js 20+. Dependencies are development-only.
 
 ```sh
-npm run inventory
+npm ci
 npm run build
 npm run check
 npm run size
 npm run dev
 ```
 
-Then open <http://127.0.0.1:4173/docs/configurator.html>. The complete grid catalog is at <http://127.0.0.1:4173/docs/grids.html>, canvas rhythm and rebasing are demonstrated at <http://127.0.0.1:4173/docs/canvas.html>, semantic subgrid composition is at <http://127.0.0.1:4173/docs/subgrid.html>, and rules and micro-alignment are at <http://127.0.0.1:4173/docs/treatments.html>. A configurable frozen-legacy preview is available at <http://127.0.0.1:4173/tests/legacy-configurator.html>, and browser geometry assertions are visible at <http://127.0.0.1:4173/tests/browser-geometry.html>.
+Open <http://127.0.0.1:4173/docs/configurator.html>, the sole visual explorer.
+It renders shipping CSS, filters flows, shows ruler/field/source-order guides,
+persists URL selections, and produces markup. It also demonstrates subgrid,
+nested canvases, shared-ruler overlays, and direct comparisons with 0.2.3.
 
-The prototype currently covers:
+```sh
+npm run browsers:install
+npm run test:browsers
+npm run test:distribution
+npm pack --dry-run
+```
 
-- the 64-bit ruler and real 20-/24-track lattices;
-- all 72 concrete legacy grid recipes, generated as real lattices;
-- sets of 3–6 items and 161 supported family/set/flow combinations;
-- 90 normalized layout recipes derived from 416 browser-captured legacy measurements;
-- container-relative expanded, compact, and stacked states;
-- wide, thin, and neat canvas-level rhythm regimes;
-- explicit nested-canvas rebasing with independent container response;
-- `gp_subgrid` for carrying parent tracks through semantic wrappers;
-- explicit rule treatments, one-bit content insets, advanced placement, and optical correction;
-- viewport-relative compatibility for markup without `gp_canvas`;
-- a configurator for every supported grid/set/flow combination;
-- deterministic generation, geometry validation, and browser placement checks.
-
-The build checks every manifest grid against geometry independently extracted from the frozen legacy stylesheet. The normalized set/flow matrix is documented in [`docs/legacy-layout-inventory.md`](docs/legacy-layout-inventory.md). Open the browser geometry page while the development server is running to execute placement checks across all 1,018 expanded layout/grid combinations, all 161 compact family/layout combinations, and all 161 standalone compatibility combinations.
-
-`npm run size` reports both raw and gzip sizes against the legacy stylesheet. The automated test suite currently enforces a 12 KB gzip ceiling for the prototype. The source build remains intentionally readable and includes the standalone legacy-compatibility path; minified and split distribution builds belong to the later distribution phase.
-
-`css/next.css` is experimental and is not yet a replacement for `css/main.css`.
+The browser suite checks current structure in Chromium, Firefox, and WebKit;
+distribution checks also replay legacy regressions. See
+[browser support](docs/browser-support.md) for the isolated Docker runner and
+[validation](docs/validation.md) for recorded results. Build scripts do not
+commit, publish, or create release tags. Git history records implementation
+history; the source tree describes current 1.0 and its 0.2.3 migration baseline.

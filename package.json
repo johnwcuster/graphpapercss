@@ -1,16 +1,39 @@
 {
   "name": "graphpapercss",
-  "version": "1.0.0-prototype.0",
-  "private": true,
+  "version": "1.0.0-rc.0",
+  "description": "A small, framework-agnostic CSS library for editorial spatial composition on a canonical 64-bit ruler.",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "repository": { "type": "git", "url": "git+https://github.com/johnwcuster/graphpapercss.git" },
+  "style": "css/main.css",
+  "exports": {
+    ".": "./css/main.css",
+    "./css/main.css": "./css/main.css",
+    "./css/main.min.css": "./css/main.min.css",
+    "./css/main.layer.css": "./css/main.layer.css",
+    "./css/main.layer.min.css": "./css/main.layer.min.css",
+    "./css/compat.css": "./css/compat.css",
+    "./css/compat.min.css": "./css/compat.min.css",
+    "./css/legacy/main.css": "./css/legacy/main.css",
+    "./css/legacy/main.min.css": "./css/legacy/main.min.css"
+  },
+  "files": ["css/main*.css", "css/compat*.css", "css/legacy/*.css", "docs/*.html", "docs/*.js", "docs/*.css", "docs/*.json", "docs/*.md", "src/manifest/grids.mjs", "src/manifest/layouts.mjs", "src/manifest/compact.mjs", "src/manifest/responsive.mjs", "src/ruler/geometry.mjs", "src/ruler/accepted-changes.mjs", "CHANGELOG.md"],
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-layouts.mjs && node scripts/build.mjs",
+    "build": "node scripts/build.mjs",
+    "dist:build": "node scripts/build-distribution.mjs",
+    "test:browsers": "node scripts/run-browsers.mjs",
+    "test:distribution": "node scripts/run-browsers.mjs --distribution",
+    "browsers:install": "playwright install chromium firefox webkit",
     "layouts:build": "node scripts/build-layouts.mjs",
-    "inventory": "node scripts/inventory.mjs",
     "size": "node scripts/size-report.mjs",
     "validate": "node scripts/validate.mjs",
-    "test": "node --test",
-    "check": "node scripts/inventory.mjs --check && node scripts/build-layouts.mjs --check && node scripts/build.mjs --check && node scripts/validate.mjs && node --test",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/build.mjs --check && node --test tests/*.test.mjs",
     "dev": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "lightningcss": "1.33.0",
+    "playwright": "1.64.0"
   }
 }

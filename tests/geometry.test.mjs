@@ -1,96 +1,81 @@
+import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
 import { gzipSync } from "node:zlib";
-import { spanBits } from "../src/geometry/ruler.mjs";
-import { rhythms } from "../src/geometry/rhythms.mjs";
-import { compactPatterns } from "../src/manifest/compact.mjs";
+import { fields, recipes, resolveColumns, layoutsFor, expandedPlacements, compactPlacements, auditGeometry } from "../src/ruler/geometry.mjs";
+import { emitRulerCss } from "../src/ruler/emit.mjs";
 import { grids } from "../src/manifest/grids.mjs";
-import { layouts } from "../src/manifest/layouts.mjs";
-import { sets } from "../src/manifest/sets.mjs";
-import {
-  validateGeneratedCss,
-  validateLegacyGridCoverage,
-  validateManifest
-} from "../src/validate.mjs";
+import { acceptedChanges } from "../src/ruler/accepted-changes.mjs";
 
-test("the wide lattice reproduces representative legacy widths", () => {
-  assert.equal(rhythms.wide.tracks[20], 1);
-  assert.equal(rhythms.wide.tracks[24], 0.5);
-  assert.equal(spanBits({ span: 12, track: 1, gap: 2 }), 34);
-  assert.equal(spanBits({ span: 10, track: 0.5, gap: 2 }), 23);
-});
-
-test("thin and neat lattices close on the 64-bit ruler", () => {
-  assert.equal(rhythms.thin.tracks[20], 2);
-  assert.equal(rhythms.thin.tracks[24], 1.5);
-  assert.equal(rhythms.neat.tracks[20], 3);
-  assert.equal(rhythms.neat.tracks[24], 2.5);
-});
-
-test("the prototype manifest satisfies geometry and placement invariants", () => {
-  assert.doesNotThrow(() => validateManifest({ compactPatterns, grids, layouts, rhythms, sets }));
-});
-
-test("the grid manifest exactly matches all concrete legacy geometries", async () => {
-  const inventory = JSON.parse(
-    await readFile(new URL("./fixtures/legacy-inventory.json", import.meta.url), "utf8")
-  );
-  assert.equal(Object.keys(grids).length, 72);
-  assert.doesNotThrow(() => validateLegacyGridCoverage(grids, inventory.gridGeometry));
-});
-
-test("the normalized layout matrix is tied to the browser-captured legacy source", async () => {
-  const [capture, inventory] = await Promise.all([
-    readFile(new URL("./fixtures/legacy-layout-capture.json", import.meta.url), "utf8").then(JSON.parse),
-    readFile(new URL("./fixtures/legacy-inventory.json", import.meta.url), "utf8").then(JSON.parse)
-  ]);
-
-  assert.equal(capture.source.sha256, inventory.source.sha256);
-  assert.equal(capture.state, "expanded");
-  assert.equal(Object.keys(capture.configurations).length, 416);
-  assert.equal(layouts.length, 90);
-  assert.equal(
-    layouts.reduce((combinationCount, layout) => combinationCount + layout.families.length, 0),
-    161
-  );
-});
-
-test("known three-item legacy flow aliases remain explicit compatibility choices", () => {
-  const layout = (flow) => layouts.find((candidate) =>
-    candidate.families.includes("02") && candidate.set === "set_03" && candidate.flow === flow
-  );
-
-  assert.deepEqual(
-    layout("flow_02").states.expanded.placements,
-    layout("flow_03").states.expanded.placements
-  );
-  assert.deepEqual(
-    layout("flow_04").states.expanded.placements,
-    layout("flow_05").states.expanded.placements
-  );
-});
-
-test("generated CSS is scoped and declares its box model", async () => {
-  const css = await readFile(new URL("../css/next.css", import.meta.url), "utf8");
-  assert.doesNotThrow(() => validateGeneratedCss(css));
-  assert.match(css, /@container gp-canvas/);
-  assert.match(css, /\.gp_canvas\.gp_rhythm--thin/);
-  assert.match(css, /\.gp_canvas\.gp_rhythm--neat/);
-  assert.match(css, /\.gp_subgrid\s*{[^}]*display: grid;[^}]*grid-template-columns: subgrid;/s);
-  assert.match(css, /\.gp_treatment--rule\s*{[^}]*--gp-rule-offset:/s);
-  assert.match(css, /\.gp_rule--start::before/);
-  assert.match(css, /\.gp_rule--end::after/);
-  assert.match(css, /\.gp_inset--bit/);
-  assert.match(css, /\.gp_place\.gp_place\s*{[^}]*--gp-column-start/s);
-  assert.match(css, /\.gp_optical\s*{[^}]*translate:/s);
-  assert.match(css, /--gp-padding-start:/);
-  assert.match(css, /--gp-gap:/);
-  assert.doesNotMatch(css, /\[class\*=/);
-
-  for (const gridName of Object.keys(grids)) {
-    assert.match(css, new RegExp(`\\.${gridName.replaceAll("-", "\\-")}(?![\\w-])`));
+test("canonical fields and every audited recipe close on integer ruler coordinates", async () => {
+  assert.deepEqual(Object.values(fields).map(f => f.end - f.start), [64, 60, 59, 58, 56]);
+  const baseline = JSON.parse(await readFile(new URL("./fixtures/legacy-geometry.json", import.meta.url), "utf8"));
+  const audit = auditGeometry(baseline);
+  assert.equal(audit.length, 72 * 3);
+  assert.ok(Object.keys(grids).every(id => recipes[id]?.legacy));
+  assert.equal(audit.filter(r => r.classification === "EXACT").length, 204);
+  assert.equal(audit.filter(r => r.classification === "ACCEPTED").length, 12);
+  assert.ok(audit.every(r => ["EXACT", "ACCEPTED"].includes(r.classification)));
+  for (const r of audit) {
+    const f = fields[r.field];
+    assert.equal(r.candidate[0].start, f.start);
+    assert.equal(r.candidate.at(-1).end, f.end);
+    r.candidate.forEach((c, i) => {
+      assert.ok(Number.isInteger(c.start) && Number.isInteger(c.end));
+      assert.ok(c.start < c.end);
+      if (i) assert.equal(c.start - r.candidate[i - 1].end, f.gutter);
+    });
+    if (r.classification === "EXACT") assert.deepEqual(r.candidate, r.legacy);
+    if (r.classification === "NEAR") assert.ok(r.displacement <= 1 && r.hierarchyPreserved);
+    if (r.classification === "ACCEPTED") {
+      assert.deepEqual(r.candidate, acceptedChanges[`${r.id}/${r.field}`]);
+      assert.equal(r.displacement, .5);
+      assert.ok(r.acceptedReason);
+    }
   }
+});
 
-  assert.ok(gzipSync(css).byteLength < 12_000, "prototype CSS should remain below 12 KB gzipped");
+test("equal 2–6 compositions and exact 5:3 split satisfy the steering arithmetic", () => {
+  const expected = { neat: [30, 20, 15, 12, 10], thin: [29, 19, 14, 11, 9], wide: [28, 18, 13, 10, 8] };
+  for (const [field, widths] of Object.entries(expected)) {
+    widths.forEach((width, i) => {
+      const columns = resolveColumns(recipes[`grid_0${i + 2}`], field);
+      assert.ok(columns.every(c => c.end - c.start === width));
+    });
+  }
+  assert.deepEqual(resolveColumns(recipes["grid_02a--07"], "wide"), [{ start: 3, end: 38 }, { start: 40, end: 61 }]);
+});
+
+test("expanded and compact placements preserve source items, row relationships and non-overlap", () => {
+  for (const recipe of Object.values(recipes)) for (const [name, f] of Object.entries(fields)) {
+    for (const layout of layoutsFor(recipe)) {
+      const expanded = expandedPlacements(recipe, name, layout);
+      assert.deepEqual(expanded.map(p => p.row), layout.states.expanded.placements.map(p => p.row));
+      for (const placements of [expanded, compactPlacements(name, layout)]) {
+        assert.deepEqual(placements.map(p => p.item).sort((a, b) => a - b), Array.from({ length: layout.items }, (_, i) => i + 1));
+        for (const p of placements) {
+          assert.ok(p.lines.every(Number.isInteger));
+          assert.ok(p.lines[0] >= 1 && p.lines[1] <= f.end - f.start + 1 && p.lines[0] < p.lines[1]);
+          for (const q of placements) if (p.item !== q.item) {
+            const columnOverlap = p.lines[0] < q.lines[1] && q.lines[0] < p.lines[1];
+            const rowOverlap = p.row[0] < q.row[1] && q.row[0] < p.row[1];
+            assert.ok(!(columnOverlap && rowOverlap), `${layout.id}: unexpected overlap`);
+          }
+        }
+      }
+    }
+  }
+});
+
+test("ruled gutters reserve whole-bit centers and generated core remains deterministic, canvas-only and host-spaced", async () => {
+  for (const recipe of Object.values(recipes)) {
+    const columns = resolveColumns(recipe, "ruled");
+    columns.slice(0, -1).forEach((c, i) => assert.ok(Number.isInteger((c.end + columns[i + 1].start) / 2)));
+  }
+  const css = emitRulerCss();
+  assert.equal(await readFile(new URL("../css/main.css", import.meta.url), "utf8"), css);
+  assert.ok(css.includes("repeat(64, minmax(0, 1fr))"));
+  assert.ok(!css.includes("@media") && !css.includes("!important"));
+  assert.ok(!/row-gap\s*:|margin-block|1rem/.test(css), "core must not supply vertical spacing defaults");
+  assert.ok(gzipSync(css).byteLength < 20000, "full readable ruler core exceeds 20 KB gzip budget");
 });
