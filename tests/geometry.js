@@ -1,4 +1,4 @@
-import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements } from "../src/ruler/geometry.mjs";
+import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements } from "../src/ruler/geometry.mjs";
 
 const failures = [];
 let assertions = 0, combinations = 0;
@@ -71,7 +71,56 @@ async function run() {
     }
   }
 
+  // Every grid-only recipe, field and state; more than two complete macro rows.
+  for (const [id, recipe] of Object.entries(recipes)) for (const field of Object.keys(fields)) {
+    for (const width of [1024, 640, 320]) {
+      const c = fixture(id, field, { items: recipe.columns * 2 + 1 }, width);
+      const state = width >= 960 ? "expanded" : width >= 480 ? "compact" : "stacked";
+      const expected = sequentialPlacements(recipe, field, c.grid.children.length, state);
+      const bounds = c.root.getBoundingClientRect(), gridBounds = c.grid.getBoundingClientRect();
+      [...c.grid.children].forEach((child, i) => {
+        const box = child.getBoundingClientRect(), p = expected[i];
+        check(near(box.left, bounds.left + (fields[field].start + p.lines[0] - 1) * width / 64)
+          && near(box.right, bounds.left + (fields[field].start + p.lines[1] - 1) * width / 64), `${id}/${field}/${state}/${i}: sequential boundaries`);
+        check(near(box.top, gridBounds.top + (p.row[0] - 1) * 20), `${id}/${field}/${state}/${i}: source-order rows`);
+      });
+      combinations++; c.root.remove();
+    }
+  }
+
   const layout = layoutsFor(recipes.grid_03).find(l => l.set === "set_03" && !l.flow);
+  // Selector factoring must preserve equal-specificity source order and the
+  // higher specificity of an explicit flow, in every generated build.
+  const cascadeRecipe = recipes["grid_03a--07"];
+  const cascadeDefault = layoutsFor(cascadeRecipe).find(l => l.set === "set_06" && !l.flow);
+  const cascadeFlow = layoutsFor(cascadeRecipe).find(l => l.set === "set_06" && l.flow === "flow_04");
+  for (const width of [640, 1024]) for (const position of ["before", "after"]) {
+    const c = fixture("grid_03a--07", "wide", cascadeDefault, width);
+    const style = document.createElement("style");
+    const layered = new URL(stylesheet.href).pathname.includes(".layer.");
+    const declarations = ".gp_field.grid_03a--07.set_06 { --gp-e-1-column: 1 / 5; --gp-c-1-column: 1 / 6; }";
+    style.textContent = layered ? `@layer graph-paper { ${declarations} }` : declarations;
+    if (position === "before") stylesheet.before(style); else stylesheet.after(style);
+    await frame();
+    const expected = width >= 960 ? expandedPlacements(cascadeRecipe, "wide", cascadeDefault) : compactPlacements("wide", cascadeDefault);
+    check(Number(getComputedStyle(c.grid.firstElementChild).gridColumnEnd) === (position === "after" ? width >= 960 ? 5 : 6 : expected[0].lines[1]), `${width}/${position}: default specificity/source order`);
+    c.grid.classList.add("flow_04"); await frame();
+    const explicit = width >= 960 ? expandedPlacements(cascadeRecipe, "wide", cascadeFlow) : compactPlacements("wide", cascadeFlow);
+    check(Number(getComputedStyle(c.grid.firstElementChild).gridColumnEnd) === explicit[0].lines[1], `${width}/${position}: explicit flow retains higher specificity`);
+    style.remove(); c.root.remove();
+  }
+  for (const width of [1024, 640, 320]) {
+    const mismatch = fixture("grid_03", "wide", { ...layout, items: 8 }, width);
+    mismatch.root.style.setProperty("--gp-e-4-column", "1 / 2");
+    mismatch.root.style.setProperty("--gp-c-4-column", "1 / 2");
+    await frame();
+    const fieldBounds = mismatch.grid.getBoundingClientRect();
+    [...mismatch.grid.children].slice(3).forEach((child, i) => {
+      const box = child.getBoundingClientRect();
+      check(near(box.left, fieldBounds.left) && near(box.right, fieldBounds.right), `mismatched set/${width}/${i}: full-width fallback isolates inherited variables`);
+    });
+    mismatch.root.remove();
+  }
   const inherited = fixture("grid_03", "wide", layout, 1024);
   const article = inherited.grid.firstElementChild; article.className = "gp_subgrid";
   const inset = document.createElement("div"); inset.style.gridColumn = "3 / -3"; article.append(inset);

@@ -3,3 +3,4 @@
 await import("./build-layouts.mjs");
 await import("./build-geometry-changes.mjs");
 await import("./build-distribution.mjs");
+await import("./sync-docs-assets.mjs");

@@ -20,6 +20,8 @@ for (const record of records.filter(r => r.classification === "ACCEPTED")) {
   });
   candidate.append(composition);
   scroll.append(candidate);
-  section.append(title, description, legacyLabel, iframe, candidateLabel, scroll);
+  const legacyScroll = document.createElement("div"); legacyScroll.className = "scroll-preview";
+  legacyScroll.append(iframe);
+  section.append(title, description, legacyLabel, legacyScroll, candidateLabel, scroll);
   document.getElementById("reviews").append(section);
 }

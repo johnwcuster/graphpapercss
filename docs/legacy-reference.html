@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>0.2.3 legacy reference</title><link rel="stylesheet" href="../css/legacy/main.css"><link rel="stylesheet" href="./docs.css"></head>
+<title>0.2.3 legacy reference</title><link rel="stylesheet" href="./assets/graph-paper/legacy.css"><link rel="stylesheet" href="./docs.css"></head>
 <body style="background: #ebe5d6"><div id="reference"></div>
 <script type="module">
-import { grids } from "../src/manifest/grids.mjs";
-import { layouts } from "../src/manifest/layouts.mjs";
+import { grids } from "./assets/graph-paper/src/manifest/grids.mjs";
+import { layouts } from "./assets/graph-paper/src/manifest/layouts.mjs";
 const query = new URLSearchParams(location.search);
 const id = query.get("grid"), set = query.get("set"), flow = query.get("flow");
 const root = document.getElementById("reference");

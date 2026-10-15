@@ -137,7 +137,7 @@ ${layouts.map(formatLayout).join(",\n")}
 if (checkOnly) {
   const currentSource = await readFile(outputPath, "utf8").catch(() => "");
   if (currentSource !== source) {
-    console.error("src/manifest/layouts.mjs is not up to date; run npm run layouts:build");
+    console.error("src/manifest/layouts.mjs is not up to date; run pnpm run layouts:build");
     process.exitCode = 1;
   }
 } else {

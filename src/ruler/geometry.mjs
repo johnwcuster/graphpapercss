@@ -15,10 +15,10 @@ export const fields = Object.freeze({
 export const recipes = Object.fromEntries(Object.entries(grids)
   .map(([id, grid]) => [id, { ...grid, id, legacy: true }]));
 Object.assign(recipes, {
-  "grid_05": { columns: 5, family: "05", weights: [1, 1, 1, 1, 1] },
-  "grid_06": { columns: 6, family: "06", weights: [1, 1, 1, 1, 1, 1] },
+  "grid_05": { id: "grid_05", columns: 5, family: "05", weights: [1, 1, 1, 1, 1] },
+  "grid_06": { id: "grid_06", columns: 6, family: "06", weights: [1, 1, 1, 1, 1, 1] },
   // 5:3 content proportion; not a reinterpretation of an existing ID.
-  "grid_02a--07": { columns: 2, family: "02a", weights: [5, 3] }
+  "grid_02a--07": { id: "grid_02a--07", columns: 2, family: "02a", weights: [5, 3] }
 });
 
 export function resolveColumns(recipe, fieldName) {
@@ -85,6 +85,18 @@ export function compactPlacements(fieldName, layout) {
     return { item: p.item,
       lines: [columns[index].start - field.start + 1, columns[index].end - field.start + 1],
       row: p.row };
+  });
+}
+
+// Grid-only occupancy: macro regions in expanded, equal pairs in compact,
+// and source-order blocks in stacked. Explicit rows make the contract testable.
+export function sequentialPlacements(recipe, fieldName, count, state = "expanded") {
+  const field = fields[fieldName];
+  const columns = state === "stacked" ? [{ start: field.start, end: field.end }]
+    : resolveColumns(state === "compact" ? { weights: [1, 1] } : recipe, fieldName);
+  return Array.from({ length: count }, (_, i) => {
+    const column = columns[i % columns.length], row = Math.floor(i / columns.length) + 1;
+    return { item: i + 1, lines: [column.start - field.start + 1, column.end - field.start + 1], row: [row, row + 1] };
   });
 }
 

@@ -3,33 +3,49 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Graph Paper CSS 1.0 configurator</title>
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="./assets/graph-paper/main.css">
   <link rel="stylesheet" href="./docs.css">
   <script type="module" src="./configurator.js"></script>
 </head>
 <body><main>
-  <nav><a href="./migration.html">Migration from 0.2.3</a> · <a href="./geometry-changes.html">Geometry changes</a> · <a href="./browser-support.md">Browser support</a></nav>
-  <h1>One ruler. Fields on the same paper.</h1>
+  <nav><a href="./index.html">Graph Paper</a> · <a href="./architecture.md">Architecture</a> · <a href="./responsive-bands.md">Bands</a> · <a href="./migration.html">Migration</a></nav>
+  <h1>Choose the relationship.</h1>
+  <p class="build-note">Development build for 1.0 · includes authoring defaults and experimental bands not in the published 0.3.0 preview.</p>
+  <p>Start with the content and its logical order. Then decide what deserves prominence. These six-item starting points preserve the same content while changing its relationships.</p>
+  <div id="starting-points" class="control-row"></div>
+  <section class="selection-tools" aria-label="Find a structure">
+    <label>Actual composed items <input id="item-count" type="number" min="1" max="12" value="6"></label>
+    <label>Width emphasis <select id="emphasis"><option value="">Any</option><option value="left">Left</option><option value="center">Interior / center</option><option value="right">Right</option><option value="even">Even</option></select></label>
+    <label>Width contrast <select id="contrast"><option value="">Any</option><option value="equal">Equal</option><option value="gentle">Gentle (up to 1.5:1)</option><option value="strong">Strong (above 1.5:1)</option></select></label>
+    <label>Supporting-region widths <select id="supports"><option value="">Any</option><option value="equal">Equal supports (3+ regions)</option><option value="varied">Varied supports (3+ regions)</option><option value="pair">Two-region pairs</option></select></label>
+    <p id="candidate-note"></p><div id="candidates" class="control-row"></div>
+  </section>
   <p>Structural edges use whole bits. A canvas starts the ruler; a field selects an interval; subgrid continues it. All 72 legacy recipes are available, plus the three additive 1.0 recipes.</p>
   <section class="controls" aria-label="Layout configuration">
     <label>Grid <select id="grid"></select></label>
-    <label>Items <select id="set"></select></label>
+    <label>Occupancy / set <select id="set"></select></label>
     <label>Flow <select id="flow"></select></label>
     <label>Field <select id="field"></select></label>
-    <label>Canvas width <input id="width" type="range" min="280" max="1200" value="1024" step="1"><output id="width-label"></output></label>
+    <label>Response band <select id="band"></select></label>
+    <label>Canvas width <input id="width" type="range" min="280" max="3200" value="1024" step="1"><output id="width-label"></output></label>
     <label><input id="ruler-guide" type="checkbox" checked> 64-bit ruler</label>
     <label><input id="field-guide" type="checkbox" checked> Active field</label>
     <label><input id="macro-guide" type="checkbox"> Macro columns (expanded)</label>
     <label><input id="source-guide" type="checkbox" checked> Source order</label>
     <label><input id="compare" type="checkbox"> Compare 0.2.3 geometry</label>
   </section>
+  <p id="design-description" class="lede"></p>
+  <p class="meta">Descriptions use design-weight proportions. Actual field-specific whole-bit boundaries are shown in the ruler and resolved geometry below. Suggestions favor item 1 in the broad region when a compatible flow provides that choice.</p>
+  <p id="count-warning" class="warning" role="status" hidden></p>
+  <p id="occupancy"></p><p id="equivalents" class="meta"></p>
   <p id="summary" aria-live="polite"></p>
+  <p id="band-pressure" class="meta" aria-live="polite"></p>
   <div class="scroll-preview"><div id="preview" class="gp_canvas"><section id="composition" class="gp_field"></section><div id="macro-overlay" aria-hidden="true"></div></div></div>
-  <section id="comparison" hidden><h2>0.2.3 legacy reference</h2><p>Same grid, set, flow, width, and historical rhythm. Full and ruled fields have no exact 0.2.3 equivalent; those comparisons use wide. New recipes have no historical counterpart.</p><iframe id="reference" title="0.2.3 legacy geometry comparison"></iframe></section>
+  <section id="comparison" hidden><h2>0.2.3 legacy reference</h2><p>Same grid, set, flow, and canvas width using the released 0.2.3 stylesheet. Full and ruled fields have no exact 0.2.3 equivalent; those comparisons use wide. New recipes have no historical counterpart.</p><iframe id="reference" title="0.2.3 legacy geometry comparison"></iframe></section>
   <p id="audit-summary"></p><p id="review-note"></p>
   <details><summary>Resolved geometry and migration evidence</summary><pre id="geometry"></pre></details>
   <h2>Use this composition</h2><button id="copy" type="button">Copy markup</button><pre id="markup"></pre>
-  <p>The field owns its inset; do not add another canvas just to constrain content. Five- and six-column recipes and the 5:3 recipe <code>grid_02a--07</code> are additive 1.0 recipes. Vertical spacing here belongs to the demo stylesheet, not Graph Paper core.</p>
+  <p>The field owns its inset; do not add another canvas just to constrain content. Five- and six-column recipes and the 5:3 recipe <code>grid_02a--07</code> are additive 1.0 recipes. Vertical spacing here belongs to the configurator stylesheet, not Graph Paper core.</p>
   <h2>A full surface, inset content, and a rule field</h2>
   <p>All three layers occupy the same row on one ruler. The 56-bit accent field marks its whole-bit outer boundaries; it does not rebase the content.</p>
   <div class="gp_canvas specimen overlay" data-demo="overlay">
@@ -44,8 +60,8 @@
       <article class="tile">A second article</article><article class="tile">A third article</article>
     </section>
   </div>
-  <h2>A nested canvas starts over</h2>
-  <p>The outer composition is expanded while the smaller canvas independently becomes compact or stacked. Resize the window to inspect both.</p>
+  <h2>Independent context: a nested canvas starts over</h2>
+  <p>Use this when a composition needs its own ruler and responsive context, not merely an inset. A narrow field or subgrid alone does not change the responsive state of its canvas.</p>
   <div class="gp_canvas specimen" data-demo="nested">
     <section class="gp_field gp_field--wide grid_02a--07 set_03">
       <article class="tile">Outer canvas: a 5:3 composition</article>

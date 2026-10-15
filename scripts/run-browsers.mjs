@@ -28,11 +28,25 @@ try {
         ? ["main.css", "main.min.css", "main.layer.css", "main.layer.min.css"] : ["main.css"];
       for (const asset of assets) {
         await page.goto(`${origin}/tests/geometry.html?css=${asset}`);
-        await page.waitForFunction(() => window.__geometryResults, { timeout: 120000 });
+        await page.waitForFunction(() => window.__geometryResults, null, { timeout: 120000 });
         const result = await page.evaluate(() => window.__geometryResults);
         reports.push({ browser: name, version: browser.version(), asset, ...result });
         console.log(`${name} ${asset}: ${result.passed ? "PASS" : "FAIL"}, ${result.combinations} combinations, ${result.assertions} assertions`);
         if (!result.passed) throw new Error(JSON.stringify(result.failures.slice(0, 20)));
+      }
+      if (!process.argv.includes("--legacy-only")) {
+        await page.goto(`${origin}/tests/bands.html`);
+        await page.waitForFunction(() => window.__bandResults, null, { timeout: 600000 });
+        const result = await page.evaluate(() => window.__bandResults);
+        reports.push({ browser:name, version:browser.version(), asset:"bands.css", ...result });
+        console.log(`${name} bands.css: ${result.passed ? "PASS" : "FAIL"}, ${result.combinations} boundary cases, ${result.assertions} assertions`);
+        if (!result.passed) throw new Error(JSON.stringify(result.failures));
+        await page.goto(`${origin}/tests/bands.html?minified`);
+        await page.waitForFunction(() => window.__bandResults, null, { timeout: 120000 });
+        const minified = await page.evaluate(() => window.__bandResults);
+        reports.push({ browser:name, version:browser.version(), asset:"bands.min.css", ...minified });
+        console.log(`${name} bands.min.css: ${minified.passed ? "PASS" : "FAIL"}, ${minified.combinations} boundary cases`);
+        if (!minified.passed) throw new Error(JSON.stringify(minified.failures));
       }
       await page.goto(`${origin}/docs/configurator.html?grid=grid_03a&field=wide&set=set_06&width=1024`);
       await page.waitForFunction(() => document.querySelectorAll("#composition > article").length === 6);
@@ -42,8 +56,37 @@ try {
       if (!await page.locator("#composition > .gp_rule--end").count()) throw new Error("Ruled markers missing");
       await page.locator("#width").evaluate(element => { element.value = "320"; element.dispatchEvent(new Event("input")); });
       if (!await page.locator("#summary").textContent().then(text => text.startsWith("stacked"))) throw new Error("Responsive label incorrect");
+      await page.selectOption("#grid", "grid_03");
+      await page.selectOption("#set", "set_03");
+      await page.selectOption("#field", "wide");
+      await page.selectOption("#band", "02");
+      await page.locator("#width").evaluate(element => { element.value="900"; element.dispatchEvent(new Event("input")); });
+      assert.match(await page.locator("#summary").textContent(), /^compact/);
+      assert.match(await page.locator("#band-pressure").textContent(), /expanded ≥ 57rem/);
+      assert.match(await page.locator("#markup").textContent(), /gp_band--02/);
       await page.check("#compare");
-      await page.waitForFunction(() => document.getElementById("reference").contentDocument?.querySelectorAll("article").length === 6);
+      await page.waitForFunction(() => document.getElementById("reference").contentDocument?.querySelectorAll("article").length === Number(document.getElementById("set").value.slice(-2)));
+      await page.goto(`${origin}/docs/configurator.html`);
+      await page.waitForFunction(() => document.querySelectorAll("#composition > article").length === 6);
+      await page.fill("#item-count", "2");
+      assert.equal(await page.locator("#set").inputValue(), "none");
+      assert.equal(await page.locator("#flow").isDisabled(), true);
+      await page.selectOption("#grid", "grid_02a--03");
+      assert.equal(await page.locator("#composition > article").count(), 2);
+      await page.fill("#item-count", "8");
+      await page.selectOption("#set", "set_06");
+      assert.equal(await page.locator("#count-warning").isVisible(), true);
+      assert.match(await page.locator("#count-warning").textContent(), /Additional items/);
+      await page.selectOption("#grid", "grid_03c--05");
+      await page.fill("#item-count", "5");
+      await page.selectOption("#set", "set_06");
+      assert.match(await page.locator("#count-warning").textContent(), /unoccupied/);
+      await page.selectOption("#emphasis", "right");
+      await page.selectOption("#supports", "varied");
+      await page.locator("#candidates button").first().click();
+      assert.equal(await page.locator("#grid").inputValue(), "grid_03b--01");
+      assert.equal(await page.locator("#flow").inputValue(), "flow_01");
+      assert.equal(await page.locator("#count-warning").isVisible(), false);
       await page.goto(`${origin}/docs/geometry-changes.html`);
       await page.waitForFunction(() => document.querySelectorAll("#reviews > section").length === 12);
       if (errors.length) throw new Error(errors.join("\n"));

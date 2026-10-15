@@ -1,54 +1,49 @@
-# 1.0 release-candidate validation
+# Validation
 
-Validated October 12, 2026, using pinned Playwright 1.64.0 and Lightning CSS
-1.33.0. These are actual engine versions tested, not inferred minimum versions.
+This repository validates library behavior and its canonical configurator.
 
-| Engine | Tested version | Modern variants | Combinations per variant | Assertions per variant |
-| --- | --- | ---: | ---: | ---: |
-| Chromium | 156.0.8078.4 | 4 | 15,585 | 229,463 |
-| Firefox | 157.0 | 4 | 15,585 | 229,463 |
-| WebKit | 27.2 | 4 | 15,585 | 229,463 |
+## Local checks
 
-All passed. The four variants are `main.css`, `main.min.css`,
-`main.layer.css`, and `main.layer.min.css`. Coverage spans all 72 migrated
-legacy recipes plus three accepted additive recipes, five fields, compatible
-flows, expanded/compact/stacked states, and focused structural assertions.
-The suite checks rule offsets and responsive ownership across every ruled-field
-combination, semantic subgrid, nesting, overlays, host-controlled spacing,
-breakpoint boundaries, and explicit placement overrides.
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+pnpm check
+pnpm docs:check
+pnpm size
+pnpm pack --dry-run
+```
 
-The primary configurator and accepted-change comparisons passed regression
-checks in each engine. The complete modern matrix was run in the isolated
-official Linux container; Chromium and WebKit also passed local macOS runs.
-Firefox's macOS launch issue did not require changes to personal browser data
-or permissions. See [browser support](browser-support.md) for reproduction.
+The deterministic build regenerates normalized layouts, accepted geometry
+records, CSS distributions, and the configurator's local runtime mirrors.
+Documentation checks verify local HTML and Markdown links, module imports,
+and freshness of those runtime assets.
 
-Ordinary and minified compatibility and explicit legacy builds each matched
-416 frozen-reference layout captures in all three engines. The regression harness
-measures in memory without writing to the preserved baseline.
+Node tests cover ruler closure, all supported recipe/set/flow placements,
+source-order occupancy, discovery metadata, the frozen 0.2.3 baseline, exact
+emission coverage, reproducible distribution, and band threshold arithmetic.
+Emission tests cover all 1,039 supported named combinations. The generator
+shares expanded and compact placement declarations while preserving selector
+specificity and placement; browser tests check host cascade overrides.
+Core and optional bands retain separate gzip ceilings of 12KB and 8KB.
+Current exact sizes are reported by `pnpm size`.
 
-`npm run check` passes eight Node test groups covering manifest invariants,
-frozen legacy coverage, source hashes, horizontal placement, non-overlap,
-accepted replacements, deterministic builds, legacy preservation, modern
-selector scope, absence of core vertical spacing, and size budgets.
+## Browser structure
 
-The 216-record historical audit contains 204 EXACT and twelve ACCEPTED records,
-with zero NEAR or REVIEW warnings. Accepted coordinates are explicitly frozen
-and tested against the approved replacements.
+```sh
+pnpm test:browsers
+pnpm test:distribution
+```
 
-| Asset | Raw bytes | Gzip bytes |
-| --- | ---: | ---: |
-| Frozen legacy | 39,291 | 4,795 |
-| Modern readable core | 224,503 | 11,209 |
-| Modern minified core | 200,470 | 10,699 |
-| Modern layered minified | 200,490 | 10,718 |
+The runner tests Chromium, Firefox, and WebKit. The core matrix has 16,710
+combinations per build: all recipes/fields, named flows, grid-only continuation,
+source order, subgrid, nested canvases, overlays, rules, and explicit placement.
+The optional band matrix checks 64,230 boundary cases plus 2,070 minified cases
+per engine, including independent nested-canvas state and enlarged root text.
+The configurator is checked against actual generated CSS, discovery controls,
+item-count warnings, band readouts, and legacy comparison.
 
-The modern minified ceiling is 12,000 gzip bytes. Minified core is approximately
-5.10× legacy raw size and 2.23× legacy gzip size. Modern core includes five
-field policies and full rule metadata, with no standalone compatibility path.
+Results are written to ignored `test-results/browsers.json`. Structural correctness does not
+constitute a comprehensive accessibility audit or a guarantee of design quality.
 
-`npm pack --dry-run --json` verifies the prepared `1.0.0-rc.0` package includes
-release CSS, explicit legacy alternatives, license, quick start, migration,
-architecture, browser notes, and release notes. Self-contained visual documentation includes only the pure geometry modules it
-uses. Contributor scripts, tests, and node_modules are excluded.
-The dry run does not publish or create a Git tag.
+The migration audit remains 204 exact matches and twelve explicitly accepted
+whole-bit adjustments. See [the coordinate record](geometry-changes.md).

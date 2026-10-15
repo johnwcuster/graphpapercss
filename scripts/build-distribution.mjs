@@ -12,10 +12,10 @@ if (createHash("sha256").update(legacy).digest("hex") !== baseline.source.sha256
 for (const [path, source] of Object.entries(distributionArtifacts(legacy))) {
   const url = new URL(`../${path}`, import.meta.url);
   if (process.argv.includes("--check")) {
-    if (await readFile(url, "utf8").catch(() => "") !== source) throw new Error(`${path} is stale; run npm run build`);
+    if (await readFile(url, "utf8").catch(() => "") !== source) throw new Error(`${path} is stale; run pnpm run build`);
   } else {
     await mkdir(dirname(fileURLToPath(url)), { recursive: true });
     await writeFile(url, source);
   }
 }
-console.log("Modern unlayered/layered/minified distributions and explicit legacy profile are up to date");
+console.log("Modern unlayered/layered/minified distributions, optional bands, and explicit legacy profile are up to date");

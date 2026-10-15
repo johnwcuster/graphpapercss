@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Graph Paper CSS</title><link rel="stylesheet" href="./docs.css"></head>
+<body><main>
+<nav><a href="./configurator.html">Configurator</a> · <a href="./architecture.md">Architecture</a> · <a href="./migration.html">Migration</a></nav>
+<h1>Graph Paper CSS</h1>
+<p>A framework-agnostic 64-bit ruler for editorial composition. No runtime JavaScript is required.</p>
+<p>This documentation describes the development build for the upcoming 1.0 release, including unreleased authoring defaults and experimental response bands. The published preview is <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.min.css">0.3.0</a>. Pin an exact release for production.</p>
+<h2>Start with a canvas and field</h2>
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.min.css&quot;&gt;
+&lt;div class="gp_canvas"&gt;
+  &lt;section class="gp_field gp_field--wide grid_03 set_03"&gt;
+    &lt;article&gt;First item&lt;/article&gt;
+    &lt;article&gt;Second item&lt;/article&gt;
+    &lt;article&gt;Third item&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</pre>
+<p>The canvas establishes coordinates and available-width context. The field selects a usable span. Grid, set, and flow arrange the content; subgrid continues alignment through wrappers. Typography, component styling, and vertical spacing belong to your project.</p>
+<h2>Inspect the API</h2>
+<ul>
+<li><a href="./configurator.html">Configurator</a>: choose recipes, fields, flows, item counts, and response bands; inspect real generated CSS and copy markup.</li>
+<li><a href="./architecture.md">Architecture</a>: field geometry, source order, subgrid, nested canvases, and rules.</li>
+<li><a href="./responsive-bands.md">Experimental bands</a>: minimum-slot requirements and their limitations.</li>
+<li><a href="./migration.html">Migration from 0.2.3</a> and <a href="./geometry-changes.html">twelve accepted whole-bit changes</a>.</li>
+<li><a href="./browser-support.md">Browser support</a> and <a href="./validation.md">validation commands</a>.</li>
+</ul>
+<h2>Choose a build</h2>
+<p>Use <code>css/main.min.css</code> for modern core, or <code>css/main.layer.min.css</code> for core in the <code>graph-paper</code> cascade layer. Load optional <code>css/bands.min.css</code> after core when using band classes; layered projects must load bands in that same layer.</p>
+<p>The separate <code>css/compat.css</code> profile preserves 0.2.3 behavior; it is not a fallback to load alongside modern core. The released baseline is retained at <code>css/legacy/main.css</code>. See <a href="./migration.html">migration guidance</a> before upgrading an existing site.</p>
+</main></body></html>

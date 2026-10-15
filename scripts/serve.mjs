@@ -3,20 +3,24 @@ import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, resolve, sep } from "node:path";
 
-const root = resolve(process.cwd());
+const root = resolve(process.env.GRAPHPAPER_ROOT ?? process.cwd());
 const port = Number.parseInt(process.env.GRAPHPAPER_PORT ?? "4173", 10);
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
-  ".mjs": "text/javascript; charset=utf-8"
+  ".md": "text/plain; charset=utf-8",
+  ".mjs": "text/javascript; charset=utf-8",
+  ".svg": "image/svg+xml",
+  ".jpg": "image/jpeg",
+  ".csv": "text/csv; charset=utf-8"
 };
 
 const server = createServer(async (request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
 
-  const requestedPath = pathname === "/" ? "/docs/configurator.html" : pathname;
+  const requestedPath = pathname === "/" ? (process.env.GRAPHPAPER_ROOT ? "/index.html" : "/docs/index.html") : pathname.endsWith("/") ? `${pathname}index.html` : pathname;
   const filePath = resolve(root, `.${requestedPath}`);
 
   if (filePath !== root && !filePath.startsWith(`${root}${sep}`)) {
@@ -38,5 +42,5 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Graph Paper configurator: http://127.0.0.1:${port}/docs/configurator.html`);
+  console.log(`Graph Paper documentation: http://127.0.0.1:${port}/${process.env.GRAPHPAPER_ROOT ? "" : "docs/"}`);
 });

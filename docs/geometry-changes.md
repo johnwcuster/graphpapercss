@@ -19,4 +19,4 @@ All 72 released grid IDs are represented in 1.0. Across neat, thin, and wide fie
 | grid_03d | thin | 16.5 / 24 / 16.5 | 17 / 24 / 16 | 2–19, 20–44, 45–61 |
 | grid_03d | wide | 15.5 / 23 / 15.5 | 16 / 23 / 15 | 3–19, 21–44, 46–61 |
 
-Coordinates are zero-based ruler bits. CSS line indices are coordinates plus one. See `docs/geometry-changes.html` for visual comparisons with 0.2.3.
+Coordinates are zero-based ruler bits. CSS line indices are coordinates plus one. See [visual comparisons with 0.2.3](geometry-changes.html).

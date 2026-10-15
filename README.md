@@ -1,85 +1,79 @@
 # Graph Paper CSS
 
-A small, framework-agnostic CSS library for editorial spatial composition.
-A 64-bit ruler connects the page: canvas, field, grid, set, and flow arrange
-content; subgrid preserves alignment through semantic nesting.
+A framework-agnostic CSS library for editorial spatial composition on a 64-bit ruler.
 
-The 1.0 release candidate is prepared locally but not published. The previous
-released version is [0.2.3](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css).
-Pin exact releases for production rather than using `@latest`.
+The published preview is [0.3.0](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.min.css).
+This checkout contains unreleased authoring improvements and experimental response bands.
+The previous legacy baseline is 0.2.3. Examples in this repository describe the
+development build unless noted otherwise. Pin exact releases in production.
 
-## Quick start
+## Use
 
 Copy `css/main.min.css` into your project:
 
 ```html
 <link rel="stylesheet" href="/css/main.min.css">
 <div class="gp_canvas">
-  <section class="gp_field gp_field--wide grid_03a--01 set_06">
-    <article>First story</article>
-    <article>Second story</article>
-    <article>Third story</article>
-    <article>Fourth story</article>
-    <article>Fifth story</article>
-    <article>Sixth story</article>
+  <section class="gp_field gp_field--wide grid_03 set_03">
+    <article>First item</article>
+    <article>Second item</article>
+    <article>Third item</article>
   </section>
 </div>
 ```
 
-No JavaScript, npm dependency, framework, or consumer build step is required.
-Your project owns typography, colors, components, and vertical spacing. Keep
-logical source order even when a flow changes visual prominence.
+Canvas establishes the ruler and responsive context; a field selects its usable
+span. Grid/set/flow arrange direct children. Subgrid continues inherited tracks;
+a nested canvas establishes independent coordinates. Your project owns typography,
+colors, components, and vertical spacing. No runtime JavaScript is required.
 
-Fields are full 64, neat 60, thin 59, wide 58, and ruled 56 bits. All 72 released
-grid IDs are supported, with equal five/six columns and the 5:3 `grid_02a--07`
-added in 1.0. Layouts expand at a canvas width of 60rem, become compact at 30rem,
-and stack in source order below 30rem.
-
-See [architecture](docs/architecture.md), [migration from 0.2.3](docs/migration.html),
-[geometry changes](docs/geometry-changes.md), [browser support](docs/browser-support.md),
-and [release notes](CHANGELOG.md).
+[Architecture](docs/architecture.md) · [Configurator](docs/configurator.html) ·
+[Response bands](docs/responsive-bands.md) · [Migration](docs/migration.html) ·
+[Accepted geometry changes](docs/geometry-changes.md)
 
 ## Builds
 
 | Files | Purpose |
 | --- | --- |
-| `css/main.css`, `main.min.css` | Modern canvas-native core |
-| `css/main.layer.css`, `main.layer.min.css` | Core inside `@layer graph-paper` |
+| `css/main.css`, `main.min.css` | Modern core |
+| `css/main.layer.css`, `main.layer.min.css` | Core in the graph-paper cascade layer |
+| `css/bands.css`, `bands.min.css` | Optional experimental minimum-slot response bands |
 | `css/compat.css`, `compat.min.css` | Alternative 0.2.3 standalone profile |
-| `css/legacy/main.css`, `main.min.css` | Released 0.2.3 reference and generated minification |
+| `css/legacy/main.css`, `main.min.css` | Frozen 0.2.3 baseline and its minification |
 
-Choose a modern build or the legacy profile per document. Compatibility keeps
-0.2.3 globals and viewport behavior; it is not an additive modern-core shim.
-The canonical historical source is `css/legacy/main.css`, verified against the
-released CDN file. The compatibility files are generated from that one source.
+Do not combine modern core and the legacy alternative on one document.
+Load bands after modern core when using `gp_band--01`–`03`.
 
-## Development
+## Develop
 
-Contributor tooling requires Node.js 20+. Dependencies are development-only.
+Use Node.js 20+ and pnpm 12.6.0, pinned in `package.json`.
 
 ```sh
-npm ci
-npm run build
-npm run check
-npm run size
-npm run dev
+pnpm install --frozen-lockfile
+pnpm build
+pnpm check
+pnpm docs:check
+pnpm size
+pnpm dev
 ```
 
-Open <http://127.0.0.1:4173/docs/configurator.html>, the sole visual explorer.
-It renders shipping CSS, filters flows, shows ruler/field/source-order guides,
-persists URL selections, and produces markup. It also demonstrates subgrid,
-nested canvases, shared-ruler overlays, and direct comparisons with 0.2.3.
+Open http://127.0.0.1:4173/docs/ for basic documentation or
+http://127.0.0.1:4173/docs/configurator.html for the canonical configurator.
 
 ```sh
-npm run browsers:install
-npm run test:browsers
-npm run test:distribution
-npm pack --dry-run
+pnpm browsers:install
+pnpm test:browsers
+pnpm test:distribution
+pnpm pack --dry-run
 ```
 
-The browser suite checks current structure in Chromium, Firefox, and WebKit;
-distribution checks also replay legacy regressions. See
-[browser support](docs/browser-support.md) for the isolated Docker runner and
-[validation](docs/validation.md) for recorded results. Build scripts do not
-commit, publish, or create release tags. Git history records implementation
-history; the source tree describes current 1.0 and its 0.2.3 migration baseline.
+See [browser support](docs/browser-support.md) and [validation](docs/validation.md).
+
+## Contributing
+
+Recipe and responsive inputs live in `src/manifest/`; ruler geometry and CSS
+generation live in `src/ruler/`. Edit these sources rather than generated CSS,
+then run the build and validation commands above. Structural changes should also
+pass the Chromium, Firefox, and WebKit distribution matrix.
+
+Graph Paper CSS is [MIT licensed](LICENSE).

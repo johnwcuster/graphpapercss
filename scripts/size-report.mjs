@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 
-const assets = ["css/legacy/main.css", "css/main.css", "css/main.min.css", "css/main.layer.min.css", "css/compat.min.css"];
+const assets = ["css/legacy/main.css", "css/main.css", "css/main.min.css", "css/main.layer.min.css", "css/bands.css", "css/bands.min.css", "css/compat.min.css"];
 console.log("Asset".padEnd(26) + "Raw bytes".padStart(12) + "Gzip bytes".padStart(12));
 for (const asset of assets) {
   const source = await readFile(new URL("../" + asset, import.meta.url));

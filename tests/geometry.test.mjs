@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
-import { fields, recipes, resolveColumns, layoutsFor, expandedPlacements, compactPlacements, auditGeometry } from "../src/ruler/geometry.mjs";
+import { fields, recipes, resolveColumns, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements, auditGeometry } from "../src/ruler/geometry.mjs";
 import { emitRulerCss } from "../src/ruler/emit.mjs";
 import { grids } from "../src/manifest/grids.mjs";
 import { acceptedChanges } from "../src/ruler/accepted-changes.mjs";
@@ -44,6 +44,22 @@ test("equal 2–6 compositions and exact 5:3 split satisfy the steering arithmet
     });
   }
   assert.deepEqual(resolveColumns(recipes["grid_02a--07"], "wide"), [{ start: 3, end: 38 }, { start: 40, end: 61 }]);
+});
+
+test("grid-only occupancy continues in source order without requiring a named set", () => {
+  for (const recipe of Object.values(recipes)) for (const field of Object.keys(fields)) {
+    for (const state of ["expanded", "compact", "stacked"]) {
+      const count = recipe.columns * 2 + 1;
+      const placements = sequentialPlacements(recipe, field, count, state);
+      const columns = state === "expanded" ? recipe.columns : state === "compact" ? 2 : 1;
+      assert.equal(placements.length, count);
+      placements.forEach((p, i) => {
+        assert.deepEqual(p.row, [Math.floor(i / columns) + 1, Math.floor(i / columns) + 2]);
+        assert.ok(p.lines.every(Number.isInteger));
+        assert.ok(p.lines[0] >= 1 && p.lines[1] <= fields[field].end - fields[field].start + 1);
+      });
+    }
+  }
 });
 
 test("expanded and compact placements preserve source items, row relationships and non-overlap", () => {

@@ -10,9 +10,9 @@ select, button { font: inherit; padding: .35rem; }
 .scroll-preview { overflow-x: auto; padding-block: 1rem; }
 #preview { position: relative; min-height: 240px; background: #ebe5d6; }
 .tile { padding-block: 1rem; padding-inline: var(--gp-bit, 1rem); background: #d5e6df; outline: 1px solid #658a81; outline-offset: -1px; min-height: 100px; }
-.gp_field { row-gap: 1rem; }
+.doc-composition { row-gap: 1rem; }
 @container gp-canvas (width < 30rem) {
-  .gp_field > * + * { margin-block-start: 1rem; }
+  .doc-composition > * + * { margin-block-start: 1rem; }
 }
 .tile h3 { margin: 0 0 .5rem; }
 .tile p { margin: 0; }
@@ -38,3 +38,11 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #eae7df; paddi
 iframe { display: block; border: 0; height: 420px; }
 #comparison { overflow-x: auto; }
 [hidden] { display: none !important; }
+.selection-tools { display:flex; flex-wrap:wrap; gap:1rem; margin-block:1.5rem; }
+.selection-tools > label, .controls > label { min-width:0; max-width:100%; flex-wrap:wrap; }
+select { max-width:100%; }
+.control-row { display:flex; flex-wrap:wrap; gap:.75rem; width:100%; }
+.control-row button { max-width:100%; text-align:left; }
+.control-row button strong, .control-row button span { display:block; }
+.meta, .build-note { color:#52625c; font-size:.9rem; }
+.warning { padding:1rem; border-left:3px solid #a65c24; }

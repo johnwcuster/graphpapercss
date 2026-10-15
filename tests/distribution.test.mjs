@@ -18,7 +18,7 @@ test("all distribution artifacts are reproducible and retain the frozen legacy p
 
 test("modern core contains the full vocabulary and no legacy globals or vertical spacing defaults", async () => {
   const css = await readFile(new URL("../css/main.css", import.meta.url), "utf8");
-  for (const id of Object.keys(recipes)) assert.ok(css.includes(`.${id}.`) || css.includes(`.${id} {`), id);
+  for (const id of Object.keys(recipes)) assert.match(css, new RegExp(`\\.${id}(?=[.,):\\s{])`), id);
   for (const field of Object.keys(fields)) assert.ok(css.includes(`.gp_field--${field}`));
   assert.ok(!/\[class\*=|!important|@media|row-gap\s*:|margin-block|font-family\s*:/.test(css));
   assert.ok(!/(?:^|\n)(?:body|h[1-6]|p|a|img|svg|table)\s*[{,]/.test(css));
