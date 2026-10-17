@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Release notes — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html" aria-current="page">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Release notes</h1></header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#041-documentation-and-configurator">0.4.1 — documentation and configurator</a></li><li><a href="#040-authoring-defaults-and-response-bands">0.4.0 — authoring defaults and response bands</a></li><li><a href="#030-public-preview-of-the-upcoming-10-architecture">0.3.0 — public preview of the upcoming 1.0 architecture</a></li><li><a href="#023-previous-released-version">0.2.3 — previous released version</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="041-documentation-and-configurator">0.4.1 — documentation and configurator</h2>
+<p>The CSS builds and authoring API are unchanged from 0.4.0. These updates improve documentation and exploration tooling.</p>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li>Refined paper-and-ink identity shared with the configurator: eight site-only
+color roles, a consistent wordmark, reading typography, and quieter editorial
+boundaries. Source and diagnostic colors retain their independent meanings.</li>
+<li>Task-oriented learning guides, class reference, troubleshooting, and a manifest-generated recipe catalogue, with an implementation checklist for human and agent authors.</li>
+<li>Site-level composition guidance and a companion inside-out/outside-in essay.</li>
+<li>Shared Graph Paper navigation and page-wide composition, recurring reading tracks, typographic measures, and deliberate wider reference views.</li>
+<li>Deterministic static HTML from maintained Markdown, with a full-height ruler toggle that remembers its state. The 0.2.3 comparison renderer remains isolated from modern CSS.</li>
+</ul>
+<h3 id="configurator">Configurator</h3>
+<ul>
+<li>Floating Preview controls and Composition panel with independent docking, keyboard hide/restore, and contextual help.</li>
+<li>Illustrated recipe, position, flow, gutter, and band choices; compatible selections are preserved, equivalent choices remain selectable, and unavailable combinations explain the next action.</li>
+<li>Source-count controls, paired responsive previews, proportional-width cues, applied classes, and copyable markup without tool-only styling.</li>
+<li>Independent visual aids, measured geometry, shared-scale band timelines, exact transition-testing widths, and a working rule-color example. Configuration changes preserve preview width and content nodes.</li>
+</ul>
+<h3 id="accessibility">Accessibility</h3>
+<ul>
+<li>Radio-group keyboard navigation, concise names and descriptions, restrained announcements, and focus handling for nonmodal floating controls.</li>
+<li>Narrow-screen adaptations, forced-color checks, and source-number labels that do not rely on color alone. Automated coverage does not replace manual assistive-technology testing.</li>
+</ul>
+<h3 id="validation">Validation</h3>
+<ul>
+<li>Reproducible documentation builds, local links and anchors, and manifest-backed catalogue checks.</li>
+<li>Cross-browser structural and interaction coverage for the configurator and documentation, including ruler geometry, preview independence, recurring reading edges, and representative page layouts through 2560px.</li>
+</ul>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="040-authoring-defaults-and-response-bands">0.4.0 — authoring defaults and response bands</h2>
+<ul>
+<li><p>Contributor tooling uses pnpm 12.6.0 with a frozen lockfile.</p>
+</li>
+<li><p>Experimental <code>gp_band--01</code> / <code>02</code> / <code>03</code> scale with provisional 12/16/20rem
+minimum slot widths, geometry-derived transition thresholds, optional
+<code>bands.css</code> / minified distribution, and live configurator controls.
+Unbanded defaults and the published 0.3.0 artifact are unchanged.</p>
+</li>
+<li><p>Factored CSS generation shares expanded and compact placement declarations
+without changing specificity, geometry, or the authoring API.</p>
+</li>
+<li><p>Exact named-placement emission coverage and browser cascade-precedence tests.</p>
+</li>
+<li><p>Updated API and migration documentation, with a canonical configurator.</p>
+</li>
+<li><p>Grid-only sequential macro placement, equal compact pairs, and stacked source
+order; isolated placement variables for nested named compositions.</p>
+</li>
+<li><p>Composition descriptions, discovery filters, curated starting points, actual
+item counts, and non-blocking mismatch warnings in the sole configurator.</p>
+</li>
+</ul>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="030-public-preview-of-the-upcoming-10-architecture">0.3.0 — public preview of the upcoming 1.0 architecture</h2>
+<ul>
+<li>Canonical 64-bit ruler with canvas-relative responsive composition.</li>
+<li>Five fields: full 64, neat 60, thin 59, wide 58, ruled 56 bits.</li>
+<li>All 72 released grid IDs, normalized sets/flows, row relationships, known
+aliases, and logical source order preserved.</li>
+<li>Equal five/six-column recipes and a 5:3 two-column recipe.</li>
+<li>Twelve intentional whole-bit geometry adjustments from 0.2.3, explicitly
+recorded in <a href="geometry-record.html">geometry changes</a>.</li>
+<li>Semantic subgrid, nested-canvas rebase, and shared-ruler overlays.</li>
+<li>Integer rule centers with responsive ownership and boundary suppression.</li>
+<li>Host-controlled typography, component styling, and vertical spacing.</li>
+<li>Ordinary, minified, and layered core builds; alternative 0.2.3 compatibility.</li>
+<li>Deterministic generation and three-engine structural regression coverage.</li>
+</ul>
+<p>Modern markup requires a canvas and field. See <a href="migration.html">migration</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="023-previous-released-version">0.2.3 — previous released version</h2>
+<p>The released stylesheet remains pinned at
+<a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css</a> and is
+retained byte-for-byte at <code>css/legacy/main.css</code> for migration and regression
+comparisons.</p>
+</div></section>
+</div></main></body></html>

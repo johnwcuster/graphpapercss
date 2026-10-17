@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contributing — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html" aria-current="page">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Contributing</h1><p>This page is for maintainers and coding agents changing the library or documentation. Using Graph Paper in another project does not require its generator or browser-test toolchain; start with <a href="getting-started.html">Getting started</a> instead.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#set-up-the-repository">Set up the repository</a></li><li><a href="#find-the-source-of-truth">Find the source of truth</a></li><li><a href="#validate-the-change">Validate the change</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="set-up-the-repository">Set up the repository</h2>
+<p>Use Node.js 20+ and the pnpm version pinned in <code>package.json</code>.</p>
+<pre><code class="language-sh">pnpm install --frozen-lockfile
+pnpm dev
+</code></pre>
+<p>Open <code>http://127.0.0.1:4173/docs/</code>. No demo repository or private service is required to maintain core or its configurator.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="find-the-source-of-truth">Find the source of truth</h2>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Area</th>
+<th scope="col">Maintained source</th>
+<th scope="col">Generated output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Recipes and normalized layouts</td>
+<td><code>src/manifest/</code></td>
+<td>Distribution selectors and inspection data</td>
+</tr>
+<tr>
+<td>Ruler geometry and CSS generation</td>
+<td><code>src/ruler/</code></td>
+<td><code>css/</code> builds and geometry records</td>
+</tr>
+<tr>
+<td>Reference and learning pages</td>
+<td>Markdown in <code>docs/</code></td>
+<td>Matching static HTML pages</td>
+</tr>
+<tr>
+<td>Releases</td>
+<td>Root <code>CHANGELOG.md</code></td>
+<td>Releases HTML page</td>
+</tr>
+<tr>
+<td>Shared site navigation and page framing</td>
+<td><code>scripts/docs-template.mjs</code></td>
+<td>Navigation on every public page</td>
+</tr>
+<tr>
+<td>Configurator and handwritten site pages</td>
+<td>HTML, JS, and documentation CSS in <code>docs/</code></td>
+<td>Shared navigation and local core mirrors updated by builds</td>
+</tr>
+</tbody></table></div>
+<p>Do not fix generated CSS by hand. Do not edit generated HTML instead of its Markdown source. <code>scripts/docs-template.mjs</code> lists generated page mappings; <code>scripts/build-docs.mjs</code> renders them. The geometry record is generated from its audit rather than authored as ordinary prose.</p>
+<p>The class reference&#39;s recipe-catalogue marker expands from the geometry/layout manifests during the documentation build. Do not hand-maintain a separate compatibility table.</p>
+<p>Site styling uses eight color roles in <code>docs/docs.css</code>, shared by <code>editorial.css</code> and <code>workbench.css</code>. Type roles remain direct stylesheet rules, not another token scale. Source-series and diagnostic colors have independent meanings. Keep branding out of the distributed library CSS; changes to reading typography also need measure, alignment, and reflow checks.</p>
+<p>The frozen 0.2.3 stylesheet is the only historical regression baseline. The isolated renderer is a test/reference fixture, not a second active architecture.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="validate-the-change">Validate the change</h2>
+<pre><code class="language-sh">pnpm build
+pnpm check
+pnpm docs:check
+pnpm size
+</code></pre>
+<p>Documentation changes should preserve static reading, local links and anchors, accessible navigation, and narrow-width reflow. Structural CSS changes also require the Chromium, Firefox, and WebKit matrices:</p>
+<pre><code class="language-sh">pnpm browsers:install
+pnpm test:browsers
+pnpm test:distribution
+pnpm pack --dry-run
+</code></pre>
+<p>The <a href="validation.html">validation reference</a> explains coverage, Docker execution, and limits. The <a href="architecture.html">architecture</a> explains the model. Keep author-facing documentation separate from test-runner and configurator implementation details.</p>
+</div></section>
+</div></main></body></html>

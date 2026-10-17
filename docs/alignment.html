@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alignment and nesting — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html" aria-current="page">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Alignment and nesting</h1><p>Use subgrid to continue an existing alignment through a wrapper. Use a nested canvas to start an independent composition. Neither is necessary simply to group text or add component padding.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#choose-what-should-be-inherited">Choose what should be inherited</a></li><li><a href="#continue-tracks-through-a-semantic-wrapper">Continue tracks through a semantic wrapper</a></li><li><a href="#start-an-independent-inner-composition">Start an independent inner composition</a></li><li><a href="#check-the-boundary-with-real-content">Check the boundary with real content</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="choose-what-should-be-inherited">Choose what should be inherited</h2>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Need</th>
+<th scope="col">Choice</th>
+<th scope="col">Consequence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ordinary content inside an item</td>
+<td>Normal semantic markup</td>
+<td>No additional ruler or placement contract</td>
+</tr>
+<tr>
+<td>Descendants aligned to the tracks occupied by a wrapper</td>
+<td><code>gp_subgrid</code></td>
+<td>Inherited tracks and the existing responsive context</td>
+</tr>
+<tr>
+<td>An inner recipe that responds to its own available width</td>
+<td>Nested <code>gp_canvas</code> plus a new field</td>
+<td>A new 64-bit ruler and independent responsive context</td>
+</tr>
+</tbody></table></div>
+<p>Starting another canvas does not preserve parent bit size. Continuing a subgrid does not make the wrapper&#39;s width the new breakpoint reference.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="continue-tracks-through-a-semantic-wrapper">Continue tracks through a semantic wrapper</h2>
+<p>This two-region example places a semantic wrapper in the first region. Its heading and description align one inherited bit inside the wrapper&#39;s edges. That inset stays tied to the outer ruler, rather than being recalculated as a fraction of the wrapper:</p>
+<pre><code class="language-html">&lt;div class=&quot;gp_canvas&quot;&gt;
+  &lt;section class=&quot;gp_field gp_field--wide grid_02&quot;&gt;
+    &lt;article class=&quot;gp_subgrid&quot;&gt;
+      &lt;h2 class=&quot;gp_place&quot; style=&quot;--gp-column-start: 2; --gp-column-end: -2&quot;&gt;Main story&lt;/h2&gt;
+      &lt;p class=&quot;gp_place&quot; style=&quot;--gp-column-start: 2; --gp-column-end: -2&quot;&gt;Its description.&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;aside&gt;Related material&lt;/aside&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+</code></pre>
+<p>In expanded and compact states, the wrapper occupies one region of this grid-only recipe. Local line <code>1</code> is its first inherited line; <code>-1</code> is its last. Selecting <code>2 / -2</code> leaves one inherited track at each side. Those tracks retain the outer canvas&#39;s bit size. Local line <code>1</code> is not the first line of the outer canvas unless the wrapper happens to start there.</p>
+<p>Below the default compact threshold, this field and its subgrid use block flow: the grid-line inset no longer applies. The heading and paragraph read normally before the related material. The wrapper does not introduce a separate query container.</p>
+<p>This demonstrates a shared inset, not a second composition recipe. To place descendants on other internal spans, select integer local lines from the wrapper&#39;s actual inherited tracks and verify those lines in every responsive state. A wrapper&#39;s track count can change when its placement changes. There is no automatic inner recipe attached to <code>gp_subgrid</code>. Use <code>1 / -1</code> instead if descendants should span the whole wrapper.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="start-an-independent-inner-composition">Start an independent inner composition</h2>
+<p>Here the first outer item is itself a canvas. Its two inner items respond to that item&#39;s width, rather than the outer page&#39;s width:</p>
+<pre><code class="language-html">&lt;div class=&quot;gp_canvas&quot;&gt;
+  &lt;section class=&quot;gp_field gp_field--wide grid_02&quot;&gt;
+    &lt;div class=&quot;gp_canvas&quot;&gt;
+      &lt;section class=&quot;gp_field gp_field--neat grid_02&quot;&gt;
+        &lt;article&gt;Inner first item&lt;/article&gt;
+        &lt;article&gt;Inner second item&lt;/article&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+    &lt;aside&gt;Outer supporting material&lt;/aside&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+</code></pre>
+<p>The inner field explicitly selects neat geometry. Its 64-bit ruler belongs to the inner canvas; its bits are smaller than outer bits when that canvas is narrower. The inner content can remain stacked while the outer composition is expanded.</p>
+<p>That is success if the inner items need room to read independently. It is the wrong choice if the goal was to keep their edges on the outer ruler. Use subgrid for that goal instead.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="check-the-boundary-with-real-content">Check the boundary with real content</h2>
+<p>For subgrid, check which parent lines the wrapper actually inherits and how they change in compact mode. Do not assume every wrapper inherits all 64 tracks. For nested canvases, inspect inner and outer transition widths separately; nesting can create a narrow context that stays stacked much longer than expected.</p>
+<p>Keep reading order sensible in both cases. Neither technique measures content or promises that a structurally correct arrangement has a comfortable text measure. The <a href="architecture.html">architecture</a> explains the underlying coordinate model, and the <a href="class-reference.html">class reference</a> documents explicit adjustments.</p>
+</div></section>
+</div></main></body></html>

@@ -3,3 +3,6 @@
 node_modules/
 test-results/
 *.tgz
+
+# Local reference material, not part of the public library or documentation.
+/other/

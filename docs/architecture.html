@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architecture — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html" aria-current="page">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Architecture</h1><p>Graph Paper has one 64-bit ruler. A canvas starts it; a field selects an interval. Grid, set, and flow compose content on it. Subgrid continues inherited alignment; a nested canvas starts a new ruler and responsive context.</p>
+<p>This architecture ships in the 0.4.0 preview of 1.0 and is unchanged in 0.4.1, which updates documentation and the configurator. The examples work with both releases. For installation, use <a href="getting-started.html">Getting started</a>. For class syntax and defaults, use the <a href="class-reference.html">class reference</a>.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#canvas-and-fields">Canvas and fields</a></li><li><a href="#recipes-and-occupancy">Recipes and occupancy</a></li><li><a href="#responsive-context">Responsive context</a></li><li><a href="#continuing-and-rebasing-alignment">Continuing and rebasing alignment</a></li><li><a href="#rules-and-exceptions">Rules and exceptions</a></li><li><a href="#scope">Scope</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="canvas-and-fields">Canvas and fields</h2>
+<p>A <code>gp_canvas</code> establishes 64 equal CSS Grid tracks and a named inline-size query container. One bit is 1/64 of its content width. Structural coordinates are integer bits; zero-based ruler coordinates translate to CSS line numbers by adding one.</p>
+<p>A direct-child <code>gp_field</code> continues the canvas tracks through subgrid. Its modifier chooses an interval, outer insets, and internal structural gutters.</p>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Field</th>
+<th scope="col">Interval (bits)</th>
+<th scope="col" align="right">Width</th>
+<th scope="col" align="right">Internal gutter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Full</td>
+<td>[0,64]</td>
+<td align="right">64</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Neat</td>
+<td>[2,62]</td>
+<td align="right">60</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Thin</td>
+<td>[2,61]</td>
+<td align="right">59</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>Wide</td>
+<td>[3,61]</td>
+<td align="right">58</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>Ruled</td>
+<td>[4,60]</td>
+<td align="right">56</td>
+<td align="right">2</td>
+</tr>
+</tbody></table></div>
+<p>Gutters occupy ruler bits, rather than CSS column gaps. Adding horizontal grid gaps, padding, or a different track definition to these grids breaks that coordinate model. Component styling and vertical spacing belong to the host project.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="recipes-and-occupancy">Recipes and occupancy</h2>
+<p>A grid recipe defines broad macro regions and expanded proportions. A set selects named item positions; flow refines their placement without changing source order. Region count, position count, and actual item count are distinct.</p>
+<p>Without a named set, items occupy regions sequentially and continue into later rows. With a named set, unfilled positions preserve the selected geometry and additional items use full-width fallback. Each field resets inherited placement inputs so an outer recipe does not accidentally populate an inner one.</p>
+<p>Geometry is resolved onto whole-bit boundaries for the selected field. Flow describes placement relative to macro starts and ends, independently of field geometry. See <a href="authoring.html">Authoring compositions</a> for editorial decisions and the <a href="class-reference.html">class reference</a> for valid-combination lookup.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="responsive-context">Responsive context</h2>
+<p>The default compact and expanded thresholds are 30rem and 60rem of canvas width. Compact layouts use normalized simplified arrangements; stacked layouts use block flow in source order. Graph Paper does not reorder the DOM or use positive tabindex to reconcile reading order.</p>
+<p>Optional experimental bands replace default thresholds with geometry-derived transitions based on minimum useful position width. They do not change the recipe&#39;s expanded proportions or select another compact arrangement. Fields on the same canvas may choose different bands, but they still reference that canvas&#39;s width.</p>
+<p>A narrower field does not establish a narrower query context. See <a href="responsive-design.html">Responsive design</a> for the authoring model and the <a href="responsive-bands.html">band reference</a> for arithmetic and calibration.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="continuing-and-rebasing-alignment">Continuing and rebasing alignment</h2>
+<p>Subgrid continues the tracks occupied by a semantic wrapper. Its descendants use local inherited line numbers; it creates no query container and assigns no automatic inner recipe.</p>
+<p>A nested canvas rebases both geometry and response. It establishes its own 64 bits based on its own width, with fields explicitly selected again. Choose it for independent inner composition, not as a substitute for inherited alignment. See <a href="alignment.html">Alignment and nesting</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="rules-and-exceptions">Rules and exceptions</h2>
+<p>Ruled fields reserve whole-bit gutters. Explicit edge ownership places markers at their centers; placement metadata suppresses outer edges and inappropriate responsive markers. Rules, explicit placement, bit insets, and optical adjustments are documented in the <a href="class-reference.html">class reference</a>.</p>
+<p>Structural alignment uses integer ruler coordinates. Optical adjustments are intentional visual exceptions, not changes to the coordinate system.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="scope">Scope</h2>
+<p>Core supplies composition, not typography, colors, components, image helpers, print styling, or vertical rhythm. Modern browser requirements and distribution choices are documented under <a href="browser-support.html">Browser support and builds</a>.</p>
+<p>The configurator is optional documentation tooling, separate from core CSS. Its interface is documented in <a href="configurator-help.html">Configurator help</a>; it is not a published inspector script or a required runtime.</p>
+<p>For existing sites, <a href="migration.html">Migration from 0.2.3</a> explains compatibility choices and the twelve intentional whole-bit geometry changes. For maintainers, <a href="contributing.html">Contributing</a> identifies manifests, generators, and tests.</p>
+</div></section>
+</div></main></body></html>

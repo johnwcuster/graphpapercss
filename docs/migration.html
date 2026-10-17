@@ -1,10 +1,19 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Migrating Graph Paper 0.2.3 to 1.0</title><link rel="stylesheet" href="./docs.css"></head>
-<body><main>
-<nav><a href="./index.html">Graph Paper</a> · <a href="./configurator.html">Configurator</a> · <a href="./architecture.md">Architecture</a> · <a href="./geometry-changes.md">Geometry changes</a></nav>
-<h1>Migrating from 0.2.3 to 1.0</h1>
-<p>This guide targets the development build for the upcoming 1.0 release; 0.3.0 is the published preview. Existing sites can keep the <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">pinned 0.2.3 release</a>. Modern core requires updated markup and browsers with container queries, container units, and subgrid.</p>
-<h2>Add a canvas and field</h2>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Migrating Graph Paper 0.2.3 to 1.0</title><link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html" aria-current="page">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" id="page-content" tabindex="-1">
+<header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1>Migrating from 0.2.3 to 1.0</h1><p>The 1.0 architecture described here is available in the 0.4.0 preview; 0.4.1 retains the same CSS and authoring API while updating documentation and the configurator. Existing sites can keep the <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">pinned 0.2.3 release</a>. Modern core requires updated markup and browsers with container queries, container units, and subgrid.</p></header>
+<nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#add-a-canvas-and-field">Add a canvas and field</a></li><li><a href="#responsive-layouts-and-reading-order">Responsive layouts and reading order</a></li><li><a href="#twelve-intentional-geometry-changes">Twelve intentional geometry changes</a></li><li><a href="#rules-and-host-controlled-spacing">Rules and host-controlled spacing</a></li><li><a href="#compatibility-and-cascade-layers">Compatibility and cascade layers</a></li></ul></nav>
+<aside class="editorial-note"><h2 class="editorial-small-heading">Explore a composition</h2><p><a href="./configurator.html">Use the configurator</a> to compare recipes, test responsive layouts, and copy markup.</p></aside>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="add-a-canvas-and-field">Add a canvas and field</h2>
 <p>Keep the grid, set, and compatible flow IDs. Add a canvas wrapper and a field:</p>
 <pre>&lt;div class="gp_canvas"&gt;
   &lt;section class="gp_field gp_field--wide grid_03a--01 set_06 flow_04"&gt;
@@ -13,11 +22,14 @@
 &lt;/div&gt;</pre>
 <p>A field is a direct canvas child and uses exactly one modifier: full (64 bits), neat (60), thin (59), wide (58), or ruled (56). The 0.2.3 thin/neat modifiers become field modifiers. Gutters occupy ruler bits; do not add a horizontal CSS gap to the canvas or field.</p>
 <p>The canvas supplies the coordinate system and responsive context. Subgrid continues a semantic wrapper's inherited tracks using local line indices. A nested canvas explicitly starts a new ruler and selects its own field. A full-bleed background and inset content can share one canvas row.</p>
-<h2>Responsive layouts and reading order</h2>
-<p>Layouts respond to canvas width instead of viewport width. Defaults are expanded at 60rem, compact at 30rem, and source-order stacking below 30rem. Optional <a href="./responsive-bands.md">experimental bands</a> change transition thresholds, not compact arrangements. Normalized flows and their known aliases remain. Keep logical DOM order; visual hierarchy does not change focus order.</p>
-<h2>Twelve intentional geometry changes</h2>
-<p>All 72 released recipes are represented. Of 216 neat/thin/wide comparisons, 204 match exactly. The twelve changes affect grid_03a, grid_03b, grid_03c, and grid_03d in each field: edges shift by at most half a bit and two formerly equal small columns differ by one bit. The <a href="./geometry-changes.md">concise coordinate record</a> specifies the accepted replacements. Full and ruled are new field policies.</p>
-<h2>Rules and host-controlled spacing</h2>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="responsive-layouts-and-reading-order">Responsive layouts and reading order</h2>
+<p>Layouts respond to canvas width instead of viewport width. Defaults are expanded at 60rem, compact at 30rem, and source-order stacking below 30rem. Optional <a href="./responsive-bands.html">experimental bands</a> change transition thresholds, not compact arrangements. Normalized flows and their known aliases remain. Keep logical DOM order; visual hierarchy does not change focus order.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="twelve-intentional-geometry-changes">Twelve intentional geometry changes</h2>
+<p>All 72 released recipes are represented. Of 216 neat/thin/wide comparisons, 204 match exactly. The twelve changes affect grid_03a, grid_03b, grid_03c, and grid_03d in each field: edges shift by at most half a bit and two formerly equal small columns differ by one bit. The <a href="./geometry-record.html">concise coordinate record</a> specifies the accepted replacements. Full and ruled are new field policies.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="rules-and-host-controlled-spacing">Rules and host-controlled spacing</h2>
 <p>Use gp_field--ruled and explicitly assign gp_rule--start or gp_rule--end to one owner per internal gutter. The ruled field reserves two bits per gutter and centers rules on whole-bit lines. Markers suppress themselves at field boundaries, on responsive full-span items, and in stacked mode. Rule color and width remain host-overridable.</p>
 <p>Replace 0.2.3's combined rule modifier with this explicit ruled-field model. Core provides no global typography, image helpers, print theme, row gaps, or stacked margins. Add vertical spacing in your project:</p>
 <pre>.editorial .gp_field { row-gap: 1.5rem; }
@@ -25,7 +37,8 @@
   .editorial .gp_field &gt; * + * { margin-block-start: 1.5rem; }
 }</pre>
 <p>This spacing example follows the default stacked threshold. If you opt into bands or customize thresholds, adapt host spacing to those transitions as well.</p>
-<h2>Compatibility and cascade layers</h2>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="compatibility-and-cascade-layers">Compatibility and cascade layers</h2>
 <p>compat.css is an alternative 0.2.3 profile, including its globals and viewport behavior. It is not a modern-field polyfill; do not load it alongside modern core in the same document. css/legacy/main.css retains the released baseline.</p>
-<p>main.layer.min.css provides modern core inside the graph-paper cascade layer. Declare its order relative to your project's layers. Ordinary unlayered host styles override normal layered declarations.</p>
-</main></body></html>
+<p>main.layer.min.css provides modern core inside the graph-paper cascade layer. Declare its order relative to your project's layers. Ordinary unlayered host styles override normal layered declarations.</p></div></section>
+</div></main></body></html>

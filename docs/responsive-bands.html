@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responsive bands reference — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul><p class="site-nav-context"><a href="./responsive-bands.html" aria-current="page">Responsive bands</a></p></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Responsive bands reference</h1><p>Bands let an author select a minimum useful slot width without choosing device
+breakpoints. They change <strong>when</strong> a composition transitions, not <strong>which</strong> compact
+arrangement the recipe supplies. Available since 0.4.0, this optional feature has
+a provisional scale that may change before 1.0.</p>
+<p>Start with <a href="responsive-design.html">Responsive design</a> for the stacked/compact/expanded model and authoring decisions. This page documents the optional band&#39;s calculation, limits, and custom-build calibration.</p>
+<p>A slot is a defined item position, which can span one or more macro regions. Slot width is its structural width, not necessarily the width of a single macro region or the text inside it. Without a named set, sequential positions correspond to macro regions in expanded mode and equal pairs in compact mode.</p>
+<p>Load the optional stylesheet after the modern core:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/bands.css&quot;&gt;
+
+&lt;div class=&quot;gp_canvas&quot;&gt;
+  &lt;section class=&quot;gp_field gp_field--wide grid_03 set_03 gp_band--02&quot;&gt;
+    &lt;article&gt;Lead&lt;/article&gt;
+    &lt;article&gt;Support&lt;/article&gt;
+    &lt;article&gt;Support&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Use exactly one band on a recipe-bearing field, not on its canvas or individual
+items. Omitting a band preserves the 30rem compact / 60rem expanded defaults.
+For layered projects, load the optional bands stylesheet in the same
+<code>graph-paper</code> layer, after the layered core; an unlayered bands sheet would have
+different cascade precedence.</p>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Class</th>
+<th scope="col" align="right">Provisional minimum useful slot width</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gp_band--01</code></td>
+<td align="right">12rem</td>
+</tr>
+<tr>
+<td><code>gp_band--02</code></td>
+<td align="right">16rem</td>
+</tr>
+<tr>
+<td><code>gp_band--03</code></td>
+<td align="right">20rem</td>
+</tr>
+</tbody></table></div>
+<p>Numbers are ordinal scale positions, not measurements or column counts.
+To calibrate a custom build, change the values in <code>src/manifest/bands.mjs</code> and run
+<code>pnpm build</code> to regenerate CSS and configurator inspection data. No JavaScript
+is needed for the actual CSS transitions.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#what-a-band-protects">What a band protects</a></li><li><a href="#inspect-and-calibrate">Inspect and calibrate</a></li><li><a href="#stylesheet-cost">Stylesheet cost</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="what-a-band-protects">What a band protects</h2>
+<p>The compiler finds the narrowest item span in each selected expanded and compact
+recipe. Bare grids use the narrowest macro region and compact pair respectively.
+All defined positions count, including currently empty positions. This is
+deliberately conservative: a band does not let you designate one limiting item
+or select a different compact arrangement.</p>
+<p>For a minimum M and a slot spanning B canvas bits, its canvas threshold is
+<code>ceil(M × 64 / B)</code> rem. Whole-rem upward rounding never reduces the declared
+minimum. Expanded cannot start before compact is viable; equal thresholds skip
+the intermediate state. Wide-field <code>grid_03 set_03 gp_band--02</code> therefore uses
+37rem for compact (28-bit slots) and 57rem for expanded (18-bit slots).</p>
+<p>The canvas remains the responsive reference. Fields and subgrids do not create
+new query containers. Two fields on the same ruler may select different bands
+and transition independently; a nested canvas still rebases both geometry and
+responsive context.</p>
+<p>The minimum refers to the structural slot, not text measure after host padding.
+If a reading treatment needs 16rem plus padding, include that extra room in your
+choice or calibration. The library does not measure text, infer hierarchy, change
+content, or diagnose excessive height. Stacking is the source-order baseline,
+not a promise that a very narrow screen can supply the selected minimum.</p>
+<p>Unsupported recipe/set/flow combinations and multiple simultaneous band classes
+are unsupported. Unmatched extra children retain the
+existing full-width fallback; a band does not fix a count mismatch.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="inspect-and-calibrate">Inspect and calibrate</h2>
+<ul>
+<li><a href="configurator.html?grid=grid_03&amp;set=set_03&amp;items=3&amp;field=wide&amp;band=02&amp;width=900">Configurator</a>:
+select a band, drag canvas width, inspect computed thresholds and copied markup.</li>
+</ul>
+<p>Ask whether the expanded state stops at the right point, whether compact actually
+relieves pressure, and whether the chosen treatment—not merely its geometry—is
+still useful. Larger bands preserve more room, so generally transition earlier.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="stylesheet-cost">Stylesheet cost</h2>
+<p>Bands ship separately as <code>bands.css</code> / <code>bands.min.css</code>; load them only when using
+band classes. Both modern core and the band stylesheet are required. Existing
+unbanded compositions are unchanged. Use <code>pnpm size</code> to inspect the core and
+optional stylesheet footprints separately.</p>
+</div></section>
+</div></main></body></html>

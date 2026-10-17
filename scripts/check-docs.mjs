@@ -14,9 +14,15 @@ for (const path of pages) {
   const html = await readFile(path, "utf8");
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const link = match[1].split("#")[0].split("?")[0];
-    if (!link || /^(https?:|data:|mailto:)/.test(link)) continue;
-    const target = resolve(dirname(path), link);
+    if (/^(https?:|data:|mailto:)/.test(link)) continue;
+    const target = link ? resolve(dirname(path), link) : path;
     if (!target.startsWith(root + "/") || !await stat(target).catch(() => null)) missing.push(`${path}: ${link}`);
+    if (/\.md(?:[?#]|$)/.test(match[1])) missing.push(`${path}: raw Markdown site link ${match[1]}`);
+    const anchor = match[1].split('#')[1];
+    if (anchor && target.endsWith('.html')) {
+      const targetHtml = await readFile(target, 'utf8').catch(() => '');
+      if (!targetHtml.includes(`id="${decodeURIComponent(anchor)}"`)) missing.push(`${path}: missing anchor ${match[1]}`);
+    }
   }
 }
 for (const path of markdown) {

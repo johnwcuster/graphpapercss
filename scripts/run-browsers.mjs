@@ -2,6 +2,8 @@ import { chromium, firefox, webkit } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
+import { checkWorkbench, setSourceCount, selectGrid, selected, expandOptions, selectBand } from "../tests/configurator-checks.mjs";
+import { checkDocumentationSite } from "../tests/documentation-site.mjs";
 
 // Own a separate server so checks cannot depend on stale local dev state.
 const port = 4186;
@@ -17,14 +19,14 @@ await new Promise((resolve, reject) => {
 const reports = [];
 try {
   for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
-    const selected = process.argv.find(arg => arg.startsWith("--engine="))?.split("=")[1];
-    if (selected && selected !== name) continue;
+    const selectedEngine = process.argv.find(arg => arg.startsWith("--engine="))?.split("=")[1];
+    if (selectedEngine && selectedEngine !== name) continue;
     const browser = await engine.launch({ headless: true });
     try {
       const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
       const errors = [];
       page.on("pageerror", error => errors.push(error.message));
-      const assets = process.argv.includes("--legacy-only") ? [] : process.argv.includes("--distribution")
+      const assets = process.argv.includes("--legacy-only") || process.argv.includes("--configurator-only") ? [] : process.argv.includes("--distribution")
         ? ["main.css", "main.min.css", "main.layer.css", "main.layer.min.css"] : ["main.css"];
       for (const asset of assets) {
         await page.goto(`${origin}/tests/geometry.html?css=${asset}`);
@@ -34,7 +36,7 @@ try {
         console.log(`${name} ${asset}: ${result.passed ? "PASS" : "FAIL"}, ${result.combinations} combinations, ${result.assertions} assertions`);
         if (!result.passed) throw new Error(JSON.stringify(result.failures.slice(0, 20)));
       }
-      if (!process.argv.includes("--legacy-only")) {
+      if (!process.argv.includes("--legacy-only") && !process.argv.includes("--configurator-only")) {
         await page.goto(`${origin}/tests/bands.html`);
         await page.waitForFunction(() => window.__bandResults, null, { timeout: 600000 });
         const result = await page.evaluate(() => window.__bandResults);
@@ -50,47 +52,48 @@ try {
       }
       await page.goto(`${origin}/docs/configurator.html?grid=grid_03a&field=wide&set=set_06&width=1024`);
       await page.waitForFunction(() => document.querySelectorAll("#composition > article").length === 6);
-      const recipeCount = await page.locator("#grid option").count();
-      if (recipeCount !== 75) throw new Error(`Expected 75 recipes, got ${recipeCount}`);
-      await page.selectOption("#field", "ruled");
+      await expandOptions(page, ['gutter-options-toggle']);
+      await page.click('#field-choices [data-field="ruled"]');
       if (!await page.locator("#composition > .gp_rule--end").count()) throw new Error("Ruled markers missing");
       await page.locator("#width").evaluate(element => { element.value = "320"; element.dispatchEvent(new Event("input")); });
       if (!await page.locator("#summary").textContent().then(text => text.startsWith("stacked"))) throw new Error("Responsive label incorrect");
-      await page.selectOption("#grid", "grid_03");
-      await page.selectOption("#set", "set_03");
-      await page.selectOption("#field", "wide");
-      await page.selectOption("#band", "02");
+      await selectGrid(page, "grid_03");
+      await page.click('[data-choice-key="set-choices:set_03"]');
+      await page.click('#field-choices [data-field="wide"]');
+      await selectBand(page, '02');
       await page.locator("#width").evaluate(element => { element.value="900"; element.dispatchEvent(new Event("input")); });
       assert.match(await page.locator("#summary").textContent(), /^compact/);
-      assert.match(await page.locator("#band-pressure").textContent(), /expanded ≥ 57rem/);
+      assert.match(await page.locator('#band-choices [aria-checked="true"] .band-thresholds').textContent(), /Expanded ≥ 912px/);
       assert.match(await page.locator("#markup").textContent(), /gp_band--02/);
-      await page.check("#compare");
-      await page.waitForFunction(() => document.getElementById("reference").contentDocument?.querySelectorAll("article").length === Number(document.getElementById("set").value.slice(-2)));
+      await page.goto(`${origin}/docs/legacy-reference.html?grid=grid_03&set=set_03&flow=&rhythm=wide&width=1024`);
+      await page.frameLocator('#legacy-preview').locator('#reference article').first().waitFor();
+      assert.equal(await page.frameLocator('#legacy-preview').locator('#reference article').count(), 3);
       await page.goto(`${origin}/docs/configurator.html`);
       await page.waitForFunction(() => document.querySelectorAll("#composition > article").length === 6);
-      await page.fill("#item-count", "2");
-      assert.equal(await page.locator("#set").inputValue(), "none");
-      assert.equal(await page.locator("#flow").isDisabled(), true);
-      await page.selectOption("#grid", "grid_02a--03");
+      await setSourceCount(page, 2);
+      assert.equal(await selected(page, "set"), "set_06");
+      await page.click('[data-choice-key="set-choices:none"]');
+      assert.equal(await page.locator('#flow-choices button:not(:disabled)').count(), 1);
+      await selectGrid(page, "grid_02a--03");
       assert.equal(await page.locator("#composition > article").count(), 2);
-      await page.fill("#item-count", "8");
-      await page.selectOption("#set", "set_06");
-      assert.equal(await page.locator("#count-warning").isVisible(), true);
-      assert.match(await page.locator("#count-warning").textContent(), /Additional items/);
-      await page.selectOption("#grid", "grid_03c--05");
-      await page.fill("#item-count", "5");
-      await page.selectOption("#set", "set_06");
-      assert.match(await page.locator("#count-warning").textContent(), /unoccupied/);
-      await page.selectOption("#emphasis", "right");
-      await page.selectOption("#supports", "varied");
-      await page.locator("#candidates button").first().click();
-      assert.equal(await page.locator("#grid").inputValue(), "grid_03b--01");
-      assert.equal(await page.locator("#flow").inputValue(), "flow_01");
-      assert.equal(await page.locator("#count-warning").isVisible(), false);
+      await setSourceCount(page, 8);
+      await page.click('[data-choice-key="set-choices:set_06"]');
+      await selectGrid(page, "grid_03c--05");
+      await setSourceCount(page, 5);
+      await page.click('[data-choice-key="set-choices:set_06"]');
+      for (const removed of ["emphasis", "contrast", "supports", "candidates"]) assert.equal(await page.locator("#" + removed).count(), 0);
+      assert.equal(await selected(page, "grid"), "grid_03c--05");
+      assert.equal(await selected(page, "set"), "set_06");
+      assert.equal(await page.locator("#composition > article").count(), 5);
       await page.goto(`${origin}/docs/geometry-changes.html`);
       await page.waitForFunction(() => document.querySelectorAll("#reviews > section").length === 12);
       if (errors.length) throw new Error(errors.join("\n"));
       console.log(`${name}: configurator and accepted-change regression checks PASS`);
+      await mkdir("test-results", { recursive: true });
+      await checkWorkbench(page, origin, name);
+      await checkDocumentationSite(page, origin, name);
+      if (errors.length) throw new Error(errors.join("\n"));
+      reports.push({ browser: name, version: browser.version(), asset: "configurator", passed: true });
       if (process.argv.includes("--distribution") || process.argv.includes("--legacy-only")) {
         // Replay optional legacy builds without modifying the 0.2.3 baseline.
         let profile = null;
@@ -117,5 +120,6 @@ try {
     } finally { await browser.close(); }
   }
   await mkdir("test-results", { recursive: true });
-  await writeFile(process.argv.includes("--legacy-only") ? "test-results/legacy-browsers.json" : "test-results/browsers.json", `${JSON.stringify(reports, null, 2)}\n`);
+  const report = process.argv.includes("--legacy-only") ? "legacy-browsers" : process.argv.includes("--configurator-only") ? "configurator-browsers" : "browsers";
+  await writeFile(`test-results/${report}.json`, `${JSON.stringify(reports, null, 2)}\n`);
 } finally { server.kill("SIGTERM"); }

@@ -1,6 +1,6 @@
 {
   "name": "graphpapercss",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A small, framework-agnostic CSS library for editorial spatial composition on a canonical 64-bit ruler.",
   "license": "MIT",
   "packageManager": "pnpm@12.6.0",
@@ -56,10 +56,12 @@
     "check": "node scripts/build.mjs --check && node --test tests/*.test.mjs",
     "dev": "node scripts/serve.mjs",
     "docs:sync": "node scripts/sync-docs-assets.mjs",
-    "docs:check": "node scripts/sync-docs-assets.mjs --check && node scripts/check-docs.mjs"
+    "docs:build": "node scripts/build-docs.mjs",
+    "docs:check": "node scripts/sync-docs-assets.mjs --check && node scripts/build-docs.mjs --check && node scripts/check-docs.mjs"
   },
   "devDependencies": {
     "lightningcss": "1.33.0",
+    "marked": "18.1.1",
     "playwright": "1.64.0"
   }
 }

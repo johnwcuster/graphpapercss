@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurator help — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><main class="editorial-page">
+<div class="gp_canvas editorial-sheet" data-editorial="help">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html" aria-current="page">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+  <section class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" data-editorial="help-intro" aria-labelledby="help-heading">
+    <header><p class="editorial-eyebrow">Using the configurator</p><h1 id="help-heading">Configurator help</h1><p class="editorial-lede">Choose a composition, inspect its layout, and copy the classes and markup into your project.</p></header>
+    <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents">
+      <li><a href="#terms">Terms used here</a></li><li><a href="#controls">How controls interact</a></li><li><a href="#workbench">Workbench controls</a></li><li><a href="#keyboard">Keyboard and accessibility</a></li><li><a href="#migration">Migration reference</a></li>
+    </ul></nav>
+    <aside class="editorial-note"><h2 class="editorial-small-heading">Start with source order</h2><p>The tools change arrangement, not reading order. The configurator’s controls are separate from Graph Paper’s CSS.</p></aside>
+  </section>
+  <section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01" aria-labelledby="terms"><div>
+<h2 id="terms">Terms used here</h2>
+<dl>
+  <dt>Workbench</dt><dd>The floating interface: Preview controls and the Composition panel. It does not include the rendered example.</dd>
+  <dt>Preview</dt><dd>The rendered example. Preview width sets its width here; it does not change your browser window or add a width utility to the copied classes.</dd>
+  <dt>Canvas</dt><dd>A <code>gp_canvas</code> element establishes the 64-bit ruler and responsive context. The preview contains one; in your own page, its width can follow its parent container. Layout transitions depend on this element’s width, not necessarily the viewport.</dd>
+  <dt>Field</dt><dd>A <code>gp_field</code> element selects a usable span of the canvas ruler. The Gutters options choose its outer insets, internal gaps, and, for ruled fields, space for column rules.</dd>
+  <dt>Recipe and macro regions</dt><dd>A <code>grid_*</code> recipe defines the composition’s broad regions and proportions. Macro regions are not independent CSS columns or a count of source items.</dd>
+  <dt>Positions and items</dt><dd>Positions are places within a recipe; a <code>set_*</code> class defines their number and arrangement. Items are the actual content elements in source order. Flow changes which positions those items occupy, without changing source order. An unfilled position and an extra item are different things.</dd>
+  <dt>Responsive states</dt><dd>Stacked, compact, and expanded describe layouts, not device types. A transition is the canvas width where the layout switches states. Opening an options group does not change the responsive state.</dd>
+  <dt>Band</dt><dd>A <code>gp_band--0*</code> class requests a minimum width for the narrowest defined item position, also called a slot. A position can span more than one macro region. Graph Paper calculates the layout transitions from that minimum. Bands use the optional, experimental <code>bands.css</code> stylesheet.</dd>
+</dl>
+  </div></section>
+  <section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01" aria-labelledby="controls"><div>
+<h2 id="controls">How controls interact</h2>
+<p>Use the Composition panel to choose the arrangement. Use Preview controls to inspect it at different widths or with visual aids. Changing the arrangement does not automatically resize the preview.</p>
+<p>Macro-region count, letter, and variant choices select a recipe. Compatible set and flow choices stay selected. When a combination is unavailable, changing the recipe may select compatible defaults. Applied classes in the Composition panel always show the result.</p>
+<p>Source shows one to eight items as a colored stack. Use − to remove the last item and + to append one in source order. Stack colors match the numbered preview badges and Flow illustrations. Numbers identify items without relying on color.</p>
+<p>Changing the number of positions may change the available flows. Adding or removing source items does not change the selected set or flow. With a named set, items beyond its position count use full-width fallback placement; unfilled positions retain the selected recipe’s geometry. Without a set class, items continue sequentially into later rows. Review these cases in the preview.</p>
+<p>Default applies only to its own choice group. For letters and variants, it selects the unlettered or unnumbered recipe. For positions, it omits the set class and places items sequentially. For flow, it omits the flow class and uses the set’s default placement. For bands, it omits the band class and uses the 30rem and 60rem canvas transitions. It does not reset the entire configuration.</p>
+<p>Gray, borderless options remain selectable: with the current items and settings, their layouts and transition widths match across responsive states. Differences that appear only at another width still count as different layouts. White disabled options represent class combinations that do not exist. Checks and outlined options mark the current selections.</p>
+<p>Show options reveals alternatives within its bordered group. Hide options leaves the selected illustrations visible. Neither action changes the composition. Unavailable letter options explain which setting to change to make them available.</p>
+<p>Letter illustrations pair compact and expanded layouts. Variants illustrate expanded layouts; Flow illustrations show the current responsive state. Numbers indicate source order, not content height. Letters are recipe alternatives, not a universal left/right switch.</p>
+<p>Arrows above variant regions compare their expanded widths with the same letter’s unnumbered Default: outward means wider, inward means narrower, and a dash means unchanged. Tooltips and accessible descriptions give bit differences. These comparisons apply even when regions are unoccupied or the preview is compact or stacked. No comparison is shown when that unnumbered recipe does not exist.</p>
+<p>Gutters and bands can change transition widths. Test transitions sets the preview width just below or above a transition. Later settings changes update those target widths without resizing the preview again.</p>
+  </div></section>
+  <section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01" aria-labelledby="workbench"><div>
+<h2 id="workbench">Workbench controls</h2>
+<p>Close panel hides only the Composition panel. Edit composition appears at its docked location to reopen it. Hide workbench or <kbd>⌥ ⇧ G</kbd> (Option+Shift+G, or Alt+Shift+G) hides both the panel and Preview controls. Show workbench or the shortcut restores them. Show workbench appears at the Hide workbench button’s docked location.</p>
+<p>Panel-outline icons identify controls that show or hide panels. Chevrons identify options groups and menus: upward means open; downward means closed.</p>
+<p>Preview dock places Preview controls at the top, bottom, left, or right. Composition dock independently places the Composition panel on the left or right. At narrow widths, side-docked Preview controls adapt to the top, and the panel uses the available width. Docking does not change the preview width.</p>
+<p>Visual aids add independent annotations to the preview. Help opens this page in a new tab so your configuration stays in place.</p>
+<p>The separate 64-bit ruler checkbox beneath the site name draws guides through the documentation’s full height. It follows the documentation canvas, not the independently sized preview, and remembers your choice between pages.</p>
+  </div></section>
+  <section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01" aria-labelledby="keyboard"><div>
+<h2 id="keyboard">Keyboard and accessibility</h2>
+<p>Tab moves between controls and choice groups. Within a choice group, arrow keys select the next or previous available option; Home and End select the first and last visible options. Unavailable options are skipped. Use Show options to include alternatives in this navigation. The selected option is the group’s single Tab stop.</p>
+<p>Escape lets native form controls handle their own interaction; from other controls it closes an open preview menu or the Composition panel. Clicking outside a preview menu also closes it. Opening the Composition panel moves focus to its heading; closing it returns focus to Edit composition. The workbench shortcut does not run while you are editing a form field.</p>
+<p>The tools do not trap keyboard focus. If the Composition panel covers a page control receiving focus, the panel closes without moving focus away from that control. Preview controls similarly hide if they cover page focus. Reopen buttons move clear of focused page controls when needed.</p>
+<p>Option labels are short; accessible descriptions explain the layout and compatibility details. Source counts are announced only when changed. Position/flow changes, responsive-state changes, and copy results have separate announcements.</p>
+  </div></section>
+  <section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01" aria-labelledby="migration"><div>
+<h2 id="migration">Migration reference</h2>
+<p>Upgrading an existing site? Start with the <a href="./migration.html">migration guide</a>, which links the 0.2.3 reference and intentional geometry changes. For the CSS contract rather than these controls, use the <a href="./class-reference.html">class reference</a> and <a href="./authoring.html">authoring guide</a>.</p>
+<p>Compare the <a href="./legacy-reference.html?grid=grid_03&amp;set=set_03&amp;flow=&amp;rhythm=wide&amp;width=1024">0.2.3 three-region example</a> with the <a href="./configurator.html?grid=grid_03&amp;set=set_03&amp;flow=default&amp;items=3&amp;field=wide&amp;width=1024">matching current configuration</a>.</p>
+<p>The legacy reference accepts <code>grid</code>, <code>set</code>, <code>flow</code>, <code>rhythm</code> (neat, thin, or wide), and <code>width</code> URL parameters. An empty <code>flow</code> value omits the flow class. Its preview width is limited to 280–1200px.</p>
+<p>Full and ruled fields have no exact 0.2.3 equivalent. Recipes added since 0.2.3, grid-only placement, and bands also lack legacy counterparts. Where available, the configurator’s resolved geometry includes the 0.2.3 comparison.</p>
+  </div></section>
+</div>
+</main></body></html>

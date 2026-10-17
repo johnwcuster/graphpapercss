@@ -1,25 +1,17 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>0.2.3 legacy reference</title><link rel="stylesheet" href="./assets/graph-paper/legacy.css"><link rel="stylesheet" href="./docs.css"></head>
-<body style="background: #ebe5d6"><div id="reference"></div>
-<script type="module">
-import { grids } from "./assets/graph-paper/src/manifest/grids.mjs";
-import { layouts } from "./assets/graph-paper/src/manifest/layouts.mjs";
-const query = new URLSearchParams(location.search);
-const id = query.get("grid"), set = query.get("set"), flow = query.get("flow");
-const root = document.getElementById("reference");
-const recipe = grids[id];
-const layout = recipe && layouts.find(l => l.families.includes(recipe.family) && l.set === set && (l.flow ?? "") === flow);
-if (!layout) root.textContent = "This 1.0 recipe has no 0.2.3 counterpart.";
-else {
-  const rhythm = ["wide", "thin", "neat"].includes(query.get("rhythm")) ? query.get("rhythm") : "wide";
-  root.style.width = `${Math.min(1200, Math.max(280, Number(query.get("width")) || 1024))}px`;
-  const grid = document.createElement("section"); grid.className = [id, set, flow, rhythm === "wide" ? null : `--${rhythm}`].filter(Boolean).join(" ");
-  for (let i = 0; i < layout.items; i++) {
-    const article = document.createElement("article"); article.className = "tile";
-    article.innerHTML = `<span class="source-number">Source ${i + 1}</span><h3>${["Lead story", "Perspective", "Dispatch", "Analysis", "Interview", "Field notes"][i]}</h3><p>Editorial content keeps its logical DOM position.</p>`;
-    grid.append(article);
-  }
-  root.append(grid);
-}
-</script></body></html>
+<title>0.2.3 legacy reference — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css">
+<script type="module" src="./legacy-reference.js"></script></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul><p class="site-nav-context"><a href="./legacy-reference.html" aria-current="page">0.2.3 reference</a></p></div>
+</nav>
+<!-- site-navigation:end -->
+<header id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro"><div><p class="editorial-eyebrow">Migration reference</p><h1>0.2.3 legacy reference</h1><p>The example below loads the released 0.2.3 CSS in an isolated frame. This page’s navigation and reading layout use modern Graph Paper; they do not affect the baseline.</p><p><a href="./migration.html">Migration guide</a> · <a href="./geometry-record.html">Coordinate record</a> · <a href="./geometry-changes.html">Visual comparisons</a></p></div></header>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01" aria-label="Legacy configuration"><div><p id="legacy-description"></p></div></section>
+<section class="gp_field gp_field--full" aria-label="Isolated 0.2.3 rendering"><div class="scroll-preview"><iframe id="legacy-preview" title="Graph Paper 0.2.3 layout" src="./fixtures/legacy-renderer.html?grid=grid_03&amp;set=set_03&amp;flow=&amp;rhythm=wide&amp;width=1024" style="width:1024px"></iframe></div></section>
+</div></main></body></html>

@@ -2,17 +2,19 @@
 
 A framework-agnostic CSS library for editorial spatial composition on a 64-bit ruler.
 
-The published preview is [0.3.0](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.min.css).
-This checkout contains unreleased authoring improvements and experimental response bands.
-The previous legacy baseline is 0.2.3. Examples in this repository describe the
-development build unless noted otherwise. Pin exact releases in production.
+Version 0.4.1 updates the documentation and configurator. Its CSS builds and
+authoring API are unchanged from the [0.4.0 preview](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css),
+including grid-only authoring defaults and experimental response bands.
+Examples intentionally remain pinned to 0.4.0 CSS and also work with 0.4.1.
+The architecture remains a preview of 1.0; the previous legacy baseline is 0.2.3.
+Pin exact releases in production.
 
 ## Use
 
-Copy `css/main.min.css` into your project:
+Use the pinned 0.4.0 CSS below, or serve `css/main.min.css` from the 0.4.1 checkout:
 
 ```html
-<link rel="stylesheet" href="/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css">
 <div class="gp_canvas">
   <section class="gp_field gp_field--wide grid_03 set_03">
     <article>First item</article>
@@ -27,9 +29,20 @@ span. Grid/set/flow arrange direct children. Subgrid continues inherited tracks;
 a nested canvas establishes independent coordinates. Your project owns typography,
 colors, components, and vertical spacing. No runtime JavaScript is required.
 
-[Architecture](docs/architecture.md) · [Configurator](docs/configurator.html) ·
-[Response bands](docs/responsive-bands.md) · [Migration](docs/migration.html) ·
-[Accepted geometry changes](docs/geometry-changes.md)
+## Documentation
+
+- Start: [Getting started](docs/getting-started.md) and [visual configurator](docs/configurator.html).
+- Learn: [Authoring compositions](docs/authoring.md), [responsive design](docs/responsive-design.md), and [alignment/nesting](docs/alignment.md).
+- Compose a whole page: [Composing a site](docs/site-authoring.md), including reading tracks, measures, secondary content, and purposeful wider sections.
+- Look up: [Class reference](docs/class-reference.md), [troubleshooting](docs/troubleshooting.md), and [browser support/builds](docs/browser-support.md).
+- Understand: [Architecture](docs/architecture.md).
+- Upgrade: [Migration from 0.2.3](docs/migration.html).
+- Maintain: [Contributing](docs/contributing.md), [validation](docs/validation.md), and [release notes](CHANGELOG.md).
+
+Coding agents can start with the [implementation checklist](docs/authoring.md#implementation-checklist)
+and use the same class reference as human authors. The static docs describe the
+contract without requiring interaction with the configurator. Serve `docs/` for
+the HTML site; Markdown links here are maintained, repository-readable sources.
 
 ## Builds
 
@@ -59,6 +72,17 @@ pnpm dev
 
 Open http://127.0.0.1:4173/docs/ for basic documentation or
 http://127.0.0.1:4173/docs/configurator.html for the canonical configurator.
+Its floating workbench offers docking, independent visual aids, and copyable
+markup. Use Alt+Shift+G outside form fields to hide or restore the controls.
+The workbench is optional documentation tooling, not part of core CSS or a
+published on-page inspector script.
+
+Reference pages are published as static HTML. Maintain their Markdown sources in
+`docs/` and run `pnpm docs:build` (also included in `pnpm build`). Geometry records
+remain generated from the library audit. Shared site navigation is maintained in
+`scripts/docs-template.mjs`; `pnpm docs:check` verifies generated pages, navigation,
+local links, and anchors. The Markdown parser is a build-only dependency; reading
+the documentation requires no client-side Markdown renderer.
 
 ```sh
 pnpm browsers:install
@@ -67,7 +91,7 @@ pnpm test:distribution
 pnpm pack --dry-run
 ```
 
-See [browser support](docs/browser-support.md) and [validation](docs/validation.md).
+See [Contributing](docs/contributing.md) and [validation](docs/validation.md).
 
 ## Contributing
 

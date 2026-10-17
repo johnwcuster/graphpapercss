@@ -1,7 +1,19 @@
+/* Site-only palette. Source-series and diagnostic colors are independent. */
+:root {
+  --site-paper: #f7f6f0;
+  --site-surface: #fffefa;
+  --site-ink: #253238;
+  --site-muted: #52625f;
+  --site-accent: #135968;
+  --site-tint: #d2e7df;
+  --site-rule: #82938b;
+  --site-focus: #a94f24;
+}
 * { box-sizing: border-box; }
-body { margin: 0; color: #283134; background: #f8f5ed; font: 16px/1.5 system-ui, sans-serif; }
-main { max-width: 1280px; margin: auto; padding: 24px; }
-a { color: #135968; }
+body { margin: 0; color: var(--site-ink); background: var(--site-paper); font: 16px/1.5 system-ui, sans-serif; }
+main { padding-block: 24px; }
+a { color: var(--site-accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
 h1 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; }
 h2 { margin-top: 2.5rem; }
 .controls { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; border: 1px solid #b2b2a1; }
@@ -34,7 +46,8 @@ select, button { font: inherit; padding: .35rem; }
 .semantic > h3, .semantic > p { grid-column: 1 / -1; margin-block: .5rem; }
 .semantic > aside { grid-column: 3 / -3; background: #aac9bd; }
 .nested { background: #ece2c6; }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #eae7df; padding: 1rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: color-mix(in srgb, var(--site-ink) 4%, var(--site-paper)); padding: 1rem; }
+pre, code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 iframe { display: block; border: 0; height: 420px; }
 #comparison { overflow-x: auto; }
 [hidden] { display: none !important; }
@@ -44,5 +57,5 @@ select { max-width:100%; }
 .control-row { display:flex; flex-wrap:wrap; gap:.75rem; width:100%; }
 .control-row button { max-width:100%; text-align:left; }
 .control-row button strong, .control-row button span { display:block; }
-.meta, .build-note { color:#52625c; font-size:.9rem; }
+.meta, .build-note { color:var(--site-muted); font-size:.9rem; }
 .warning { padding:1rem; border-left:3px solid #a65c24; }

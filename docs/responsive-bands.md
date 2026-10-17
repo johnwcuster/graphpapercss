@@ -1,9 +1,13 @@
-# Experimental responsive bands
+# Responsive bands reference
 
 Bands let an author select a minimum useful slot width without choosing device
 breakpoints. They change **when** a composition transitions, not **which** compact
-arrangement the recipe supplies. This optional, unreleased feature has a
-provisional scale that may change before 1.0. It is not in the published 0.3.0 build.
+arrangement the recipe supplies. Available since 0.4.0, this optional feature has
+a provisional scale that may change before 1.0.
+
+Start with [Responsive design](responsive-design.md) for the stacked/compact/expanded model and authoring decisions. This page documents the optional band's calculation, limits, and custom-build calibration.
+
+A slot is a defined item position, which can span one or more macro regions. Slot width is its structural width, not necessarily the width of a single macro region or the text inside it. Without a named set, sequential positions correspond to macro regions in expanded mode and equal pairs in compact mode.
 
 Load the optional stylesheet after the modern core:
 
@@ -40,7 +44,7 @@ is needed for the actual CSS transitions.
 ## What a band protects
 
 The compiler finds the narrowest item span in each selected expanded and compact
-recipe. Bare grids use the narrowest macro column and compact pair respectively.
+recipe. Bare grids use the narrowest macro region and compact pair respectively.
 All defined positions count, including currently empty positions. This is
 deliberately conservative: a band does not let you designate one limiting item
 or select a different compact arrangement.

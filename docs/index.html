@@ -1,29 +1,25 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Graph Paper CSS</title><link rel="stylesheet" href="./docs.css"></head>
-<body><main>
-<nav><a href="./configurator.html">Configurator</a> · <a href="./architecture.md">Architecture</a> · <a href="./migration.html">Migration</a></nav>
-<h1>Graph Paper CSS</h1>
-<p>A framework-agnostic 64-bit ruler for editorial composition. No runtime JavaScript is required.</p>
-<p>This documentation describes the development build for the upcoming 1.0 release, including unreleased authoring defaults and experimental response bands. The published preview is <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.min.css">0.3.0</a>. Pin an exact release for production.</p>
-<h2>Start with a canvas and field</h2>
-<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.min.css&quot;&gt;
-&lt;div class="gp_canvas"&gt;
-  &lt;section class="gp_field gp_field--wide grid_03 set_03"&gt;
-    &lt;article&gt;First item&lt;/article&gt;
-    &lt;article&gt;Second item&lt;/article&gt;
-    &lt;article&gt;Third item&lt;/article&gt;
-  &lt;/section&gt;
-&lt;/div&gt;</pre>
-<p>The canvas establishes coordinates and available-width context. The field selects a usable span. Grid, set, and flow arrange the content; subgrid continues alignment through wrappers. Typography, component styling, and vertical spacing belong to your project.</p>
-<h2>Inspect the API</h2>
-<ul>
-<li><a href="./configurator.html">Configurator</a>: choose recipes, fields, flows, item counts, and response bands; inspect real generated CSS and copy markup.</li>
-<li><a href="./architecture.md">Architecture</a>: field geometry, source order, subgrid, nested canvases, and rules.</li>
-<li><a href="./responsive-bands.md">Experimental bands</a>: minimum-slot requirements and their limitations.</li>
-<li><a href="./migration.html">Migration from 0.2.3</a> and <a href="./geometry-changes.html">twelve accepted whole-bit changes</a>.</li>
-<li><a href="./browser-support.md">Browser support</a> and <a href="./validation.md">validation commands</a>.</li>
-</ul>
-<h2>Choose a build</h2>
-<p>Use <code>css/main.min.css</code> for modern core, or <code>css/main.layer.min.css</code> for core in the <code>graph-paper</code> cascade layer. Load optional <code>css/bands.min.css</code> after core when using band classes; layered projects must load bands in that same layer.</p>
-<p>The separate <code>css/compat.css</code> profile preserves 0.2.3 behavior; it is not a fallback to load alongside modern core. The released baseline is retained at <code>css/legacy/main.css</code>. See <a href="./migration.html">migration guidance</a> before upgrading an existing site.</p>
-</main></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Graph Paper CSS</title><link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html" aria-current="page"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" id="page-content" tabindex="-1">
+<header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1>Composition, not a component theme.</h1><p>A framework-agnostic CSS library for responsive editorial layouts. Choose relationships and proportions from a constrained recipe catalogue; keep your own typography, components, and content treatments.</p><p>No runtime JavaScript is required. Graph Paper supplies horizontal geometry and placement, not a design system for every part of your site.</p></header>
+<nav aria-label="Start here"><h2 class="editorial-small-heading">Start here</h2><ul class="editorial-contents"><li><a href="./getting-started.html">Build your first composition</a></li><li><a href="./configurator.html">Explore recipes visually</a></li><li><a href="./class-reference.html">Look up a class</a></li></ul></nav>
+<aside class="editorial-note"><h2 class="editorial-small-heading">Release status</h2><p>0.4.1 updates documentation and the configurator. CSS and the authoring API are unchanged from <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css">0.4.0</a>; examples remain pinned to that CSS and work with both releases. The architecture is a preview of 1.0, and bands remain experimental. See <a href="./releases.html">release notes</a>.</p></aside>
+</section>
+<section class="gp_field gp_field--wide grid_03 set_03 documentation-paths" aria-label="Ways into the documentation">
+<article><h2>Learn to compose</h2><p>Start with source order and content treatments. Choose broad relationships, inspect compact and expanded designs, and judge the limiting region.</p><p><a href="./authoring.html">Authoring compositions</a> · <a href="./site-authoring.html">Composing a site</a> · <a href="./responsive-design.html">Responsive design</a> · <a href="./alignment.html">Alignment and nesting</a></p></article>
+<article><h2>Implement with confidence</h2><p>Find class placement, defaults, valid combinations, and the boundary between library geometry and host styling.</p><p><a href="./class-reference.html">Class reference</a> · <a href="./troubleshooting.html">Troubleshooting</a> · <a href="./browser-support.html">Browser support and builds</a></p></article>
+<article><h2>Upgrade or contribute</h2><p>Existing sites and library maintainers have different tasks from first-time authors. Their compatibility records and build instructions live here.</p><p><a href="./migration.html">Migration from 0.2.3</a> · <a href="./contributing.html">Contributing</a> · <a href="./releases.html">Releases</a></p></article>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="the-model">One model, several decisions</h2>
+<p>A <code>gp_canvas</code> starts a 64-bit ruler and responsive context. A field selects a usable span and gutters. Grid, set, and flow arrange its direct children. Subgrid continues inherited alignment; a nested canvas starts independent coordinates.</p>
+<p>Recipes include responsive arrangements, not just fixed column counts. Your project owns typography, image treatment, vertical spacing, and the editorial judgment that makes the composition useful. Read the <a href="./architecture.html">architecture</a> for the conceptual model or use the <a href="./authoring.html#implementation-checklist">implementation checklist</a> for a compact human/agent handoff.</p>
+</div></section>
+</div></main></body></html>

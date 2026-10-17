@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responsive design — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html" aria-current="page">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Responsive design</h1><p>Graph Paper responds to the width available to a canvas, not necessarily the browser viewport. A sidebar, a full-width page, and an independently nested composition can therefore reach different responsive states on the same screen.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#understand-the-default-sequence">Understand the default sequence</a></li><li><a href="#know-what-changes-the-response">Know what changes the response</a></li><li><a href="#adjust-timing-with-an-optional-band">Adjust timing with an optional band</a></li><li><a href="#evaluate-success-rather-than-just-a-transition">Evaluate success rather than just a transition</a></li><li><a href="#inspect-in-the-configurator">Inspect in the configurator</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="understand-the-default-sequence">Understand the default sequence</h2>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">State</th>
+<th scope="col">Default canvas width</th>
+<th scope="col">What to expect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Stacked</td>
+<td>Below 30rem</td>
+<td>Items read in source order using block flow.</td>
+</tr>
+<tr>
+<td>Compact</td>
+<td>At least 30rem and below 60rem</td>
+<td>The recipe/set/flow uses its simplified arrangement; grid-only occupancy uses pairs.</td>
+</tr>
+<tr>
+<td>Expanded</td>
+<td>At least 60rem</td>
+<td>The recipe&#39;s expanded proportions and placement apply.</td>
+</tr>
+</tbody></table></div>
+<p>At a 16px root font size, 30rem is 480px and 60rem is 960px. They are canvas-width transitions, not viewport media queries. There is no requirement to fix canvas width; in your site it normally follows its container.</p>
+<p>The <code>grid_*</code> class names the responsive recipe as a whole. <code>grid_03*</code> has three expanded macro regions but can have a different compact arrangement. The compact design is not separately selectable through the current API.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="know-what-changes-the-response">Know what changes the response</h2>
+<p>Without a band, all fields use the default canvas thresholds. Changing a field changes insets and gutters but does not create a new query container or move those default thresholds.</p>
+<p>With a band, the selected recipe, field, set, and flow determine the narrowest defined positions, and therefore the transition widths. Changing those choices can change when the composition shifts. Two fields inside one canvas can use different bands and transition at different widths.</p>
+<p>A subgrid continues alignment without creating a responsive context. A nested canvas starts an independent context based on its own available width. See <a href="alignment.html">Alignment and nesting</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="adjust-timing-with-an-optional-band">Adjust timing with an optional band</h2>
+<p>A band requests a minimum useful structural slot width. Here, a slot is a defined item position, which can span one or more macro regions; it does not necessarily mean a single macro region. Graph Paper calculates transition widths from the narrowest defined positions in the expanded and compact layouts. It does not measure text, images, or padding.</p>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Selection</th>
+<th scope="col">Minimum slot width</th>
+<th scope="col">Stylesheet</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No band class</td>
+<td>Fixed 30rem / 60rem transitions</td>
+<td>Core only</td>
+</tr>
+<tr>
+<td><code>gp_band--01</code></td>
+<td>12rem</td>
+<td>Core plus bands</td>
+</tr>
+<tr>
+<td><code>gp_band--02</code></td>
+<td>16rem</td>
+<td>Core plus bands</td>
+</tr>
+<tr>
+<td><code>gp_band--03</code></td>
+<td>20rem</td>
+<td>Core plus bands</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/bands.min.css&quot;&gt;
+&lt;div class=&quot;gp_canvas&quot;&gt;
+  &lt;section class=&quot;gp_field gp_field--wide grid_03 set_03 gp_band--02&quot;&gt;
+    &lt;article&gt;Lead&lt;/article&gt;
+    &lt;article&gt;Support&lt;/article&gt;
+    &lt;article&gt;Support&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Apply one band to the recipe-bearing field, not to individual items or the canvas. Bands replace the default thresholds; they do not add another viewport condition. Their scale is experimental and available since 0.4.0.</p>
+<p>For this example, compact starts at 37rem and expanded at 57rem. A larger band generally asks the layout to simplify earlier as width shrinks. Compared with the defaults, however, a band can move either threshold in either direction. If compact and expanded thresholds coincide, the compact interval is skipped.</p>
+<p>All defined positions count, including empty ones. Extra fallback items do not redefine the named recipe&#39;s minimum. Stacked mode cannot promise the requested minimum when the canvas itself is narrower than it.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="evaluate-success-rather-than-just-a-transition">Evaluate success rather than just a transition</h2>
+<p>A successful adjustment preserves the wider arrangement while its limiting content region remains useful, then switches to a simpler arrangement that actually relieves the pressure.</p>
+<p>An unsuccessful adjustment can be mechanically correct: it might stack too early, keep uncomfortable narrow text too long, or expose a compact arrangement that is unsuitable for the material. Change treatment or recipe rather than expecting the band to choose a different design.</p>
+<p>Test the full width range. A band can change the future transition policy without changing the arrangement at the width you happen to be viewing.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="inspect-in-the-configurator">Inspect in the configurator</h2>
+<p>The Responsive design diagrams compare policies on one canvas-width axis. The solid line is the current preview width; dashed lines mark the default 30rem and 60rem references. Preview controls&#39; Test transitions actions resize just below or above the selected policy&#39;s actual boundaries.</p>
+<p>Changing a setting does not automatically resize the preview. Its current pixel width is a tool setting, not a fixed-width class copied into your site. Use <a href="configurator-help.html">Configurator help</a> for interface details and the <a href="responsive-bands.html">band reference</a> for calculations and custom-build calibration.</p>
+</div></section>
+</div></main></body></html>

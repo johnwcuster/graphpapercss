@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html" aria-current="page">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Troubleshooting</h1><p>Start with the visible symptom, then check structure, classes, available width, and host styling. The <a href="configurator.html">configurator</a> can help distinguish a library arrangement from styles introduced by your project.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#the-example-looks-unstyled">The example looks unstyled</a></li><li><a href="#the-layout-stays-stacked">The layout stays stacked</a></li><li><a href="#my-wrapper-broke-placement">My wrapper broke placement</a></li><li><a href="#changing-flow-or-variant-does-nothing">Changing flow or variant does nothing</a></li><li><a href="#extra-items-form-full-width-rows">Extra items form full-width rows</a></li><li><a href="#gutters-or-edges-do-not-align">Gutters or edges do not align</a></li><li><a href="#a-rule-is-missing-or-doubled">A rule is missing or doubled</a></li><li><a href="#a-band-changes-the-diagram-but-not-the-layout">A band changes the diagram but not the layout</a></li><li><a href="#the-geometry-works-but-reading-suffers">The geometry works but reading suffers</a></li><li><a href="#an-override-behaves-differently-in-a-layered-build">An override behaves differently in a layered build</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="the-example-looks-unstyled">The example looks unstyled</h2>
+<p>That may be expected. Graph Paper supplies geometry, not a type system, card theme, image sizing, or vertical rhythm. Confirm that core CSS loaded and compare item placement at wide and narrow canvas widths. Then add your project&#39;s treatment as shown in <a href="getting-started.html">Getting started</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="the-layout-stays-stacked">The layout stays stacked</h2>
+<p>Inspect the width of the nearest <code>gp_canvas</code>, not just the viewport. A nested canvas may be much narrower than the page. Defaults switch at 30rem and 60rem; a band may request different thresholds.</p>
+<p>Check that the field is a direct child of the canvas, has one field modifier and a valid recipe, and is not being overridden by host <code>display</code> or track styles. If using a band, confirm that the optional bands stylesheet is loaded after core. Removing a band class is a useful diagnostic, not necessarily the final design decision.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="my-wrapper-broke-placement">My wrapper broke placement</h2>
+<p>The field places direct element children. Wrapping several articles together changes them from several items into one. Headings or decorative elements added as direct children also count as items.</p>
+<p>Keep component wrappers inside each intended item, or deliberately use a semantic wrapper as an item. Use <a href="alignment.html">subgrid</a> only if the wrapper&#39;s descendants need inherited track alignment.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="changing-flow-or-variant-does-nothing">Changing flow or variant does nothing</h2>
+<p>First confirm the combination exists. Then check the responsive state and actual occupied positions. Proportional differences may appear only in expanded mode; different placements can be equivalent for the occupied items. Default is an intentional selection, not an incomplete configuration.</p>
+<p>The configurator keeps equivalent choices selectable and distinguishes them from unavailable combinations. Use it to compare all states. Do not assume that identical appearance at one width means two recipes are universally interchangeable.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="extra-items-form-full-width-rows">Extra items form full-width rows</h2>
+<p>With a named set, items beyond its position count use full-width fallback. Fewer items leave positions unfilled; Graph Paper does not automatically choose a new composition. Check whether your content count and selected set agree.</p>
+<p>For a collection that should continue through the regions into later rows, omit the set class. Grid-only occupancy has sequential continuation rather than named-set fallback. See the <a href="class-reference.html#recipes-positions-and-defaults">occupancy contract</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="gutters-or-edges-do-not-align">Gutters or edges do not align</h2>
+<p>Check for horizontal gap, grid padding, or replacement track definitions on the canvas or field. These compete with the ruler. Check that each field has exactly one modifier and that an inner canvas was not introduced when inherited alignment was intended.</p>
+<p>Component padding is different from structural alignment: an item can sit on the correct tracks while its text is inset. Use inspection aids to distinguish the item edge from its contents.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="a-rule-is-missing-or-doubled">A rule is missing or doubled</h2>
+<p>Rules require the ruled field and explicit start/end ownership on direct items. Choose one owner per shared gutter. Stacked items, outer edges, and responsive full-span edges intentionally suppress markers.</p>
+<p>Check competing <code>::before</code>/<code>::after</code> styles and explicit placement overrides. Host-authored placement must also manage rule ownership; generated metadata cannot infer your custom design. See <a href="class-reference.html#column-rules">Column rules</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="a-band-changes-the-diagram-but-not-the-layout">A band changes the diagram but not the layout</h2>
+<p>A band changes transition timing, not expanded proportions or the compact arrangement. The current canvas width may remain within the same state under both policies. Test either side of the new thresholds.</p>
+<p>In the configurator, choosing a band does not resize the preview. Test transitions performs a one-time resize; later edits can move those transition targets without moving the current preview width.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="the-geometry-works-but-reading-suffers">The geometry works but reading suffers</h2>
+<p>Check the narrowest important content treatment, not just the overall composition. Long text in a narrow supporting position can cause both uncomfortable measure and excessive shared-row height.</p>
+<p>Try an appropriate excerpt or headline treatment, another recipe/set, different grouping, or a band that transitions earlier. Do not expect a band to measure text or choose another compact layout. A fallback can be structurally correct without being the right editorial design. See <a href="authoring.html">Authoring compositions</a>.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="an-override-behaves-differently-in-a-layered-build">An override behaves differently in a layered build</h2>
+<p>Check your cascade layer order and whether host styles are layered. Normal unlayered styles override normal layered styles. Optional bands should share the core&#39;s layer when using layered core. Do not mix the standalone compatibility profile with modern core. See <a href="browser-support.html">Browser support and builds</a>.</p>
+</div></section>
+</div></main></body></html>

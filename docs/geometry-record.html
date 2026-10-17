@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0.2.3 to 1.0 geometry changes — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul><p class="site-nav-context"><a href="./geometry-record.html" aria-current="page">Coordinate record</a></p></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">0.2.3 to 1.0 geometry changes</h1><p>Baseline: <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">released 0.2.3 CSS</a>, retained at <code>css/legacy/main.css</code>. SHA-256: <code>8bcfdcd401bfa53752569c4eb6c01400b20e27f4d36b87b53db7cf9b1cac60dc</code>.</p>
+<p>All 72 released grid IDs are represented in the 1.0 architecture, available in the released 0.4.0 preview. Across neat, thin, and wide fields, 204 macro geometries match exactly. The twelve intentional changes below replace half-bit edges with whole-bit coordinates. Maximum edge displacement is 0.5 bit; formerly equal small columns differ by one bit. These replacements are frozen in <code>src/ruler/accepted-changes.mjs</code>. Full and ruled fields are new designed extents, not legacy parity claims.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#coordinate-table">Coordinate table</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose editorial-wide-data" aria-label="Wide reference data"><div><div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Grid</th>
+<th scope="col">Field</th>
+<th scope="col">0.2.3 widths (bits)</th>
+<th scope="col">1.0 widths (bits)</th>
+<th scope="col">1.0 intervals (bits)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>grid_03a</td>
+<td>neat</td>
+<td>25 / 17.5 / 17.5</td>
+<td>25 / 18 / 17</td>
+<td>2–27, 27–45, 45–62</td>
+</tr>
+<tr>
+<td>grid_03a</td>
+<td>thin</td>
+<td>24 / 16.5 / 16.5</td>
+<td>24 / 17 / 16</td>
+<td>2–26, 27–44, 45–61</td>
+</tr>
+<tr>
+<td>grid_03a</td>
+<td>wide</td>
+<td>23 / 15.5 / 15.5</td>
+<td>23 / 16 / 15</td>
+<td>3–26, 28–44, 46–61</td>
+</tr>
+<tr>
+<td>grid_03b</td>
+<td>neat</td>
+<td>17.5 / 17.5 / 25</td>
+<td>18 / 17 / 25</td>
+<td>2–20, 20–37, 37–62</td>
+</tr>
+<tr>
+<td>grid_03b</td>
+<td>thin</td>
+<td>16.5 / 16.5 / 24</td>
+<td>17 / 16 / 24</td>
+<td>2–19, 20–36, 37–61</td>
+</tr>
+<tr>
+<td>grid_03b</td>
+<td>wide</td>
+<td>15.5 / 15.5 / 23</td>
+<td>16 / 15 / 23</td>
+<td>3–19, 21–36, 38–61</td>
+</tr>
+<tr>
+<td>grid_03c</td>
+<td>neat</td>
+<td>17.5 / 25 / 17.5</td>
+<td>18 / 25 / 17</td>
+<td>2–20, 20–45, 45–62</td>
+</tr>
+<tr>
+<td>grid_03c</td>
+<td>thin</td>
+<td>16.5 / 24 / 16.5</td>
+<td>17 / 24 / 16</td>
+<td>2–19, 20–44, 45–61</td>
+</tr>
+<tr>
+<td>grid_03c</td>
+<td>wide</td>
+<td>15.5 / 23 / 15.5</td>
+<td>16 / 23 / 15</td>
+<td>3–19, 21–44, 46–61</td>
+</tr>
+<tr>
+<td>grid_03d</td>
+<td>neat</td>
+<td>17.5 / 25 / 17.5</td>
+<td>18 / 25 / 17</td>
+<td>2–20, 20–45, 45–62</td>
+</tr>
+<tr>
+<td>grid_03d</td>
+<td>thin</td>
+<td>16.5 / 24 / 16.5</td>
+<td>17 / 24 / 16</td>
+<td>2–19, 20–44, 45–61</td>
+</tr>
+<tr>
+<td>grid_03d</td>
+<td>wide</td>
+<td>15.5 / 23 / 15.5</td>
+<td>16 / 23 / 15</td>
+<td>3–19, 21–44, 46–61</td>
+</tr>
+</tbody></table></div></div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<p>Coordinates are zero-based ruler bits. CSS line indices are coordinates plus one. See <a href="geometry-changes.html">visual comparisons with 0.2.3</a>.</p>
+</div></section>
+</div></main></body></html>

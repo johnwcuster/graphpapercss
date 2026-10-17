@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browser support and builds — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<!-- site-navigation:start -->
+<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html" aria-current="page">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end -->
+<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Browser support and builds</h1><p>Modern Graph Paper requires CSS Grid, column subgrid, named inline-size
+container queries, and container-query units. The optional band stylesheet uses
+the same browser capabilities. Unsupported browsers do not receive a legacy
+fallback automatically; the 0.2.3 compatibility profile is a separate choice.</p>
+<p>Structural tests use pinned Playwright 1.64.0 against Chromium, Firefox, and
+WebKit. Tested versions are recorded in <code>test-results/browsers.json</code>; these are
+test environments, not claims about the oldest supported browser.</p>
+</header>
+  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#choose-a-build">Choose a build</a></li><li><a href="#integrate-with-your-cascade">Integrate with your cascade</a></li><li><a href="#understand-support-limits">Understand support limits</a></li><li><a href="#verify-in-your-project">Verify in your project</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+</section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="choose-a-build">Choose a build</h2>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Build</th>
+<th scope="col">Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>css/main.css</code> / <code>css/main.min.css</code></td>
+<td>Modern core; start here. Minification does not change behavior.</td>
+</tr>
+<tr>
+<td><code>css/main.layer.css</code> / <code>css/main.layer.min.css</code></td>
+<td>The same core inside the <code>graph-paper</code> cascade layer.</td>
+</tr>
+<tr>
+<td><code>css/bands.css</code> / <code>css/bands.min.css</code></td>
+<td>Optional experimental bands; load after modern core when using band classes.</td>
+</tr>
+<tr>
+<td><code>css/compat.css</code> / <code>css/compat.min.css</code></td>
+<td>Alternative standalone 0.2.3 profile, including its legacy globals and viewport behavior.</td>
+</tr>
+<tr>
+<td><code>css/legacy/main.css</code> / <code>css/legacy/main.min.css</code></td>
+<td>Frozen released 0.2.3 reference and its minification.</td>
+</tr>
+</tbody></table></div>
+<p>Use one core/profile, not modern plus compatibility together. The compatibility profile is not a polyfill for modern fields. See <a href="migration.html">Migration</a> before upgrading an existing site.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="integrate-with-your-cascade">Integrate with your cascade</h2>
+<p>For unlayered projects, load modern core, optional bands, and then host styles:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/bands.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;site.css&quot;&gt;
+</code></pre>
+<p>Omit the bands link if no bands are used. For layered projects, declare your intended layer order and place both core and bands in the same layer. One option in your entry stylesheet is:</p>
+<pre><code class="language-css">@layer graph-paper, site;
+@import url(&quot;css/main.min.css&quot;) layer(graph-paper);
+@import url(&quot;css/bands.min.css&quot;) layer(graph-paper);
+
+@layer site {
+  /* Host typography, components, and spacing. */
+}
+</code></pre>
+<p>Alternatively, the pre-layered core already declares <code>graph-paper</code>; do not wrap it in another layer of the same name. Load bands into its existing layer. Normal unlayered host declarations override normal layered declarations, independently of stylesheet order.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="understand-support-limits">Understand support limits</h2>
+<p>The test matrix verifies structure in three current browser engines. It does not establish an oldest-supported browser version, guarantee every embedded webview, or replace testing your own content and styles. No minimum browser-version table is claimed here without a dedicated compatibility audit.</p>
+<p>Core has no JavaScript runtime requirement. The configurator uses JavaScript for documentation tooling; that requirement does not carry into copied compositions. Pin exact releases for production and distinguish the development documentation from published assets.</p>
+</div></section>
+<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="verify-in-your-project">Verify in your project</h2>
+<p>Check actual available canvas widths, enlarged text/root font settings, source-order reading, image sizing, and host cascade overrides. A passing library test is not a guarantee that your content treatment remains usable.</p>
+<p>For repository maintainers, <a href="contributing.html">Contributing</a> explains setup and the <a href="validation.html">validation reference</a> provides browser commands, Docker execution, coverage, and limits. That toolchain is not required to use the distributed CSS.</p>
+</div></section>
+</div></main></body></html>
