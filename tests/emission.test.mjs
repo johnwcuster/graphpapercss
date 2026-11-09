@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { emitRulerCss } from "../src/ruler/emit.mjs";
-import { recipes, layoutsFor } from "../src/ruler/geometry.mjs";
-import { compactPatterns } from "../src/manifest/compact.mjs";
+import { emitRulerCss } from "../src/legacy/0.4/ruler/emit.mjs";
+import { recipes, layoutsFor } from "../src/legacy/0.4/ruler/geometry.mjs";
+import { compactPatterns } from "../src/legacy/0.4/manifest/compact.mjs";
 
 function splitSelectors(source) {
   const selectors = []; let depth = 0, start = 0;

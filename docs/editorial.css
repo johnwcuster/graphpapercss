@@ -25,10 +25,7 @@ main.editorial-page { color: var(--site-ink); padding-inline: 0; }
 .editorial-page .specimen { margin: 0; }
 .editorial-page .editorial-prose { padding-block: 2rem; }
 .editorial-page .editorial-prose > div, .editorial-page .editorial-intro > :first-child { inline-size: 100%; max-inline-size: 76ch; justify-self: center; font-size: 1.0625rem; line-height: 1.65; }
-.editorial-page .editorial-wide-data > div { max-inline-size: 128ch; }
 .editorial-page .editorial-intro > :first-child p { max-inline-size: 65ch; }
-.editorial-page .editorial-prose + .editorial-wide-data { padding-top: 0; border-top: 0; }
-.editorial-wide-data .editorial-table { margin-top: 0; }
 .editorial-page .editorial-prose h2 { margin-block: 0 1rem; line-height: 1.2; font-size: 1.75rem; font-weight: 600; letter-spacing: -.015em; }
 .editorial-page .editorial-prose dt { margin-top: 1.25rem; font-weight: 650; color: var(--site-ink); }
 .editorial-page .editorial-prose dd { margin: .3rem 0 1rem; }
@@ -52,7 +49,7 @@ main.editorial-page { color: var(--site-ink); padding-inline: 0; }
 .editorial-page a:focus-visible, .editorial-table:focus-visible { outline: 3px solid var(--site-focus); outline-offset: 3px; }
 .editorial-table { overflow-x: auto; max-width: 100%; margin-block: 1.5rem; }
 .editorial-table table { border-collapse: collapse; min-width: 40rem; width: 100%; text-align: left; font-size: .875rem; }
-.editorial-table :is(th, td) { padding: .7rem; border-bottom: 1px solid color-mix(in srgb, var(--site-rule) 45%, transparent); vertical-align: top; }
+.editorial-table :is(th, td) { padding-block: .7em; border-bottom: 1px solid color-mix(in srgb, var(--site-rule) 45%, transparent); vertical-align: top; }
 .editorial-table th { color: var(--site-ink); }
 .editorial-page .editorial-prose code, .editorial-page .editorial-intro code { overflow-wrap: anywhere; }
 .editorial-page .editorial-prose a, .editorial-page .editorial-intro a { overflow-wrap: anywhere; }
@@ -79,4 +76,50 @@ main.editorial-page { color: var(--site-ink); padding-inline: 0; }
 @media print {
   .site-ruler-control { display: none; }
   .editorial-sheet:has(.site-ruler-toggle:checked)::after { content: none; }
+}
+/* Current docs keep one reading lane; multi-item navigation uses core layouts. */
+.editorial-page .editorial-intro > nav { inline-size:100%; max-inline-size:76ch; justify-self:center; font-size:1.0625rem; }
+.editorial-page .editorial-intro .editorial-contents { display:flex; flex-wrap:wrap; gap:.35rem 1rem; font-size:.875rem; }
+.editorial-page .editorial-intro > nav > h2 { margin-block:0 .5rem; }
+
+.editorial-table :is(th, td):first-child { min-inline-size:12rem; }
+
+/* A document is normal text flow inside one Wide field, not a grid per heading. */
+main.documentation-page { padding:0; }
+.editorial-page .site-navigation:where(.gp_layout--stack) { padding-block:0; margin-block:0; row-gap:0; }
+.editorial-page .site-navigation:where(.gp_layout--stack) ul { display:block; }
+.editorial-page .site-navigation:where(.gp_layout--stack) li { display:inline; }
+.editorial-document, .document-contents {
+  inline-size:100%; justify-self:center;
+  /* Wide has 58 usable bits. Even spans put both centered edges on whole bits.
+     Percentages use that grid area; no captured length or query context. */
+  max-inline-size:max(calc(100% * 2 / 58),round(down,76ch,calc(100% * 2 / 58)));
+  font-size:1.0625rem; line-height:1.65;
+}
+.editorial-document.editorial-reference { max-inline-size:100%; }
+.editorial-reference-layout > .document-contents { max-inline-size:100%; }
+.editorial-document > header { margin-block:2em; }
+.editorial-document h1 { max-inline-size:15ch; margin:0; font-size:clamp(2.25rem,4vw,4rem); line-height:1.07; font-weight:600; letter-spacing:-.03em; }
+.document-contents { align-self:start; margin-block:2em; }
+.document-contents a { overflow-wrap:anywhere; }
+.editorial-document h2 { margin-block:2em .6em; line-height:1.2; font-size:1.75rem; font-weight:600; letter-spacing:-.015em; scroll-margin-top:1rem; }
+.editorial-document h3 { margin-block:1.75em .75em; font-size:1.125rem; font-weight:650; line-height:1.35; }
+.editorial-document .editorial-small-heading { margin-block:0 .5em; font-size:1rem; line-height:1.4; }
+.editorial-document dt { margin-block-start:1.25em; font-weight:650; }
+.editorial-document dd { margin:.3em 0 1em; }
+.editorial-document :is(a,code) { overflow-wrap:anywhere; }
+.editorial-document pre { border:0; }
+.editorial-reference :is(p,dl) { max-inline-size:76ch; }
+@media (min-width:64rem) {
+  /* Wide leaves 56 bits after its gutter: the 1:3 pair assigns 14 and 42. */
+  .editorial-document { max-inline-size:max(calc(100% * 2 / 42),round(down,76ch,calc(100% * 2 / 42))); }
+  .document-contents { max-inline-size:100%; }
+}
+@media (min-width:64rem) and (min-height:40rem) {
+  .editorial-field > .document-contents {
+    position:sticky; top:1rem; max-block-size:calc(100dvh - 2rem); overflow:auto;
+  }
+}
+@media print {
+  .document-contents { position:static !important; max-block-size:none !important; overflow:visible !important; }
 }

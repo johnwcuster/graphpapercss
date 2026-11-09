@@ -1,9 +1,9 @@
 import { readFile } from "node:fs/promises";
-import { gzipSync } from "node:zlib";
+import { gzipSync, brotliCompressSync } from "node:zlib";
 
-const assets = ["css/legacy/main.css", "css/main.css", "css/main.min.css", "css/main.layer.min.css", "css/bands.css", "css/bands.min.css", "css/compat.min.css"];
-console.log("Asset".padEnd(26) + "Raw bytes".padStart(12) + "Gzip bytes".padStart(12));
+const assets = ["css/main.css", "css/main.min.css", "css/main.layer.css", "css/main.layer.min.css", "css/legacy/0.4/main.min.css", "css/legacy/0.4/bands.min.css", "css/legacy/main.css"];
+console.log("Asset".padEnd(32) + "Raw bytes".padStart(12) + "Gzip bytes".padStart(12) + "Brotli bytes".padStart(14));
 for (const asset of assets) {
   const source = await readFile(new URL("../" + asset, import.meta.url));
-  console.log(asset.padEnd(26) + source.byteLength.toLocaleString("en-US").padStart(12) + gzipSync(source).byteLength.toLocaleString("en-US").padStart(12));
+  console.log(asset.padEnd(32) + source.byteLength.toLocaleString("en-US").padStart(12) + gzipSync(source).byteLength.toLocaleString("en-US").padStart(12) + brotliCompressSync(source).byteLength.toLocaleString("en-US").padStart(14));
 }

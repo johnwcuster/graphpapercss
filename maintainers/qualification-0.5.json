@@ -1,0 +1,141 @@
+{
+  "date": "2026-11-08",
+  "scope": "Structural/browser qualification; performance and manual assistive-technology review are separate gates",
+  "environment": {
+    "os": "macOS 27.2",
+    "architecture": "arm64",
+    "playwright": "1.64.0",
+    "olderFirefoxDriver": "1.52.0"
+  },
+  "artifacts": {
+    "main.css": {
+      "bytes": 228484,
+      "sha256": "02d65a950c0b8280cef289abc1d4a31f2d25a167f0dae91c3e59ef0e0e21d074"
+    },
+    "main.min.css": {
+      "bytes": 192555,
+      "sha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58"
+    },
+    "main.layer.css": {
+      "bytes": 228507,
+      "sha256": "ac39ed1c6c069d6245497c72974c7bd6b707cb2550e94f2a6af210aeb380dff2"
+    },
+    "main.layer.min.css": {
+      "bytes": 192575,
+      "sha256": "9296692214f4f5f817cfe9328929abf6fd0f066b826fbdb8bbd6fca520ca8ef5"
+    }
+  },
+  "engines": [
+    {
+      "engine": "chromium",
+      "version": "156.0.8078.4",
+      "core": 39145,
+      "padding": 8886,
+      "verticalSpacing": 183169,
+      "distribution": 27324,
+      "docsPages": 24,
+      "executedExamples": 12
+    },
+    {
+      "engine": "firefox",
+      "version": "157.0",
+      "core": 39145,
+      "padding": 8886,
+      "verticalSpacing": 183169,
+      "distribution": 27324,
+      "docsPages": 24,
+      "executedExamples": 12
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "core": 39145,
+      "padding": 8886,
+      "verticalSpacing": 183169,
+      "distribution": 27324,
+      "docsPages": 24,
+      "executedExamples": 12
+    }
+  ],
+  "olderBrowsers": [
+    {
+      "engine": "chromium",
+      "browser": "136.0.7103.25",
+      "checks": 204916,
+      "fallback": "source-order-stack",
+      "forcedFeatureOff": false,
+      "capabilities": {
+        "nativeCount": false,
+        "absoluteValue": false,
+        "rounding": true,
+        "subgrid": true
+      }
+    },
+    {
+      "engine": "firefox",
+      "browser": "137.0",
+      "checks": 204916,
+      "fallback": "repeating-pairs",
+      "forcedFeatureOff": false,
+      "capabilities": {
+        "nativeCount": false,
+        "absoluteValue": true,
+        "rounding": true,
+        "subgrid": true
+      }
+    }
+  ],
+  "cssChanged": false,
+  "knownLimitations": [],
+  "resolvedFindings": [
+    {
+      "finding": "Firefox construction-row clamping caused high-count Three/Four overlap",
+      "resolution": "Shared 9,998-row construction budget stacks entire Two/Three/Four allocations in source order across engines, including full-width endpoints and exact requests.",
+      "date": "2026-11-08"
+    }
+  ],
+  "rowBudget": {
+    "constructionRows": 9998,
+    "reserveRows": 1,
+    "endpointRowsIncluded": true,
+    "overflow": "source-order-stack",
+    "families": [
+      "two",
+      "three",
+      "four"
+    ]
+  },
+  "readableIdentifierNormalization": {
+    "date": "2026-11-08",
+    "readablePureIdentifierSubstitutionVerified": true,
+    "compactMappingUnchanged": true,
+    "minifiedAndLayeredMinifiedByteIdentical": true,
+    "previousReadableArtifacts": {
+      "main.css": {
+        "bytes": 232528,
+        "sha256": "1341a95b2105ef1b1786028d65083d2a6b2c22188f316b4fbf604bfa35ab5f25"
+      },
+      "main.layer.css": {
+        "bytes": 232551,
+        "sha256": "756408442093cda004718e663c3a4ccabe077c49f43bf4a43982f5e6edfb7350"
+      }
+    },
+    "supplementarySmoke": [
+      {
+        "engine": "chromium",
+        "checks": 3133,
+        "scope": "readable/minified workflows and all-build row-budget integration; exhaustive profiles omitted"
+      },
+      {
+        "engine": "firefox",
+        "checks": 3133,
+        "scope": "readable/minified workflows and all-build row-budget integration; exhaustive profiles omitted"
+      },
+      {
+        "engine": "webkit",
+        "checks": 3133,
+        "scope": "readable/minified workflows and all-build row-budget integration; exhaustive profiles omitted"
+      }
+    ]
+  }
+}

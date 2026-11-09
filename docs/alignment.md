@@ -1,63 +1,63 @@
 # Alignment and nesting
 
-Use subgrid to continue an existing alignment through a wrapper. Use a nested canvas to start an independent composition. Neither is necessary simply to group text or add component padding.
+Use a shared ruler when edges should relate across sections. Continue assigned tracks when descendants should preserve that rhythm. Rebase when a component needs 64 new local subdivisions. Neither nesting choice selects a responsive design by itself.
 
-## Choose what should be inherited
+## Establish a ruler
 
-| Need | Choice | Consequence |
-| --- | --- | --- |
-| Ordinary content inside an item | Normal semantic markup | No additional ruler or placement contract |
-| Descendants aligned to the tracks occupied by a wrapper | `gp_subgrid` | Inherited tracks and the existing responsive context |
-| An inner recipe that responds to its own available width | Nested `gp_canvas` plus a new field | A new 64-bit ruler and independent responsive context |
+`gp_ruler` starts 64 tracks across its available width. It can also carry a layout, or provide coordinates to direct child layouts. Give the ruler the width your page actually assigns; it need not be the full viewport or live in an extra site wrapper.
 
-Starting another canvas does not preserve parent bit size. Continuing a subgrid does not make the wrapper's width the new breakpoint reference.
+A direct participant already receives its own assigned area. A separately selected nested layout needs a wrapper so parent placement and child selection remain separate. Use the following forms rather than placing two independent layout roles on the same assigned item.
 
-## Continue tracks through a semantic wrapper
-
-This two-region example places a semantic wrapper in the first region. Its heading and description align one inherited bit inside the wrapper's edges. That inset stays tied to the outer ruler, rather than being recalculated as a fraction of the wrapper:
+## Continue assigned tracks
 
 ```html
-<div class="gp_canvas">
-  <section class="gp_field gp_field--wide grid_02">
-    <article class="gp_subgrid">
-      <h2 class="gp_place" style="--gp-column-start: 2; --gp-column-end: -2">Main story</h2>
-      <p class="gp_place" style="--gp-column-start: 2; --gp-column-end: -2">Its description.</p>
-    </article>
-    <aside>Related material</aside>
-  </section>
-</div>
-```
-
-In expanded and compact states, the wrapper occupies one region of this grid-only recipe. Local line `1` is its first inherited line; `-1` is its last. Selecting `2 / -2` leaves one inherited track at each side. Those tracks retain the outer canvas's bit size. Local line `1` is not the first line of the outer canvas unless the wrapper happens to start there.
-
-Below the default compact threshold, this field and its subgrid use block flow: the grid-line inset no longer applies. The heading and paragraph read normally before the related material. The wrapper does not introduce a separate query container.
-
-This demonstrates a shared inset, not a second composition recipe. To place descendants on other internal spans, select integer local lines from the wrapper's actual inherited tracks and verify those lines in every responsive state. A wrapper's track count can change when its placement changes. There is no automatic inner recipe attached to `gp_subgrid`. Use `1 / -1` instead if descendants should span the whole wrapper.
-
-## Start an independent inner composition
-
-Here the first outer item is itself a canvas. Its two inner items respond to that item's width, rather than the outer page's width:
-
-```html
-<div class="gp_canvas">
-  <section class="gp_field gp_field--wide grid_02">
-    <div class="gp_canvas">
-      <section class="gp_field gp_field--neat grid_02">
-        <article>Inner first item</article>
-        <article>Inner second item</article>
-      </section>
+<section class="gp_ruler gp_layout--stack gp_md--two-3-2 gp_spacing--neat">
+  <article class="gp_continue_tracks">
+    <div class="gp_layout--stack gp_md--two-1-1 gp_spacing--full">
+      <figure><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'/%3E" alt="Illustrative placeholder"></figure>
+      <p>Explanation aligned to the parent's track rhythm.</p>
     </div>
-    <aside>Outer supporting material</aside>
-  </section>
-</div>
+  </article>
+  <aside>Related material.</aside>
+</section>
 ```
 
-The inner field explicitly selects neat geometry. Its 64-bit ruler belongs to the inner canvas; its bits are smaller than outer bits when that canvas is narrower. The inner content can remain stacked while the outer composition is expanded.
+`gp_continue_tracks` belongs on the **assigned wrapper**. It exposes the tracks spanning that wrapper to an inner layout through native subgrid. If the assigned area spans 36 parent tracks, the child works with those 36 tracks; it does not receive 64 new ones. Whole-bit rounding and nonempty-span safeguards operate on that available count.
 
-That is success if the inner items need room to read independently. It is the wrong choice if the goal was to keep their edges on the outer ruler. Use subgrid for that goal instead.
+Choose Full spacing inside when you want the inner composition to reach its assigned edges. Applying another inset is deliberate: continuation does not imply that the parent should apply its outer gutter twice.
 
-## Check the boundary with real content
+## Rebase to 64 local tracks
 
-For subgrid, check which parent lines the wrapper actually inherits and how they change in compact mode. Do not assume every wrapper inherits all 64 tracks. For nested canvases, inspect inner and outer transition widths separately; nesting can create a narrow context that stays stacked much longer than expected.
+```html
+<section class="gp_ruler gp_layout--stack gp_md--two-3-2 gp_spacing--neat">
+  <article class="gp_continue_tracks">
+    <div class="gp_rebase_64 gp_layout--stack gp_md--two-1-1 gp_spacing--full">
+      <figure>Illustration.</figure>
+      <p>Explanation using a fresh local 64-track ruler.</p>
+    </div>
+  </article>
+  <aside>Related material.</aside>
+</section>
+```
 
-Keep reading order sensible in both cases. Neither technique measures content or promises that a structurally correct arrangement has a comfortable text measure. The [architecture](architecture.md) explains the underlying coordinate model, and the [class reference](class-reference.md) documents explicit adjustments.
+The same assigned wrapper now contains a local coordinate root. Its bits are one sixty-fourth of its own area. This is useful for an article-local title/definition list or a component with a reusable internal proportion system. Its inner edges may no longer coincide with every parent bit.
+
+`gp_rebase_64` changes coordinates, not activation conditions. `gp_md--…` inside it still means a 48rem **viewport** threshold. It does not test the nested area's width. Use author-owned component CSS when a genuine local condition is needed, as shown in [Responsive design](responsive-design.md#add-a-component-specific-condition-when-needed).
+
+## Choose the relationship deliberately
+
+| Need | Choice |
+| --- | --- |
+| Align descendants to the assigned parent rhythm | `gp_continue_tracks` and an inner layout |
+| Subdivide the assigned area into 64 local tracks | Continuation wrapper, then `gp_rebase_64` with an inner layout |
+| Bound prose to a comfortable reading measure | Host `max-inline-size`; a new ruler is not required |
+| Draw rules with a captured ruler length | `gp_ruler--measure` on the intended coordinate root |
+| Select a different arrangement at an available component width | An explicit host condition selecting `--gp-layout` |
+
+If neither continuation nor rebasing is supplied, ordinary content remains inside its assigned item. It does not automatically gain a nested Graph Paper composition. No library class is required just to render an article's normal headings and paragraphs.
+
+## Preserve geometry around spacing
+
+Keep coordinate roots and continuation wrappers unpadded. Put `gp_pad` on content items or a full-region content layer. A narrower intermediate wrapper can change the percentage basis without changing inherited track metadata; apply padding before that interruption or use host spacing for the constrained text component.
+
+Continuation and rebasing also preserve independent layout controls: parent allocation, traversal and exact-count requests do not become child selections. Test nested arrangements at their actual assigned width, including narrow sources and source-count changes. See [Edges and mixed spacing](edges-and-spacing.md).

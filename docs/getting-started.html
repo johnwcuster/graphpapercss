@@ -1,68 +1,98 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Getting started — Graph Paper CSS</title>
-<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
-<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="gp_ruler editorial-sheet editorial-page documentation-page">
 <!-- site-navigation:start -->
-<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
-  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
-  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html" aria-current="page">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
-  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+<nav class="gp_layout--stack gp_sm--two-1-2 gp_lg--three-1-2-1 gp_spacing--wide editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity gp_pad"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div class="gp_pad"><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html" aria-current="page">Getting started</a></li>
+<li><a href="./authoring.html">Authoring compositions</a></li>
+<li><a href="./site-authoring.html">Composing a site</a></li>
+<li><a href="./responsive-design.html">Responsive design</a></li>
+<li><a href="./alignment.html">Alignment and nesting</a></li>
+<li><a href="./edges-and-spacing.html">Edges and mixed spacing</a></li>
+<li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div class="gp_pad"><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+<li><a href="./browser-support.html">Browser support and builds</a></li>
+<li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+<li><a href="./releases.html">Releases</a></li></ul></div>
 </nav>
 <!-- site-navigation:end -->
-<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
-  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Getting started</h1><p>Graph Paper composes content into responsive editorial layouts. It supplies horizontal relationships and placement—not typography, cards, image treatments, or an application shell. Use it when you want a constrained catalogue of compositions rather than designing every grid from scratch.</p>
-<p>Version 0.4.1 updates the documentation and configurator without changing the CSS or authoring API from 0.4.0, a preview of the 1.0 architecture. Examples intentionally remain pinned to 0.4.0 CSS and also work with 0.4.1. Bands remain experimental. See <a href="releases.html">releases</a> for details.</p>
+<div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#load-one-stylesheet">Load one stylesheet</a></li>
+<li><a href="#start-with-meaningful-source-order">Start with meaningful source order</a></li>
+<li><a href="#choose-the-relationship-before-refinements">Choose the relationship before refinements</a></li>
+<li><a href="#decide-when-it-changes">Decide when it changes</a></li>
+<li><a href="#verify-before-refining">Verify before refining</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+<article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Getting started</h1><p>Graph Paper provides section-level composition tools for building site-level spatial continuity. It supplies ruler-aligned spatial arrangements while your site supplies typography, content treatments and visual identity.</p>
+<p>These instructions describe <strong>Graph Paper 0.5.0</strong>. The 0.4 releases use a different API; see <a href="migration.html">Migration</a>.</p>
 </header>
-  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#load-the-css">Load the CSS</a></li><li><a href="#make-a-first-composition">Make a first composition</a></li><li><a href="#add-your-own-treatment">Add your own treatment</a></li><li><a href="#check-narrow-and-wide">Check narrow and wide</a></li><li><a href="#choose-the-next-step">Choose the next step</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
-</section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="load-the-css">Load the CSS</h2>
-<p>Use the pinned 0.4.0 CSS, unchanged in 0.4.1:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css&quot;&gt;
+<h2 id="load-one-stylesheet">Load one stylesheet</h2>
+<p>Serve the current build from your project:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.min.css&quot;&gt;
 </code></pre>
-<p>Or copy <code>css/main.min.css</code> from your chosen checkout and serve it locally. No runtime JavaScript, package installation, or framework integration is required. The configurator is optional documentation tooling, not a script your site must load.</p>
-<p>Modern core requires container queries, container units, and column subgrid. Check <a href="browser-support.html">browser support and builds</a> before adopting it. Do not load the legacy compatibility profile alongside modern core.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="make-a-first-composition">Make a first composition</h2>
-<pre><code class="language-html">&lt;div class=&quot;gp_canvas&quot;&gt;
-  &lt;section class=&quot;gp_field gp_field--wide grid_03 set_03 stories&quot;&gt;
-    &lt;article&gt;&lt;h2&gt;Lead story&lt;/h2&gt;&lt;p&gt;Your primary content.&lt;/p&gt;&lt;/article&gt;
-    &lt;article&gt;&lt;h2&gt;Related story&lt;/h2&gt;&lt;p&gt;Supporting content.&lt;/p&gt;&lt;/article&gt;
-    &lt;article&gt;&lt;h2&gt;Another perspective&lt;/h2&gt;&lt;p&gt;Additional content.&lt;/p&gt;&lt;/article&gt;
-  &lt;/section&gt;
-&lt;/div&gt;
+<p>For version-pinned CDN delivery:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css&quot;&gt;
 </code></pre>
-<p>The canvas starts the coordinate system and responsive context. Its direct-child field selects the usable width and gutters. The recipe, <code>grid_03</code>, defines broad regions; <code>set_03</code> places three direct children. No flow class is needed for the default placement.</p>
-<p>The elements are semantic choices: <code>section</code> and <code>article</code> are not required tags. The nesting and direct children are important. An extra wrapper around all three articles would become the single item the field places.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="add-your-own-treatment">Add your own treatment</h2>
-<p>Load your project stylesheet after core. For example:</p>
-<pre><code class="language-css">.stories { row-gap: 1.5rem; }
-.stories &gt; article { margin-block-end: 1.5rem; }
-.stories h2 { margin-block: 0 .5rem; }
-.stories p { margin-block: 0; max-inline-size: 65ch; }
-.stories img { display: block; max-inline-size: 100%; block-size: auto; }
+<p>Use <code>css/main.css</code> for readable source or <code>css/main.layer.min.css</code> when you want the core in the <code>graph-paper</code> cascade layer. Choose one. No JavaScript or optional tool is required. Pin an exact release when publishing a production site; do not point the new markup at a 0.4 stylesheet.</p>
+<h2 id="start-with-meaningful-source-order">Start with meaningful source order</h2>
+<pre><code class="language-html">&lt;section class=&quot;gp_ruler gp_layout--stack
+                gp_md--two-3-2 gp_spacing--neat
+                gp_vertical-spacing--1&quot;&gt;
+  &lt;article class=&quot;gp_pad&quot;&gt;&lt;h2&gt;Ruler&lt;/h2&gt;&lt;p&gt;Establish shared coordinates.&lt;/p&gt;&lt;/article&gt;
+  &lt;article class=&quot;gp_pad&quot;&gt;&lt;h2&gt;Fields&lt;/h2&gt;&lt;p&gt;Select usable space and gutters.&lt;/p&gt;&lt;/article&gt;
+  &lt;article class=&quot;gp_pad&quot;&gt;&lt;h2&gt;Layouts&lt;/h2&gt;&lt;p&gt;Choose relationships and proportions.&lt;/p&gt;&lt;/article&gt;
+&lt;/section&gt;
 </code></pre>
-<p>These are example host styles, not required Graph Paper defaults. The margin keeps stacked articles separated when the field becomes block flow; row gaps separate grid rows in wider states. Tune both to your design. Core intentionally supplies neither.</p>
-<p>Keep horizontal gaps and padding off the canvas/field grid itself. Put component padding, backgrounds, and text treatments inside its items. See the <a href="class-reference.html">class reference</a> for the geometry contract.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="check-narrow-and-wide">Check narrow and wide</h2>
-<p>With the default root font size, this example is stacked below 480px of <strong>canvas width</strong>, compact from 480px, and expanded from 960px. The actual thresholds are 30rem and 60rem; they are not fixed pixel promises or viewport queries.</p>
-<p>Resize the parent container, not just the browser window. Verify source-order reading when stacked, the compact arrangement, and the expanded proportions. A recipe family name is not a column-count guarantee at every width.</p>
-<p><a href="configurator.html?grid=grid_03&amp;set=set_03&amp;flow=default&amp;items=3&amp;field=wide&amp;width=1024">Open this example in the configurator</a>. Compare the illustrated states, test transitions, and copy markup without example-only styling.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="choose-the-next-step">Choose the next step</h2>
-<ul>
-<li><a href="authoring.html">Authoring compositions</a>: choose relationships that suit actual content.</li>
-<li><a href="class-reference.html">Class reference</a>: look up exact class placement and defaults.</li>
-<li><a href="responsive-design.html">Responsive design</a>: understand compact layouts and optional bands.</li>
-<li><a href="troubleshooting.html">Troubleshooting</a>: diagnose unexpected placement or uncomfortable content.</li>
-<li><a href="authoring.html#implementation-checklist">Implementation checklist</a>: a compact contract for humans and coding agents.</li>
-</ul>
-</div></section>
-</div></main></body></html>
+<p><code>gp_ruler</code> establishes 64 local tracks. <code>gp_layout--stack</code> starts with one column. From a <strong>48rem viewport</strong>, <code>gp_md--two-3-2</code> selects two physical regions, left wider than right. Three source items allocate as one on the left and two on the right; source order is unchanged. The layout keeps using the element&#39;s available width, which can be narrower than the viewport.</p>
+<p>Neat spacing uses the 60-bit field with touching internal edges. <code>gp_pad</code> optionally adds one bit inside each item; <code>gp_vertical-spacing--1</code> optionally separates items beginning below the top row. They are separate choices. Omit them when your components already supply the intended spacing.</p>
+<h2 id="choose-the-relationship-before-refinements">Choose the relationship before refinements</h2>
+<p>Use <a href="configurator.html">the configurator</a> to choose a layout type, number of columns, width relationship and proportion. Its preview shows the actual item count and selected viewport sequence. Copy HTML and replace the placeholders with content.</p>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Content relationship</th>
+<th scope="col">Starting choice</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A single reading sequence</td>
+<td><code>gp_layout--stack</code></td>
+</tr>
+<tr>
+<td>Comparable records continuing in rows</td>
+<td><code>gp_layout--peers-2</code> through <code>peers-6</code></td>
+</tr>
+<tr>
+<td>Consecutive source groups in two, three or four regions</td>
+<td><code>gp_layout--two-*</code>, <code>three-*</code>, <code>four-*</code></td>
+</tr>
+<tr>
+<td>An interlocking composition with an exact item count</td>
+<td><code>gp_layout--mosaic-6</code> through <code>mosaic-13</code></td>
+</tr>
+</tbody></table></div>
+<p>For a left-led composition, <code>two-3-2</code> is a plausible first choice. For a centered lead and exactly three items, try <code>three-1-2-1</code> with <code>gp_traversal--center-first</code>. Proportions name physical left-to-right widths; traversal decides which region receives the first source run.</p>
+<h2 id="decide-when-it-changes">Decide when it changes</h2>
+<pre><code class="language-html">&lt;section class=&quot;gp_ruler gp_layout--stack
+                gp_md--two-3-2 gp_lg--three-1-2-1
+                gp_lg-traversal--center-first
+                gp_spacing--wide&quot;&gt;
+  &lt;article&gt;First source item.&lt;/article&gt;
+  &lt;article&gt;Second source item.&lt;/article&gt;
+  &lt;article&gt;Third source item.&lt;/article&gt;
+&lt;/section&gt;
+</code></pre>
+<p>This stacks below 48rem, uses two regions from 48rem, and three from 64rem. No implicit compact arrangement or band chooses those transitions. Test the narrowest important region with actual content before selecting a threshold. See <a href="responsive-design.html">Responsive design</a>.</p>
+<h2 id="verify-before-refining">Verify before refining</h2>
+<p>Resize across both sides of every selected transition. Check source and focus order, text length, image treatment, larger text and the actual composition width. Change grouping or content treatment when a layout cannot express the intended relationship; a new ratio cannot undo a DOM grouping decision.</p>
+<p>The library counts <strong>direct element children</strong>, including hidden ones. Comments, text nodes and grandchildren do not increase that count. You do not need a <code>set_*</code> class or an author-maintained item-count variable. <a href="class-reference.html">Class reference</a> covers allocation, traversal, exact counts and fallbacks; <a href="alignment.html">Alignment and nesting</a> explains wrappers.</p>
+
+</article>
+</div>
+</main></body></html>

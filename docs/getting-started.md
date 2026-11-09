@@ -1,65 +1,71 @@
 # Getting started
 
-Graph Paper composes content into responsive editorial layouts. It supplies horizontal relationships and placement—not typography, cards, image treatments, or an application shell. Use it when you want a constrained catalogue of compositions rather than designing every grid from scratch.
+Graph Paper provides section-level composition tools for building site-level spatial continuity. It supplies ruler-aligned spatial arrangements while your site supplies typography, content treatments and visual identity.
 
-Version 0.4.1 updates the documentation and configurator without changing the CSS or authoring API from 0.4.0, a preview of the 1.0 architecture. Examples intentionally remain pinned to 0.4.0 CSS and also work with 0.4.1. Bands remain experimental. See [releases](releases.html) for details.
+These instructions describe **Graph Paper 0.5.0**. The 0.4 releases use a different API; see [Migration](migration.md).
 
-## Load the CSS
+## Load one stylesheet
 
-Use the pinned 0.4.0 CSS, unchanged in 0.4.1:
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css">
-```
-
-Or copy `css/main.min.css` from your chosen checkout and serve it locally. No runtime JavaScript, package installation, or framework integration is required. The configurator is optional documentation tooling, not a script your site must load.
-
-Modern core requires container queries, container units, and column subgrid. Check [browser support and builds](browser-support.md) before adopting it. Do not load the legacy compatibility profile alongside modern core.
-
-## Make a first composition
+Serve the current build from your project:
 
 ```html
-<div class="gp_canvas">
-  <section class="gp_field gp_field--wide grid_03 set_03 stories">
-    <article><h2>Lead story</h2><p>Your primary content.</p></article>
-    <article><h2>Related story</h2><p>Supporting content.</p></article>
-    <article><h2>Another perspective</h2><p>Additional content.</p></article>
-  </section>
-</div>
+<link rel="stylesheet" href="css/main.min.css">
 ```
 
-The canvas starts the coordinate system and responsive context. Its direct-child field selects the usable width and gutters. The recipe, `grid_03`, defines broad regions; `set_03` places three direct children. No flow class is needed for the default placement.
+For version-pinned CDN delivery:
 
-The elements are semantic choices: `section` and `article` are not required tags. The nesting and direct children are important. An extra wrapper around all three articles would become the single item the field places.
-
-## Add your own treatment
-
-Load your project stylesheet after core. For example:
-
-```css
-.stories { row-gap: 1.5rem; }
-.stories > article { margin-block-end: 1.5rem; }
-.stories h2 { margin-block: 0 .5rem; }
-.stories p { margin-block: 0; max-inline-size: 65ch; }
-.stories img { display: block; max-inline-size: 100%; block-size: auto; }
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css">
 ```
 
-These are example host styles, not required Graph Paper defaults. The margin keeps stacked articles separated when the field becomes block flow; row gaps separate grid rows in wider states. Tune both to your design. Core intentionally supplies neither.
+Use `css/main.css` for readable source or `css/main.layer.min.css` when you want the core in the `graph-paper` cascade layer. Choose one. No JavaScript or optional tool is required. Pin an exact release when publishing a production site; do not point the new markup at a 0.4 stylesheet.
 
-Keep horizontal gaps and padding off the canvas/field grid itself. Put component padding, backgrounds, and text treatments inside its items. See the [class reference](class-reference.md) for the geometry contract.
+## Start with meaningful source order
 
-## Check narrow and wide
+```html
+<section class="gp_ruler gp_layout--stack
+                gp_md--two-3-2 gp_spacing--neat
+                gp_vertical-spacing--1">
+  <article class="gp_pad"><h2>Ruler</h2><p>Establish shared coordinates.</p></article>
+  <article class="gp_pad"><h2>Fields</h2><p>Select usable space and gutters.</p></article>
+  <article class="gp_pad"><h2>Layouts</h2><p>Choose relationships and proportions.</p></article>
+</section>
+```
 
-With the default root font size, this example is stacked below 480px of **canvas width**, compact from 480px, and expanded from 960px. The actual thresholds are 30rem and 60rem; they are not fixed pixel promises or viewport queries.
+`gp_ruler` establishes 64 local tracks. `gp_layout--stack` starts with one column. From a **48rem viewport**, `gp_md--two-3-2` selects two physical regions, left wider than right. Three source items allocate as one on the left and two on the right; source order is unchanged. The layout keeps using the element's available width, which can be narrower than the viewport.
 
-Resize the parent container, not just the browser window. Verify source-order reading when stacked, the compact arrangement, and the expanded proportions. A recipe family name is not a column-count guarantee at every width.
+Neat spacing uses the 60-bit field with touching internal edges. `gp_pad` optionally adds one bit inside each item; `gp_vertical-spacing--1` optionally separates items beginning below the top row. They are separate choices. Omit them when your components already supply the intended spacing.
 
-[Open this example in the configurator](configurator.html?grid=grid_03&set=set_03&flow=default&items=3&field=wide&width=1024). Compare the illustrated states, test transitions, and copy markup without example-only styling.
+## Choose the relationship before refinements
 
-## Choose the next step
+Use [the configurator](configurator.html) to choose a layout type, number of columns, width relationship and proportion. Its preview shows the actual item count and selected viewport sequence. Copy HTML and replace the placeholders with content.
 
-- [Authoring compositions](authoring.md): choose relationships that suit actual content.
-- [Class reference](class-reference.md): look up exact class placement and defaults.
-- [Responsive design](responsive-design.md): understand compact layouts and optional bands.
-- [Troubleshooting](troubleshooting.md): diagnose unexpected placement or uncomfortable content.
-- [Implementation checklist](authoring.md#implementation-checklist): a compact contract for humans and coding agents.
+| Content relationship | Starting choice |
+| --- | --- |
+| A single reading sequence | `gp_layout--stack` |
+| Comparable records continuing in rows | `gp_layout--peers-2` through `peers-6` |
+| Consecutive source groups in two, three or four regions | `gp_layout--two-*`, `three-*`, `four-*` |
+| An interlocking composition with an exact item count | `gp_layout--mosaic-6` through `mosaic-13` |
+
+For a left-led composition, `two-3-2` is a plausible first choice. For a centered lead and exactly three items, try `three-1-2-1` with `gp_traversal--center-first`. Proportions name physical left-to-right widths; traversal decides which region receives the first source run.
+
+## Decide when it changes
+
+```html
+<section class="gp_ruler gp_layout--stack
+                gp_md--two-3-2 gp_lg--three-1-2-1
+                gp_lg-traversal--center-first
+                gp_spacing--wide">
+  <article>First source item.</article>
+  <article>Second source item.</article>
+  <article>Third source item.</article>
+</section>
+```
+
+This stacks below 48rem, uses two regions from 48rem, and three from 64rem. No implicit compact arrangement or band chooses those transitions. Test the narrowest important region with actual content before selecting a threshold. See [Responsive design](responsive-design.md).
+
+## Verify before refining
+
+Resize across both sides of every selected transition. Check source and focus order, text length, image treatment, larger text and the actual composition width. Change grouping or content treatment when a layout cannot express the intended relationship; a new ratio cannot undo a DOM grouping decision.
+
+The library counts **direct element children**, including hidden ones. Comments, text nodes and grandchildren do not increase that count. You do not need a `set_*` class or an author-maintained item-count variable. [Class reference](class-reference.md) covers allocation, traversal, exact counts and fallbacks; [Alignment and nesting](alignment.md) explains wrappers.

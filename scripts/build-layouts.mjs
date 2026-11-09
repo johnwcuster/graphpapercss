@@ -1,9 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { candidateFlows, legacyFamilies } from "../src/manifest/compatibility.mjs";
+import { candidateFlows, legacyFamilies } from "../src/legacy/0.4/manifest/compatibility.mjs";
 
 const capturePath = new URL("../tests/fixtures/legacy-layouts.json", import.meta.url);
 const inventoryPath = new URL("../tests/fixtures/legacy-geometry.json", import.meta.url);
-const outputPath = new URL("../src/manifest/layouts.mjs", import.meta.url);
+const outputPath = new URL("../src/legacy/0.4/manifest/layouts.mjs", import.meta.url);
 const checkOnly = process.argv.includes("--check");
 const capture = JSON.parse(await readFile(capturePath, "utf8"));
 const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
@@ -137,7 +137,7 @@ ${layouts.map(formatLayout).join(",\n")}
 if (checkOnly) {
   const currentSource = await readFile(outputPath, "utf8").catch(() => "");
   if (currentSource !== source) {
-    console.error("src/manifest/layouts.mjs is not up to date; run pnpm run layouts:build");
+    console.error("src/legacy/0.4/manifest/layouts.mjs is not up to date; run pnpm run layouts:build");
     process.exitCode = 1;
   }
 } else {

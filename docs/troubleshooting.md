@@ -1,59 +1,55 @@
 # Troubleshooting
 
-Start with the visible symptom, then check structure, classes, available width, and host styling. The [configurator](configurator.html) can help distinguish a library arrangement from styles introduced by your project.
+Start with the stylesheet, the source count and the element that owns the layout. Most surprises come from a version mismatch, a changed count, an inherited control choice or a container narrower than the viewport suggests.
 
-## The example looks unstyled
+## The new classes do nothing
 
-That may be expected. Graph Paper supplies geometry, not a type system, card theme, image sizing, or vertical rhythm. Confirm that core CSS loaded and compare item placement at wide and narrow canvas widths. Then add your project's treatment as shown in [Getting started](getting-started.md).
+Load the current `css/main.css` or minified/layered equivalent. A pinned 0.4 stylesheet does not understand `gp_layout--*`; the new core does not interpret `grid_*`, `set_*` or `gp_band--*`. Use [Migration](migration.md) rather than combining both versions.
 
-## The layout stays stacked
+The selecting element needs a recognized layout class and a valid ruler context. Setting `--gp-layout` alone on arbitrary markup does not activate composition. Keep parent placement separate from an independently selected inner layout using [the nesting forms](alignment.md).
 
-Inspect the width of the nearest `gp_canvas`, not just the viewport. A nested canvas may be much narrower than the page. Defaults switch at 30rem and 60rem; a band may request different thresholds.
+## The layout stacks unexpectedly
 
-Check that the field is a direct child of the canvas, has one field modifier and a valid recipe, and is not being overridden by host `display` or track styles. If using a band, confirm that the optional bands stylesheet is loaded after core. Removing a band class is a useful diagnostic, not necessarily the final design decision.
+Check direct **element** children, including hidden elements. Underfilled Three/Four compositions stack. Spanning Two requires at least two supporting items after excluding the endpoint(s). Mosaics require their exact six-to-thirteen count and Neat/Thin spacing. Unsupported features or too few available tracks can also trigger safeguards.
 
-## My wrapper broke placement
+A selected ineligible layout stacks; it does not restore an earlier viewport layout. Review the current selection and capabilities rather than treating fallback as a breakpoint design.
 
-The field places direct element children. Wrapping several articles together changes them from several items into one. Headings or decorative elements added as direct children also count as items.
+## Changing counts moves earlier items
 
-Keep component wrappers inside each intended item, or deliberately use a semantic wrapper as an item. Use [subgrid](alignment.md) only if the wrapper's descendants need inherited track alignment.
+Automatic allocation changes the split when the total changes. It does not retain permanent groups. If a group must stay together, represent it as one source participant and give its children a nested arrangement.
 
-## Changing flow or variant does nothing
+Use Repeating peers for row-major collections. Use compositions for column-first source runs. Actual content heights can still imply false rows or an awkward focus path; inspect the rendered material rather than only the allocation numbers.
 
-First confirm the combination exists. Then check the responsive state and actual occupied positions. Proportional differences may appear only in expanded mode; different placements can be equivalent for the occupied items. Default is an intentional selection, not an incomplete configuration.
+## An exact request does not apply
 
-The configurator keeps equivalent choices selectable and distinguishes them from unavailable combinations. Use it to compare all states. Do not assume that identical appearance at one width means two recipes are universally interchangeable.
+Use complete positive integer physical counts for the selected family. The total must match the participating source count, with the documented spread and coprime-neighbor conditions. Spanning Two counts only supports; Across Two ignores exact inputs.
 
-## Extra items form full-width rows
+Choose an eligible tuple in the configurator instead of guessing it. Invalid requests retain automatic allocation. Requests remain present and can reactivate when the source matches. Responsive inputs carry forward independently; explicit zero resets an earlier regional value, while `unset` reveals it. See [Exact physical counts](class-reference.md#exact-physical-counts).
 
-With a named set, items beyond its position count use full-width fallback. Fewer items leave positions unfilled; Graph Paper does not automatically choose a new composition. Check whether your content count and selected set agree.
+## The preview changes at the wrong width
 
-For a collection that should continue through the regions into later rows, omit the set class. Grid-only occupancy has sequential continuation rather than named-set fallback. See the [occupancy contract](class-reference.md#recipes-positions-and-defaults).
+Viewport aliases measure the viewport, not the component. A wide screen can contain a narrow composition. Continue/rebase changes coordinates without changing that condition. Test the limiting region and choose another threshold or an author-owned component condition.
 
-## Gutters or edges do not align
+The configurator's requested width is a simulated viewport displayed at a scale that fits the workspace. Copied HTML does not impose that width on your page. Preview controls change the test environment; layout controls change the exported configuration.
 
-Check for horizontal gap, grid padding, or replacement track definitions on the canvas or field. These compete with the ruler. Check that each field has exactly one modifier and that an inner canvas was not introduced when inherited alignment was intended.
+## A control seems to persist across a new layout
 
-Component padding is different from structural alignment: an item can sit on the correct tracks while its text is inset. Use inspection aids to distinguish the item edge from its contents.
+Layout, gutters, allocation, traversal, arrangement, padding and vertical spacing have independent mobile-up carry-forward. Select an explicit default or zero where the design should reset. Class attribute order is not breakpoint priority. Independently selected nested layouts do not inherit the outer typed control inputs.
 
-## A rule is missing or doubled
+## Padding or spacing does not follow the expected bit
 
-Rules require the ruled field and explicit start/end ownership on direct items. Choose one owner per shared gutter. Stacked items, outer edges, and responsive full-span edges intentionally suppress markers.
+Keep coordinate roots and continuation wrappers unpadded. Put `gp_pad` on content whose containing block corresponds to its inherited track metadata. A max-width or otherwise narrowed intermediate box can interrupt that relationship; use an appropriate full-region layer or ordinary host spacing there.
 
-Check competing `::before`/`::after` styles and explicit placement overrides. Host-authored placement must also manage rule ownership; generated metadata cannot infer your custom design. See [Column rules](class-reference.md#column-rules).
+Vertical-spacing utilities add margins at lower item starts, not gaps between every construction row. Shared rows can redistribute height. Thin mosaics have defaults that explicit vertical-spacing classes replace. Host declarations override zero-specificity margins/padding normally.
 
-## A band changes the diagram but not the layout
+## A rule is missing or the wrong color
 
-A band changes transition timing, not expanded proportions or the compact arrangement. The current canvas width may remain within the same state under both policies. Test either side of the new thresholds.
+Ruled spacing reserves geometry; decoration also needs `gp_ruler--measure` at the intended coordinate root and explicit `gp_rule--start/end` ownership on the item. Outer/nonexistent boundaries and insufficient internal gutters suppress rules. Mosaics do not support Ruled.
 
-In the configurator, choosing a band does not resize the preview. Test transitions performs a one-time resize; later edits can move those transition targets without moving the current preview width.
+Set `--gp-rule-color` and `--gp-rule-width` in author CSS or an inline property declaration. Choose one owner per shared gutter. Keep measurement locally scoped; it is unnecessary for padding or Thin mosaic margins.
 
-## The geometry works but reading suffers
+## Text or images make a valid layout difficult to read
 
-Check the narrowest important content treatment, not just the overall composition. Long text in a narrow supporting position can cause both uncomfortable measure and excessive shared-row height.
+The core does not supply a readable measure, type scale, fixed heights or image cropping. Change the content treatment, proportion, grouping or transition. Do not make less important text dictate composition height by forcing it into a narrow region. Review keyboard and source hierarchy alongside visual emphasis.
 
-Try an appropriate excerpt or headline treatment, another recipe/set, different grouping, or a band that transitions earlier. Do not expect a band to measure text or choose another compact layout. A fallback can be structurally correct without being the right editorial design. See [Authoring compositions](authoring.md).
-
-## An override behaves differently in a layered build
-
-Check your cascade layer order and whether host styles are layered. Normal unlayered styles override normal layered styles. Optional bands should share the core's layer when using layered core. Do not mix the standalone compatibility profile with modern core. See [Browser support and builds](browser-support.md).
+Continue with [Authoring compositions](authoring.md) or [Browser support and builds](browser-support.md).

@@ -1,10 +1,10 @@
-# 0.2.3 to 1.0 geometry changes
+# 0.2.3 to 0.4 geometry changes
 
 Baseline: [released 0.2.3 CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css), retained at `css/legacy/main.css`. SHA-256: `8bcfdcd401bfa53752569c4eb6c01400b20e27f4d36b87b53db7cf9b1cac60dc`.
 
-All 72 released grid IDs are represented in the 1.0 architecture, available in the released 0.4.0 preview. Across neat, thin, and wide fields, 204 macro geometries match exactly. The twelve intentional changes below replace half-bit edges with whole-bit coordinates. Maximum edge displacement is 0.5 bit; formerly equal small columns differ by one bit. These replacements are frozen in `src/ruler/accepted-changes.mjs`. Full and ruled fields are new designed extents, not legacy parity claims.
+This historical record covers the 72 grid IDs in the 0.4 ruler implementation, available in released 0.4.0 and unchanged in 0.4.1. It does not map those recipe IDs to the new 0.5 catalogue. Across neat, thin, and wide fields, 204 macro geometries match exactly. The twelve intentional changes below replace half-bit edges with whole-bit coordinates. Maximum edge displacement is 0.5 bit; formerly equal small columns differ by one bit. These replacements are frozen in `src/legacy/0.4/ruler/accepted-changes.mjs`. Full and ruled fields are new designed extents, not legacy parity claims.
 
-| Grid | Field | 0.2.3 widths (bits) | 1.0 widths (bits) | 1.0 intervals (bits) |
+| Grid | Field | 0.2.3 widths (bits) | 0.4 widths (bits) | 0.4 intervals (bits) |
 | --- | --- | --- | --- | --- |
 | grid_03a | neat | 25 / 17.5 / 17.5 | 25 / 18 / 17 | 2–27, 27–45, 45–62 |
 | grid_03a | thin | 24 / 16.5 / 16.5 | 24 / 17 / 16 | 2–26, 27–44, 45–61 |

@@ -10,9 +10,9 @@ Outside-in design begins with the available space and its broad organization. Wh
 
 A familiar answer is a centered container with a maximum width, with sections composed inside it. That can work well. But the container has already made editorial decisions before the section grid becomes involved: it bounds the page, establishes outer spacing, and gives every section the same maximum extent.
 
-Graph Paper does not require that answer. A canvas can use the available page width, fields can establish insets, and recipes can organize the content directly on that ruler.
+Graph Paper does not require that answer. A ruler can use the available page width, spacing can establish fields and insets, and layouts can organize content directly on those coordinates.
 
-This site uses that approach. A center-led recipe supplies a primary region with supporting positions on either side. Reading sections can occupy the primary position alone. Empty supporting positions do not require placeholder elements or invented content; they can be intentional negative space.
+This site uses a page-wide ruler. Navigation expresses real groups through a composition; each document pairs its contents with a normal-flow article in one Wide field, stacking them on narrower screens. The article has a typography-based measure. Quiet space does not require fake source items or underfilled multi-region layouts.
 
 Outside-in thinking establishes a shared spatial language. It does not yet establish how much of that space the content should use.
 
@@ -22,9 +22,9 @@ Inside-out design begins with the material and its treatment. How much width mak
 
 A page-wide ruler makes more space available, but availability is not evidence of usefulness. Long prose still needs a readable measure. A short comparison table does not become more informative when its columns spread across a large monitor. A generic invitation to explore the library does not necessarily deserve an entire sidebar.
 
-Here, the ruler remains wide while particular reading components have typography-based bounds. The reading container stops at `76ch`, with paragraphs bounded further. Those values are host design choices, not Graph Paper requirements or a universal prescription for readable text.
+Here, the ruler remains wide while a normal-flow article has a typography-based bound near `76ch`. Its maximum width rounds down in two-bit steps, so centering the article leaves both edges on ruler lines. Heading and paragraph spacing stays typographic; individual headings do not require separate subgrids. The target is a host design choice, not a Graph Paper requirement or a universal prescription for readable text.
 
-The distinction matters: constrain the content treatment without necessarily shrinking the coordinate system around every section. The [responsive-design page](responsive-design.md) keeps its small tables with their explanations; the dense [recipe catalogue](class-reference.md#recipe-catalogue) receives a wider view.
+The distinction matters: constrain the content treatment without necessarily shrinking the coordinate system around every section. The [responsive-design page](responsive-design.md) keeps its small tables with their explanations; the dense [class-reference page](class-reference.md#layout-catalogue) fills its available article region.
 
 Additional width is a resource to assign, not a condition every element must express.
 
@@ -40,7 +40,7 @@ A recurring reading position gives introductions, prose, and ordinary comparison
 
 Typography participates in that continuity. Centering several children independently at different measure limits can create unrelated left edges inside an otherwise consistent grid. Bounding and aligning a shared reading component is often more coherent. Its visible edge need not coincide with a ruler line once its measure cap applies; the assigned region still belongs to the ruler.
 
-Responsive timing matters too. Related sections can use the same recipe yet shift arrangements at different widths. On this site, introductions and reading sections share a band policy so that their relationship changes together. That is an editorial continuity decision, not merely a test of whether each section fits.
+Responsive timing matters too. Related sections can use the same recipe yet shift arrangements at different widths. On this site, introductions and reading sections share their field and reading measure, while multi-item sections use explicitly authored viewport transitions. That is an editorial continuity decision, not merely a test of whether each section fits.
 
 ## Move between the two directions
 
@@ -60,7 +60,7 @@ These directions do not prescribe a responsive workflow. Outside-in is not synon
 
 ## Decide what the framework should own
 
-Graph Paper contributes a constrained vocabulary of coordinates, fields, recipes, positions, and responsive arrangements. It does not decide whether a sidebar is worth having, whether a table needs more room, or whether the resulting hierarchy serves the reader. Bands do not measure text and infer when reading becomes uncomfortable.
+Graph Paper contributes a constrained vocabulary of coordinates, fields, layouts, allocation and explicit responsive selections. It does not decide whether a sidebar is worth having, whether a table needs more room, or whether the resulting hierarchy serves the reader. Viewport thresholds do not measure text and infer when reading becomes uncomfortable.
 
 The site still supplies typography, content treatment, images, vertical spacing, and editorial judgment. A maximum-width container remains a legitimate option when the project needs one; it need not be an automatic prerequisite around everything.
 

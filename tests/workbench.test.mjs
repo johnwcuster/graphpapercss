@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { recipes, fields, resolveColumns, layoutsFor } from '../src/ruler/geometry.mjs';
+import { recipes, fields, resolveColumns, layoutsFor } from '../src/legacy/0.4/ruler/geometry.mjs';
 import { recipeParts, alternatives, selectAlternative, compatibleLayout, recipeSelection, designOptions, letterAvailability, variantWidthChanges, diagramItems, boundarySteps } from '../docs/workbench/model.mjs';
 
 test('workbench recipe controls expose only real alternatives, including unnumbered defaults', () => {

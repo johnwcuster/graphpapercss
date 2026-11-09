@@ -1,21 +1,51 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Release notes — Graph Paper CSS</title>
-<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
-<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="gp_ruler editorial-sheet editorial-page documentation-page">
 <!-- site-navigation:start -->
-<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
-  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
-  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
-  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html" aria-current="page">Releases</a></li></ul></div>
+<nav class="gp_layout--stack gp_sm--two-1-2 gp_lg--three-1-2-1 gp_spacing--wide editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity gp_pad"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div class="gp_pad"><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li>
+<li><a href="./authoring.html">Authoring compositions</a></li>
+<li><a href="./site-authoring.html">Composing a site</a></li>
+<li><a href="./responsive-design.html">Responsive design</a></li>
+<li><a href="./alignment.html">Alignment and nesting</a></li>
+<li><a href="./edges-and-spacing.html">Edges and mixed spacing</a></li>
+<li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div class="gp_pad"><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+<li><a href="./browser-support.html">Browser support and builds</a></li>
+<li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+<li><a href="./releases.html" aria-current="page">Releases</a></li></ul></div>
 </nav>
 <!-- site-navigation:end -->
-<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
+<div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#050-explicit-layouts-and-ruler-based-composition">0.5.0 — explicit layouts and ruler-based composition</a></li>
+<li><a href="#041-documentation-and-configurator">0.4.1 — documentation and configurator</a></li>
+<li><a href="#040-authoring-defaults-and-response-bands">0.4.0 — authoring defaults and response bands</a></li>
+<li><a href="#030-public-preview-of-the-upcoming-10-architecture">0.3.0 — public preview of the upcoming 1.0 architecture</a></li>
+<li><a href="#023-previous-released-version">0.2.3 — previous released version</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+<article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
   <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Release notes</h1></header>
-  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#041-documentation-and-configurator">0.4.1 — documentation and configurator</a></li><li><a href="#040-authoring-defaults-and-response-bands">0.4.0 — authoring defaults and response bands</a></li><li><a href="#030-public-preview-of-the-upcoming-10-architecture">0.3.0 — public preview of the upcoming 1.0 architecture</a></li><li><a href="#023-previous-released-version">0.2.3 — previous released version</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
-</section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
+<h2 id="050-explicit-layouts-and-ruler-based-composition">0.5.0 — explicit layouts and ruler-based composition</h2>
+<p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css">Minified CSS</a></p>
+<p>Graph Paper 0.5.0 replaces the <code>grid_*</code> / <code>set_*</code> / <code>flow_*</code> and band-based authoring API with explicit layouts and independently selected viewport transitions. Existing 0.4 markup needs migration; this is not a drop-in class rename. The versioned 0.4 reference remains available under <code>css/legacy/0.4/</code>.</p>
+<ul>
+<li>102 layout selections: Stack, five repeating Peers, seventeen Two, forty-six Three, twenty-five Four, and eight exact-count mosaics.</li>
+<li>Mobile-up viewport steps at 30, 40, 48, 64, 80, and 96rem. Layout, allocation, traversal, gutters, padding, and vertical spacing carry forward independently.</li>
+<li>Automatic direct-item counting, proportional regions, exact physical count refinements, and explicit first/last spanning endpoints for two-region layouts. Native source and focus order remain unchanged.</li>
+<li>A 64-bit ruler with explicit assigned-track continuation and local rebasing. Full, Neat, Thin, Wide, and Ruled fields; mosaics support Neat and Thin.</li>
+<li>Zero/one/two-bit padding and vertical-spacing utilities. Thin mosaics use percentage-based vertical gutters without ruler measurement. Column rules retain explicit measurement and ownership.</li>
+<li>A shared 9,998-construction-row budget stacks over-budget coupled allocations in source order, consistently across browsers. Safe source or layout changes restore composition automatically.</li>
+<li>Readable, minified, and optional layered builds with zero-specificity selection and placement. No runtime layout JavaScript or compatibility aliases for the former API.</li>
+<li>A configurator for the new API, library-focused examples, migration guidance, ruler-aligned documentation, and an optional inspector scoped to the legacy 0.4 API.</li>
+<li>Chromium, Firefox, and WebKit qualification, bounded real older-browser fallbacks, deterministic/package checks, and recorded size/runtime assessments.</li>
+</ul>
 <h2 id="041-documentation-and-configurator">0.4.1 — documentation and configurator</h2>
+<p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.1/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.1/css/main.min.css">Minified CSS</a></p>
 <p>The CSS builds and authoring API are unchanged from 0.4.0. These updates improve documentation and exploration tooling.</p>
 <h3 id="documentation">Documentation</h3>
 <ul>
@@ -44,9 +74,8 @@ boundaries. Source and diagnostic colors retain their independent meanings.</li>
 <li>Reproducible documentation builds, local links and anchors, and manifest-backed catalogue checks.</li>
 <li>Cross-browser structural and interaction coverage for the configurator and documentation, including ruler geometry, preview independence, recurring reading edges, and representative page layouts through 2560px.</li>
 </ul>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
 <h2 id="040-authoring-defaults-and-response-bands">0.4.0 — authoring defaults and response bands</h2>
+<p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css">Minified CSS</a></p>
 <ul>
 <li><p>Contributor tooling uses pnpm 12.6.0 with a frozen lockfile.</p>
 </li>
@@ -69,9 +98,8 @@ order; isolated placement variables for nested named compositions.</p>
 item counts, and non-blocking mismatch warnings in the sole configurator.</p>
 </li>
 </ul>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
 <h2 id="030-public-preview-of-the-upcoming-10-architecture">0.3.0 — public preview of the upcoming 1.0 architecture</h2>
+<p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.min.css">Minified CSS</a></p>
 <ul>
 <li>Canonical 64-bit ruler with canvas-relative responsive composition.</li>
 <li>Five fields: full 64, neat 60, thin 59, wide 58, ruled 56 bits.</li>
@@ -87,12 +115,10 @@ recorded in <a href="geometry-record.html">geometry changes</a>.</li>
 <li>Deterministic generation and three-engine structural regression coverage.</li>
 </ul>
 <p>Modern markup requires a canvas and field. See <a href="migration.html">migration</a>.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
 <h2 id="023-previous-released-version">0.2.3 — previous released version</h2>
-<p>The released stylesheet remains pinned at
-<a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css</a> and is
-retained byte-for-byte at <code>css/legacy/main.css</code> for migration and regression
-comparisons.</p>
-</div></section>
-</div></main></body></html>
+<p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.min.css">Minified CSS</a></p>
+<p>The stylesheet is also retained byte-for-byte at <code>css/legacy/main.css</code> for migration and regression comparisons.</p>
+
+</article>
+</div>
+</main></body></html>

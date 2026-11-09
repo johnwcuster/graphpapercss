@@ -1,6 +1,24 @@
 # Release notes
 
+## 0.5.0 — explicit layouts and ruler-based composition
+
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css)
+
+Graph Paper 0.5.0 replaces the `grid_*` / `set_*` / `flow_*` and band-based authoring API with explicit layouts and independently selected viewport transitions. Existing 0.4 markup needs migration; this is not a drop-in class rename. The versioned 0.4 reference remains available under `css/legacy/0.4/`.
+
+- 102 layout selections: Stack, five repeating Peers, seventeen Two, forty-six Three, twenty-five Four, and eight exact-count mosaics.
+- Mobile-up viewport steps at 30, 40, 48, 64, 80, and 96rem. Layout, allocation, traversal, gutters, padding, and vertical spacing carry forward independently.
+- Automatic direct-item counting, proportional regions, exact physical count refinements, and explicit first/last spanning endpoints for two-region layouts. Native source and focus order remain unchanged.
+- A 64-bit ruler with explicit assigned-track continuation and local rebasing. Full, Neat, Thin, Wide, and Ruled fields; mosaics support Neat and Thin.
+- Zero/one/two-bit padding and vertical-spacing utilities. Thin mosaics use percentage-based vertical gutters without ruler measurement. Column rules retain explicit measurement and ownership.
+- A shared 9,998-construction-row budget stacks over-budget coupled allocations in source order, consistently across browsers. Safe source or layout changes restore composition automatically.
+- Readable, minified, and optional layered builds with zero-specificity selection and placement. No runtime layout JavaScript or compatibility aliases for the former API.
+- A configurator for the new API, library-focused examples, migration guidance, ruler-aligned documentation, and an optional inspector scoped to the legacy 0.4 API.
+- Chromium, Firefox, and WebKit qualification, bounded real older-browser fallbacks, deterministic/package checks, and recorded size/runtime assessments.
+
 ## 0.4.1 — documentation and configurator
+
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.1/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.1/css/main.min.css)
 
 The CSS builds and authoring API are unchanged from 0.4.0. These updates improve documentation and exploration tooling.
 
@@ -33,6 +51,8 @@ The CSS builds and authoring API are unchanged from 0.4.0. These updates improve
 
 ## 0.4.0 — authoring defaults and response bands
 
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css)
+
 - Contributor tooling uses pnpm 12.6.0 with a frozen lockfile.
 
 - Experimental `gp_band--01` / `02` / `03` scale with provisional 12/16/20rem
@@ -52,6 +72,8 @@ The CSS builds and authoring API are unchanged from 0.4.0. These updates improve
 
 ## 0.3.0 — public preview of the upcoming 1.0 architecture
 
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.3.0/css/main.min.css)
+
 - Canonical 64-bit ruler with canvas-relative responsive composition.
 - Five fields: full 64, neat 60, thin 59, wide 58, ruled 56 bits.
 - All 72 released grid IDs, normalized sets/flows, row relationships, known
@@ -69,7 +91,6 @@ Modern markup requires a canvas and field. See [migration](docs/migration.html).
 
 ## 0.2.3 — previous released version
 
-The released stylesheet remains pinned at
-<https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css> and is
-retained byte-for-byte at `css/legacy/main.css` for migration and regression
-comparisons.
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.min.css)
+
+The stylesheet is also retained byte-for-byte at `css/legacy/main.css` for migration and regression comparisons.

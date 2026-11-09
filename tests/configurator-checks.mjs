@@ -44,7 +44,7 @@ export async function setSourceCount(page, count) {
 }
 
 export async function checkWorkbench(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   await expandOptions(page);
   const width = () => page.locator('#preview').evaluate(node => node.getBoundingClientRect().width);
@@ -227,7 +227,7 @@ export async function checkWorkbench(page, origin, engine) {
   await checkAccessibility(page, origin, engine);
   await checkEditorial(page, origin, engine);
   if (engine === 'chromium') {
-    await page.goto(`${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&width=1024`);
+    await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&width=1024`);
     await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
     await page.screenshot({ path: 'test-results/configurator-workbench.png', fullPage: false });
   }
@@ -235,7 +235,7 @@ export async function checkWorkbench(page, origin, engine) {
 }
 
 async function checkTransitionPreview(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03&set=set_03&field=wide&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03&set=set_03&field=wide&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.equal(await page.locator('#responsive-sequence, #sequence-toggle, #sequence-states').count(), 0);
   assert.equal(await page.locator('#workbench-panel #boundary-steps').count(), 0);
@@ -295,7 +295,7 @@ async function checkTransitionPreview(page, origin, engine) {
 }
 
 async function checkSetOptions(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&flow=flow_02&items=6&field=wide&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&flow=flow_02&items=6&field=wide&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   const toggle = page.locator('#set-options-toggle');
   for (const id of ['illustration-toggle', 'set-options-toggle', 'gutter-options-toggle', 'band-options-toggle']) {
@@ -364,7 +364,7 @@ async function checkSetOptions(page, origin, engine) {
 }
 
 async function checkGutterChoices(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&flow=default&items=6&field=wide&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&flow=default&items=6&field=wide&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.equal(await page.locator('#field').count(), 0);
   assert.equal(await page.locator('fieldset', { has: page.locator('#field-choices') }).locator('legend').textContent(), 'Usable width');
@@ -449,7 +449,7 @@ async function checkGutterChoices(page, origin, engine) {
 }
 
 async function checkBandChoices(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_02a--07&set=set_03&flow=default&items=4&field=thin&width=961`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_02a--07&set=set_03&flow=default&items=4&field=thin&width=961`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.equal(await page.locator('#band').count(), 0);
   assert.equal(await page.locator('#band-pressure, #response-state, #response-policy, #response-thresholds, #response-why').count(), 0);
@@ -522,7 +522,7 @@ async function checkBandChoices(page, origin, engine) {
   assert.match(await page.locator('#summary').textContent(), /^compact/);
   await selectBand(page, '02');
   assert.match(await page.locator('#summary').textContent(), /^expanded/);
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_02&set=set_03&field=wide&band=01&width=449`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_02&set=set_03&field=wide&band=01&width=449`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   const shared = page.locator('#band-choices [data-band="01"]');
   assert.equal(await shared.isVisible(), true, 'Band links retain the selected preview');
@@ -533,7 +533,7 @@ async function checkBandChoices(page, origin, engine) {
   assert.match(await page.locator('#band-axis').textContent(), /0–3200px/);
   assert.deepEqual(await shared.locator('.band-default-reference').evaluateAll(nodes => nodes.map(node => node.style.left)), fixedReferences);
   assert.equal(await shared.locator('.band-current').evaluate(node => node.style.left), '50%');
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_02&set=set_05&field=wide&width=8192`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_02&set=set_05&field=wide&width=8192`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.match(await page.locator('#band-axis').textContent(), /0–3200px.*8192px.*off-scale/);
   assert.equal(await page.locator('#band-choices [aria-checked="true"] .band-current.off-scale').count(), 1);
@@ -542,7 +542,7 @@ async function checkBandChoices(page, origin, engine) {
 }
 
 async function checkIllustrationDisclosure(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03c&set=none&flow=default&items=6&field=wide&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03c&set=none&flow=default&items=6&field=wide&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   const toggle = page.locator('#illustration-toggle');
   assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
@@ -604,7 +604,7 @@ async function checkIllustrationDisclosure(page, origin, engine) {
 }
 
 async function checkVariantStates(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03a&set=set_06&flow=default&items=6&field=wide&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a&set=set_06&flow=default&items=6&field=wide&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   await expandOptions(page, ['illustration-toggle']);
   assert.equal(await page.locator('#macro-region-panel .choices-heading').textContent(), 'Variants when expanded');
@@ -649,7 +649,7 @@ async function checkVariantStates(page, origin, engine) {
 }
 
 async function checkSourceControls(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&items=12&width=1024`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&items=12&width=1024`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.deepEqual(await page.locator('#workbench-panel > section').evaluateAll(nodes => nodes.map(node => node.id)), ['source-section', 'design-section']);
   assert.equal(await page.locator('#item-count').count(), 0);
@@ -715,7 +715,7 @@ async function checkSourceControls(page, origin, engine) {
 }
 
 async function checkResponsiveFeedback(page, origin, engine) {
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&width=600`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&width=600`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   await expandOptions(page, ['illustration-toggle']);
   assert.equal(await page.locator('#choice-context').textContent(), 'Preview: 600px · Compact');
@@ -762,7 +762,7 @@ async function checkResponsiveFeedback(page, origin, engine) {
   await page.click('[data-choice-key="letter-choices:a"]');
   assert.equal(await selected(page, 'grid'), 'grid_03a--07');
 
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_02a--07&set=set_03&items=4&field=thin&width=961`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_02a--07&set=set_03&items=4&field=thin&width=961`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.equal(await page.locator('#panel-canvas-classes').textContent(), 'gp_canvas');
   assert.equal(await page.locator('[data-choice-key="letter-choices:b"]').isDisabled(), true, '02b--07 must not silently substitute the unnumbered recipe');
@@ -799,7 +799,7 @@ async function checkResponsiveFeedback(page, origin, engine) {
   assert.equal(await page.locator('#width').inputValue(), String(targetWidth));
   assert.match(await page.locator('#summary').textContent(), /^expanded/);
   if (engine === 'chromium') await page.screenshot({ path: 'test-results/configurator-response-feedback.png', fullPage: false });
-  await page.goto(`${origin}/docs/configurator.html?grid=grid_02&set=set_03&items=3&field=wide&band=01&width=449`);
+  await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_02&set=set_03&items=3&field=wide&band=01&width=449`);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   assert.equal(await page.locator('#boundary-steps button').count(), 2);
   assert.match(await page.locator('#boundary-steps h3').textContent(), /Stacked → Expanded.*448px/);

@@ -1,0 +1,12 @@
+{
+  "version": "0.4.1",
+  "description": "CSS is byte-identical in releases 0.4.0 and 0.4.1. Hashes captured before 0.5 distribution promotion.",
+  "sha256": {
+    "main.min.css": "4129be1d9e82f6b40323980fe707fb9e508ce86c3cfc75ff1831075820ca0b9a",
+    "main.layer.css": "4b5968f946bd73a990daa3e58077e4ad055a158ae50d8eabbe4983035f9204cb",
+    "main.css": "83409892be95ffab18197a4b88f81c9941bec879477bba8064f7bbbbcbbd71f5",
+    "main.layer.min.css": "4847f61d02f344b416a77f97fb157e6a4fe1db62ee379701ef2540d4ac91c576",
+    "bands.min.css": "ba4c2024902ee8ffc416a36e15e22affa98b32658a8633ae767c5143dca5325c",
+    "bands.css": "9727e902f74ece9c3045aef75710026b800260c5954be795e8fe5bd6ca155a78"
+  }
+}

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 
 export async function checkAccessibility(page, origin, engine) {
-  const url = `${origin}/docs/configurator.html?grid=grid_03a--07&set=set_06&items=6&width=1024`;
+  const url = `${origin}/docs/configurator-0.4.html?grid=grid_03a--07&set=set_06&items=6&width=1024`;
   await page.goto(url);
   await page.waitForFunction(() => document.querySelector('#inspection-overlay').dataset.ready === 'true');
   for (const id of ['illustration-toggle', 'set-options-toggle', 'gutter-options-toggle', 'band-options-toggle']) {

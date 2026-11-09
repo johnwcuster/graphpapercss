@@ -2,10 +2,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
-import { fields, recipes, resolveColumns, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements, auditGeometry } from "../src/ruler/geometry.mjs";
-import { emitRulerCss } from "../src/ruler/emit.mjs";
-import { grids } from "../src/manifest/grids.mjs";
-import { acceptedChanges } from "../src/ruler/accepted-changes.mjs";
+import { fields, recipes, resolveColumns, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements, auditGeometry } from "../src/legacy/0.4/ruler/geometry.mjs";
+import { emitRulerCss } from "../src/legacy/0.4/ruler/emit.mjs";
+import { grids } from "../src/legacy/0.4/manifest/grids.mjs";
+import { acceptedChanges } from "../src/legacy/0.4/ruler/accepted-changes.mjs";
 
 test("canonical fields and every audited recipe close on integer ruler coordinates", async () => {
   assert.deepEqual(Object.values(fields).map(f => f.end - f.start), [64, 60, 59, 58, 56]);
@@ -89,7 +89,7 @@ test("ruled gutters reserve whole-bit centers and generated core remains determi
     columns.slice(0, -1).forEach((c, i) => assert.ok(Number.isInteger((c.end + columns[i + 1].start) / 2)));
   }
   const css = emitRulerCss();
-  assert.equal(await readFile(new URL("../css/main.css", import.meta.url), "utf8"), css);
+  assert.equal(await readFile(new URL("../css/legacy/0.4/main.css", import.meta.url), "utf8"), css);
   assert.ok(css.includes("repeat(64, minmax(0, 1fr))"));
   assert.ok(!css.includes("@media") && !css.includes("!important"));
   assert.ok(!/row-gap\s*:|margin-block|1rem/.test(css), "core must not supply vertical spacing defaults");

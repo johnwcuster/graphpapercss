@@ -1,25 +1,51 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Graph Paper CSS</title><link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
-<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spatial continuity, section by section — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="gp_ruler editorial-sheet editorial-page documentation-page">
 <!-- site-navigation:start -->
-<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
-  <div class="site-identity"><a href="./index.html" aria-current="page"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
-  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
-  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+<nav class="gp_layout--stack gp_sm--two-1-2 gp_lg--three-1-2-1 gp_spacing--wide editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity gp_pad"><a href="./index.html" aria-current="page"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div class="gp_pad"><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li>
+<li><a href="./authoring.html">Authoring compositions</a></li>
+<li><a href="./site-authoring.html">Composing a site</a></li>
+<li><a href="./responsive-design.html">Responsive design</a></li>
+<li><a href="./alignment.html">Alignment and nesting</a></li>
+<li><a href="./edges-and-spacing.html">Edges and mixed spacing</a></li>
+<li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div class="gp_pad"><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+<li><a href="./browser-support.html">Browser support and builds</a></li>
+<li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+<li><a href="./releases.html">Releases</a></li></ul></div>
 </nav>
 <!-- site-navigation:end -->
-<section class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" id="page-content" tabindex="-1">
-<header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1>Composition, not a component theme.</h1><p>A framework-agnostic CSS library for responsive editorial layouts. Choose relationships and proportions from a constrained recipe catalogue; keep your own typography, components, and content treatments.</p><p>No runtime JavaScript is required. Graph Paper supplies horizontal geometry and placement, not a design system for every part of your site.</p></header>
-<nav aria-label="Start here"><h2 class="editorial-small-heading">Start here</h2><ul class="editorial-contents"><li><a href="./getting-started.html">Build your first composition</a></li><li><a href="./configurator.html">Explore recipes visually</a></li><li><a href="./class-reference.html">Look up a class</a></li></ul></nav>
-<aside class="editorial-note"><h2 class="editorial-small-heading">Release status</h2><p>0.4.1 updates documentation and the configurator. CSS and the authoring API are unchanged from <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.4.0/css/main.min.css">0.4.0</a>; examples remain pinned to that CSS and work with both releases. The architecture is a preview of 1.0, and bands remain experimental. See <a href="./releases.html">release notes</a>.</p></aside>
-</section>
-<section class="gp_field gp_field--wide grid_03 set_03 documentation-paths" aria-label="Ways into the documentation">
-<article><h2>Learn to compose</h2><p>Start with source order and content treatments. Choose broad relationships, inspect compact and expanded designs, and judge the limiting region.</p><p><a href="./authoring.html">Authoring compositions</a> · <a href="./site-authoring.html">Composing a site</a> · <a href="./responsive-design.html">Responsive design</a> · <a href="./alignment.html">Alignment and nesting</a></p></article>
-<article><h2>Implement with confidence</h2><p>Find class placement, defaults, valid combinations, and the boundary between library geometry and host styling.</p><p><a href="./class-reference.html">Class reference</a> · <a href="./troubleshooting.html">Troubleshooting</a> · <a href="./browser-support.html">Browser support and builds</a></p></article>
-<article><h2>Upgrade or contribute</h2><p>Existing sites and library maintainers have different tasks from first-time authors. Their compatibility records and build instructions live here.</p><p><a href="./migration.html">Migration from 0.2.3</a> · <a href="./contributing.html">Contributing</a> · <a href="./releases.html">Releases</a></p></article>
-</section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="the-model">One model, several decisions</h2>
-<p>A <code>gp_canvas</code> starts a 64-bit ruler and responsive context. A field selects a usable span and gutters. Grid, set, and flow arrange its direct children. Subgrid continues inherited alignment; a nested canvas starts independent coordinates.</p>
-<p>Recipes include responsive arrangements, not just fixed column counts. Your project owns typography, image treatment, vertical spacing, and the editorial judgment that makes the composition useful. Read the <a href="./architecture.html">architecture</a> for the conceptual model or use the <a href="./authoring.html#implementation-checklist">implementation checklist</a> for a compact human/agent handoff.</p>
-</div></section>
-</div></main></body></html>
+<div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#start-with-a-spatial-relationship">Start with a spatial relationship</a></li>
+<li><a href="#learn-look-up-maintain">Learn, look up, maintain</a></li>
+<li><a href="#one-ruler-explicit-decisions">One ruler, explicit decisions</a></li>
+<li><a href="#release-status">Release status</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+<article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Spatial continuity, section by section</h1><p>Graph Paper provides section-level composition tools for building site-level spatial continuity. Choose ruler-aligned relationships, keep meaningful source order, and supply your own typography, images and component styling.</p>
+</header>
+<h2 id="start-with-a-spatial-relationship">Start with a spatial relationship</h2>
+<p>Use the <a href="configurator.html">configurator</a> to compare physical proportions, allocation, source traversal and explicit viewport transitions. Copy a configuration into your own content; no configurator JavaScript is needed on the finished page.</p>
+<p>For a first implementation, start with <a href="getting-started.html">Getting started</a>. If you already know the rendered relationship you want, use <a href="class-reference.html#layout-catalogue">Class reference</a> to locate the family and nearby ratios.</p>
+<h2 id="learn-look-up-maintain">Learn, look up, maintain</h2>
+<ul>
+<li><strong>Learn:</strong> <a href="authoring.html">Authoring compositions</a>, <a href="site-authoring.html">Composing a site</a>, <a href="responsive-design.html">Responsive design</a>, <a href="alignment.html">Alignment and nesting</a>, and <a href="edges-and-spacing.html">Edges and mixed spacing</a>.</li>
+<li><strong>Look up:</strong> <a href="class-reference.html">Class reference</a>, <a href="architecture.html">Architecture</a>, <a href="troubleshooting.html">Troubleshooting</a>, <a href="browser-support.html">Browser support and builds</a>, and <a href="configurator-help.html">Configurator help</a>.</li>
+<li><strong>Maintain:</strong> <a href="migration.html">Migration</a>, <a href="validation.html">Validation</a>, <a href="contributing.html">Contributing</a>, and <a href="releases.html">Releases</a>.</li>
+</ul>
+<h2 id="one-ruler-explicit-decisions">One ruler, explicit decisions</h2>
+<p>A ruler establishes coordinates. A layout selects physical proportions and an arrangement; direct items are counted automatically. Gutters, item padding and vertical spacing are independent. Viewport aliases say when another design begins. Nested content can continue assigned parent tracks or rebase to 64 new local tracks.</p>
+<p>The result is a constrained vocabulary for composition, not a theme or an automatic content designer. The library does not infer readable widths, crop images, pack a viewport or fix an unsuitable source grouping. Your design still needs realistic content and editorial judgment.</p>
+<h2 id="release-status">Release status</h2>
+<p>These pages document <strong>Graph Paper 0.5.0</strong>. Use the matching <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css">0.5.0 stylesheet</a> with the examples. Earlier 0.4 markup follows a different API; see <a href="migration.html">Migration</a>.</p>
+<p>Existing tags remain unchanged. Use <a href="migration.html">Migration</a> and the <a href="configurator-0.4.html">0.4 reference</a> for existing pages. Structural qualification covers Chromium, Firefox and WebKit. Runtime policy, manual assistive-technology review and release metadata remain separate gates; the documentation does not claim that release is already complete.</p>
+
+</article>
+</div>
+</main></body></html>

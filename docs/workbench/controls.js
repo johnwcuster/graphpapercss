@@ -1,4 +1,4 @@
-import { fields, recipes, layoutsFor, resolveColumns } from '../assets/graph-paper/src/ruler/geometry.mjs';
+import { fields, recipes, layoutsFor, resolveColumns } from '../assets/graph-paper/src/legacy/0.4/ruler/geometry.mjs';
 import { recipeParts, selectAlternative, recipeSelection, designOptions, letterAvailability, variantWidthChanges, diagramItems, transitionBoundaries } from './model.mjs';
 import { compareChoice, responseFor, bandComparisons } from './response.mjs';
 import { sourceStyle } from './source.mjs';

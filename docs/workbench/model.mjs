@@ -1,4 +1,5 @@
-import { recipes, fields, layoutsFor, resolveColumns, expandedPlacements, compactPlacements, sequentialPlacements } from '../assets/graph-paper/src/ruler/geometry.mjs';
+import { recipes, fields, resolveColumns } from '../assets/graph-paper/src/legacy/0.4/ruler/geometry.mjs';
+export { compatibleLayout, recipeSelection, diagramItems } from '../assets/graph-paper/tools/shared/composition.mjs';
 
 export function recipeParts(id) {
   const match = /^grid_(\d{2})([a-d]?)(?:--(\d{2}))?$/.exec(id);
@@ -29,17 +30,6 @@ export function selectAlternative(id, dimension, value) {
     return (dimension === 'variant' || parts.variant === current.variant)
       && (dimension !== 'family' || parts.letter === current.letter);
   }) ?? candidates.find(candidate => !recipeParts(candidate).variant) ?? candidates[0];
-}
-
-export function compatibleLayout(id, set, flow) {
-  return layoutsFor(recipes[id]).find(layout => layout.set === set && (layout.flow ?? 'default') === flow)
-    ?? layoutsFor(recipes[id]).find(layout => layout.set === set && !layout.flow)
-    ?? null;
-}
-
-export function recipeSelection(id, set, flow) {
-  const layout = compatibleLayout(id, set, flow);
-  return { grid: id, set: layout?.set ?? 'none', flow: layout?.flow ?? 'default' };
 }
 
 // Unlike family changes, these controls never substitute another variant.
@@ -94,24 +84,6 @@ export function letterAvailability(id, key) {
     }
   }
   return 'Change the macro-region count above.';
-}
-
-// Current-field/state occupancy. Extra children retain full-width auto-row
-// fallback and appear below the named positions in this schematic preview.
-export function diagramItems(id, set, flow, count = 6, fieldName = 'wide', state = 'expanded') {
-  const layout = compatibleLayout(id, set, flow);
-  const placements = state === 'stacked' ? sequentialPlacements(recipes[id], fieldName, count, state)
-    : layout ? state === 'expanded' ? expandedPlacements(recipes[id], fieldName, layout) : compactPlacements(fieldName, layout)
-      : sequentialPlacements(recipes[id], fieldName, count, state);
-  const span = fields[fieldName].end - fields[fieldName].start;
-  let lastRow = Math.max(...placements.filter(p => p.item <= count).map(p => p.row[1]));
-  for (let item = placements.length + 1; item <= count; item++) placements.push({ item, lines: [1, span + 1], row: [lastRow, ++lastRow] });
-  const rows = Math.max(...placements.map(p => p.row[1] - 1));
-  return placements.filter(p => p.item <= count).map(p => ({
-    item: p.item, x: (p.lines[0] - 1) / span * 100,
-    width: (p.lines[1] - p.lines[0]) / span * 100,
-    y: (p.row[0] - 1) / rows * 56, height: (p.row[1] - p.row[0]) / rows * 56
-  }));
 }
 
 export function boundarySteps(thresholds, rem) {

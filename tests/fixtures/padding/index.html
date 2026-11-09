@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruler padding · Graph Paper test fixture</title>
+  <link rel="stylesheet" href="../../../css/main.css">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<header class="intro"><p class="eyebrow">Core padding utility · 0.5 candidate</p><h1>Space inside the ruler.</h1><p>The core <code>gp_pad</code> and <code>gp_pad--2</code> utilities add one or two ruler bits of content padding without ruler measurement. Track wrappers stay unpadded.</p></header>
+<div class="controls" role="group" aria-label="Specimen controls">
+  <label><input id="padding" type="checkbox" checked>Apply element padding</label>
+  <label>Padding amount <select id="padding-size"><option value="1">1 bit</option><option value="2">2 bits</option></select></label>
+  <label>Requested composition width <input id="width" type="range" min="320" max="1600" value="1200"><output id="requested-width">1200px</output></label>
+  <p id="status" role="status">Padding follows assigned tracks without measurement; it does not add gaps.</p>
+</div>
+<main id="workspace">
+<section class="specimen" aria-labelledby="blocks-heading"><header><p class="eyebrow">01 · Touching color blocks</p><h2 id="blocks-heading">An inset without a gutter.</h2><p>Padding belongs to each colored item. Neat regions keep touching; both the background edge and ruler alignment remain fixed.</p></header>
+<div id="blocks-ruler" class="gp_ruler" data-measure-root>
+ <div id="blocks" class="gp_layout--stack gp_md--peers-3 gp_spacing--neat">
+  <article class="block blue gp_pad" data-padding><span class="number">01</span><h3>One shared rhythm</h3><p>The first line sits one bit inside the block. At 1200px, that is 18.75px.</p><p>Backgrounds reach their assigned region edges.</p></article>
+  <article class="block gold gp_pad" data-padding><span class="number">02</span><h3>Different amounts of content</h3><p>A longer record can wrap and set the height of a shared row. The utility supplies neither a height nor a type scale.</p><p>Changing the width changes the inset continuously, without choosing another spacing token.</p></article>
+  <article class="block green gp_pad" data-padding><span class="number">03</span><h3>Still Neat</h3><p>The padding lives inside the items, leaving zero gutter between adjacent blocks.</p></article>
+ </div>
+</div><p class="reading" data-readout="blocks-ruler"></p>
+<pre><code>&lt;div class="gp_ruler"&gt;
+  &lt;section class="gp_layout--peers-3 gp_spacing--neat"&gt;
+    &lt;article class="gp_pad"&gt;Content&lt;/article&gt;
+    …
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre></section>
+<section class="specimen" aria-labelledby="overlay-heading"><header><p class="eyebrow">02 · Image edges and text insets</p><h2 id="overlay-heading">Let the image reach the edge.</h2><p>The image fills the article. Only the text layer carries <code>gp_pad</code>. Positioning, image crop, contrast treatment, and minimum height are specimen CSS.</p></header>
+<div id="overlay-ruler" class="gp_ruler" data-measure-root><div class="gp_layout--stack gp_md--peers-2 gp_spacing--neat">
+ <article class="overlay"><img src="../../../docs/sequence/assets/ruler-and-field.svg" alt="A 64-bit ruler and its Wide field"><div class="overlay-copy gp_pad" data-padding><p class="eyebrow">Graph Paper · ruler geometry</p><h3>Ruler-aligned content</h3><p>The diagram remains behind the text, including its padded area. Padding changes the content treatment without narrowing the background.</p><p class="credit">Original Graph Paper diagram</p></div></article>
+ <article class="overlay detail"><img src="../../../docs/sequence/assets/ruler-and-field.svg" alt="A closer crop of the ruler diagram"><div class="overlay-copy gp_pad" data-padding><p class="eyebrow">Another view of the same ruler</p><h3>A full-bleed detail</h3><p>The picture has a different crop. Its text still follows the same ruler bit, even though the image box is narrower than the full composition.</p><p class="credit">Original diagram; crop is presentation.</p></div></article>
+</div></div><p class="reading" data-readout="overlay-ruler"></p>
+<pre><code>&lt;article class="overlay"&gt;
+  &lt;img src="…" alt="…"&gt;
+  &lt;div class="overlay-copy gp_pad"&gt;Heading and caption&lt;/div&gt;
+&lt;/article&gt;</code></pre></section>
+<section class="specimen" aria-labelledby="nested-heading"><header><p class="eyebrow">03 · Continued tracks and a rebased ruler</p><h2 id="nested-heading">Choose which rhythm continues.</h2><p>Left: the parent bit continues into two nested items. Right: a local ruler divides its assigned width into 64 new bits. Neither continuation wrapper has padding.</p></header>
+<div id="nested-ruler" class="gp_ruler" data-measure-root><div class="gp_layout--stack gp_md--two-3-2 gp_spacing--neat">
+ <article id="continued-wrapper" class="gp_continue_tracks"><div id="continued" class="gp_layout--peers-2 gp_spacing--full">
+  <article class="block blue gp_pad" data-padding><p class="eyebrow">Continued ruler</p><h3>Parent-sized padding</h3><p>Shared tracks keep their original width. This inset follows the outer ruler, not this small block's width.</p></article>
+  <article class="block green gp_pad" data-padding><p class="eyebrow">Continued ruler</p><h3>Aligned neighbors</h3><p>The track wrapper and nested layout retain their edges. Padding is applied only to these content items.</p></article>
+ </div></article>
+ <article id="rebased-wrapper" class="gp_continue_tracks"><div id="local-ruler" class="gp_rebase_64" data-measure-root><div id="rebased" class="gp_layout--peers-2 gp_spacing--full">
+  <article class="block gold gp_pad" data-padding><p class="eyebrow">Local ruler</p><h3>A smaller bit</h3><p>This padding is one sixty-fourth of the local ruler.</p></article>
+  <article class="block rose gp_pad" data-padding><p class="eyebrow">Local ruler</p><h3>Deliberate rebase</h3><p>A new spatial rhythm starts here. It need not match the parent's inset.</p></article>
+ </div></div></article>
+</div></div><p class="reading" data-readout="nested-ruler"></p><p class="reading" data-readout="local-ruler"></p>
+<pre><code>&lt;article class="gp_continue_tracks"&gt;
+  &lt;div class="gp_layout--peers-2 gp_spacing--full"&gt;
+    &lt;article class="gp_pad"&gt;Parent bit&lt;/article&gt;
+    …
+  &lt;/div&gt;
+&lt;/article&gt;
+
+&lt;article class="gp_continue_tracks"&gt;
+  &lt;div class="gp_rebase_64"&gt;
+    &lt;div class="gp_layout--peers-2 gp_spacing--full"&gt;
+      &lt;article class="gp_pad"&gt;Local bit&lt;/article&gt;
+      …
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></section>
+<section class="specimen"><h2>The included core utilities</h2><pre><code id="utility-code"></code></pre><p>Both selectors have zero specificity. They use assigned-track percentages and work without measurement. Apply a utility to the item or a full-region content layer, keeping ruler and continuation wrappers unpadded. Width-changing intermediate wrappers can change the percentage basis. Gutters, margins, overlay positioning, and typography remain separate choices. Used values can differ from the ideal ruler fraction by browser subpixel rounding.</p></section>
+</main>
+</body></html>

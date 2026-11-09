@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { recipes, layoutsFor, fields, expandedPlacements, compactPlacements, sequentialPlacements } from '../src/ruler/geometry.mjs';
-import { bandThresholds } from '../src/ruler/bands.mjs';
+import { recipes, layoutsFor, fields, expandedPlacements, compactPlacements, sequentialPlacements } from '../src/legacy/0.4/ruler/geometry.mjs';
+import { bandThresholds } from '../src/legacy/0.4/ruler/bands.mjs';
 
 export async function checkEditorial(page, origin, engine) {
   for (const document of ['configurator', 'configurator-help']) {
-    await page.goto(`${origin}/docs/${document}.html?grid=grid_03a--07&set=set_06&items=6&width=1024`);
+    await page.goto(`${origin}/docs/${document === 'configurator' ? 'configurator-0.4' : 'configurator-help-0.4'}.html?grid=grid_03a--07&set=set_06&items=6&width=1024`);
     if (document === 'configurator') {
       await page.waitForFunction(() => window.getComputedStyle(globalThis.document.querySelector('#preview')).width === '1024px');
       await page.click('#workbench-hide');
@@ -46,7 +46,7 @@ export async function checkEditorial(page, origin, engine) {
         assert.equal(await page.locator('#preview').evaluate(node => node.getBoundingClientRect().width), 1024);
         assert.equal(await page.locator('#composition').evaluate(node => node.classList.contains('is-stacked')), false, 'A stacked document must not stack its independent 1024px preview');
       } else {
-        assert.equal(await page.locator('.editorial-prose h2').count(), 5);
+        assert.deepEqual(await page.locator('.editorial-prose h2').evaluateAll(nodes=>nodes.map(node=>node.id)), ['terms','controls','workbench','keyboard','on-page','migration']);
         assert.ok(await page.locator('.editorial-prose p').first().evaluate(node => node.getBoundingClientRect().width <= parseFloat(getComputedStyle(node).fontSize) * 50));
       }
       if (engine === 'chromium' && [320, 1440].includes(width)) {

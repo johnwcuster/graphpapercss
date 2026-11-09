@@ -1,0 +1,4753 @@
+{
+  "date": "2026-11-08",
+  "status": "Guarded artifacts assessed and structurally qualified; manual assistive-technology review remains separate",
+  "artifacts": {
+    "main.css": {
+      "bytes": 228484,
+      "gzip": 20497,
+      "brotli": 12536,
+      "sha256": "02d65a950c0b8280cef289abc1d4a31f2d25a167f0dae91c3e59ef0e0e21d074"
+    },
+    "main.min.css": {
+      "bytes": 192555,
+      "gzip": 17817,
+      "brotli": 10411,
+      "sha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58"
+    },
+    "main.layer.css": {
+      "bytes": 228507,
+      "gzip": 20511,
+      "brotli": 12578,
+      "sha256": "ac39ed1c6c069d6245497c72974c7bd6b707cb2550e94f2a6af210aeb380dff2"
+    },
+    "main.layer.min.css": {
+      "bytes": 192575,
+      "gzip": 17834,
+      "brotli": 10473,
+      "sha256": "9296692214f4f5f817cfe9328929abf6fd0f066b826fbdb8bbd6fca520ca8ef5"
+    }
+  },
+  "method": "Inline stylesheet insertion plus forced synchronous layout; alternating precompiled/Graph Paper order. Compare initial, resized, alternate-layout and added-source geometry for every composition, detect same-region overlap, and omit invalid-operation timings. Fixed CSS knows both layouts and source totals; it does not provide automatic allocation, metadata, feature fallback or captured ruler-length semantics. Timings exclude network, paint, images, GPU, scrolling and real-device interaction; not an interaction budget. Chromium style/layout totals also include preflight and warmups.",
+  "schema": "Operation arrays are [median,p95] milliseconds. Absent invalidStates means all four geometry phases passed. Null operation timings are omitted invalid work, not zero cost. Source changes append/remove one item per composition; all roots change together.",
+  "profiles": [
+    {
+      "tag": "row-before-chromium",
+      "stage": "before",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "/private/tmp/graphpaper-row-budget-before/main.min.css",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/row-before-chromium.json",
+      "summary": [
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.4,
+          "resizeMs": [
+            0,
+            0.2
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.2
+          ],
+          "sourceChangeMs": [
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 16.8,
+          "resizeMs": [
+            0.1,
+            0.1
+          ],
+          "layoutChangeMs": [
+            7.9,
+            8
+          ],
+          "sourceChangeMs": [
+            5.8,
+            7.8
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.7,
+          "resizeMs": [
+            0,
+            0.2
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 13.4,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            4.7,
+            5
+          ],
+          "sourceChangeMs": [
+            1.7,
+            1.9
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            1,
+            1.1
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.8
+          ],
+          "sourceChangeMs": [
+            1.1,
+            1.3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 224.7,
+          "resizeMs": [
+            1,
+            1.2
+          ],
+          "layoutChangeMs": [
+            156.2,
+            165.5
+          ],
+          "sourceChangeMs": [
+            115.3,
+            125.9
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.2,
+          "resizeMs": [
+            0.8,
+            0.9
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.7
+          ],
+          "sourceChangeMs": [
+            1.1,
+            1.2
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 186.1,
+          "resizeMs": [
+            0.8,
+            0.8
+          ],
+          "layoutChangeMs": [
+            115.8,
+            120.6
+          ],
+          "sourceChangeMs": [
+            61.2,
+            70.5
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-after-chromium",
+      "stage": "after",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "css/main.min.css",
+      "cssSha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/row-after-chromium.json",
+      "summary": [
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.5,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.2
+          ],
+          "sourceChangeMs": [
+            0.1,
+            0.2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 16.9,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            8,
+            8.2
+          ],
+          "sourceChangeMs": [
+            5.9,
+            7.9
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.5,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.2
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 13.6,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            4.8,
+            5
+          ],
+          "sourceChangeMs": [
+            1.7,
+            2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            1,
+            1.1
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.8
+          ],
+          "sourceChangeMs": [
+            1.2,
+            1.3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 226.2,
+          "resizeMs": [
+            1,
+            1.1
+          ],
+          "layoutChangeMs": [
+            158.6,
+            165.9
+          ],
+          "sourceChangeMs": [
+            115.2,
+            123.5
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.2,
+          "resizeMs": [
+            0.8,
+            0.9
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.7
+          ],
+          "sourceChangeMs": [
+            1.1,
+            1.3
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 186.1,
+          "resizeMs": [
+            0.8,
+            0.9
+          ],
+          "layoutChangeMs": [
+            116.8,
+            122.9
+          ],
+          "sourceChangeMs": [
+            64.9,
+            71.3
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-stress-chromium",
+      "stage": "stress",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "css/main.min.css",
+      "cssSha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 129,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/row-stress-chromium.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 4.2,
+          "resizeMs": [
+            0.4,
+            0.4
+          ],
+          "layoutChangeMs": [
+            2.1,
+            2.2
+          ],
+          "sourceChangeMs": [
+            1.8,
+            1.9
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 86.7,
+          "resizeMs": [
+            0.4,
+            0.4
+          ],
+          "layoutChangeMs": [
+            49.8,
+            51.7
+          ],
+          "sourceChangeMs": [
+            18.8,
+            20.1
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 4.2,
+          "resizeMs": [
+            0.3,
+            0.4
+          ],
+          "layoutChangeMs": [
+            1.7,
+            1.7
+          ],
+          "sourceChangeMs": [
+            2,
+            2.2
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 90.8,
+          "resizeMs": [
+            0.3,
+            0.4
+          ],
+          "layoutChangeMs": [
+            53.6,
+            57.3
+          ],
+          "sourceChangeMs": [
+            54.2,
+            56.9
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 4.1,
+          "resizeMs": [
+            0.3,
+            0.4
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.8
+          ],
+          "sourceChangeMs": [
+            2.1,
+            2.3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 113.1,
+          "resizeMs": [
+            0.3,
+            0.4
+          ],
+          "layoutChangeMs": [
+            75.4,
+            80.1
+          ],
+          "sourceChangeMs": [
+            75.7,
+            77.6
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-before-firefox",
+      "stage": "before",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "/private/tmp/graphpaper-row-budget-before/main.min.css",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/row-before-firefox.json",
+      "summary": [
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 16,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            8,
+            10
+          ],
+          "sourceChangeMs": [
+            5,
+            6
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 12,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            2,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            2,
+            5
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 47,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            90,
+            94
+          ],
+          "sourceChangeMs": [
+            45,
+            49
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            6
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 34,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            47,
+            48
+          ],
+          "sourceChangeMs": [
+            28,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-after-firefox",
+      "stage": "after",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "css/main.min.css",
+      "cssSha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/row-after-firefox.json",
+      "summary": [
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 16,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            9,
+            10
+          ],
+          "sourceChangeMs": [
+            5,
+            6
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 12,
+          "resizeMs": [
+            0,
+            0
+          ],
+          "layoutChangeMs": [
+            2,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 48,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            94,
+            96
+          ],
+          "sourceChangeMs": [
+            46,
+            49
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 35,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            48,
+            50
+          ],
+          "sourceChangeMs": [
+            29,
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-stress-firefox",
+      "stage": "stress",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "css/main.min.css",
+      "cssSha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 129,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/row-stress-firefox.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 8,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            7,
+            9
+          ],
+          "sourceChangeMs": [
+            7,
+            8
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 20,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            9,
+            10
+          ],
+          "sourceChangeMs": [
+            7,
+            8
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 7,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            6,
+            7
+          ],
+          "sourceChangeMs": [
+            7,
+            8
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 21,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            11,
+            12
+          ],
+          "sourceChangeMs": [
+            9,
+            10
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 10,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            6,
+            7
+          ],
+          "sourceChangeMs": [
+            7,
+            8
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 32,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            22,
+            23
+          ],
+          "sourceChangeMs": [
+            18,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-before-webkit",
+      "stage": "before",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "/private/tmp/graphpaper-row-budget-before/main.min.css",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": null,
+      "rawReport": "test-results/runtime/row-before-webkit.json",
+      "summary": [
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 35,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            10,
+            11
+          ],
+          "sourceChangeMs": [
+            8,
+            9
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 29,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            5,
+            5
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 216,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            191,
+            194
+          ],
+          "sourceChangeMs": [
+            161,
+            175
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 7,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 156,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            127,
+            131
+          ],
+          "sourceChangeMs": [
+            93,
+            102
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-after-webkit",
+      "stage": "after",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "css/main.min.css",
+      "cssSha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/row-after-webkit.json",
+      "summary": [
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 32,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            10,
+            11
+          ],
+          "sourceChangeMs": [
+            8,
+            9
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 29,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            5,
+            5
+          ],
+          "sourceChangeMs": [
+            3,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 212,
+          "resizeMs": [
+            3,
+            3
+          ],
+          "layoutChangeMs": [
+            189,
+            195
+          ],
+          "sourceChangeMs": [
+            158,
+            173
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 7,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 155,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            127,
+            128
+          ],
+          "sourceChangeMs": [
+            92,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "row-stress-webkit",
+      "stage": "stress",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssPath": "css/main.min.css",
+      "cssSha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 129,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": null,
+      "rawReport": "test-results/runtime/row-stress-webkit.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 11,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            4,
+            4
+          ],
+          "sourceChangeMs": [
+            4,
+            4
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 76,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            52,
+            52
+          ],
+          "sourceChangeMs": [
+            29,
+            30
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 11,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            1,
+            2
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 78,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            54,
+            62
+          ],
+          "sourceChangeMs": [
+            56,
+            58
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 10,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            1,
+            2
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 114,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            89,
+            97
+          ],
+          "sourceChangeMs": [
+            91,
+            94
+          ]
+        }
+      ]
+    }
+  ],
+  "referenceArtifacts": {
+    "main.css": {
+      "bytes": 231682,
+      "gzip": 20540,
+      "brotli": 12499,
+      "sha256": "b01fa3ce359cb33a86a1efde0ed1257ea2291dc0c4c32d65da142ab00a9e2417"
+    },
+    "main.min.css": {
+      "bytes": 191954,
+      "gzip": 17740,
+      "brotli": 10361,
+      "sha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1"
+    },
+    "main.layer.css": {
+      "bytes": 231705,
+      "gzip": 20555,
+      "brotli": 12563,
+      "sha256": "4afac9cda017162f5928c29107c3da841d3283ad9a56f572ebfb94abdc4550a1"
+    },
+    "main.layer.min.css": {
+      "bytes": 191974,
+      "gzip": 17756,
+      "brotli": 10389,
+      "sha256": "dba3879b1d0b20d89a19872ad84219925bfb68e06e055297a96d40b99a0fd195"
+    }
+  },
+  "rowBudget": {
+    "constructionRows": 9998,
+    "reserveRows": 1,
+    "overflow": "source-order-stack",
+    "publicApiChanges": false
+  },
+  "referenceProfiles": [
+    {
+      "tag": "final-chromium",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 20,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/final-chromium.json",
+      "summary": [
+        {
+          "layout": "stack",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.3,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 13.1,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            4.6,
+            4.9
+          ],
+          "sourceChangeMs": [
+            1.5,
+            1.9
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.5,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.2
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 13.1,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            4.7,
+            4.8
+          ],
+          "sourceChangeMs": [
+            1.6,
+            1.9
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.4,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 13.6,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            5,
+            5.2
+          ],
+          "sourceChangeMs": [
+            2.3,
+            2.6
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.4,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.2
+          ],
+          "sourceChangeMs": [
+            0.1,
+            0.1
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 14,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            5.5,
+            5.8
+          ],
+          "sourceChangeMs": [
+            2.7,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.4,
+          "resizeMs": [
+            0.1,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0.1,
+            0.1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 16.2,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            7.8,
+            8.1
+          ],
+          "sourceChangeMs": [
+            5.6,
+            6.2
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 1,
+          "items": 8,
+          "mode": "fixed",
+          "initialMs": 0.3,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 1,
+          "items": 8,
+          "mode": "graphpaper",
+          "initialMs": 10.8,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            3,
+            3.7
+          ],
+          "sourceChangeMs": [
+            3.7,
+            6.3
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.4,
+          "resizeMs": [
+            0.1,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0.1,
+            0.1
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 14.3,
+          "resizeMs": [
+            0.1,
+            0.1
+          ],
+          "layoutChangeMs": [
+            4.8,
+            5.9
+          ],
+          "sourceChangeMs": [
+            6,
+            9.8
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 0.5,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            0.1,
+            0.1
+          ],
+          "sourceChangeMs": [
+            0,
+            0.1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 13.2,
+          "resizeMs": [
+            0,
+            0.1
+          ],
+          "layoutChangeMs": [
+            4.6,
+            4.8
+          ],
+          "sourceChangeMs": [
+            1.6,
+            1.9
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 2.5,
+          "resizeMs": [
+            0.6,
+            0.7
+          ],
+          "layoutChangeMs": [
+            1.3,
+            1.4
+          ],
+          "sourceChangeMs": [
+            0.7,
+            0.8
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 159,
+          "resizeMs": [
+            0.6,
+            1.1
+          ],
+          "layoutChangeMs": [
+            92.4,
+            95.7
+          ],
+          "sourceChangeMs": [
+            32,
+            37.6
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 2.8,
+          "resizeMs": [
+            0.8,
+            0.9
+          ],
+          "layoutChangeMs": [
+            1.5,
+            1.9
+          ],
+          "sourceChangeMs": [
+            0.7,
+            0.8
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 161.4,
+          "resizeMs": [
+            0.8,
+            1.3
+          ],
+          "layoutChangeMs": [
+            91.8,
+            96.3
+          ],
+          "sourceChangeMs": [
+            32.8,
+            37.4
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 2.7,
+          "resizeMs": [
+            0.7,
+            0.8
+          ],
+          "layoutChangeMs": [
+            1.4,
+            1.5
+          ],
+          "sourceChangeMs": [
+            1.1,
+            1.3
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 166.3,
+          "resizeMs": [
+            0.7,
+            0.8
+          ],
+          "layoutChangeMs": [
+            99.6,
+            102.8
+          ],
+          "sourceChangeMs": [
+            44.1,
+            53.4
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 2.7,
+          "resizeMs": [
+            0.8,
+            0.9
+          ],
+          "layoutChangeMs": [
+            1.5,
+            1.9
+          ],
+          "sourceChangeMs": [
+            0.9,
+            1.1
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 177.4,
+          "resizeMs": [
+            0.7,
+            0.9
+          ],
+          "layoutChangeMs": [
+            109.2,
+            113.7
+          ],
+          "sourceChangeMs": [
+            55.3,
+            61.2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 2.9,
+          "resizeMs": [
+            1,
+            1.1
+          ],
+          "layoutChangeMs": [
+            1.6,
+            2.1
+          ],
+          "sourceChangeMs": [
+            1.1,
+            1.2
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 222.1,
+          "resizeMs": [
+            1,
+            1.1
+          ],
+          "layoutChangeMs": [
+            155,
+            163.8
+          ],
+          "sourceChangeMs": [
+            115.1,
+            123.8
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 20,
+          "items": 160,
+          "mode": "fixed",
+          "initialMs": 1.8,
+          "resizeMs": [
+            0.5,
+            0.6
+          ],
+          "layoutChangeMs": [
+            0.8,
+            0.9
+          ],
+          "sourceChangeMs": [
+            0.8,
+            1
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 20,
+          "items": 160,
+          "mode": "graphpaper",
+          "initialMs": 114.5,
+          "resizeMs": [
+            0.5,
+            1
+          ],
+          "layoutChangeMs": [
+            60.4,
+            72.8
+          ],
+          "sourceChangeMs": [
+            74.1,
+            126.5
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            1,
+            1.2
+          ],
+          "layoutChangeMs": [
+            1.5,
+            1.8
+          ],
+          "sourceChangeMs": [
+            1.5,
+            1.7
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 181.3,
+          "resizeMs": [
+            1,
+            1.1
+          ],
+          "layoutChangeMs": [
+            98.1,
+            115.7
+          ],
+          "sourceChangeMs": [
+            120.2,
+            197.5
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.1,
+          "resizeMs": [
+            0.8,
+            0.9
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.7
+          ],
+          "sourceChangeMs": [
+            1.1,
+            1.2
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 184.6,
+          "resizeMs": [
+            0.8,
+            0.8
+          ],
+          "layoutChangeMs": [
+            114.9,
+            119.2
+          ],
+          "sourceChangeMs": [
+            63.5,
+            68.6
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-shared-chromium",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "shared",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        20
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/final-shared-chromium.json",
+      "summary": [
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.2,
+          "resizeMs": [
+            1.1,
+            1.2
+          ],
+          "layoutChangeMs": [
+            1.6,
+            1.9
+          ],
+          "sourceChangeMs": [
+            1.7,
+            2.2
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 194.7,
+          "resizeMs": [
+            1.1,
+            1.2
+          ],
+          "layoutChangeMs": [
+            97.3,
+            119.2
+          ],
+          "sourceChangeMs": [
+            121.6,
+            204.5
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.3,
+          "resizeMs": [
+            0.9,
+            1
+          ],
+          "layoutChangeMs": [
+            1.7,
+            1.9
+          ],
+          "sourceChangeMs": [
+            1.2,
+            1.4
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 198.4,
+          "resizeMs": [
+            0.9,
+            1
+          ],
+          "layoutChangeMs": [
+            116.6,
+            122.9
+          ],
+          "sourceChangeMs": [
+            64.6,
+            70.6
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-stress-65-chromium",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 65,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/final-stress-65-chromium.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 1.7,
+          "resizeMs": [
+            0.2,
+            0.3
+          ],
+          "layoutChangeMs": [
+            0.7,
+            0.8
+          ],
+          "sourceChangeMs": [
+            0.6,
+            0.7
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 46.9,
+          "resizeMs": [
+            0.2,
+            0.3
+          ],
+          "layoutChangeMs": [
+            25.3,
+            28.2
+          ],
+          "sourceChangeMs": [
+            9.5,
+            10.7
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 1.8,
+          "resizeMs": [
+            0.2,
+            0.3
+          ],
+          "layoutChangeMs": [
+            0.7,
+            0.8
+          ],
+          "sourceChangeMs": [
+            0.6,
+            0.7
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 48.9,
+          "resizeMs": [
+            0.2,
+            0.3
+          ],
+          "layoutChangeMs": [
+            27.5,
+            30.7
+          ],
+          "sourceChangeMs": [
+            11.2,
+            12.7
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 1.8,
+          "resizeMs": [
+            0.3,
+            0.3
+          ],
+          "layoutChangeMs": [
+            0.8,
+            0.9
+          ],
+          "sourceChangeMs": [
+            0.6,
+            0.7
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 59.5,
+          "resizeMs": [
+            0.3,
+            0.3
+          ],
+          "layoutChangeMs": [
+            38.2,
+            40.6
+          ],
+          "sourceChangeMs": [
+            23.1,
+            24.4
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-stress-129-chromium",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 129,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/final-stress-129-chromium.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 4.4,
+          "resizeMs": [
+            0.4,
+            0.5
+          ],
+          "layoutChangeMs": [
+            2.1,
+            2.2
+          ],
+          "sourceChangeMs": [
+            1.8,
+            1.9
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 85.7,
+          "resizeMs": [
+            0.4,
+            0.4
+          ],
+          "layoutChangeMs": [
+            49.2,
+            52.2
+          ],
+          "sourceChangeMs": [
+            18.1,
+            20.2
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 4.4,
+          "resizeMs": [
+            0.4,
+            0.5
+          ],
+          "layoutChangeMs": [
+            2.2,
+            2.3
+          ],
+          "sourceChangeMs": [
+            1.9,
+            2
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 89.9,
+          "resizeMs": [
+            0.4,
+            0.7
+          ],
+          "layoutChangeMs": [
+            53.9,
+            56.2
+          ],
+          "sourceChangeMs": [
+            22,
+            24.1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 4.5,
+          "resizeMs": [
+            0.5,
+            0.6
+          ],
+          "layoutChangeMs": [
+            2.2,
+            2.3
+          ],
+          "sourceChangeMs": [
+            1.8,
+            1.9
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 112.4,
+          "resizeMs": [
+            0.4,
+            0.5
+          ],
+          "layoutChangeMs": [
+            75.9,
+            80.5
+          ],
+          "sourceChangeMs": [
+            44.1,
+            49.9
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-firefox",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 20,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/final-firefox.json",
+      "summary": [
+        {
+          "layout": "stack",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            0
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 11,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            2,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 12,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            2,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 10,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            0,
+            0
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 12,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            5,
+            5
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 15,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            8,
+            9
+          ],
+          "sourceChangeMs": [
+            5,
+            5
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 1,
+          "items": 8,
+          "mode": "fixed",
+          "initialMs": 2,
+          "resizeMs": [
+            0,
+            0
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 1,
+          "items": 8,
+          "mode": "graphpaper",
+          "initialMs": 10,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            4,
+            5
+          ],
+          "sourceChangeMs": [
+            4,
+            6
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 14,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            4,
+            5
+          ],
+          "sourceChangeMs": [
+            5,
+            9
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            0
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 11,
+          "resizeMs": [
+            0,
+            0
+          ],
+          "layoutChangeMs": [
+            1,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            2,
+            3
+          ],
+          "sourceChangeMs": [
+            1,
+            2
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 23,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            10,
+            11
+          ],
+          "sourceChangeMs": [
+            17,
+            18
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            2,
+            3
+          ],
+          "sourceChangeMs": [
+            1,
+            2
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 27,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            12,
+            13
+          ],
+          "sourceChangeMs": [
+            17,
+            19
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            2,
+            3
+          ],
+          "sourceChangeMs": [
+            3,
+            3
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 28,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            24,
+            26
+          ],
+          "sourceChangeMs": [
+            22,
+            24
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 5,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            3
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 33,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            50,
+            52
+          ],
+          "sourceChangeMs": [
+            27,
+            28
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 48,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            91,
+            92
+          ],
+          "sourceChangeMs": [
+            45,
+            49
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 20,
+          "items": 160,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            2,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 20,
+          "items": 160,
+          "mode": "graphpaper",
+          "initialMs": 25,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            41,
+            56
+          ],
+          "sourceChangeMs": [
+            23,
+            39
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 33,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            44,
+            62
+          ],
+          "sourceChangeMs": [
+            31,
+            60
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 33,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            47,
+            48
+          ],
+          "sourceChangeMs": [
+            28,
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-shared-firefox",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "shared",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/final-shared-firefox.json",
+      "summary": [
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 34,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            44,
+            60
+          ],
+          "sourceChangeMs": [
+            31,
+            61
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 5,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 33,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            46,
+            48
+          ],
+          "sourceChangeMs": [
+            28,
+            30
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-stress-65-firefox",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 65,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/final-stress-65-firefox.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            0,
+            2
+          ],
+          "layoutChangeMs": [
+            2,
+            3
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 15,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            6,
+            7
+          ],
+          "sourceChangeMs": [
+            4,
+            5
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            2,
+            3
+          ],
+          "sourceChangeMs": [
+            null,
+            null
+          ],
+          "invalidStates": {
+            "source": {
+              "valid": false,
+              "overlaps": 3,
+              "realizedRows": 9999
+            }
+          }
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 17,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            9,
+            10
+          ],
+          "sourceChangeMs": [
+            null,
+            null
+          ],
+          "invalidStates": {
+            "source": {
+              "valid": false,
+              "overlaps": 3,
+              "realizedRows": 9999
+            }
+          }
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 5,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 27,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            18,
+            19
+          ],
+          "sourceChangeMs": [
+            12,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-stress-129-firefox",
+      "engine": "firefox",
+      "browser": "157.0",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 129,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": null,
+      "rawReport": "test-results/runtime/final-stress-129-firefox.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 9,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            7,
+            8
+          ],
+          "sourceChangeMs": [
+            7,
+            8
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 19,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            8,
+            9
+          ],
+          "sourceChangeMs": [
+            7,
+            8
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": null,
+          "resizeMs": [
+            null,
+            null
+          ],
+          "layoutChangeMs": [
+            null,
+            null
+          ],
+          "sourceChangeMs": [
+            null,
+            null
+          ],
+          "invalidStates": {
+            "initial": {
+              "valid": false,
+              "overlaps": 95,
+              "realizedRows": 9999
+            },
+            "resize": {
+              "valid": false,
+              "overlaps": 95,
+              "realizedRows": 9999
+            },
+            "select": {
+              "valid": false,
+              "overlaps": 95,
+              "realizedRows": 9999
+            }
+          }
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": null,
+          "resizeMs": [
+            null,
+            null
+          ],
+          "layoutChangeMs": [
+            null,
+            null
+          ],
+          "sourceChangeMs": [
+            null,
+            null
+          ],
+          "invalidStates": {
+            "initial": {
+              "valid": false,
+              "overlaps": 95,
+              "realizedRows": 9999
+            },
+            "resize": {
+              "valid": false,
+              "overlaps": 95,
+              "realizedRows": 9999
+            },
+            "select": {
+              "valid": false,
+              "overlaps": 95,
+              "realizedRows": 9999
+            }
+          }
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": null,
+          "resizeMs": [
+            null,
+            null
+          ],
+          "layoutChangeMs": [
+            null,
+            null
+          ],
+          "sourceChangeMs": [
+            null,
+            null
+          ],
+          "invalidStates": {
+            "initial": {
+              "valid": false,
+              "overlaps": 87,
+              "realizedRows": 9999
+            },
+            "resize": {
+              "valid": false,
+              "overlaps": 87,
+              "realizedRows": 9999
+            },
+            "select": {
+              "valid": false,
+              "overlaps": 87,
+              "realizedRows": 9999
+            }
+          }
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": null,
+          "resizeMs": [
+            null,
+            null
+          ],
+          "layoutChangeMs": [
+            null,
+            null
+          ],
+          "sourceChangeMs": [
+            null,
+            null
+          ],
+          "invalidStates": {
+            "initial": {
+              "valid": false,
+              "overlaps": 87,
+              "realizedRows": 9999
+            },
+            "resize": {
+              "valid": false,
+              "overlaps": 87,
+              "realizedRows": 9999
+            },
+            "select": {
+              "valid": false,
+              "overlaps": 87,
+              "realizedRows": 9999
+            }
+          }
+        }
+      ]
+    },
+    {
+      "tag": "final-webkit",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 20,
+      "compositions": [
+        1,
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/final-webkit.json",
+      "summary": [
+        {
+          "layout": "stack",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 28,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            4,
+            5
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 28,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            4,
+            5
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 28,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            5,
+            5
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 29,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            6,
+            6
+          ],
+          "sourceChangeMs": [
+            4,
+            4
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 33,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            9,
+            10
+          ],
+          "sourceChangeMs": [
+            8,
+            9
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 1,
+          "items": 8,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 1,
+          "items": 8,
+          "mode": "graphpaper",
+          "initialMs": 30,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            5,
+            8
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 35,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            5,
+            6
+          ],
+          "sourceChangeMs": [
+            7,
+            13
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "fixed",
+          "initialMs": 1,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            0,
+            1
+          ],
+          "sourceChangeMs": [
+            0,
+            1
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 1,
+          "items": 13,
+          "mode": "graphpaper",
+          "initialMs": 27,
+          "resizeMs": [
+            0,
+            1
+          ],
+          "layoutChangeMs": [
+            4,
+            5
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 5,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            1,
+            2
+          ]
+        },
+        {
+          "layout": "stack",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 111,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            88,
+            89
+          ],
+          "sourceChangeMs": [
+            46,
+            52
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 5,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            1,
+            2
+          ]
+        },
+        {
+          "layout": "peers-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 112,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            89,
+            91
+          ],
+          "sourceChangeMs": [
+            47,
+            54
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 125,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            101,
+            103
+          ],
+          "sourceChangeMs": [
+            63,
+            70
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 5,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 134,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            111,
+            113
+          ],
+          "sourceChangeMs": [
+            73,
+            81
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 211,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            186,
+            188
+          ],
+          "sourceChangeMs": [
+            158,
+            171
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 20,
+          "items": 160,
+          "mode": "fixed",
+          "initialMs": 3,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            2,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            2
+          ]
+        },
+        {
+          "layout": "mosaic-8",
+          "compositions": 20,
+          "items": 160,
+          "mode": "graphpaper",
+          "initialMs": 98,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            58,
+            71
+          ],
+          "sourceChangeMs": [
+            73,
+            156
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 142,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            91,
+            115
+          ],
+          "sourceChangeMs": [
+            119,
+            242
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 151,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            124,
+            126
+          ],
+          "sourceChangeMs": [
+            88,
+            97
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-shared-webkit",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "shared",
+      "measured": false,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        20
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/final-shared-webkit.json",
+      "summary": [
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            3,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            3,
+            4
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 143,
+          "resizeMs": [
+            3,
+            3
+          ],
+          "layoutChangeMs": [
+            92,
+            115
+          ],
+          "sourceChangeMs": [
+            123,
+            247
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 7,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            3,
+            4
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 156,
+          "resizeMs": [
+            2,
+            3
+          ],
+          "layoutChangeMs": [
+            125,
+            135
+          ],
+          "sourceChangeMs": [
+            89,
+            97
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-stress-65-webkit",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 65,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": null,
+      "rawReport": "test-results/runtime/final-stress-65-webkit.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            1,
+            2
+          ],
+          "sourceChangeMs": [
+            1,
+            2
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 50,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            25,
+            27
+          ],
+          "sourceChangeMs": [
+            14,
+            15
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 4,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            1,
+            2
+          ],
+          "sourceChangeMs": [
+            2,
+            4
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 52,
+          "resizeMs": [
+            1,
+            1
+          ],
+          "layoutChangeMs": [
+            28,
+            30
+          ],
+          "sourceChangeMs": [
+            19,
+            21
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 65,
+          "mode": "fixed",
+          "initialMs": 6,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            3,
+            3
+          ],
+          "sourceChangeMs": [
+            2,
+            3
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 65,
+          "mode": "graphpaper",
+          "initialMs": 78,
+          "resizeMs": [
+            1,
+            2
+          ],
+          "layoutChangeMs": [
+            49,
+            54
+          ],
+          "sourceChangeMs": [
+            36,
+            38
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-stress-129-webkit",
+      "engine": "webkit",
+      "browser": "27.2",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "local",
+      "measured": false,
+      "padding": false,
+      "count": 129,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        1
+      ],
+      "timerResolutionMs": 1,
+      "rawReport": "test-results/runtime/final-stress-129-webkit.json",
+      "summary": [
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 12,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            4,
+            5
+          ],
+          "sourceChangeMs": [
+            4,
+            5
+          ]
+        },
+        {
+          "layout": "two-3-2",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 75,
+          "resizeMs": [
+            2,
+            2
+          ],
+          "layoutChangeMs": [
+            51,
+            56
+          ],
+          "sourceChangeMs": [
+            28,
+            30
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 30,
+          "resizeMs": [
+            9,
+            10
+          ],
+          "layoutChangeMs": [
+            24,
+            26
+          ],
+          "sourceChangeMs": [
+            8,
+            20
+          ]
+        },
+        {
+          "layout": "three-1-2-1",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 98,
+          "resizeMs": [
+            9,
+            9
+          ],
+          "layoutChangeMs": [
+            75,
+            78
+          ],
+          "sourceChangeMs": [
+            39,
+            51
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "fixed",
+          "initialMs": 30,
+          "resizeMs": [
+            8,
+            8
+          ],
+          "layoutChangeMs": [
+            23,
+            24
+          ],
+          "sourceChangeMs": [
+            8,
+            20
+          ]
+        },
+        {
+          "layout": "four-6-5-4-3",
+          "compositions": 1,
+          "items": 129,
+          "mode": "graphpaper",
+          "initialMs": 132,
+          "resizeMs": [
+            8,
+            8
+          ],
+          "layoutChangeMs": [
+            111,
+            116
+          ],
+          "sourceChangeMs": [
+            73,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "final-measured-chromium",
+      "engine": "chromium",
+      "browser": "156.0.8078.4",
+      "cpu": "Apple M4 Pro",
+      "platform": "darwin",
+      "osRelease": "27.2.0",
+      "arch": "arm64",
+      "cssSha256": "5868e0dc3b300a9564b4ab612295adfb849a937b3170bb2d74a19ed71c3957b1",
+      "context": "shared",
+      "measured": true,
+      "padding": false,
+      "count": 13,
+      "rounds": 3,
+      "iterations": 12,
+      "compositions": [
+        20
+      ],
+      "timerResolutionMs": 0.1,
+      "rawReport": "test-results/runtime/final-measured-chromium.json",
+      "summary": [
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.2,
+          "resizeMs": [
+            1.1,
+            1.3
+          ],
+          "layoutChangeMs": [
+            1.5,
+            1.9
+          ],
+          "sourceChangeMs": [
+            1.7,
+            2.2
+          ]
+        },
+        {
+          "layout": "mosaic-13",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 208.1,
+          "resizeMs": [
+            129.3,
+            135.8
+          ],
+          "layoutChangeMs": [
+            108.7,
+            134
+          ],
+          "sourceChangeMs": [
+            135.1,
+            213.8
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "fixed",
+          "initialMs": 3.4,
+          "resizeMs": [
+            0.9,
+            1
+          ],
+          "layoutChangeMs": [
+            1.7,
+            1.8
+          ],
+          "sourceChangeMs": [
+            1.2,
+            1.4
+          ]
+        },
+        {
+          "layout": "mixed",
+          "compositions": 20,
+          "items": 260,
+          "mode": "graphpaper",
+          "initialMs": 208,
+          "resizeMs": [
+            128.8,
+            134.7
+          ],
+          "layoutChangeMs": [
+            127.5,
+            134.4
+          ],
+          "sourceChangeMs": [
+            75.9,
+            83.9
+          ]
+        }
+      ]
+    }
+  ],
+  "readableIdentifierNormalization": {
+    "minifiedByteIdentical": true,
+    "runtimeSamplesRemainApplicable": true
+  }
+}

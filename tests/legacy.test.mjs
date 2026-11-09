@@ -2,8 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { grids } from "../src/manifest/grids.mjs";
-import { layouts } from "../src/manifest/layouts.mjs";
+import { grids } from "../src/legacy/0.4/manifest/grids.mjs";
+import { layouts } from "../src/legacy/0.4/manifest/layouts.mjs";
 
 test("the only historical baseline is released 0.2.3 and covers every retained grid", async () => {
   const baseline = JSON.parse(await readFile(new URL("./fixtures/legacy-geometry.json", import.meta.url), "utf8"));

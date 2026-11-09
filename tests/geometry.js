@@ -1,4 +1,4 @@
-import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements } from "../src/ruler/geometry.mjs";
+import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements } from "../src/legacy/0.4/ruler/geometry.mjs";
 
 const failures = [];
 let assertions = 0, combinations = 0;

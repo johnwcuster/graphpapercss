@@ -1,44 +1,119 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Migrating Graph Paper 0.2.3 to 1.0</title><link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
-<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migrating to 0.5 — Graph Paper CSS</title>
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="gp_ruler editorial-sheet editorial-page documentation-page">
 <!-- site-navigation:start -->
-<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
-  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
-  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
-  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html" aria-current="page">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+<nav class="gp_layout--stack gp_sm--two-1-2 gp_lg--three-1-2-1 gp_spacing--wide editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity gp_pad"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div class="gp_pad"><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li>
+<li><a href="./authoring.html">Authoring compositions</a></li>
+<li><a href="./site-authoring.html">Composing a site</a></li>
+<li><a href="./responsive-design.html">Responsive design</a></li>
+<li><a href="./alignment.html">Alignment and nesting</a></li>
+<li><a href="./edges-and-spacing.html">Edges and mixed spacing</a></li>
+<li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div class="gp_pad"><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+<li><a href="./browser-support.html">Browser support and builds</a></li>
+<li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html" aria-current="page">Migration</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+<li><a href="./releases.html">Releases</a></li></ul></div>
 </nav>
 <!-- site-navigation:end -->
-<section class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" id="page-content" tabindex="-1">
-<header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1>Migrating from 0.2.3 to 1.0</h1><p>The 1.0 architecture described here is available in the 0.4.0 preview; 0.4.1 retains the same CSS and authoring API while updating documentation and the configurator. Existing sites can keep the <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.2.3/css/main.css">pinned 0.2.3 release</a>. Modern core requires updated markup and browsers with container queries, container units, and subgrid.</p></header>
-<nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#add-a-canvas-and-field">Add a canvas and field</a></li><li><a href="#responsive-layouts-and-reading-order">Responsive layouts and reading order</a></li><li><a href="#twelve-intentional-geometry-changes">Twelve intentional geometry changes</a></li><li><a href="#rules-and-host-controlled-spacing">Rules and host-controlled spacing</a></li><li><a href="#compatibility-and-cascade-layers">Compatibility and cascade layers</a></li></ul></nav>
-<aside class="editorial-note"><h2 class="editorial-small-heading">Explore a composition</h2><p><a href="./configurator.html">Use the configurator</a> to compare recipes, test responsive layouts, and copy markup.</p></aside>
-</section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="add-a-canvas-and-field">Add a canvas and field</h2>
-<p>Keep the grid, set, and compatible flow IDs. Add a canvas wrapper and a field:</p>
-<pre>&lt;div class="gp_canvas"&gt;
-  &lt;section class="gp_field gp_field--wide grid_03a--01 set_06 flow_04"&gt;
-    …
+<div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#choose-a-version-boundary">Choose a version boundary</a></li>
+<li><a href="#translate-the-decisions">Translate the decisions</a></li>
+<li><a href="#re-author-a-small-composition">Re-author a small composition</a></li>
+<li><a href="#revisit-assumptions-about-occupancy">Revisit assumptions about occupancy</a></li>
+<li><a href="#move-spacing-deliberately">Move spacing deliberately</a></li>
+<li><a href="#retest-nesting-and-response">Retest nesting and response</a></li>
+<li><a href="#earlier-023-migration-record">Earlier 0.2.3 migration record</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+<article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Migrating to 0.5</h1><p>The 0.5.0 API is a deliberate authoring change from the published <strong>0.4.1</strong> release and its byte-identical <strong>0.4.0</strong> CSS. This is not a drop-in class rename. Proportions remain ruler-aligned, but response, occupancy and nesting are expressed differently.</p>
+</header>
+<h2 id="choose-a-version-boundary">Choose a version boundary</h2>
+<p>Use the root <code>css/main*.css</code> builds for new markup. To keep an existing 0.4 page running during migration, use a pinned 0.4 release or <code>css/legacy/0.4/main.css</code> with its matching legacy bands if needed. Do not load both cores onto one document. An isolated frame is appropriate for a side-by-side comparison.</p>
+<p>The versioned reference retains original 0.4 CSS bytes, including layered builds and optional bands. The portable inspector remains a 0.4 tool, exposed through <code>graphpapercss/legacy/0.4/inspector</code>; it does not edit the new layout API.</p>
+<h2 id="translate-the-decisions">Translate the decisions</h2>
+<div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Previous expression</th>
+<th scope="col">New decision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gp_canvas</code></td>
+<td>Establish coordinates with <code>gp_ruler</code></td>
+</tr>
+<tr>
+<td><code>gp_field gp_field--wide</code></td>
+<td>Select a layout and apply <code>gp_spacing--wide</code> on it</td>
+</tr>
+<tr>
+<td><code>grid_*</code> and numbered/letter variants</td>
+<td>Choose an explicit physical ratio such as <code>two-3-2</code> or <code>three-1-2-1</code></td>
+</tr>
+<tr>
+<td><code>set_*</code></td>
+<td>Direct participants are counted automatically; choose composition or repetition intentionally</td>
+</tr>
+<tr>
+<td><code>flow_*</code></td>
+<td>Choose traversal, allocation or a spanning arrangement according to the intended relationship</td>
+</tr>
+<tr>
+<td>Bundled compact behavior</td>
+<td>Select another layout at an explicit viewport threshold</td>
+</tr>
+<tr>
+<td><code>gp_band--*</code></td>
+<td>Choose transition timing, or use author-owned conditions where needed</td>
+</tr>
+<tr>
+<td><code>gp_subgrid</code></td>
+<td>Use an assigned <code>gp_continue_tracks</code> wrapper before the inner layout</td>
+</tr>
+<tr>
+<td>Nested canvas</td>
+<td>Use a continuation wrapper and <code>gp_rebase_64</code> for 64 new local tracks</td>
+</tr>
+</tbody></table></div>
+<p>No one-to-one mapping is promised for grid/set/flow combinations. Inspect the rendered source hierarchy, physical widths and compact behavior, then choose the new expression in the configurator.</p>
+<h2 id="re-author-a-small-composition">Re-author a small composition</h2>
+<p>The old shape might have been:</p>
+<pre><code class="language-html">&lt;div class=&quot;gp_canvas&quot;&gt;
+  &lt;section class=&quot;gp_field gp_field--wide grid_03 set_03&quot;&gt;
+    &lt;article&gt;Lead.&lt;/article&gt;&lt;article&gt;Support.&lt;/article&gt;&lt;article&gt;Support.&lt;/article&gt;
   &lt;/section&gt;
-&lt;/div&gt;</pre>
-<p>A field is a direct canvas child and uses exactly one modifier: full (64 bits), neat (60), thin (59), wide (58), or ruled (56). The 0.2.3 thin/neat modifiers become field modifiers. Gutters occupy ruler bits; do not add a horizontal CSS gap to the canvas or field.</p>
-<p>The canvas supplies the coordinate system and responsive context. Subgrid continues a semantic wrapper's inherited tracks using local line indices. A nested canvas explicitly starts a new ruler and selects its own field. A full-bleed background and inset content can share one canvas row.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="responsive-layouts-and-reading-order">Responsive layouts and reading order</h2>
-<p>Layouts respond to canvas width instead of viewport width. Defaults are expanded at 60rem, compact at 30rem, and source-order stacking below 30rem. Optional <a href="./responsive-bands.html">experimental bands</a> change transition thresholds, not compact arrangements. Normalized flows and their known aliases remain. Keep logical DOM order; visual hierarchy does not change focus order.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="twelve-intentional-geometry-changes">Twelve intentional geometry changes</h2>
-<p>All 72 released recipes are represented. Of 216 neat/thin/wide comparisons, 204 match exactly. The twelve changes affect grid_03a, grid_03b, grid_03c, and grid_03d in each field: edges shift by at most half a bit and two formerly equal small columns differ by one bit. The <a href="./geometry-record.html">concise coordinate record</a> specifies the accepted replacements. Full and ruled are new field policies.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="rules-and-host-controlled-spacing">Rules and host-controlled spacing</h2>
-<p>Use gp_field--ruled and explicitly assign gp_rule--start or gp_rule--end to one owner per internal gutter. The ruled field reserves two bits per gutter and centers rules on whole-bit lines. Markers suppress themselves at field boundaries, on responsive full-span items, and in stacked mode. Rule color and width remain host-overridable.</p>
-<p>Replace 0.2.3's combined rule modifier with this explicit ruled-field model. Core provides no global typography, image helpers, print theme, row gaps, or stacked margins. Add vertical spacing in your project:</p>
-<pre>.editorial .gp_field { row-gap: 1.5rem; }
-@container gp-canvas (width &lt; 30rem) {
-  .editorial .gp_field &gt; * + * { margin-block-start: 1.5rem; }
-}</pre>
-<p>This spacing example follows the default stacked threshold. If you opt into bands or customize thresholds, adapt host spacing to those transitions as well.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div><h2 id="compatibility-and-cascade-layers">Compatibility and cascade layers</h2>
-<p>compat.css is an alternative 0.2.3 profile, including its globals and viewport behavior. It is not a modern-field polyfill; do not load it alongside modern core in the same document. css/legacy/main.css retains the released baseline.</p>
-<p>main.layer.min.css provides modern core inside the graph-paper cascade layer. Declare its order relative to your project's layers. Ordinary unlayered host styles override normal layered declarations.</p></div></section>
-</div></main></body></html>
+&lt;/div&gt;
+</code></pre>
+<p>A new choice could be:</p>
+<pre><code class="language-html">&lt;section class=&quot;gp_ruler gp_layout--stack
+                gp_sm--two-1-1 gp_sm-arrangement--first-above
+                gp_lg--three-1-2-1 gp_lg-arrangement--across
+                gp_lg-traversal--center-first gp_spacing--wide&quot;&gt;
+  &lt;article&gt;Lead.&lt;/article&gt;
+  &lt;article&gt;Support.&lt;/article&gt;
+  &lt;article&gt;Support.&lt;/article&gt;
+&lt;/section&gt;
+</code></pre>
+<p>This deliberately chooses a full-width lead above supports from 40rem, then a centered lead in three regions from 64rem. It illustrates design intent, not geometry parity with every old <code>grid_03</code> configuration. Set thresholds using the actual content and available widths.</p>
+<h2 id="revisit-assumptions-about-occupancy">Revisit assumptions about occupancy</h2>
+<p>Automatic counts can change which earlier items belong to a region. Use nested source groups when membership is semantic. Exact physical-count requests can refine known source totals; invalid requests return to automatic allocation rather than hiding content.</p>
+<p>Underfilled Three/Four layouts stack. Empty supporting regions are not reserved by applying a larger layout to one item. If a reading component needs a narrower measure, use host typography constraints within a sensible field. Reassess older one-position layouts that relied on unoccupied named slots.</p>
+<h2 id="move-spacing-deliberately">Move spacing deliberately</h2>
+<p>Gutters are selected independently of item padding and vertical spacing. Ordinary compositions supply no implicit row gaps. Use <code>gp_pad</code>, <code>gp_vertical-spacing--0/1/2</code> and their responsive aliases only where intended, or retain component-owned spacing.</p>
+<p>Thin mosaics have a one-bit lower-start margin by default; explicit vertical spacing replaces it. Ruled decoration needs explicit rule owners and <code>gp_ruler--measure</code>. Mosaics do not support Ruled.</p>
+<h2 id="retest-nesting-and-response">Retest nesting and response</h2>
+<p>Continuation preserves the assigned parent track count; rebasing makes 64 new tracks. Neither introduces a local breakpoint. Viewport prefixes continue to respond to viewport width inside a narrow component. Component-owned CSS can select named layout tokens under an intentional local condition.</p>
+<p>Check source/focus order, every authored threshold, long content, changed counts, rule ownership, utility resets and nested isolation. The <a href="class-reference.html">Class reference</a> documents the exact contracts.</p>
+<h2 id="earlier-023-migration-record">Earlier 0.2.3 migration record</h2>
+<p>The <a href="legacy-reference.html">frozen 0.2.3 reference</a>, <a href="geometry-record.html">twelve whole-bit adjustments</a> and <a href="geometry-changes.html">visual comparisons</a> describe migration from 0.2.3 to the 0.4 ruler implementation. They are retained historical geometry evidence, not a promise that 0.5 reproduces old recipe IDs.</p>
+<p>The sole original 0.2.3 baseline remains <code>css/legacy/main.css</code>. The new 0.5 catalogue is validated against its own reviewed geometry and composition contracts. Published release tags remain unchanged.</p>
+
+</article>
+</div>
+</main></body></html>

@@ -1,9 +1,9 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { distributionArtifacts } from "../src/ruler/distribution.mjs";
+import { distributionArtifacts } from "../src/legacy/0.4/ruler/distribution.mjs";
 import { createHash } from "node:crypto";
-import { validateManifest } from "../src/validate.mjs";
+import { validateManifest } from "../src/legacy/0.4/validate.mjs";
 
 validateManifest();
 const legacy = await readFile(new URL("../css/legacy/main.css", import.meta.url), "utf8");
@@ -18,4 +18,4 @@ for (const [path, source] of Object.entries(distributionArtifacts(legacy))) {
     await writeFile(url, source);
   }
 }
-console.log("Modern unlayered/layered/minified distributions, optional bands, and explicit legacy profile are up to date");
+console.log("Versioned 0.4 reference, its optional bands, and the frozen 0.2.3 baseline are up to date");

@@ -1,6 +1,6 @@
-import { bands } from "../src/manifest/bands.mjs";
-import { bandThresholds } from "../src/ruler/bands.mjs";
-import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements } from "../src/ruler/geometry.mjs";
+import { bands } from "../src/legacy/0.4/manifest/bands.mjs";
+import { bandThresholds } from "../src/legacy/0.4/ruler/bands.mjs";
+import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements } from "../src/legacy/0.4/ruler/geometry.mjs";
 
 const failures = [];
 let assertions = 0, combinations = 0;

@@ -1,53 +1,53 @@
 # Contributing
 
-This page is for maintainers and coding agents changing the library or documentation. Using Graph Paper in another project does not require its generator or browser-test toolchain; start with [Getting started](getting-started.md) instead.
+Graph Paper welcomes thoughtful contributions that improve the library, its documentation, and its authoring tools.
 
-## Set up the repository
+## Start a conversation
+
+For new layouts, API changes, optimizations, or substantial documentation work, please start with an issue describing the problem and your proposed approach. Agreeing on scope before implementation helps us focus review time and gives your contribution the best chance of becoming part of the project.
+
+Small corrections—such as typos and broken links—can go directly to a pull request. Bug reports are especially helpful when they include the Graph Paper version, browser, a minimal reproduction, and the expected versus actual behavior.
+
+Whether you work by hand or with AI assistance, please submit changes you understand and have verified. Explain what improves, why it matters, and how you tested it.
+
+Graph Paper is maintained with limited review time. We prioritize agreed-upon work and may close substantial pull requests that haven't been discussed first.
+
+## Install and build
 
 Use Node.js 20+ and the pnpm version pinned in `package.json`.
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm dev
-```
-
-Open `http://127.0.0.1:4173/docs/`. No demo repository or private service is required to maintain core or its configurator.
-
-## Find the source of truth
-
-| Area | Maintained source | Generated output |
-| --- | --- | --- |
-| Recipes and normalized layouts | `src/manifest/` | Distribution selectors and inspection data |
-| Ruler geometry and CSS generation | `src/ruler/` | `css/` builds and geometry records |
-| Reference and learning pages | Markdown in `docs/` | Matching static HTML pages |
-| Releases | Root `CHANGELOG.md` | Releases HTML page |
-| Shared site navigation and page framing | `scripts/docs-template.mjs` | Navigation on every public page |
-| Configurator and handwritten site pages | HTML, JS, and documentation CSS in `docs/` | Shared navigation and local core mirrors updated by builds |
-
-Do not fix generated CSS by hand. Do not edit generated HTML instead of its Markdown source. `scripts/docs-template.mjs` lists generated page mappings; `scripts/build-docs.mjs` renders them. The geometry record is generated from its audit rather than authored as ordinary prose.
-
-The class reference's recipe-catalogue marker expands from the geometry/layout manifests during the documentation build. Do not hand-maintain a separate compatibility table.
-
-Site styling uses eight color roles in `docs/docs.css`, shared by `editorial.css` and `workbench.css`. Type roles remain direct stylesheet rules, not another token scale. Source-series and diagnostic colors have independent meanings. Keep branding out of the distributed library CSS; changes to reading typography also need measure, alignment, and reflow checks.
-
-The frozen 0.2.3 stylesheet is the only historical regression baseline. The isolated renderer is a test/reference fixture, not a second active architecture.
-
-## Validate the change
-
-```sh
 pnpm build
 pnpm check
 pnpm docs:check
-pnpm size
+pnpm dev
 ```
 
-Documentation changes should preserve static reading, local links and anchors, accessible navigation, and narrow-width reflow. Structural CSS changes also require the Chromium, Firefox, and WebKit matrices:
+The development server defaults to `http://127.0.0.1:4173`. Open the configurator or any static documentation page. No separate demo repository is needed for build or regression checks.
 
-```sh
-pnpm browsers:install
-pnpm test:browsers
-pnpm test:distribution
-pnpm pack --dry-run
-```
+## Edit maintained source
 
-The [validation reference](validation.md) explains coverage, Docker execution, and limits. The [architecture](architecture.md) explains the model. Keep author-facing documentation separate from test-runner and configurator implementation details.
+The current compiler and catalogue live in `src/core/`. Generated core CSS is in `css/main*.css`. The versioned implementation in `src/legacy/0.4/` supports the reference and its inspector; it is not another active authoring architecture.
+
+Edit maintained Markdown and the shared documentation templates rather than generated HTML. The configurator lives in `docs/sequence/`; reusable local assets are synchronized into `docs/assets/graph-paper/` so the directory can be served independently.
+
+Do not introduce an experiment or private content source as a build dependency. Maintained regression fixtures and independent oracles belong in `tests/`; generated screenshots, benchmark reports and temporary comparison CSS belong in ignored `test-results/`.
+
+## Review a geometry change
+
+Graph Paper supplies section-level arrangements for site-level spatial continuity. Preserve the distinction between geometry, source hierarchy, explicit response and host design.
+
+State the author-visible problem and intended behavior. Show proportions, allocation, traversal, counts and viewport conditions separately. Verify rounded field closure, nested metadata, fallback and cleanup rather than judging only a screenshot.
+
+Frozen geometry fixtures should change only with an explicit accepted geometry decision. Keep enumeration/GCD/LCM oracles independent of optimized CSS expressions. A performance optimization must preserve public names, zero specificity, author overrides, exact restoration and native focus order unless a contract change is intentional.
+
+## Validate the surface you changed
+
+Run the relevant unit, geometry, utility, distribution, package, configurator or docs checks. [Validation](validation.md) explains the commands and limits. A quick browser run is not a replacement for the full release matrix.
+
+When documenting evidence, name engines and profiles actually tested. Do not infer a browser-support guarantee from a syntax check or a forced-feature-off test. Test copyable examples with the linked stylesheet, not a separate approximation.
+
+## Prepare a release
+
+Before a tag, align public docs and package paths, qualify final readable/minified/layered artifacts, resolve browser and performance gates, and check migration guidance. Update version, pinned URLs and changelog together after those decisions. Existing published tags remain immutable; no build command commits, tags or publishes.

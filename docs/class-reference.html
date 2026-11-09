@@ -1,628 +1,781 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Class reference — Graph Paper CSS</title>
-<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./assets/graph-paper/bands.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
-<body><a class="site-skip" href="#page-content">Skip to content</a><main class="editorial-page"><div class="gp_canvas editorial-sheet">
+<link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
+<body><a class="site-skip" href="#page-content">Skip to content</a><main class="gp_ruler editorial-sheet editorial-page documentation-page">
 <!-- site-navigation:start -->
-<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
-  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
-  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html">Configurator</a></li></ul></div>
-  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html" aria-current="page">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
+<nav class="gp_layout--stack gp_sm--two-1-2 gp_lg--three-1-2-1 gp_spacing--wide editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity gp_pad"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div class="gp_pad"><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li>
+<li><a href="./authoring.html">Authoring compositions</a></li>
+<li><a href="./site-authoring.html">Composing a site</a></li>
+<li><a href="./responsive-design.html">Responsive design</a></li>
+<li><a href="./alignment.html">Alignment and nesting</a></li>
+<li><a href="./edges-and-spacing.html">Edges and mixed spacing</a></li>
+<li><a href="./configurator.html">Configurator</a></li></ul></div>
+  <div class="gp_pad"><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html" aria-current="page">Class reference</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+<li><a href="./browser-support.html">Browser support and builds</a></li>
+<li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+<li><a href="./releases.html">Releases</a></li></ul></div>
 </nav>
 <!-- site-navigation:end -->
-<section id="page-content" tabindex="-1" class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" aria-labelledby="page-heading">
-  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Class reference</h1><p>Use this page to look up the modern CSS authoring contract. For a first example, see <a href="getting-started.html">Getting started</a>; for choosing relationships around content, see <a href="authoring.html">Authoring compositions</a>.</p>
+<div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field editorial-reference-layout">
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#coordinates-and-wrappers">Coordinates and wrappers</a></li>
+<li><a href="#layouts-and-viewport-aliases">Layouts and viewport aliases</a></li>
+<li><a href="#allocation-and-traversal">Allocation and traversal</a></li>
+<li><a href="#exact-physical-counts">Exact physical counts</a></li>
+<li><a href="#gutters-and-fields">Gutters and fields</a></li>
+<li><a href="#padding-and-vertical-spacing">Padding and vertical spacing</a></li>
+<li><a href="#counts-fallback-and-source-order">Counts, fallback and source order</a></li>
+<li><a href="#layout-catalogue">Layout catalogue</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+<article id="page-content" tabindex="-1" class="editorial-document editorial-reference" aria-labelledby="page-heading">
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Class reference</h1><p>This reference describes the <strong>0.5 API in the current build</strong>. Use the <a href="configurator.html">configurator</a> to discover a plausible arrangement, then use this page to understand its markup and defaults. Older grid/set/flow classes are documented only through <a href="migration.html">migration</a> and the <a href="configurator-0.4.html">0.4 reference</a>.</p>
 </header>
-  <nav aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#required-structure">Required structure</a></li><li><a href="#fields-and-gutters">Fields and gutters</a></li><li><a href="#recipes-positions-and-defaults">Recipes, positions, and defaults</a></li><li><a href="#find-valid-combinations">Find valid combinations</a></li><li><a href="#subgrid-and-nested-canvases">Subgrid and nested canvases</a></li><li><a href="#column-rules">Column rules</a></li><li><a href="#explicit-adjustments">Explicit adjustments</a></li><li><a href="#recipe-catalogue">Recipe catalogue</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
-</section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="required-structure">Required structure</h2>
-<pre><code class="language-html">&lt;div class=&quot;gp_canvas&quot;&gt;
-  &lt;section class=&quot;gp_field gp_field--wide grid_02&quot;&gt;
-    &lt;article&gt;First item&lt;/article&gt;
-    &lt;article&gt;Second item&lt;/article&gt;
-  &lt;/section&gt;
-&lt;/div&gt;
-</code></pre>
+<h2 id="coordinates-and-wrappers">Coordinates and wrappers</h2>
 <div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
 <thead>
 <tr>
-<th scope="col">Class</th>
-<th scope="col">Apply to</th>
-<th scope="col">Contract</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>gp_canvas</code></td>
-<td>A container around fields</td>
-<td>Starts 64 equal tracks and a named inline-size responsive context. Its width normally follows its parent.</td>
-</tr>
-<tr>
-<td><code>gp_field</code></td>
-<td>A direct child of a canvas</td>
-<td>Continues the ruler and selects its usable span through exactly one field modifier.</td>
-</tr>
-<tr>
-<td><code>grid_*</code></td>
-<td>The field</td>
-<td>Chooses the responsive composition recipe and expanded macro proportions. Use one recipe.</td>
-</tr>
-<tr>
-<td><code>set_03</code>–<code>set_06</code></td>
-<td>The recipe-bearing field, if compatible</td>
-<td>Selects a named arrangement of positions. Omit for sequential occupancy.</td>
-</tr>
-<tr>
-<td><code>flow_*</code></td>
-<td>The same field, if compatible with the named set</td>
-<td>Refines placement. Omit for the set&#39;s default flow.</td>
-</tr>
-<tr>
-<td><code>gp_band--01</code>–<code>gp_band--03</code></td>
-<td>The same field, optionally</td>
-<td>Replaces default transition thresholds. Requires the separate bands stylesheet. Use at most one.</td>
-</tr>
-</tbody></table></div>
-<p>Items are the field&#39;s direct element children, regardless of tag name. A wrapper, heading, or decorative element added as another direct child participates in item counting. Put internal component structure inside the intended item instead.</p>
-<p>A field without a recipe can frame prose or other full-span content: its direct children default to full field width. A field is not an independent query container.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="fields-and-gutters">Fields and gutters</h2>
-<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
-<thead>
-<tr>
-<th scope="col">Modifier</th>
-<th scope="col">Canvas interval</th>
-<th scope="col" align="right">Usable bits</th>
-<th scope="col" align="right">Internal gutter</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>gp_field--full</code></td>
-<td>[0,64]</td>
-<td align="right">64</td>
-<td align="right">0 bits</td>
-</tr>
-<tr>
-<td><code>gp_field--neat</code></td>
-<td>[2,62]</td>
-<td align="right">60</td>
-<td align="right">0 bits</td>
-</tr>
-<tr>
-<td><code>gp_field--thin</code></td>
-<td>[2,61]</td>
-<td align="right">59</td>
-<td align="right">1 bit</td>
-</tr>
-<tr>
-<td><code>gp_field--wide</code></td>
-<td>[3,61]</td>
-<td align="right">58</td>
-<td align="right">2 bits</td>
-</tr>
-<tr>
-<td><code>gp_field--ruled</code></td>
-<td>[4,60]</td>
-<td align="right">56</td>
-<td align="right">2 bits, with explicit rule owners</td>
-</tr>
-</tbody></table></div>
-<p>One bit is 1/64 of the canvas content width. These intervals are zero-based coordinates, not CSS line numbers. Gutters occupy ruler bits between macro regions; they are not CSS <code>column-gap</code>. An item spanning regions includes their intervening space.</p>
-<p>Do not add horizontal CSS gap or padding, or replace track definitions, on the canvas/field grids. Component padding belongs inside items. Vertical gaps and margins remain host-controlled; stacked fields become block flow, so grid row gaps alone do not supply stacked spacing.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="recipes-positions-and-defaults">Recipes, positions, and defaults</h2>
-<p>Recipe families include two-, three-, and four-region alternatives, plus equal five- and six-region recipes. <code>grid_02a--07</code> is a 5:3 content-proportion option. The catalogue is constrained: not every number, letter, and variant combination exists.</p>
-<p>The region count describes expanded macro geometry, not item count or a guarantee at compact widths. Letters are family-specific alternatives. Numbered variants are proportional alternatives, not a universal prominence scale.</p>
-<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
-<thead>
-<tr>
-<th scope="col">Choice</th>
-<th scope="col">If omitted</th>
-<th scope="col">With a supported selection</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Set</td>
-<td>Sequential macro occupancy in expanded, pairs in compact, source order in stacked; continues into later rows</td>
-<td>Recipe-specific named positions; unfilled positions remain, extra items fall back full-width</td>
-</tr>
-<tr>
-<td>Flow</td>
-<td>The named set&#39;s intentional default</td>
-<td>A compatible alternative placement without DOM reordering</td>
-</tr>
-<tr>
-<td>Band</td>
-<td>Compact at 30rem and expanded at 60rem of canvas width</td>
-<td>Geometry-derived thresholds for both transitions</td>
-</tr>
-</tbody></table></div>
-<p>Named sets are <code>set_03</code>, <code>set_04</code>, <code>set_05</code>, and <code>set_06</code>, subject to recipe compatibility. There is no <code>set_02</code>. Do not add a set just to make its suffix match the macro-region count.</p>
-<p>Item count need not equal position count. Unfilled positions can be deliberate negative space rather than an authoring error; <a href="site-authoring.html#establish-a-recurring-reading-position">Composing a site</a> demonstrates a reading section occupying only its primary position. Review the result across responsive states instead of automatically changing the set.</p>
-<p>Flow IDs are also compatibility-dependent. A supported alternative can be visually equivalent for certain settings or occupied positions. An unsupported combination is not a documented way to request a fallback: use a real combination instead.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="find-valid-combinations">Find valid combinations</h2>
-<p>The <a href="configurator.html">configurator</a> exposes the catalogue, compatible sets and flows, real responsive previews, applied classes, and copyable markup. Disabled choices do not exist for the current combination; muted selectable choices are equivalent for the compared settings.</p>
-<p>The <a href="#recipe-catalogue">static recipe catalogue</a> below lists every recipe and its supported named set/flow combinations without JavaScript. It is generated from the same manifests as the CSS. Search for an exact ID rather than assuming that every possible suffix exists.</p>
-<p>Repository tooling can read the same manifests without parsing generated CSS:</p>
-<pre><code class="language-js">import { recipes, layoutsFor, expandedPlacements, compactPlacements,
-  sequentialPlacements } from &#39;./src/ruler/geometry.mjs&#39;;
-
-const recipe = recipes.grid_03;
-const choices = layoutsFor(recipe); // Supported named set/flow combinations.
-const layout = choices.find(choice =&gt; choice.set === &#39;set_03&#39; &amp;&amp; !choice.flow);
-const expanded = expandedPlacements(recipe, &#39;wide&#39;, layout);
-const compact = compactPlacements(&#39;wide&#39;, layout);
-const gridOnly = sequentialPlacements(recipe, &#39;wide&#39;, 3, &#39;expanded&#39;);
-</code></pre>
-<p><code>Object.keys(recipes)</code> lists valid recipe IDs. <code>layoutsFor</code> returns named combinations, not grid-only occupancy. Returned item line indices are local to the field. These modules are repository inspection/build tools, not a required client-side JavaScript API or a separately versioned package export.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="subgrid-and-nested-canvases">Subgrid and nested canvases</h2>
-<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
-<thead>
-<tr>
-<th scope="col">Choice</th>
-<th scope="col">Apply to</th>
-<th scope="col">Inherits or starts</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>gp_subgrid</code></td>
-<td>A grid item/semantic wrapper spanning inherited tracks</td>
-<td>Continues occupied tracks; does not create a new query context or automatically assign descendants a recipe</td>
-</tr>
-<tr>
-<td>Nested <code>gp_canvas</code></td>
-<td>An item or a container inside it</td>
-<td>Starts an independent 64-bit ruler and responsive context; select an inner field again</td>
-</tr>
-</tbody></table></div>
-<p>Subgrid descendants use local inherited line numbers. A nested canvas&#39;s bits refer to its own width, not the outer ruler. See <a href="alignment.html">Alignment and nesting</a> for complete examples.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="column-rules">Column rules</h2>
-<p>Use <code>gp_field--ruled</code>, then assign <code>gp_rule--start</code> or <code>gp_rule--end</code> to a direct item owning an internal gutter edge. Assign one owner per shared gutter to avoid duplicate rules.</p>
-<pre><code class="language-html">&lt;div class=&quot;gp_canvas&quot;&gt;
-  &lt;section class=&quot;gp_field gp_field--ruled grid_02 publication&quot;&gt;
-    &lt;article class=&quot;gp_rule--end&quot;&gt;First item&lt;/article&gt;
-    &lt;article&gt;Second item&lt;/article&gt;
-  &lt;/section&gt;
-&lt;/div&gt;
-</code></pre>
-<pre><code class="language-css">.publication {
-  --gp-rule-color: #64748b; /* Defaults to currentColor. */
-  --gp-rule-width: 1px;    /* Defaults to 1px. */
-}
-</code></pre>
-<p>The marker is centered one bit outside the item, halfway through the two-bit gutter. Generated placement metadata suppresses outer-edge markers, responsive full-span markers, and stacked rules. Rules use <code>::before</code>/<code>::after</code>; avoid assigning competing component decoration to the same pseudo-element. Other field modifiers do not activate ruled treatment.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="explicit-adjustments">Explicit adjustments</h2>
-<p>These are escape hatches, not prerequisites for normal recipe authoring.</p>
-<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
-<thead>
-<tr>
-<th scope="col">Class</th>
-<th scope="col">Inputs</th>
+<th scope="col">Expression</th>
+<th scope="col">Place it on</th>
 <th scope="col">Effect</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>gp_place</code></td>
-<td><code>--gp-column-start</code>, <code>--gp-column-end</code>; optional <code>--gp-row-start</code>, <code>--gp-row-end</code></td>
-<td>Explicit grid placement using local CSS line numbers. Row inputs default to <code>auto</code>.</td>
+<td><code>gp_ruler</code></td>
+<td>A standalone coordinate root</td>
+<td>Establish 64 local tracks; it can also select a layout</td>
 </tr>
 <tr>
-<td><code>gp_inset--bit</code></td>
-<td>Inherited <code>--gp-bit</code></td>
-<td>Adds one canvas-bit inline padding to an element; use inside items, not on the canvas/field grid.</td>
+<td><code>gp_continue_tracks</code></td>
+<td>An assigned participant containing an inner layout</td>
+<td>Continue only the parent tracks spanning this participant</td>
 </tr>
 <tr>
-<td><code>gp_optical</code></td>
-<td><code>--gp-optical-x</code>, <code>--gp-optical-y</code>, default <code>0em</code></td>
-<td>Translates visual appearance without changing structural layout; use font-relative offsets deliberately.</td>
+<td><code>gp_rebase_64</code></td>
+<td>The local root inside the continuation wrapper</td>
+<td>Subdivide its assigned area into 64 fresh tracks</td>
+</tr>
+<tr>
+<td><code>gp_ruler--measure</code></td>
+<td>The ruler/rebased root needing captured lengths</td>
+<td>Enable <code>--gp-ruler-bit</code> for rules or author CSS; unnecessary for padding and mosaic margins</td>
 </tr>
 </tbody></table></div>
-<p>For example, on a descendant inside a subgrid:</p>
-<pre><code class="language-html">&lt;div class=&quot;gp_place&quot; style=&quot;--gp-column-start: 1; --gp-column-end: -1&quot;&gt;
-  Content spanning the inherited tracks
-&lt;/div&gt;
-</code></pre>
-<p>Explicit placement must be authored and checked across responsive states. It does not automatically acquire a compact design or repair rule ownership; generated metadata still describes the original recipe. Do not treat internal generated custom properties as a general-purpose public placement API.</p>
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose grid_03c--07 set_03 gp_band--01"><div>
-<h2 id="recipe-catalogue">Recipe catalogue</h2>
-<p>Each row lists one real recipe. Region widths run from start to end in the wide field&#39;s expanded layout; these are content widths in canvas bits, excluding internal gutters, not universal proportions for every field. Use the configurator to see other fields and compact arrangements.</p>
-<p>All recipes also support sequential occupancy with no set or flow class. In the named-combinations column, <strong>default means omit the flow class</strong>. Only the flows listed beside that set are supported for that recipe. Presence here does not imply a visible difference for every occupied item count or responsive state.</p>
-<!-- Source readers: the marker below expands in class-reference.html#recipe-catalogue.
-Repository agents can also use the manifest lookup above. -->
-</div></section>
-<section class="gp_field gp_field--wide editorial-prose editorial-wide-data" aria-label="Wide reference data"><div><div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<p>Use <a href="alignment.html">the documented nesting forms</a>, keeping parent placement separate from inner selection. Coordinates do not themselves select a responsive design.</p>
+<h2 id="layouts-and-viewport-aliases">Layouts and viewport aliases</h2>
+<p><code>gp_layout--ID</code> selects the base layout. <code>gp_PREFIX--ID</code> selects it at a supported viewport threshold. Examples: <code>gp_layout--two-3-2</code>, <code>gp_md--three-1-2-1</code>, <code>gp_xl--mosaic-8</code>.</p>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
 <thead>
 <tr>
-<th scope="col">Recipe</th>
-<th scope="col">Wide-field region widths (bits)</th>
-<th scope="col">Supported named sets and flows</th>
+<th scope="col">Prefix</th>
+<th scope="col" align="right">Minimum viewport</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>grid_02</code></td>
-<td>28 : 28</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code><br><code>set_06</code>: default</td>
+<td><code>xs</code></td>
+<td align="right">30rem</td>
 </tr>
 <tr>
-<td><code>grid_02a</code></td>
-<td>28 : 28</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>sm</code></td>
+<td align="right">40rem</td>
 </tr>
 <tr>
-<td><code>grid_02b</code></td>
-<td>28 : 28</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>md</code></td>
+<td align="right">48rem</td>
 </tr>
 <tr>
-<td><code>grid_02a--01</code></td>
-<td>33 : 23</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>lg</code></td>
+<td align="right">64rem</td>
 </tr>
 <tr>
-<td><code>grid_02a--02</code></td>
-<td>34 : 22</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>xl</code></td>
+<td align="right">80rem</td>
 </tr>
 <tr>
-<td><code>grid_02a--03</code></td>
-<td>38 : 18</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>2xl</code></td>
+<td align="right">96rem</td>
 </tr>
+</tbody></table></div>
+<p>Class order does not change breakpoint priority. Omitted decisions carry forward. A custom-property selection such as <code>--gp-layout: var(--gp-two-3-2)</code> uses the same arrangement, but the element still needs a recognized layout class for participation.</p>
+<h2 id="allocation-and-traversal">Allocation and traversal</h2>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
 <tr>
-<td><code>grid_02a--04</code></td>
-<td>40 : 16</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<th scope="col">Decision</th>
+<th scope="col">Classes</th>
+<th scope="col">Default and scope</th>
 </tr>
+</thead>
+<tbody><tr>
+<td>Automatic preference</td>
+<td><code>gp_allocation--closest</code>, <code>--stronger</code></td>
+<td>Closest; Two and Four</td>
+</tr>
+<tr>
+<td>Fewer-item side</td>
+<td><code>gp_fewer--left</code>, <code>--right</code></td>
+<td>Left; Two only</td>
+</tr>
+<tr>
+<td>First source run</td>
+<td><code>gp_traversal--left-to-right</code>, <code>--right-to-left</code>, <code>--center-first</code>, <code>--widest-first</code></td>
+<td>Left-to-right; permitted alternatives depend on family</td>
+</tr>
+<tr>
+<td>Full-width endpoints</td>
+<td><code>gp_arrangement--across</code>, <code>--first-above</code>, <code>--last-below</code>, <code>--first-above-last-below</code></td>
+<td>Across; spanning applies to Two only</td>
+</tr>
+</tbody></table></div>
+<p>Each control has viewport aliases, for example <code>gp_md-allocation--stronger</code>, <code>gp_lg-fewer--right</code>, <code>gp_xl-traversal--center-first</code> and <code>gp_sm-arrangement--first-above</code>. Explicit defaults reset earlier values. Selection through CSS uses <code>--gp-allocation:var(--gp-stronger)</code>, <code>--gp-fewer:var(--gp-fewer-right)</code>, <code>--gp-traversal:var(--gp-center-first)</code> and <code>--gp-arrangement:var(--gp-first-above)</code>.</p>
+<p>Two chooses a coprime pair differing by at most four. Closest prefers the nearest valid pair; Stronger prefers greater difference. The fewer-side choice and source traversal are independent of physical widths.</p>
+<p>Three chooses among positive physical triples with spread at most two and coprime neighbors. Its automatic preference favors matching outer counts, a differentiated center, then smaller spread and the remaining deterministic tie-breaks. There is no Three allocation-mode switch. Center-first is available at all supported counts; right-to-left is available only at exactly three items and otherwise normalizes to left-to-right.</p>
+<p>Four selects from its reviewed automatic candidate pool, with spread at most four and coprime physical neighbors. Widest-first ranks nominal physical widths, independently of bit-rounding ties. Equal quarters and unsupported traversal requests normalize to left-to-right. Proportions and traversal can change which automatic allocation is eligible.</p>
+<h2 id="exact-physical-counts">Exact physical counts</h2>
+<p>The configurator offers eligible tuples for the current source count; it does not require memorizing them. A copied refinement names physical regions and includes viewport-specific properties when needed.</p>
+<pre><code class="language-html">&lt;section class=&quot;gp_ruler gp_layout--three-1-2-1 gp_spacing--neat&quot;
+         style=&quot;--gp-exact-count-left:5;
+                --gp-exact-count-center:3;
+                --gp-exact-count-right:4;&quot;&gt;
+  &lt;!-- Exactly 12 direct participants for this request --&gt;
+&lt;/section&gt;
+</code></pre>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Layout</th>
+<th scope="col">Physical properties</th>
+<th scope="col">Eligibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Spanning Two supports</td>
+<td><code>left</code>, <code>right</code>; <code>center</code> zero/unset</td>
+<td>Total equals non-spanning support count; positive coprime pair, difference at most four</td>
+</tr>
+<tr>
+<td>Three</td>
+<td><code>left</code>, <code>center</code>, <code>right</code></td>
+<td>Total equals direct count; positive integers, spread at most two, coprime neighbors</td>
+</tr>
+<tr>
+<td>Four</td>
+<td><code>left</code>, <code>center-left</code>, <code>center-right</code>, <code>right</code></td>
+<td>Total equals direct count; positive integers, spread at most four, coprime neighbors</td>
+</tr>
+</tbody></table></div>
+<p>Prefix every property with <code>--gp-exact-count-</code>. Responsive forms insert the viewport prefix: <code>--gp-md-exact-count-left</code>. Ordinary Across Two ignores exact requests. Mosaics and Peers do not use these inputs.</p>
+<p>Requests remain present when counts change. Incomplete, invalid or mismatched tuples use automatic allocation and reactivate when eligible. Omission carries forward the last matching regional input; explicit zero replaces it and restores automatic allocation when the tuple becomes ineligible. <code>initial</code> or <code>unset</code> removes that breakpoint input and reveals an earlier value. Requests do not inherit into independently selected nested layouts.</p>
+<h2 id="gutters-and-fields">Gutters and fields</h2>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Class</th>
+<th scope="col" align="right">Field bits</th>
+<th scope="col">Outer insets, left/right</th>
+<th scope="col" align="right">Internal gutter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gp_spacing--full</code></td>
+<td align="right">64</td>
+<td>0 / 0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td><code>gp_spacing--neat</code></td>
+<td align="right">60</td>
+<td>2 / 2</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td><code>gp_spacing--thin</code></td>
+<td align="right">59</td>
+<td>2 / 3</td>
+<td align="right">1 bit</td>
+</tr>
+<tr>
+<td><code>gp_spacing--wide</code></td>
+<td align="right">58</td>
+<td>3 / 3</td>
+<td align="right">2 bits</td>
+</tr>
+<tr>
+<td><code>gp_spacing--ruled</code></td>
+<td align="right">56</td>
+<td>4 / 4</td>
+<td align="right">2 bits</td>
+</tr>
+</tbody></table></div>
+<p>Use an explicit spacing class in ordinary authoring; the unconfigured field is Full. Responsive forms include <code>gp_lg-spacing--wide</code>. Nominal field bits include internal gutters; actual item spans deduct them. On continued rulers, insets and gutters are bounded to preserve nonempty spans. Mosaics support only Neat/Thin and otherwise stack.</p>
+<p>Ruled spacing reserves the field; decoration also needs the measured coordinate root and an explicit <code>gp_rule--end</code> or <code>gp_rule--start</code> owner on a participant. Choose one owner per shared gutter. The library suppresses outer/nonexistent boundaries. Colors and stroke widths are public host choices:</p>
+<pre><code class="language-css">.article-group {
+  --gp-rule-color: #52625f;
+  --gp-rule-width: 1px;
+}
+</code></pre>
+<p>Rule color defaults to <code>currentColor</code> and width to <code>1px</code>. Keep measurement on the ruler that supplies the relevant coordinate rhythm. See <a href="edges-and-spacing.html">Edges and mixed spacing</a>.</p>
+<h2 id="padding-and-vertical-spacing">Padding and vertical spacing</h2>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Expression</th>
+<th scope="col">Placement</th>
+<th scope="col">Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gp_pad</code>, <code>gp_pad--2</code>, <code>gp_pad--0</code></td>
+<td>Content item or full-region content layer</td>
+<td>One, two or zero assigned ruler bits inside the element</td>
+</tr>
+<tr>
+<td><code>gp_md-pad--0/1/2</code> and other prefixes</td>
+<td>The same element</td>
+<td>Mobile-up padding selection</td>
+</tr>
+<tr>
+<td><code>gp_vertical-spacing--0/1/2</code></td>
+<td>Composition</td>
+<td>Zero, one or two top-margin bits on direct items beginning below the top row</td>
+</tr>
+<tr>
+<td><code>gp_md-vertical-spacing--0/1/2</code> and other prefixes</td>
+<td>Composition</td>
+<td>Mobile-up vertical-spacing selection</td>
+</tr>
+</tbody></table></div>
+<p>Keep rulers and continuation wrappers unpadded. A width-changing intermediate wrapper can interrupt percentage-based rhythm. Use a correctly sized content layer or host CSS for the constrained box.</p>
+<p>Ordinary layouts have no implicit vertical gaps. Thin mosaics default to one bit below the top row; Neat mosaics default to zero. Explicit vertical-spacing amounts replace those defaults; removing all utility classes restores them. Host margins/padding override the zero-specificity utilities normally. None of these utilities requires ruler measurement, fixed row heights or a native <code>row-gap</code>.</p>
+<h2 id="counts-fallback-and-source-order">Counts, fallback and source order</h2>
+<p>Every direct element child counts, including hidden elements and inline element-level metadata. Keep stylesheet/script elements outside a composition when they are not intended participants. Text nodes, comments and grandchildren do not add to the count.</p>
+<p>Stack is the conservative underfill fallback. Peers repeat row-major and retain partial-row slots. Two/Three/Four group consecutive source items by region, with no enumerated maximum count. Spanning Two excludes the actual first item, last item or both before allocating supports; at least two supports are required. Three/Four underfill and mismatched mosaics stack without silently selecting a different layout.</p>
+<p>The DOM and native focus sequence never change. Visual reordering and column-first traversal still require an author to review the finished content. Missing native count arithmetic has family-specific fallbacks; see <a href="browser-support.html">Browser support</a>.</p>
+<h2 id="layout-catalogue">Layout catalogue</h2>
+<p>IDs describe physical proportions, not semantic importance. Mosaic suffixes name exact item counts. The catalogue lists all current selections; use the configurator to narrow it by width relationship and then compare nearby proportions. Nominal ratios can round differently across fields; the accepted Four 9:8:7:6 Wide treatment uses 16/14/12/10 bit widths on a full ruler.</p>
+<div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
+<thead>
+<tr>
+<th scope="col">Layout ID</th>
+<th scope="col">Physical proportions / positions</th>
+<th scope="col">Occupancy and traversal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>stack</code></td>
+<td>Single column</td>
+<td>Any count; source order</td>
+</tr>
+<tr>
+<td><code>peers-2</code></td>
+<td>2 equal positions</td>
+<td>Repeating; row-major</td>
+</tr>
+<tr>
+<td><code>peers-3</code></td>
+<td>3 equal positions</td>
+<td>Repeating; row-major</td>
+</tr>
+<tr>
+<td><code>peers-4</code></td>
+<td>4 equal positions</td>
+<td>Repeating; row-major</td>
+</tr>
+<tr>
+<td><code>peers-5</code></td>
+<td>5 equal positions</td>
+<td>Repeating; row-major</td>
+</tr>
+<tr>
+<td><code>peers-6</code></td>
+<td>6 equal positions</td>
+<td>Repeating; row-major</td>
+</tr>
+<tr>
+<td><code>two-1-5</code></td>
+<td>1 : 5</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-1-4</code></td>
+<td>1 : 4</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-1-3</code></td>
+<td>1 : 3</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-3-7</code></td>
+<td>3 : 7</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-1-2</code></td>
+<td>1 : 2</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-3-5</code></td>
+<td>3 : 5</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-2-3</code></td>
+<td>2 : 3</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-5-7</code></td>
+<td>5 : 7</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-1-1</code></td>
+<td>1 : 1</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-7-5</code></td>
+<td>7 : 5</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-3-2</code></td>
+<td>3 : 2</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-5-3</code></td>
+<td>5 : 3</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-2-1</code></td>
+<td>2 : 1</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-7-3</code></td>
+<td>7 : 3</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-3-1</code></td>
+<td>3 : 1</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-4-1</code></td>
+<td>4 : 1</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>two-5-1</code></td>
+<td>5 : 1</td>
+<td>Automatic pair; either direction; optional spanning endpoints</td>
+</tr>
+<tr>
+<td><code>three-1-1-4</code></td>
+<td>1 : 1 : 4</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-2-3-7</code></td>
+<td>2 : 3 : 7</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-1-2-3</code></td>
+<td>1 : 2 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-2-5-5</code></td>
+<td>2 : 5 : 5</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-1-3-2</code></td>
+<td>1 : 3 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-2-7-3</code></td>
+<td>2 : 7 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-1-4-1</code></td>
+<td>1 : 4 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-1-1-3</code></td>
+<td>1 : 1 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-2-3-5</code></td>
+<td>2 : 3 : 5</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-1-2-2</code></td>
+<td>1 : 2 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
+<tr>
+<td><code>three-2-5-3</code></td>
+<td>2 : 5 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
+</tr>
 <tr>
-<td><code>grid_02a--05</code></td>
-<td>43 : 13</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-1-3-1</code></td>
+<td>1 : 3 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02a--06</code></td>
-<td>46 : 10</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-3-2-7</code></td>
+<td>3 : 2 : 7</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02b--01</code></td>
-<td>23 : 33</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-1-1-2</code></td>
+<td>1 : 1 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02b--02</code></td>
-<td>22 : 34</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-3-4-5</code></td>
+<td>3 : 4 : 5</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02b--03</code></td>
-<td>18 : 38</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-2-3-3</code></td>
+<td>2 : 3 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02b--04</code></td>
-<td>16 : 40</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-3-5-4</code></td>
+<td>3 : 5 : 4</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02b--05</code></td>
-<td>13 : 43</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-1-2-1</code></td>
+<td>1 : 2 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_02b--06</code></td>
-<td>10 : 46</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_04</code>: default, <code>flow_02</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_03</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>three-3-7-2</code></td>
+<td>3 : 7 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03</code></td>
-<td>18 : 18 : 18</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-3-2-5</code></td>
+<td>3 : 2 : 5</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a</code></td>
-<td>23 : 16 : 15</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-3-3-4</code></td>
+<td>3 : 3 : 4</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b</code></td>
-<td>16 : 15 : 23</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-3-4-3</code></td>
+<td>3 : 4 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c</code></td>
-<td>16 : 23 : 15</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-3-5-2</code></td>
+<td>3 : 5 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03d</code></td>
-<td>16 : 23 : 15</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-2-1-3</code></td>
+<td>2 : 1 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--01</code></td>
-<td>23 : 18 : 13</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-4-3-5</code></td>
+<td>4 : 3 : 5</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--02</code></td>
-<td>28 : 16 : 10</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-1-1-1</code></td>
+<td>1 : 1 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--03</code></td>
-<td>28 : 18 : 8</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-4-5-3</code></td>
+<td>4 : 5 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--04</code></td>
-<td>33 : 13 : 8</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-2-3-1</code></td>
+<td>2 : 3 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--05</code></td>
-<td>22 : 16 : 16</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-3-2-3</code></td>
+<td>3 : 2 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--06</code></td>
-<td>28 : 13 : 13</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-3-3-2</code></td>
+<td>3 : 3 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--07</code></td>
-<td>34 : 10 : 10</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-2-1-2</code></td>
+<td>2 : 1 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03a--08</code></td>
-<td>38 : 8 : 8</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code></td>
+<td><code>three-4-3-3</code></td>
+<td>4 : 3 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--01</code></td>
-<td>13 : 18 : 23</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-2-2-1</code></td>
+<td>2 : 2 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--02</code></td>
-<td>10 : 16 : 28</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-5-2-5</code></td>
+<td>5 : 2 : 5</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--03</code></td>
-<td>8 : 18 : 28</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-5-3-4</code></td>
+<td>5 : 3 : 4</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--04</code></td>
-<td>8 : 13 : 33</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-5-4-3</code></td>
+<td>5 : 4 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--05</code></td>
-<td>16 : 16 : 22</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-5-5-2</code></td>
+<td>5 : 5 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--06</code></td>
-<td>13 : 13 : 28</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-3-1-2</code></td>
+<td>3 : 1 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--07</code></td>
-<td>10 : 10 : 34</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-5-2-3</code></td>
+<td>5 : 2 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03b--08</code></td>
-<td>8 : 8 : 38</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default</td>
+<td><code>three-2-1-1</code></td>
+<td>2 : 1 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--01</code></td>
-<td>18 : 23 : 13</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-5-3-2</code></td>
+<td>5 : 3 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--02</code></td>
-<td>16 : 28 : 10</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-3-2-1</code></td>
+<td>3 : 2 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--03</code></td>
-<td>18 : 28 : 8</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-7-2-3</code></td>
+<td>7 : 2 : 3</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--04</code></td>
-<td>13 : 33 : 8</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-7-3-2</code></td>
+<td>7 : 3 : 2</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--05</code></td>
-<td>16 : 22 : 16</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-3-1-1</code></td>
+<td>3 : 1 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--06</code></td>
-<td>13 : 28 : 13</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>three-4-1-1</code></td>
+<td>4 : 1 : 1</td>
+<td>Automatic/exact triple; left-to-right or center-first; reverse at 3 items</td>
 </tr>
 <tr>
-<td><code>grid_03c--07</code></td>
-<td>10 : 34 : 10</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-1-1-1-1</code></td>
+<td>1 : 1 : 1 : 1</td>
+<td>Automatic/exact four; left-to-right</td>
 </tr>
 <tr>
-<td><code>grid_03c--08</code></td>
-<td>8 : 38 : 8</td>
-<td><code>set_04</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code><br><code>set_05</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-6-5-4-3</code></td>
+<td>6 : 5 : 4 : 3</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--01</code></td>
-<td>13 : 23 : 18</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-5-6-4-3</code></td>
+<td>5 : 6 : 4 : 3</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--02</code></td>
-<td>10 : 28 : 16</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-4-5-6-3</code></td>
+<td>4 : 5 : 6 : 3</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--03</code></td>
-<td>8 : 28 : 18</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-4-6-5-3</code></td>
+<td>4 : 6 : 5 : 3</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--04</code></td>
-<td>8 : 33 : 13</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-3-4-5-6</code></td>
+<td>3 : 4 : 5 : 6</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--05</code></td>
-<td>16 : 22 : 16</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-3-4-6-5</code></td>
+<td>3 : 4 : 6 : 5</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--06</code></td>
-<td>13 : 28 : 13</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-3-5-6-4</code></td>
+<td>3 : 5 : 6 : 4</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--07</code></td>
-<td>10 : 34 : 10</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-3-6-5-4</code></td>
+<td>3 : 6 : 5 : 4</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_03d--08</code></td>
-<td>8 : 38 : 8</td>
-<td><code>set_04</code>: default, <code>flow_02</code>, <code>flow_04</code>, <code>flow_06</code>, <code>flow_01</code>, <code>flow_03</code>, <code>flow_05</code><br><code>set_05</code>: default, <code>flow_03</code>, <code>flow_04</code>, <code>flow_01</code>, <code>flow_02</code><br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code><br><code>set_03</code>: default, <code>flow_01</code></td>
+<td><code>four-7-6-5-4</code></td>
+<td>7 : 6 : 5 : 4</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04</code></td>
-<td>13 : 13 : 13 : 13</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default</td>
+<td><code>four-6-7-5-4</code></td>
+<td>6 : 7 : 5 : 4</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04a</code></td>
-<td>13 : 13 : 13 : 13</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_01</code><br><code>set_05</code>: default<br><code>set_06</code>: default</td>
+<td><code>four-5-6-7-4</code></td>
+<td>5 : 6 : 7 : 4</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04b</code></td>
-<td>13 : 13 : 13 : 13</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code><br><code>set_04</code>: default</td>
+<td><code>four-5-7-6-4</code></td>
+<td>5 : 7 : 6 : 4</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04c</code></td>
-<td>13 : 13 : 13 : 13</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default<br><code>set_04</code>: <code>flow_01</code>, default</td>
+<td><code>four-4-5-6-7</code></td>
+<td>4 : 5 : 6 : 7</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04a--01</code></td>
-<td>18 : 13 : 13 : 8</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_01</code><br><code>set_05</code>: default<br><code>set_06</code>: default</td>
+<td><code>four-4-5-7-6</code></td>
+<td>4 : 5 : 7 : 6</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04a--02</code></td>
-<td>19 : 13 : 10 : 10</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_01</code><br><code>set_05</code>: default<br><code>set_06</code>: default</td>
+<td><code>four-4-6-7-5</code></td>
+<td>4 : 6 : 7 : 5</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04a--03</code></td>
-<td>23 : 13 : 8 : 8</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_01</code><br><code>set_05</code>: default<br><code>set_06</code>: default</td>
+<td><code>four-4-7-6-5</code></td>
+<td>4 : 7 : 6 : 5</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04a--04</code></td>
-<td>22 : 16 : 7 : 7</td>
-<td><code>set_03</code>: default<br><code>set_04</code>: default, <code>flow_01</code><br><code>set_05</code>: default<br><code>set_06</code>: default</td>
+<td><code>four-9-8-7-6</code></td>
+<td>9 : 8 : 7 : 6</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04b--01</code></td>
-<td>8 : 13 : 18 : 13</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code><br><code>set_04</code>: default</td>
+<td><code>four-8-9-7-6</code></td>
+<td>8 : 9 : 7 : 6</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04b--02</code></td>
-<td>10 : 10 : 19 : 13</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code><br><code>set_04</code>: default</td>
+<td><code>four-7-8-9-6</code></td>
+<td>7 : 8 : 9 : 6</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04b--03</code></td>
-<td>8 : 8 : 23 : 13</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code><br><code>set_04</code>: default</td>
+<td><code>four-7-9-8-6</code></td>
+<td>7 : 9 : 8 : 6</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04b--04</code></td>
-<td>7 : 7 : 22 : 16</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default, <code>flow_01</code>, <code>flow_02</code><br><code>set_04</code>: default</td>
+<td><code>four-6-7-8-9</code></td>
+<td>6 : 7 : 8 : 9</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04c--01</code></td>
-<td>13 : 18 : 13 : 8</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default<br><code>set_04</code>: <code>flow_01</code>, default</td>
+<td><code>four-6-7-9-8</code></td>
+<td>6 : 7 : 9 : 8</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04c--02</code></td>
-<td>13 : 19 : 10 : 10</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default<br><code>set_04</code>: <code>flow_01</code>, default</td>
+<td><code>four-6-8-9-7</code></td>
+<td>6 : 8 : 9 : 7</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04c--03</code></td>
-<td>13 : 23 : 8 : 8</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default<br><code>set_04</code>: <code>flow_01</code>, default</td>
+<td><code>four-6-9-8-7</code></td>
+<td>6 : 9 : 8 : 7</td>
+<td>Automatic/exact four; left-to-right or widest-first</td>
 </tr>
 <tr>
-<td><code>grid_04c--04</code></td>
-<td>16 : 22 : 7 : 7</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_06</code>: default<br><code>set_04</code>: <code>flow_01</code>, default</td>
+<td><code>mosaic-6</code></td>
+<td>6 interlocking items</td>
+<td>Exactly 6; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_04d--01</code></td>
-<td>13 : 13 : 18 : 8</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_04</code>: default<br><code>set_06</code>: default, <code>flow_02</code></td>
+<td><code>mosaic-7</code></td>
+<td>7 interlocking items</td>
+<td>Exactly 7; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_04d--02</code></td>
-<td>10 : 13 : 19 : 10</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_04</code>: default<br><code>set_06</code>: default, <code>flow_02</code></td>
+<td><code>mosaic-8</code></td>
+<td>8 interlocking items</td>
+<td>Exactly 8; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_04d--03</code></td>
-<td>8 : 13 : 23 : 8</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_04</code>: default<br><code>set_06</code>: default, <code>flow_02</code></td>
+<td><code>mosaic-9</code></td>
+<td>9 interlocking items</td>
+<td>Exactly 9; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_04d--04</code></td>
-<td>7 : 16 : 22 : 7</td>
-<td><code>set_03</code>: default<br><code>set_05</code>: default<br><code>set_04</code>: default<br><code>set_06</code>: default, <code>flow_02</code></td>
+<td><code>mosaic-10</code></td>
+<td>10 interlocking items</td>
+<td>Exactly 10; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_05</code></td>
-<td>10 : 10 : 10 : 10 : 10</td>
-<td><code>set_05</code>: default</td>
+<td><code>mosaic-11</code></td>
+<td>11 interlocking items</td>
+<td>Exactly 11; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_06</code></td>
-<td>8 : 8 : 8 : 8 : 8 : 8</td>
-<td><code>set_06</code>: default</td>
+<td><code>mosaic-12</code></td>
+<td>12 interlocking items</td>
+<td>Exactly 12; fixed map; Neat/Thin</td>
 </tr>
 <tr>
-<td><code>grid_02a--07</code></td>
-<td>35 : 21</td>
-<td><code>set_03</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_01</code><br><code>set_04</code>: default, <code>flow_02</code>, <code>flow_01</code><br><code>set_05</code>: default, <code>flow_02</code>, <code>flow_03</code>, <code>flow_04</code>, <code>flow_05</code>, <code>flow_06</code>, <code>flow_07</code>, <code>flow_01</code><br><code>set_06</code>: default, <code>flow_01</code></td>
+<td><code>mosaic-13</code></td>
+<td>13 interlocking items</td>
+<td>Exactly 13; fixed map; Neat/Thin</td>
 </tr>
-</tbody></table></div></div></section>
-</div></main></body></html>
+</tbody></table></div>
+
+</article>
+</div>
+</main></body></html>

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { describeDiagram } from '../docs/workbench/accessibility.mjs';
-import { recipes, layoutsFor } from '../docs/assets/graph-paper/src/ruler/geometry.mjs';
+import { recipes, layoutsFor } from '../docs/assets/graph-paper/src/legacy/0.4/ruler/geometry.mjs';
 
 test('nonvisual previews describe occupied positions, stacking, and full-width fallback', () => {
   const selection = { grid: 'grid_03a--07', set: 'set_06', flow: 'default', items: 8, field: 'wide' };

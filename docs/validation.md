@@ -1,68 +1,57 @@
 # Validation
 
-This is the maintainer's reference for checking the library, static documentation, and configurator. For everyday use, see [Getting started](getting-started.md); for repository setup and source ownership, see [Contributing](contributing.md).
+Validation checks the current 0.5 contracts and preserves the explicitly versioned legacy references. It does not turn any particular composition into a universally appropriate design or an accessibility guarantee for arbitrary content.
 
-## Local checks
+## Reproduce the build and package
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm build
 pnpm check
+pnpm validate
 pnpm docs:check
-pnpm size
-pnpm pack --dry-run
+pnpm test:package
+pnpm test:distribution --engine=chromium
+pnpm test:distribution --engine=webkit
 ```
 
-The build regenerates distributions, geometry records, configurator mirrors, and static documentation. `pnpm check` verifies deterministic output and runs Node tests. Edit maintained Markdown sources and shared navigation, then run `pnpm docs:build` or the full build. Documentation checks catch stale HTML, raw Markdown site links, missing local targets and anchors, and broken module imports.
+`check` verifies deterministic distributions, diagnostic mappings, maintained fixtures, static docs and unit tests without changing generated files. `validate` checks catalogue/ruler invariants. Package tests inspect the actual publish tarball, exported bytes, static docs assets, development exclusions and the complete scoped legacy inspector module graph. They do not publish or install it.
 
-Node coverage includes ruler closure, supported recipe/set/flow placements, sequential occupancy, source order, discovery metadata, band arithmetic, normalized flows, accepted geometry changes, emission specificity, and distribution independence. All 1,039 named combinations are covered by emission checks.
-
-Core and optional bands retain separate gzip ceilings of 12KB and 8KB. Use `pnpm size` for current measured sizes rather than inferring footprint from generated line counts.
-
-## Browser commands
+## Run the structural matrices
 
 ```sh
-pnpm browsers:install
-pnpm test:browsers
-pnpm test:distribution
-# Configurator and documentation only, all three engines:
-pnpm test:browsers --configurator-only
+pnpm test:browsers --engine=chromium
+pnpm test:browsers --engine=webkit
+pnpm test:padding --engine=chromium
+pnpm test:padding --engine=webkit
+pnpm test:vertical-spacing --engine=chromium
+pnpm test:vertical-spacing --engine=webkit
 ```
 
-The runner uses pinned Playwright against Chromium, Firefox, and WebKit. The distribution matrix additionally exercises ordinary, minified, and layered builds with host overrides.
+The core matrix covers proportions, whole-bit fields, allocation, traversal, exact-count eligibility/restoration, spanning endpoints, responsive selections, narrow inherited rulers, continuation/rebasing, rules, source/focus order, mosaics, cleanup and no-JavaScript rendering. Independent frozen geometry and enumeration oracles guard against merely repeating the compiler formulas.
 
-An isolated Linux environment can run the same suite after dependencies are installed and `test-results/` exists:
+Utility matrices cover zero/one/two-bit amounts, overrides, overlays, nesting, viewport resets, content-sized row effects and percentage-based gutters without measurement. Distribution checks exercise all four delivery forms and layered author overrides.
 
-```sh
-docker run --rm --ipc=host \
-  -v "$PWD":/workspace:ro \
-  -v "$PWD/test-results":/workspace/test-results \
-  -w /workspace mcr.microsoft.com/playwright:v1.64.0-noble \
-  node scripts/run-browsers.mjs
-```
+`--quick` on the core browser script omits exhaustive profiles. Report it as a smoke test, not full release qualification. Feature-off tests in modern engines are not tests of an actual older browser.
 
-Add `--distribution` to the final command for all distribution variants, or `--configurator-only` for documentation/tooling checks. Results are written to ignored `test-results/browsers.json`; tested engines are not claims about oldest-supported browser versions.
+## Reproduce the complete qualification
 
-## Structural coverage
+`pnpm test:release --suite=core`, `--suite=utilities`, `--suite=tools` and `--suite=package` run the maintained groups and record browser versions, commands, logs and before/after CSS hashes. Browser groups default to Chromium, Firefox and WebKit; add `--engine=firefox` to choose one. Run groups sequentially when they share fixed server ports.
 
-The core matrix tests 16,710 combinations per build: recipe/field geometry, named flows, sequential continuation, source order, subgrid, nested canvases, overlays, rules, and explicit placement. Optional bands add 64,230 boundary cases plus 2,070 minified cases per engine, including nested responsiveness and enlarged root text.
+`pnpm test:fallback` accepts an explicitly supplied older executable through `--executable`; a matching older driver can be supplied with `--driver`. It requires an actual engine without native counting and records the observed fallback mode without changing CSS. Older executable downloads are a test prerequisite, not a package dependency. See [Browser support](browser-support.md) for the actual tested builds and limitations.
 
-The 0.2.3 migration audit has 204 exact matches and twelve accepted whole-bit adjustments. The isolated baseline renderer is retained for regression and visual comparison. See the [migration guide](migration.html) and [coordinate record](geometry-changes.md).
+## Check the documentation and configurator
 
-## Configurator and site coverage
+Run `pnpm test:docs --engine=chromium` or `--engine=webkit` for site navigation, modern layout geometry, readable measures, ruler visibility, copyable examples and narrow-screen reflow. Run `pnpm test:configurator --engine=chromium` and then `--engine=webkit --docs-only` for controls, all catalogue choices, transitions, exact counts, exports, URL state, keyboard focus and isolated static delivery. Run the configurator engines sequentially because they share one local server port.
 
-Tooling checks cover compatible choices and explicit defaults, item-count changes without replacing content nodes, equivalent versus unavailable options, responsive diagrams and transition targets, rule customization, visual aids, independent docking, and hide/restore behavior. Rendered placements are checked against actual generated CSS, not just thumbnail drawings.
+Markdown is maintained source; HTML and module/CSS mirrors are generated and checked in for static delivery. `docs:check` verifies local links, anchors and module imports. No dependency on the separate editorial demo is required.
 
-Editorial checks measure ruler alignment, recipe geometry, bounded reading measure, narrow-width reflow, and preview independence. Every public documentation page is checked at 320, 640, and 1440px for shared navigation geometry, active-page links, target sizes, and page overflow. Static HTML links and the isolated legacy reference are also checked.
+## Preserve baselines without confusing APIs
 
-The copyable alignment examples are extracted from the generated documentation and rendered against core CSS. Checks verify outer item placement, inherited-bit subgrid insets, and inner canvases responding independently across narrow and wide widths.
+The 0.4 stylesheet hashes are checked against the preserved reference. Original 0.2.3 CSS has its own frozen source hash and geometry fixture. Their regression commands remain separate from current-core qualification. The twelve historical whole-bit adjustments are recorded under [Migration](migration.md#earlier-023-migration-record).
 
-Page-level composition checks additionally exercise representative pages through 2560px. They verify a page-width ruler without a bounded site shell, centered recipe-based reading positions, and host typographic measures that stop text containers growing without shrinking the ruler or data fields.
+## Interpret evidence carefully
 
-The responsive-design and site-authoring guides additionally check recurring title, prose, and ordinary-table left edges, including either side of their shared expanded transition. Dense reference views have their own bounded measure instead of widening every table section.
+Runtime benchmarks measure synchronous style/layout work on identified hardware and browser versions; they exclude paint, GPU work and real-device interaction. Record the CSS hash and keep content, options and device matched for comparisons. Compressed transfer size and runtime work are different costs.
 
-## Accessibility and design limits
-
-Accessibility regression checks cover short control names and separate descriptions, radio-group semantics and keyboard navigation, unavailable-choice skipping, stable announcements, Escape behavior, unobscured page focus, narrow-screen docking, and forced colors. Source labels are tested for contrast and do not rely on color alone.
-
-These automated checks do not replace manual VoiceOver/NVDA testing, a comprehensive accessibility audit, or evaluation with real content. Passing geometry does not guarantee a useful reading measure, balanced composition height, or good editorial emphasis. Test host typography, imagery, component behavior, and content diversity in the consuming site.
+Structural and keyboard checks do not replace manual screen-reader, magnification, contrast, source-hierarchy or content review. Native focus order is preserved; visual traversal can still be inappropriate. Current checks focus on horizontal left-to-right writing. The structural matrix includes the shared row-budget safeguard described in [Browser support](browser-support.md): boundary counts, exact requests, endpoint rows, visible non-overlap and restoration across all four builds. Manual assistive-technology review remains a separate release gate.

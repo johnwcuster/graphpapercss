@@ -1,57 +1,49 @@
 # Architecture
 
-Graph Paper has one 64-bit ruler. A canvas starts it; a field selects an interval. Grid, set, and flow compose content on it. Subgrid continues inherited alignment; a nested canvas starts a new ruler and responsive context.
+Graph Paper is a spatial arrangement library. Its authoritative model is a **64-bit ruler**, an assigned field and layout, direct participants, and explicit continuation or rebasing for nested composition. Responsive selection is authored separately.
 
-This architecture ships in the 0.4.0 preview of 1.0 and is unchanged in 0.4.1, which updates documentation and the configurator. The examples work with both releases. For installation, use [Getting started](getting-started.md). For class syntax and defaults, use the [class reference](class-reference.md).
+## Coordinates and usable space
 
-## Canvas and fields
+A `gp_ruler` establishes 64 equal local tracks. Layouts use those coordinates directly or receive an assigned portion through a continuation wrapper. A `gp_rebase_64` starts 64 new tracks inside its local area.
 
-A `gp_canvas` establishes 64 equal CSS Grid tracks and a named inline-size query container. One bit is 1/64 of its content width. Structural coordinates are integer bits; zero-based ruler coordinates translate to CSS line numbers by adding one.
+Spacing selects the usable field and internal gutters. Full, Neat, Thin, Wide and Ruled use nominal fields of 64, 60, 59, 58 and 56 bits. Item spans account for internal gutters; a field's bit count is not the width of one column. Whole-bit cumulative rounding closes the field and preserves nonempty spans on inherited rulers.
 
-A direct-child `gp_field` continues the canvas tracks through subgrid. Its modifier chooses an interval, outer insets, and internal structural gutters.
+There is no separate `gp_field` or `gp_canvas` requirement in the new API. Those names belong to the previous version; [Migration](migration.md) explains the boundary.
 
-| Field | Interval (bits) | Width | Internal gutter |
-| --- | --- | ---: | ---: |
-| Full | [0,64] | 64 | 0 |
-| Neat | [2,62] | 60 | 0 |
-| Thin | [2,61] | 59 | 1 |
-| Wide | [3,61] | 58 | 2 |
-| Ruled | [4,60] | 56 | 2 |
+## Select an arrangement
 
-Gutters occupy ruler bits, rather than CSS column gaps. Adding horizontal grid gaps, padding, or a different track definition to these grids breaks that coordinate model. Component styling and vertical spacing belong to the host project.
+The catalogue includes Stack, repeating Peers, two-/three-/four-region compositions, and exact-count mosaics. Proportions are physical left to right. Traversal assigns source runs independently. Selection is available through public classes and equivalent named custom-property tokens.
 
-## Recipes and occupancy
+A recognized layout class activates composition behavior; assigning `--gp-layout` to an arbitrary unmarked element is insufficient. Public selection inputs are typed and non-inheriting so an outer layout does not silently configure an independently selected inner layout.
 
-A grid recipe defines broad macro regions and expanded proportions. A set selects named item positions; flow refines their placement without changing source order. Region count, position count, and actual item count are distinct.
+## Count and allocate direct participants
 
-Without a named set, items occupy regions sequentially and continue into later rows. With a named set, unfilled positions preserve the selected geometry and additional items use full-width fallback. Each field resets inherited placement inputs so an outer recipe does not accidentally populate an inner one.
+Native CSS counts direct element children. All elements count, including hidden ones; comments, text and descendants do not increase the outer count. There is no author-maintained count variable or `set_*` selection.
 
-Geometry is resolved onto whole-bit boundaries for the selected field. Flow describes placement relative to macro starts and ends, independently of field geometry. See [Authoring compositions](authoring.md) for editorial decisions and the [class reference](class-reference.md) for valid-combination lookup.
+Repeating layouts traverse rows. Compositions allocate consecutive source runs to regions and coordinate content-sized rows. Adjacent coprime counts avoid shared internal subdivisions that can look like row-major reading. Exact physical-count requests refine eligible allocations; invalid requests restore automatic behavior.
 
-## Responsive context
+Mosaics use fixed reviewed maps for exactly six through thirteen items. Their implicit rows remain content-sized. They do not pack a viewport, guarantee equal visible areas, or create independent masonry columns.
 
-The default compact and expanded thresholds are 30rem and 60rem of canvas width. Compact layouts use normalized simplified arrangements; stacked layouts use block flow in source order. Graph Paper does not reorder the DOM or use positive tabindex to reconcile reading order.
+## Keep response separate from coordinates
 
-Optional experimental bands replace default thresholds with geometry-derived transitions based on minimum useful position width. They do not change the recipe's expanded proportions or select another compact arrangement. Fields on the same canvas may choose different bands, but they still reference that canvas's width.
+Six mobile-up viewport steps select layouts and controls. Every decision carries forward independently until replaced. Continuing or rebasing tracks does not create a local breakpoint. Component-specific conditions remain author CSS selecting the same public tokens.
 
-A narrower field does not establish a narrower query context. See [Responsive design](responsive-design.md) for the authoring model and the [band reference](responsive-bands.md) for arithmetic and calibration.
+The library does not infer an item's semantic importance, inspect text length or automatically replace a narrow but structurally valid composition. The author owns those decisions.
 
-## Continuing and rebasing alignment
+## Own each kind of spacing explicitly
 
-Subgrid continues the tracks occupied by a semantic wrapper. Its descendants use local inherited line numbers; it creates no query container and assigns no automatic inner recipe.
+Gutters, item padding and vertical spacing are distinct. Ordinary layouts have no implicit vertical gaps. Thin mosaics supply one-bit top-margin defaults below their top row; explicit vertical-spacing classes replace those defaults.
 
-A nested canvas rebases both geometry and response. It establishes its own 64 bits based on its own width, with fields explicitly selected again. Choose it for independent inner composition, not as a substitute for inherited alignment. See [Alignment and nesting](alignment.md).
+Padding and vertical spacing resolve percentages from assigned tracks without capturing a length on an ancestor. Column rules and author-owned CSS can opt into `gp_ruler--measure` when they need a captured `--gp-ruler-bit` length. Continuation preserves that rhythm; a measured rebase establishes a local one. Measurement is not a responsive selection.
 
-## Rules and exceptions
+## Preserve normal CSS ownership
 
-Ruled fields reserve whole-bit gutters. Explicit edge ownership places markers at their centers; placement metadata suppresses outer edges and inappropriate responsive markers. Rules, explicit placement, bit insets, and optical adjustments are documented in the [class reference](class-reference.md).
+Selection and placement use zero-specificity selectors. Host CSS supplies type, measure, images, component styling and any custom positioning. It can override public layout tokens or utility declarations through ordinary cascade rules. Private numeric IDs and `--_gp-*` arithmetic are implementation details; minification may rename them.
 
-Structural alignment uses integer ruler coordinates. Optical adjustments are intentional visual exceptions, not changes to the coordinate system.
+The layered build contains the same core in `@layer graph-paper`. It is an alternative delivery form, not an additional sheet to load on top of the unlayered core.
 
-## Scope
+## Apply conservative safeguards
 
-Core supplies composition, not typography, colors, components, image helpers, print styling, or vertical rhythm. Modern browser requirements and distribution choices are documented under [Browser support and builds](browser-support.md).
+An underfilled or unsupported Three/Four composition stacks. An ineligible mosaic stacks without choosing another map. The two-region native-arithmetic-off profile uses equal repeating pairs, retaining explicitly spanning endpoints when applicable. Feature-disabled tests in modern engines do not establish an older-browser support guarantee.
 
-The configurator is optional documentation tooling, separate from core CSS. Its interface is documented in [Configurator help](configurator-help.html); it is not a published inspector script or a required runtime.
-
-For existing sites, [Migration from 0.2.3](migration.html) explains compatibility choices and the twelve intentional whole-bit geometry changes. For maintainers, [Contributing](contributing.md) identifies manifests, generators, and tests.
+The core needs no runtime JavaScript. The configurator generates HTML and the inspector is optional tooling; neither is part of layout computation. See [Class reference](class-reference.md), [Browser support and builds](browser-support.md), and [Validation](validation.md).

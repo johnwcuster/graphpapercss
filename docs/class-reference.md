@@ -1,143 +1,119 @@
 # Class reference
 
-Use this page to look up the modern CSS authoring contract. For a first example, see [Getting started](getting-started.md); for choosing relationships around content, see [Authoring compositions](authoring.md).
+This reference describes the **0.5 API in the current build**. Use the [configurator](configurator.html) to discover a plausible arrangement, then use this page to understand its markup and defaults. Older grid/set/flow classes are documented only through [migration](migration.md) and the [0.4 reference](configurator-0.4.html).
 
-## Required structure
+## Coordinates and wrappers
+
+| Expression | Place it on | Effect |
+| --- | --- | --- |
+| `gp_ruler` | A standalone coordinate root | Establish 64 local tracks; it can also select a layout |
+| `gp_continue_tracks` | An assigned participant containing an inner layout | Continue only the parent tracks spanning this participant |
+| `gp_rebase_64` | The local root inside the continuation wrapper | Subdivide its assigned area into 64 fresh tracks |
+| `gp_ruler--measure` | The ruler/rebased root needing captured lengths | Enable `--gp-ruler-bit` for rules or author CSS; unnecessary for padding and mosaic margins |
+
+Use [the documented nesting forms](alignment.md), keeping parent placement separate from inner selection. Coordinates do not themselves select a responsive design.
+
+## Layouts and viewport aliases
+
+`gp_layout--ID` selects the base layout. `gp_PREFIX--ID` selects it at a supported viewport threshold. Examples: `gp_layout--two-3-2`, `gp_md--three-1-2-1`, `gp_xl--mosaic-8`.
+
+| Prefix | Minimum viewport |
+| --- | ---: |
+| `xs` | 30rem |
+| `sm` | 40rem |
+| `md` | 48rem |
+| `lg` | 64rem |
+| `xl` | 80rem |
+| `2xl` | 96rem |
+
+Class order does not change breakpoint priority. Omitted decisions carry forward. A custom-property selection such as `--gp-layout: var(--gp-two-3-2)` uses the same arrangement, but the element still needs a recognized layout class for participation.
+
+## Allocation and traversal
+
+| Decision | Classes | Default and scope |
+| --- | --- | --- |
+| Automatic preference | `gp_allocation--closest`, `--stronger` | Closest; Two and Four |
+| Fewer-item side | `gp_fewer--left`, `--right` | Left; Two only |
+| First source run | `gp_traversal--left-to-right`, `--right-to-left`, `--center-first`, `--widest-first` | Left-to-right; permitted alternatives depend on family |
+| Full-width endpoints | `gp_arrangement--across`, `--first-above`, `--last-below`, `--first-above-last-below` | Across; spanning applies to Two only |
+
+Each control has viewport aliases, for example `gp_md-allocation--stronger`, `gp_lg-fewer--right`, `gp_xl-traversal--center-first` and `gp_sm-arrangement--first-above`. Explicit defaults reset earlier values. Selection through CSS uses `--gp-allocation:var(--gp-stronger)`, `--gp-fewer:var(--gp-fewer-right)`, `--gp-traversal:var(--gp-center-first)` and `--gp-arrangement:var(--gp-first-above)`.
+
+Two chooses a coprime pair differing by at most four. Closest prefers the nearest valid pair; Stronger prefers greater difference. The fewer-side choice and source traversal are independent of physical widths.
+
+Three chooses among positive physical triples with spread at most two and coprime neighbors. Its automatic preference favors matching outer counts, a differentiated center, then smaller spread and the remaining deterministic tie-breaks. There is no Three allocation-mode switch. Center-first is available at all supported counts; right-to-left is available only at exactly three items and otherwise normalizes to left-to-right.
+
+Four selects from its reviewed automatic candidate pool, with spread at most four and coprime physical neighbors. Widest-first ranks nominal physical widths, independently of bit-rounding ties. Equal quarters and unsupported traversal requests normalize to left-to-right. Proportions and traversal can change which automatic allocation is eligible.
+
+## Exact physical counts
+
+The configurator offers eligible tuples for the current source count; it does not require memorizing them. A copied refinement names physical regions and includes viewport-specific properties when needed.
 
 ```html
-<div class="gp_canvas">
-  <section class="gp_field gp_field--wide grid_02">
-    <article>First item</article>
-    <article>Second item</article>
-  </section>
-</div>
+<section class="gp_ruler gp_layout--three-1-2-1 gp_spacing--neat"
+         style="--gp-exact-count-left:5;
+                --gp-exact-count-center:3;
+                --gp-exact-count-right:4;">
+  <!-- Exactly 12 direct participants for this request -->
+</section>
 ```
 
-| Class | Apply to | Contract |
+| Layout | Physical properties | Eligibility |
 | --- | --- | --- |
-| `gp_canvas` | A container around fields | Starts 64 equal tracks and a named inline-size responsive context. Its width normally follows its parent. |
-| `gp_field` | A direct child of a canvas | Continues the ruler and selects its usable span through exactly one field modifier. |
-| `grid_*` | The field | Chooses the responsive composition recipe and expanded macro proportions. Use one recipe. |
-| `set_03`–`set_06` | The recipe-bearing field, if compatible | Selects a named arrangement of positions. Omit for sequential occupancy. |
-| `flow_*` | The same field, if compatible with the named set | Refines placement. Omit for the set's default flow. |
-| `gp_band--01`–`gp_band--03` | The same field, optionally | Replaces default transition thresholds. Requires the separate bands stylesheet. Use at most one. |
+| Spanning Two supports | `left`, `right`; `center` zero/unset | Total equals non-spanning support count; positive coprime pair, difference at most four |
+| Three | `left`, `center`, `right` | Total equals direct count; positive integers, spread at most two, coprime neighbors |
+| Four | `left`, `center-left`, `center-right`, `right` | Total equals direct count; positive integers, spread at most four, coprime neighbors |
 
-Items are the field's direct element children, regardless of tag name. A wrapper, heading, or decorative element added as another direct child participates in item counting. Put internal component structure inside the intended item instead.
+Prefix every property with `--gp-exact-count-`. Responsive forms insert the viewport prefix: `--gp-md-exact-count-left`. Ordinary Across Two ignores exact requests. Mosaics and Peers do not use these inputs.
 
-A field without a recipe can frame prose or other full-span content: its direct children default to full field width. A field is not an independent query container.
+Requests remain present when counts change. Incomplete, invalid or mismatched tuples use automatic allocation and reactivate when eligible. Omission carries forward the last matching regional input; explicit zero replaces it and restores automatic allocation when the tuple becomes ineligible. `initial` or `unset` removes that breakpoint input and reveals an earlier value. Requests do not inherit into independently selected nested layouts.
 
-## Fields and gutters
+## Gutters and fields
 
-| Modifier | Canvas interval | Usable bits | Internal gutter |
-| --- | --- | ---: | ---: |
-| `gp_field--full` | [0,64] | 64 | 0 bits |
-| `gp_field--neat` | [2,62] | 60 | 0 bits |
-| `gp_field--thin` | [2,61] | 59 | 1 bit |
-| `gp_field--wide` | [3,61] | 58 | 2 bits |
-| `gp_field--ruled` | [4,60] | 56 | 2 bits, with explicit rule owners |
+| Class | Field bits | Outer insets, left/right | Internal gutter |
+| --- | ---: | --- | ---: |
+| `gp_spacing--full` | 64 | 0 / 0 | 0 |
+| `gp_spacing--neat` | 60 | 2 / 2 | 0 |
+| `gp_spacing--thin` | 59 | 2 / 3 | 1 bit |
+| `gp_spacing--wide` | 58 | 3 / 3 | 2 bits |
+| `gp_spacing--ruled` | 56 | 4 / 4 | 2 bits |
 
-One bit is 1/64 of the canvas content width. These intervals are zero-based coordinates, not CSS line numbers. Gutters occupy ruler bits between macro regions; they are not CSS `column-gap`. An item spanning regions includes their intervening space.
+Use an explicit spacing class in ordinary authoring; the unconfigured field is Full. Responsive forms include `gp_lg-spacing--wide`. Nominal field bits include internal gutters; actual item spans deduct them. On continued rulers, insets and gutters are bounded to preserve nonempty spans. Mosaics support only Neat/Thin and otherwise stack.
 
-Do not add horizontal CSS gap or padding, or replace track definitions, on the canvas/field grids. Component padding belongs inside items. Vertical gaps and margins remain host-controlled; stacked fields become block flow, so grid row gaps alone do not supply stacked spacing.
-
-## Recipes, positions, and defaults
-
-Recipe families include two-, three-, and four-region alternatives, plus equal five- and six-region recipes. `grid_02a--07` is a 5:3 content-proportion option. The catalogue is constrained: not every number, letter, and variant combination exists.
-
-The region count describes expanded macro geometry, not item count or a guarantee at compact widths. Letters are family-specific alternatives. Numbered variants are proportional alternatives, not a universal prominence scale.
-
-| Choice | If omitted | With a supported selection |
-| --- | --- | --- |
-| Set | Sequential macro occupancy in expanded, pairs in compact, source order in stacked; continues into later rows | Recipe-specific named positions; unfilled positions remain, extra items fall back full-width |
-| Flow | The named set's intentional default | A compatible alternative placement without DOM reordering |
-| Band | Compact at 30rem and expanded at 60rem of canvas width | Geometry-derived thresholds for both transitions |
-
-Named sets are `set_03`, `set_04`, `set_05`, and `set_06`, subject to recipe compatibility. There is no `set_02`. Do not add a set just to make its suffix match the macro-region count.
-
-Item count need not equal position count. Unfilled positions can be deliberate negative space rather than an authoring error; [Composing a site](site-authoring.md#establish-a-recurring-reading-position) demonstrates a reading section occupying only its primary position. Review the result across responsive states instead of automatically changing the set.
-
-Flow IDs are also compatibility-dependent. A supported alternative can be visually equivalent for certain settings or occupied positions. An unsupported combination is not a documented way to request a fallback: use a real combination instead.
-
-## Find valid combinations
-
-The [configurator](configurator.html) exposes the catalogue, compatible sets and flows, real responsive previews, applied classes, and copyable markup. Disabled choices do not exist for the current combination; muted selectable choices are equivalent for the compared settings.
-
-The [static recipe catalogue](#recipe-catalogue) below lists every recipe and its supported named set/flow combinations without JavaScript. It is generated from the same manifests as the CSS. Search for an exact ID rather than assuming that every possible suffix exists.
-
-Repository tooling can read the same manifests without parsing generated CSS:
-
-```js
-import { recipes, layoutsFor, expandedPlacements, compactPlacements,
-  sequentialPlacements } from './src/ruler/geometry.mjs';
-
-const recipe = recipes.grid_03;
-const choices = layoutsFor(recipe); // Supported named set/flow combinations.
-const layout = choices.find(choice => choice.set === 'set_03' && !choice.flow);
-const expanded = expandedPlacements(recipe, 'wide', layout);
-const compact = compactPlacements('wide', layout);
-const gridOnly = sequentialPlacements(recipe, 'wide', 3, 'expanded');
-```
-
-`Object.keys(recipes)` lists valid recipe IDs. `layoutsFor` returns named combinations, not grid-only occupancy. Returned item line indices are local to the field. These modules are repository inspection/build tools, not a required client-side JavaScript API or a separately versioned package export.
-
-## Subgrid and nested canvases
-
-| Choice | Apply to | Inherits or starts |
-| --- | --- | --- |
-| `gp_subgrid` | A grid item/semantic wrapper spanning inherited tracks | Continues occupied tracks; does not create a new query context or automatically assign descendants a recipe |
-| Nested `gp_canvas` | An item or a container inside it | Starts an independent 64-bit ruler and responsive context; select an inner field again |
-
-Subgrid descendants use local inherited line numbers. A nested canvas's bits refer to its own width, not the outer ruler. See [Alignment and nesting](alignment.md) for complete examples.
-
-## Column rules
-
-Use `gp_field--ruled`, then assign `gp_rule--start` or `gp_rule--end` to a direct item owning an internal gutter edge. Assign one owner per shared gutter to avoid duplicate rules.
-
-```html
-<div class="gp_canvas">
-  <section class="gp_field gp_field--ruled grid_02 publication">
-    <article class="gp_rule--end">First item</article>
-    <article>Second item</article>
-  </section>
-</div>
-```
+Ruled spacing reserves the field; decoration also needs the measured coordinate root and an explicit `gp_rule--end` or `gp_rule--start` owner on a participant. Choose one owner per shared gutter. The library suppresses outer/nonexistent boundaries. Colors and stroke widths are public host choices:
 
 ```css
-.publication {
-  --gp-rule-color: #64748b; /* Defaults to currentColor. */
-  --gp-rule-width: 1px;    /* Defaults to 1px. */
+.article-group {
+  --gp-rule-color: #52625f;
+  --gp-rule-width: 1px;
 }
 ```
 
-The marker is centered one bit outside the item, halfway through the two-bit gutter. Generated placement metadata suppresses outer-edge markers, responsive full-span markers, and stacked rules. Rules use `::before`/`::after`; avoid assigning competing component decoration to the same pseudo-element. Other field modifiers do not activate ruled treatment.
+Rule color defaults to `currentColor` and width to `1px`. Keep measurement on the ruler that supplies the relevant coordinate rhythm. See [Edges and mixed spacing](edges-and-spacing.md).
 
-## Explicit adjustments
+## Padding and vertical spacing
 
-These are escape hatches, not prerequisites for normal recipe authoring.
-
-| Class | Inputs | Effect |
+| Expression | Placement | Effect |
 | --- | --- | --- |
-| `gp_place` | `--gp-column-start`, `--gp-column-end`; optional `--gp-row-start`, `--gp-row-end` | Explicit grid placement using local CSS line numbers. Row inputs default to `auto`. |
-| `gp_inset--bit` | Inherited `--gp-bit` | Adds one canvas-bit inline padding to an element; use inside items, not on the canvas/field grid. |
-| `gp_optical` | `--gp-optical-x`, `--gp-optical-y`, default `0em` | Translates visual appearance without changing structural layout; use font-relative offsets deliberately. |
+| `gp_pad`, `gp_pad--2`, `gp_pad--0` | Content item or full-region content layer | One, two or zero assigned ruler bits inside the element |
+| `gp_md-pad--0/1/2` and other prefixes | The same element | Mobile-up padding selection |
+| `gp_vertical-spacing--0/1/2` | Composition | Zero, one or two top-margin bits on direct items beginning below the top row |
+| `gp_md-vertical-spacing--0/1/2` and other prefixes | Composition | Mobile-up vertical-spacing selection |
 
-For example, on a descendant inside a subgrid:
+Keep rulers and continuation wrappers unpadded. A width-changing intermediate wrapper can interrupt percentage-based rhythm. Use a correctly sized content layer or host CSS for the constrained box.
 
-```html
-<div class="gp_place" style="--gp-column-start: 1; --gp-column-end: -1">
-  Content spanning the inherited tracks
-</div>
-```
+Ordinary layouts have no implicit vertical gaps. Thin mosaics default to one bit below the top row; Neat mosaics default to zero. Explicit vertical-spacing amounts replace those defaults; removing all utility classes restores them. Host margins/padding override the zero-specificity utilities normally. None of these utilities requires ruler measurement, fixed row heights or a native `row-gap`.
 
-Explicit placement must be authored and checked across responsive states. It does not automatically acquire a compact design or repair rule ownership; generated metadata still describes the original recipe. Do not treat internal generated custom properties as a general-purpose public placement API.
+## Counts, fallback and source order
 
-## Recipe catalogue
+Every direct element child counts, including hidden elements and inline element-level metadata. Keep stylesheet/script elements outside a composition when they are not intended participants. Text nodes, comments and grandchildren do not add to the count.
 
-Each row lists one real recipe. Region widths run from start to end in the wide field's expanded layout; these are content widths in canvas bits, excluding internal gutters, not universal proportions for every field. Use the configurator to see other fields and compact arrangements.
+Stack is the conservative underfill fallback. Peers repeat row-major and retain partial-row slots. Two/Three/Four group consecutive source items by region, with no enumerated maximum count. Spanning Two excludes the actual first item, last item or both before allocating supports; at least two supports are required. Three/Four underfill and mismatched mosaics stack without silently selecting a different layout.
 
-All recipes also support sequential occupancy with no set or flow class. In the named-combinations column, **default means omit the flow class**. Only the flows listed beside that set are supported for that recipe. Presence here does not imply a visible difference for every occupied item count or responsive state.
+The DOM and native focus sequence never change. Visual reordering and column-first traversal still require an author to review the finished content. Missing native count arithmetic has family-specific fallbacks; see [Browser support](browser-support.md).
 
-<!-- Source readers: the marker below expands in class-reference.html#recipe-catalogue.
-Repository agents can also use the manifest lookup above. -->
+## Layout catalogue
 
-<!-- recipe-catalogue -->
+IDs describe physical proportions, not semantic importance. Mosaic suffixes name exact item counts. The catalogue lists all current selections; use the configurator to narrow it by width relationship and then compare nearby proportions. Nominal ratios can round differently across fields; the accepted Four 9:8:7:6 Wide treatment uses 16/14/12/10 bit widths on a full ruler.
+
+<!-- layout-catalogue -->

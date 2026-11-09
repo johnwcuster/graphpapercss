@@ -46,7 +46,7 @@ select, button { font: inherit; padding: .35rem; }
 .semantic > h3, .semantic > p { grid-column: 1 / -1; margin-block: .5rem; }
 .semantic > aside { grid-column: 3 / -3; background: #aac9bd; }
 .nested { background: #ece2c6; }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; background: color-mix(in srgb, var(--site-ink) 4%, var(--site-paper)); padding: 1rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: color-mix(in srgb, var(--site-ink) 4%, var(--site-paper)); padding-block: 1em; }
 pre, code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 iframe { display: block; border: 0; height: 420px; }
 #comparison { overflow-x: auto; }

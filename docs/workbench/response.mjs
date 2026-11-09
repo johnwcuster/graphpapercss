@@ -1,17 +1,7 @@
-import { fields, recipes, layoutsFor, expandedPlacements, compactPlacements, sequentialPlacements } from '../assets/graph-paper/src/ruler/geometry.mjs';
-import { responsive } from '../assets/graph-paper/src/manifest/responsive.mjs';
-import { bands } from '../assets/graph-paper/src/manifest/bands.mjs';
-import { bandThresholds } from '../assets/graph-paper/src/ruler/bands.mjs';
-
-export const defaultThresholds = { compact: parseFloat(responsive.compact), expanded: parseFloat(responsive.expanded) };
-export const stateAt = (width, thresholds, rem = 16) => width >= thresholds.expanded * rem ? 'expanded' : width >= thresholds.compact * rem ? 'compact' : 'stacked';
-
-export function responseFor(selection, rem = 16) {
-  const recipe = recipes[selection.grid];
-  const layout = layoutsFor(recipe).find(l => l.set === selection.set && (l.flow ?? 'default') === selection.flow);
-  const thresholds = selection.band ? bandThresholds(recipe, selection.field, layout, selection.band) : { ...defaultThresholds };
-  return { recipe, layout, thresholds, state: stateAt(selection.width, thresholds, rem) };
-}
+import { fields, expandedPlacements, compactPlacements, sequentialPlacements } from '../assets/graph-paper/src/legacy/0.4/ruler/geometry.mjs';
+import { bands } from '../assets/graph-paper/src/legacy/0.4/manifest/bands.mjs';
+import { defaultThresholds, stateAt, responseFor } from '../assets/graph-paper/tools/shared/response.mjs';
+export { defaultThresholds, stateAt, responseFor };
 
 // A conservative structural comparison, not a claim of equal host typography.
 // Explicit rows are retained even when positions are empty. Fallback items keep

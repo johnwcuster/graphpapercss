@@ -50,7 +50,7 @@ try {
         console.log(`${name} bands.min.css: ${minified.passed ? "PASS" : "FAIL"}, ${minified.combinations} boundary cases`);
         if (!minified.passed) throw new Error(JSON.stringify(minified.failures));
       }
-      await page.goto(`${origin}/docs/configurator.html?grid=grid_03a&field=wide&set=set_06&width=1024`);
+      await page.goto(`${origin}/docs/configurator-0.4.html?grid=grid_03a&field=wide&set=set_06&width=1024`);
       await page.waitForFunction(() => document.querySelectorAll("#composition > article").length === 6);
       await expandOptions(page, ['gutter-options-toggle']);
       await page.click('#field-choices [data-field="ruled"]');
@@ -68,7 +68,7 @@ try {
       await page.goto(`${origin}/docs/legacy-reference.html?grid=grid_03&set=set_03&flow=&rhythm=wide&width=1024`);
       await page.frameLocator('#legacy-preview').locator('#reference article').first().waitFor();
       assert.equal(await page.frameLocator('#legacy-preview').locator('#reference article').count(), 3);
-      await page.goto(`${origin}/docs/configurator.html`);
+      await page.goto(`${origin}/docs/configurator-0.4.html`);
       await page.waitForFunction(() => document.querySelectorAll("#composition > article").length === 6);
       await setSourceCount(page, 2);
       assert.equal(await selected(page, "set"), "set_06");
@@ -110,7 +110,7 @@ try {
           return result.configurations;
         };
         const baseline = await collect();
-        for (const asset of ["compat.css", "compat.min.css", "legacy/main.css", "legacy/main.min.css"]) {
+        for (const asset of ["legacy/main.css", "legacy/main.min.css"]) {
           profile = asset;
           assert.deepEqual(await collect(), baseline, `${name}/${asset}: legacy capture changed`);
           reports.push({ browser: name, version: browser.version(), asset, passed: true, combinations: Object.keys(baseline).length, failures: [] });

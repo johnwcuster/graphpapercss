@@ -1,201 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Graph Paper CSS configurator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configurator — Graph Paper CSS</title>
   <link rel="stylesheet" href="./assets/graph-paper/main.css">
-  <link rel="stylesheet" href="./assets/graph-paper/bands.css">
+
   <link rel="stylesheet" href="./docs.css">
-  <link rel="stylesheet" href="./workbench.css">
   <link rel="stylesheet" href="./editorial.css">
+  <link rel="stylesheet" href="./sequence/style.css">
   <script type="module" src="./configurator.js"></script>
 </head>
 <body class="configurator-page">
-<p id="control-announcement" class="sr-only" role="status" aria-atomic="true"></p>
-<a class="workbench-skip" href="#workspace">Skip to composition</a>
-<div id="workbench" class="gp-workbench" data-dock="top" data-panel-dock="right" aria-label="Graph Paper workbench">
-  <div id="workbench-rail" class="workbench-rail" role="region" aria-label="Preview controls">
-    <a class="workbench-brand" href="./index.html">Graph Paper <span>Configurator</span></a>
-    <div class="rail-group rail-preview" role="group" aria-labelledby="rail-preview-label">
-    <span id="rail-preview-label" class="rail-group-label">Preview controls</span><div class="rail-group-controls">
-    <label class="rail-width">Preview width <input id="width" type="range" min="280" max="3200" value="1024" step="1"><output id="width-label"></output></label>
-    <details id="transition-menu" class="transition-menu"><summary>Test transitions</summary><div class="transition-options">
-      <h2 class="rail-menu-heading">Resize preview</h2>
-      <div id="boundary-steps" class="boundary-steps" role="group" aria-label="Test transition boundaries"></div>
-      <p class="meta">Set the preview width just below or above a transition.</p>
-      <p id="threshold-change" class="response-change" role="status">Changing settings keeps the preview width unchanged.</p>
-    </div></details>
-    <details class="overlay-menu"><summary>Visual aids</summary><div class="overlay-options">
-      <h2 class="rail-menu-heading">Annotate preview</h2>
-      <label><input id="breakpoint-guide" type="checkbox" checked> Layout transitions</label>
-      <label><input id="ruler-guide" type="checkbox" checked> 64-bit ruler</label>
-      <label><input id="field-guide" type="checkbox" checked> Field boundaries</label>
-      <label><input id="band-guide" type="checkbox"> Band minimum width</label>
-      <label><input id="layout-guide" type="checkbox"> Actual item boxes</label>
-      <label><input id="macro-guide" type="checkbox"> Expanded macro boundaries</label>
-      <label><input id="source-guide" type="checkbox" checked> Source order</label>
-    </div></details>
-    </div></div>
-    <div class="rail-group rail-utilities" role="group" aria-labelledby="rail-workbench-label">
-    <span id="rail-workbench-label" class="rail-group-label">Tools</span><div class="rail-group-controls">
-    <label>Preview dock <select id="dock"><option value="top">Top</option><option value="right">Right</option><option value="bottom">Bottom</option><option value="left">Left</option></select></label>
-    <a id="workbench-help" href="./configurator-help.html" target="_blank" rel="noopener" aria-label="Configurator help (opens in a new tab)">Help</a>
-    <button id="workbench-hide" class="panel-action" type="button" aria-keyshortcuts="Alt+Shift+G" title="Hide the rail and composition panel (Alt+Shift+G)"><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 8h18M15 8v13M6 12l6 6m0-6-6 6"/></svg>Hide workbench</button>
-    </div></div>
-  </div>
-  <button id="panel-toggle" class="composition-launcher panel-action" type="button" aria-expanded="true" aria-controls="workbench-panel" hidden><svg class="control-icon sidebar-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18M6 12h6m-3-3 3 3-3 3"/></svg>Edit composition</button>
-  <aside id="workbench-panel" class="workbench-panel" aria-label="Composition settings">
-    <header class="panel-heading"><h2>Composition</h2><span class="panel-heading-actions"><kbd title="Hide or restore the workbench (Option+Shift+G)" aria-label="Option Shift G: hide or restore the workbench">⌥ ⇧ G</kbd><button id="panel-close" class="panel-action" type="button" aria-label="Close panel: Composition"><svg class="control-icon sidebar-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18M17 10l3 4m0-4-3 4"/></svg>Close panel</button></span></header>
-    <label class="panel-dock-control">Composition dock <select id="panel-dock"><option value="right">Right</option><option value="left">Left</option></select></label>
-    <section id="source-section" class="composition-section" aria-labelledby="source-heading">
-      <header class="section-heading"><h3 id="source-heading">Source</h3>
-        <div class="source-incrementors" role="group" aria-label="Number of source items">
-          <button id="source-remove" type="button" aria-label="Remove last source item">−</button>
-          <output id="source-count" aria-label="Source item count" aria-live="polite"></output>
-          <button id="source-add" type="button" aria-label="Add another source item">+</button>
-        </div>
-      </header>
-    </section>
-    <section id="design-section" class="composition-section" aria-labelledby="design-heading">
-    <header class="section-heading"><h3 id="design-heading">Design</h3></header>
-    <details class="class-readout" open><summary>Applied classes</summary>
-      <dl><dt>Canvas element</dt><dd><code id="panel-canvas-classes">gp_canvas</code></dd><dt>Field element</dt><dd><code id="panel-field-classes"></code></dd></dl>
-      <button id="copy-field-classes" type="button">Copy field classes</button>
-    </details>
-    <fieldset id="macro-region-panel" class="selected-only"><legend>Number of macro regions</legend>
-      <div id="family-choices" class="number-choices" role="radiogroup" aria-label="Number of macro regions"></div>
-      <p id="choice-context" class="meta"></p>
-      <div class="options-panel">
-      <button id="illustration-toggle" type="button" aria-expanded="false" aria-controls="letter-choices variant-choices">Show options</button>
-      <div class="options-content">
-      <div id="letter-choices" class="visual-choices" role="radiogroup" aria-label="Letter alternatives"></div>
-      <hr class="design-separator">
-      <h4 class="choices-heading">Variants when expanded</h4>
-      <p id="variant-width-key" class="variant-width-key"></p>
-      <div id="variant-choices" class="visual-choices" role="radiogroup" aria-label="Proportion alternatives"></div>
-      </div></div>
-    </fieldset>
-    <fieldset id="set-panel" class="selected-only"><legend>Set within macro regions</legend>
-      <h4 class="choices-heading">Number of positions</h4>
-      <div id="set-choices" class="number-choices" role="radiogroup" aria-label="Number of positions"></div>
-      <h4 class="choices-heading">Flow between positions</h4>
-      <div class="options-panel">
-      <button id="set-options-toggle" type="button" aria-expanded="false" aria-controls="flow-choices">Show options</button>
-      <div class="options-content">
-      <div id="flow-choices" class="visual-choices" role="radiogroup" aria-label="Flow between positions"></div>
-      </div></div>
-    </fieldset>
-    <fieldset><legend>Usable width</legend>
-      <h4 class="choices-heading">Gutters</h4>
-      <div class="options-panel">
-      <button id="gutter-options-toggle" type="button" aria-expanded="false" aria-controls="field-choices">Show options</button>
-      <div class="options-content">
-      <div id="field-choices" class="visual-choices selected-only" role="radiogroup" aria-label="Gutters"></div>
-      </div></div>
-      <section id="rule-customization" class="rule-customization" aria-label="Column rule color" hidden>
-        <p>Rule color defaults to <code>currentColor</code>. Adapt this in your stylesheet:</p>
-        <pre id="rule-css">.gp_field--ruled {
-  --gp-rule-color: #86503d;
-}</pre>
-        <button id="copy-rule-css" type="button">Copy rule CSS</button>
-        <p>Use the rule markers in the markup below. Rules are hidden when stacked.</p>
-      </section>
-    </fieldset>
-    <fieldset id="responsive-design"><legend>Responsive design</legend>
-      <details class="response-introduction"><summary>What triggers layout shifts?</summary>
-        <p>By default, Graph Paper switches between stacked, compact, and expanded layouts at canvas widths of 30rem and 60rem—not viewport widths.</p>
-        <p>Bands work like breakpoints, but specify a minimum useful width for the narrowest defined position. Graph Paper uses that minimum to calculate replacement transition widths as the canvas grows or shrinks. It does not measure the text inside your items.</p>
-        <p>Smaller bands allow narrower positions before switching; larger bands switch at wider canvas widths. Changing a band changes the transition points, not the canvas width.</p>
-        <details id="band-calculation"><summary>How the band is calculated</summary><p id="response-calculation"></p></details>
-      </details>
-      <div class="options-panel">
-      <button id="band-options-toggle" type="button" aria-expanded="false" aria-controls="band-choices">Show options</button>
-      <div class="options-content">
-      <p id="band-axis" class="band-axis"></p>
-      <p class="band-legend"><span class="band-key stacked">S · Stacked</span><span class="band-key compact">C · Compact</span><span class="band-key expanded">E · Expanded</span><span class="band-marker-key"><span class="current-line-key" aria-hidden="true"></span>Preview width</span><span class="band-marker-key"><span class="default-line-key" aria-hidden="true"></span>Default · 30 / 60rem</span></p>
-      <div id="band-choices" class="band-choices selected-only" role="radiogroup" aria-label="Responsive bands"></div>
-      </div></div>
-    </fieldset>
-    </section>
-  </aside>
-</div>
-<button id="workbench-launcher" class="gp-workbench workbench-launcher panel-action" type="button" aria-controls="workbench" aria-expanded="false" aria-keyshortcuts="Alt+Shift+G" hidden><svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 8h18M15 8v13M6 15h6m-3-3v6"/></svg>Show workbench <kbd>⌥ ⇧ G</kbd></button>
-<main id="workspace" class="editorial-page" tabindex="-1">
-<div class="gp_canvas editorial-sheet" data-editorial="document">
-<!-- site-navigation:start -->
-<nav class="gp_field gp_field--wide grid_03 set_03 editorial-nav site-navigation" aria-label="Site navigation">
-  <div class="site-identity"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
-  <div><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li><li><a href="./authoring.html">Authoring compositions</a></li><li><a href="./site-authoring.html">Composing a site</a></li><li><a href="./responsive-design.html">Responsive design</a></li><li><a href="./alignment.html">Alignment and nesting</a></li><li><a href="./configurator.html" aria-current="page">Configurator</a></li></ul></div>
-  <div><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li><li><a href="./architecture.html">Architecture</a></li><li><a href="./troubleshooting.html">Troubleshooting</a></li><li><a href="./browser-support.html">Browser support and builds</a></li><li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li><li><a href="./contributing.html">Contributing</a></li><li><a href="./releases.html">Releases</a></li></ul></div>
-</nav>
-<!-- site-navigation:end -->
-  <header class="gp_field gp_field--wide grid_03c--07 set_03 gp_band--01 editorial-intro" data-editorial="intro">
-    <div>
-      <p class="editorial-eyebrow">Graph Paper CSS 0.4.1 · Configurator</p>
-      <h1>Choose the relationship.</h1>
-      <p id="design-description" class="lede"></p>
+  <a class="skip-link" href="#preview-heading">Skip to preview</a>
+  <header class="rail">
+    <div class="brand"><a href="./index.html">Graph Paper</a></div>
+    <div class="preview-controls" role="group" aria-label="Preview controls">
+      <div class="width-control"><label for="width">Preview viewport</label><input id="width" type="range" min="280" max="3200" value="375"><span><input id="width-number" type="number" min="280" max="3200" step="1" value="375" aria-label="Preview viewport width in pixels"> px</span></div>
+      <button id="fit" type="button" title="Set the simulated viewport width to the available workspace width">Use workspace width</button>
+      <details class="overlay-menu"><summary>Visual aids</summary><div>
+        <label><input type="checkbox" id="ruler">Preview ruler</label>
+        <label><input type="checkbox" id="source" checked>Source order</label>
+        <label><input type="checkbox" id="inspector">Item boundaries</label>
+      </div></details>
     </div>
-    <div class="editorial-current" aria-label="Current composition">
-      <p class="editorial-small-heading">Current settings</p>
-      <p id="summary"></p>
-      <p id="active-classes" class="active-classes"></p>
-      <p>Start with source order. Explore proportions, arrange positions, and test how the composition responds as its canvas narrows.</p>
-    </div>
+    <a href="./configurator-help.html">Help</a>
+    <button id="workbench-hide" type="button" aria-keyshortcuts="Alt+Shift+G" title="Hide preview controls and layout controls (Option+Shift+G)">Hide workbench</button>
+    <button id="panel-toggle" type="button" aria-expanded="true" aria-controls="composition-panel">Hide layout controls</button>
   </header>
-  <!-- This independent canvas remains at the width selected in Preview controls. -->
-  <section class="gp_field gp_field--full editorial-preview" aria-label="Live composition preview">
-    <div class="scroll-preview"><div id="preview-stage">
-      <div id="width-scale" class="width-scale" aria-label="Preview width and layout transitions"></div>
-      <div id="preview" class="gp_canvas"><section id="composition" class="gp_field"></section><div id="macro-overlay" aria-hidden="true"></div></div>
-      <div id="inspection-overlay" class="inspection-overlay" aria-hidden="true"></div>
-    </div></div>
-  </section>
-  <section class="gp_field gp_field--wide editorial-reading editorial-inspection" aria-label="Preview measurements">
-    <p id="inspection-summary" class="meta"></p>
-    <details><summary>How to read this composition</summary>
-      <p>Use the Composition panel to change the arrangement and Preview controls to inspect it at different widths. Letter illustrations pair compact and expanded layouts; variants show expanded layouts, and Flow illustrations show the current responsive state. These illustrations show item relationships, not independent CSS columns.</p>
-      <p>Descriptions use design-weight proportions. Actual field-specific whole-bit boundaries are shown in the ruler and resolved geometry below. Explore recipes using the macro-region, letter, and variant controls.</p>
-      <p>Visual aids toggle independently. Band brackets show the requested structural minimum, including in stacked layouts that cannot supply it. Item boxes use actual browser measurements; they turn red when horizontal geometry differs from the recipe.</p>
-    </details>
-    <details><summary>Resolved geometry and 0.2.3 comparison</summary><pre id="geometry"></pre></details>
-  </section>
-  <section class="gp_field gp_field--wide editorial-section" aria-labelledby="use-heading">
-    <header class="editorial-heading"><p class="editorial-eyebrow">From preview to page</p><h2 id="use-heading">Use this composition</h2></header>
-  </section>
-  <section class="gp_field gp_field--wide grid_02a--07 set_03 editorial-composition" data-editorial="markup" aria-labelledby="use-heading">
-      <div><button id="copy" type="button">Copy markup</button><pre id="markup"></pre></div>
-      <aside class="editorial-note"><h3>Keep the context</h3><p>The <code>gp_field</code> element supplies the inset. Add a new <code>gp_canvas</code> only when you need an independent ruler and responsive context—not just to constrain content.</p></aside>
-      <aside class="editorial-note"><h3>Supply the treatment</h3><p>Your stylesheet supplies typography, component styling, and vertical spacing. The markup copies Graph Paper classes, not the configurator’s example styling.</p></aside>
-  </section>
-  <section class="gp_field gp_field--wide grid_02b--03 editorial-section gp_band--03" data-editorial="example" aria-labelledby="overlay-heading">
-    <header class="editorial-heading"><p class="editorial-eyebrow">Shared alignment</p><h2 id="overlay-heading">A full surface, inset content, and a ruled field</h2><p>All three layers occupy the same row on one ruler. The 56-bit accent field marks its whole-bit outer boundaries; it does not rebase the content.</p></header>
-    <div class="gp_canvas specimen overlay" data-demo="overlay">
-      <div class="gp_field gp_field--full surface" aria-hidden="true"></div>
-      <div class="gp_field gp_field--neat content"><h3>A shared sheet of paper</h3><p>A full-bleed surface can sit behind inset editorial content.</p></div>
-      <div class="gp_field gp_field--ruled accent" aria-hidden="true"></div>
-    </div>
-  </section>
-  <section class="gp_field gp_field--wide grid_02b--03 editorial-section gp_band--03" data-editorial="example" aria-labelledby="subgrid-heading">
-    <header class="editorial-heading"><p class="editorial-eyebrow">Continue the ruler</p><h2 id="subgrid-heading">Semantic nesting with subgrid</h2><p>The article keeps its inherited tracks. Its aside is inset by two of those tracks, without starting a new ruler.</p></header>
-    <div class="gp_canvas specimen" data-demo="subgrid">
-      <section class="gp_field gp_field--wide grid_03 set_03">
-        <article class="gp_subgrid semantic"><h3>Article</h3><p>These children inherit the article’s ruler tracks.</p><aside>Inset by two inherited bits, without a new ruler.</aside></article>
-        <article class="tile">A second article</article><article class="tile">A third article</article>
+  <button id="workbench-show" type="button" aria-keyshortcuts="Alt+Shift+G" hidden>Show workbench (⌥ ⇧ G)</button>
+
+  <main class="workspace">
+    <section class="preview-area" aria-labelledby="preview-heading">
+      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.5.0</span></header>
+      <p id="load-notice" class="warning" role="status" hidden></p>
+      <section class="sequence-strip" aria-label="Preview responsive sequence">
+        <div class="sequence-actions"><h2>Viewport transitions</h2><details id="add-transition-menu" class="overlay-menu"><summary><span aria-hidden="true">+</span> Add transition</summary><div id="transition-options" role="group" aria-label="Choose a viewport transition"></div></details></div>
+        <div id="timeline" class="timeline" role="group" aria-label="Preview an arrangement"></div>
+        <p id="preview-warning" class="warning" hidden></p>
       </section>
-    </div>
-  </section>
-  <section class="gp_field gp_field--wide grid_02b--03 editorial-section gp_band--03" data-editorial="example" aria-labelledby="nested-heading">
-    <header class="editorial-heading"><p class="editorial-eyebrow">Independent context</p><h2 id="nested-heading">A nested canvas establishes its own ruler</h2><p>A narrow field or subgrid alone does not change its canvas’s responsive state. A nested canvas does: its layout responds to its own width.</p></header>
-    <div class="gp_canvas specimen" data-demo="nested">
-      <section class="gp_field gp_field--wide grid_02a--07 set_03">
-        <article class="tile">Outer canvas: 5:3 when expanded</article>
-        <div class="gp_canvas nested"><section class="gp_field gp_field--thin grid_02 set_03"><article class="tile">Local 1</article><article class="tile">Local 2</article><article class="tile">Local 3</article></section></div>
-        <article class="tile">Outer source item 3</article>
+      <div id="preview-scroll" class="preview-scroll" role="region" aria-label="Composition preview, scaled down to fit the workspace without changing its simulated viewport width.">
+        <div class="viewport-wrap"><div class="viewport-label"><span id="viewport-caption">375px viewport · scaled to fit</span><span id="ruler-scale" hidden>0 — 64 bits</span></div>
+          <div id="viewport-stage" class="viewport-stage">
+          <iframe id="preview" src="./sequence/preview.html" title="Responsive composition preview" width="375" height="700"></iframe>
+          </div>
+        </div>
+      </div>
+      <section class="markup-section" aria-labelledby="markup-heading">
+        <header><h2 id="markup-heading">HTML markup</h2><button id="copy-markup" type="button">Copy HTML</button></header>
+        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.5.0 stylesheet</a> and replace the placeholders with your content.</p>
+        <pre tabindex="0" aria-label="Graph Paper HTML"><code id="markup"></code></pre>
+
+
       </section>
-    </div>
-  </section>
-  <section class="gp_field gp_field--wide editorial-reading editorial-section" aria-labelledby="rules-heading">
-    <div><p class="editorial-eyebrow">Between regions</p><h2 id="rules-heading">Column rules</h2><p>The ruled field runs from bit 4 to bit 60, with two-bit gutters. Explicit end markers belong to internal gutters and sit on whole-bit lines. Stacked compositions suppress them. Thin fields do not automatically center a rule in their one-bit gutters.</p></div>
-  </section>
-</div>
-</main></body></html>
+      <footer class="preview-links"><a href="./configurator-help.html">How to use the configurator</a><button id="copy-link" type="button">Copy exploration link</button></footer>
+    </section>
+
+    <aside id="composition-panel" class="composition-panel" aria-labelledby="composition-heading">
+      <header class="panel-heading"><p class="eyebrow">Author the relationship</p><h2 id="composition-heading" tabindex="-1">Layout controls</h2><button id="panel-close" type="button" aria-label="Close layout controls">Close</button></header>
+      <section class="source-control" aria-labelledby="source-heading"><h3 id="source-heading">Source</h3><div role="group" aria-label="Number of source items"><button id="remove-item" type="button" aria-label="Remove last item">−</button><span id="source-stack" aria-hidden="true"></span><output id="item-count" aria-live="polite">6 items</output><button id="add-item" type="button" aria-label="Add another item">+</button></div></section>
+
+      <section class="sequence-editor" aria-labelledby="sequence-heading">
+        <header><h3 id="sequence-heading">Responsive layouts</h3><span class="policy">Viewport</span></header>
+        <p class="hint">Choose the base, then add only the transitions you need.</p>
+        <div id="steps" class="steps"></div>
+      </section>
+      <section id="layout-editor" class="layout-editor" aria-labelledby="editing-heading">
+        <p class="eyebrow">Editing selection</p><h3 id="editing-heading">Base layout</h3>
+        <div class="threshold-row"><label id="threshold-label" for="threshold">Minimum viewport width</label><select id="threshold"></select><button id="remove-transition" type="button">Remove transition</button></div>
+        <p id="base-note" class="hint" hidden>The base applies before your first transition. A stack is the default; choose another layout to retain columns at small widths.</p>
+        <div id="inheritance-note" class="hint" hidden><p id="inheritance-text"></p><button id="inherit-layout" type="button">Use inherited layout</button></div>
+        <p id="selection-warning" class="warning" hidden></p>
+        <fieldset><legend>Layout</legend><label for="family">Layout type</label><select id="family"><option value="stack">Stack</option><option value="peers">Repeating</option><option value="regions">Composition</option><option value="mosaic">Mosaic</option></select><div id="layout-choices" class="catalogue-picker"></div><p class="hint">Width controls describe physical columns. Placement below determines which source items occupy them.</p></fieldset>
+        <fieldset id="refinements"><legend>Placement at this transition</legend><div id="refinement-controls"></div><p id="placement-note" class="hint" role="status"></p><details id="exact-controls"><summary>Exact physical counts</summary><p id="exact-note" class="hint"></p><fieldset><legend class="sr-only">Physical allocation</legend><div id="exact-options" class="layout-choices"></div></fieldset><p id="exact-status" class="hint" role="status"></p></details><p class="hint">Refinements carry forward until the next explicit selection. Changing family resets them at this transition. The export uses responsive classes and breakpoint-specific exact-count properties; no author stylesheet rules are required.</p></fieldset>
+        <details id="spacing-controls" class="spacing-controls"><summary><span>Spacing</span><span id="spacing-summary" class="spacing-summary"></span></summary><div class="spacing-body">
+        <fieldset class="transition-spacing"><legend>Gutters</legend><label for="spacing" class="sr-only">Gutters</label><select id="spacing"></select><p class="hint">Carries forward until another gutter choice. Changing the layout keeps your gutter choice.</p><div id="rule-help" class="hint" hidden><p>Ruled uses a 56-bit field. Field edges and full-width items have no rule. For column layouts, the export includes ruler measurement and end-rule ownership automatically. Mosaics use Neat or Thin.</p><p>Optional rule styling on the composition:</p><code>style="--gp-rule-color: #64748b; --gp-rule-width: 1px;"</code></div></fieldset>
+        <fieldset class="transition-spacing"><legend>Vertical spacing</legend><label for="vertical-spacing" class="sr-only">Vertical spacing</label><select id="vertical-spacing"></select><p class="hint">Between items, independently of gutters and padding. Layout default preserves mosaic gutters; Zero explicitly removes vertical spacing.</p></fieldset>
+        <fieldset class="transition-spacing"><legend>Item padding</legend><label for="item-padding" class="sr-only">Item padding</label><select id="item-padding"></select><p class="hint">Carries forward independently of layout and gutters. No extra CSS or ruler measurement.</p></fieldset>
+        </div></details>
+        <details class="scope-note"><summary>What can I edit here?</summary><p>One standalone composition: source item count, layout, viewport transitions, gutters, and placement. The markup includes any required ruler measurement and column-rule ownership.</p><p>Choose transition widths by inspecting the content. This tool does not edit content grouping or nested compositions. <a href="./configurator-help.html#scope">Read about these boundaries</a>.</p></details>
+      </section>
+    </aside>
+  </main>
+  <footer class="site-directory editorial-page"><div class="gp_ruler editorial-sheet"><!-- site-navigation:start -->
+<nav class="gp_layout--stack gp_sm--two-1-2 gp_lg--three-1-2-1 gp_spacing--wide editorial-nav site-navigation" aria-label="Site navigation">
+  <div class="site-identity gp_pad"><a href="./index.html"><span class="site-wordmark">Graph Paper</span> <span class="site-wordmark-suffix">CSS</span></a><p>Editorial composition on a 64-bit ruler.</p><label class="site-ruler-control"><input class="site-ruler-toggle" type="checkbox">64-bit ruler</label><script type="module" src="./site-ruler.js"></script></div>
+  <div class="gp_pad"><p class="site-nav-heading">Learn</p><ul><li><a href="./getting-started.html">Getting started</a></li>
+<li><a href="./authoring.html">Authoring compositions</a></li>
+<li><a href="./site-authoring.html">Composing a site</a></li>
+<li><a href="./responsive-design.html">Responsive design</a></li>
+<li><a href="./alignment.html">Alignment and nesting</a></li>
+<li><a href="./edges-and-spacing.html">Edges and mixed spacing</a></li>
+<li><a href="./configurator.html" aria-current="page">Configurator</a></li></ul></div>
+  <div class="gp_pad"><p class="site-nav-heading">Reference</p><ul><li><a href="./class-reference.html">Class reference</a></li>
+<li><a href="./architecture.html">Architecture</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+<li><a href="./browser-support.html">Browser support and builds</a></li>
+<li><a href="./configurator-help.html">Configurator help</a></li></ul><p class="site-nav-heading">Project</p><ul><li><a href="./migration.html">Migration</a></li>
+<li><a href="./contributing.html">Contributing</a></li>
+<li><a href="./releases.html">Releases</a></li></ul></div>
+</nav>
+<!-- site-navigation:end --></div></footer>
+  <p id="announcement" class="sr-only" role="status" aria-atomic="true"></p>
+  <noscript><p class="warning">The configurator requires JavaScript. Graph Paper layouts themselves use CSS. <a href="./configurator-help.html">Read the configurator guide</a>.</p></noscript>
+</body>
+</html>

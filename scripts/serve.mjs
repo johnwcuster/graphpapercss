@@ -33,7 +33,10 @@ const server = createServer(async (request, response) => {
     if (!file.isFile()) throw new Error("Not a file");
 
     response.writeHead(200, {
-      "Content-Type": contentTypes[extname(filePath)] ?? "application/octet-stream"
+      "Content-Type": contentTypes[extname(filePath)] ?? "application/octet-stream",
+      // Public tooling modules may be imported by a separately served demo.
+      ...(/^(?:(?:\/docs)?\/(?:inspector|workbench|assets\/graph-paper)\/|\/tools\/(?:inspector|shared)\/|\/src\/legacy\/0\.4\/(?:ruler|manifest)\/)/.test(pathname)
+        ? { "Access-Control-Allow-Origin": "*" } : {})
     });
     createReadStream(filePath).pipe(response);
   } catch {

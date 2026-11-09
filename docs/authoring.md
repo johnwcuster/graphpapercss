@@ -1,74 +1,73 @@
 # Authoring compositions
 
-Graph Paper reduces the geometry choices; it does not choose your editorial hierarchy. Start with actual content and use the recipes to test relationships. A valid layout is a starting point, not proof that the design serves its readers.
+Start with what the reader should notice, understand and do. Graph Paper reduces the geometry search to a catalogue of spatial relationships; it cannot decide which relationship serves your material.
 
-For installation, use [Getting started](getting-started.md). For exact class behavior, use the [class reference](class-reference.md). The [configurator](configurator.html) helps you compare alternatives without memorizing their IDs.
+## Establish the source hierarchy
 
-For relationships between sections, recurring reading edges, and page-wide versus bounded coordinates, see [Composing a site](site-authoring.md).
+Write a meaningful source sequence before choosing a layout. A lead might be first, followed by evidence and related material. Stacking restores that sequence. Do not use positive `tabindex` values to imitate a visual arrangement: keyboard and reading order should remain intelligible from the document.
 
-The companion essay [Inside-out and outside-in](inside-out-outside-in.md) explores how content treatments and spatial structure inform one another.
+A direct child is a participant. A figure containing an image and a caption is one participant until you deliberately expose those children to a nested layout. The configurator can refine an existing composition; it does not regroup content or turn a caption into an independent participant.
 
-## Establish source order and content treatments
+## Distinguish composition from repetition
 
-Arrange items in a sensible reading order before selecting their visual placement. Stacked mode exposes that order; visual flow does not rewrite DOM order or keyboard focus order.
+Repeating peers fill rows left to right and continue into new rows. Use them for comparable records whose sequence is naturally row-major.
 
-Identify the main reading experience, supporting material, and incidental material. Decide what each item needs to show: full text, an excerpt, a headline, an image, a caption, or a link to further reading. These are editorial decisions, not Graph Paper classes.
+Two-, three- and four-region compositions allocate consecutive source runs to columns. Reading and keyboard traversal follow the source through one run and then the next. They are not repeating grids or independent masonry columns. The library avoids shared internal subdivisions between adjacent regions where they would imply false rows, but actual content heights can still create visual ambiguities.
 
-Content and layout are an iteration loop. You need not squeeze the same treatment into every position. A narrow supporting position may work with a headline and summary where full body text would become unreadable. Preserve access to omitted information, and do not use visual hiding to erase content that readers need.
+Mosaics supply reviewed interlocking maps for exact counts of six through thirteen. They require more deliberate source order and content treatment. Do not use one merely to accommodate a large collection; several smaller compositions may be clearer.
 
-## Choose relationships before IDs
+## Choose physical proportions and source traversal
 
-Choose the broad number of regions and their relationship: equal peers, a lead with support, or a reading region beside supplementary material. Then compare letter and numbered alternatives in the configurator.
+`two-3-2` means wider left and narrower right. `three-1-2-1` means a wider center. `four-6-5-4-3` progressively narrows toward the right. These names do not declare which source item is editorially primary.
 
-Macro regions are broad compositional divisions, not necessarily individual items. A named set can place multiple items in a region or span an item across regions. Three macro regions do not imply three source items.
+Left-to-right is the shared traversal default. Choose right-to-left for Two when the first run belongs on the right, center-first for Three when it belongs in the middle, or widest-first for unequal Four when the widest region should receive it. Three supports right-to-left at exactly three items only. Review the finished focus path, especially when it crosses several columns.
 
-`grid_03*` identifies a responsive recipe family with three expanded macro regions. It does not promise three visible columns at every width. Letters are alternatives within a family, not a universal left/right switch. Numbered variants change proportions; a higher number does not universally mean greater prominence.
+The [catalogue](class-reference.md#layout-catalogue) and configurator show nearby ratios. Prefer changing one decision at a time: width relationship, proportion, allocation, traversal or viewport timing.
 
-Width emphasis and editorial prominence are related but distinct. Source position, imagery, type scale, contrast, and content treatment can outweigh width. Inspect the resulting hierarchy rather than inferring it from the recipe name.
+## Fit the treatment as well as the layout
 
-## Choose occupancy and placement
+A long body text in a narrow supporting region may be the wrong treatment even when the geometry is valid. Alternatives include a headline and short summary linked to the full text, a different image crop, a nested image/text arrangement, or a wider supporting region. Keep meaningful content accessible; choosing a shorter presentation is an editorial decision, not permission to silently discard it.
 
-Omit a set for sequential occupancy: items fill macro regions, then continue into later rows. This is a useful starting point for peer collections or unknown counts.
+Repeated semantic structure does not imply equal visual weight. A modest image can carry the stronger explanation while a striking image needs little text. Judge those assets together rather than assuming identical cards are the only truthful presentation.
 
-Use a named set when you want its deliberate multi-item composition. Supported named sets are `set_03` through `set_06`, with recipe-specific availability. There is no `set_02`; a two-item composition can use a two-region grid without a set. A set's number describes positions, not macro regions.
+Consider which items should determine composition height. Less prominent text should not accidentally become the binding height constraint simply because it was squeezed into the narrowest column. Above-the-fold height is a host design decision; the core supplies no viewport packing or fixed-height system.
 
-Omit flow for the set's default placement. Select a compatible `flow_*` only when its alternative better serves the content. The same flow ID need not have a distinct visible effect for every recipe, state, or number of occupied positions.
+## Author the intermediate design
 
-Matching a named set's position count to item count is a useful starting point, not a requirement. Fewer items leave positions unfilled rather than redesigning the recipe. Those positions can be intentional negative space: this site's reading sections occupy only the primary position of a three-position composition. See [Composing a site](site-authoring.md#establish-a-recurring-reading-position). A count mismatch warrants review, not automatic correction.
+A three-region composition need not become an automatic pair at a standard compact width. Select a useful smaller-screen layout explicitly. Three items might stack, form an ordinary pair of source runs, or use a two-region arrangement with the first item spanning above the supporting pair.
 
-Extra items use full-width fallback rather than extending the named composition. Treat fallback as predictable behavior to review, not an automatic editorial solution.
+```html
+<section class="gp_ruler gp_layout--stack
+                gp_sm--two-1-1 gp_sm-arrangement--first-above
+                gp_lg--three-1-2-1 gp_lg-arrangement--across
+                gp_lg-traversal--center-first gp_spacing--wide">
+  <article>Lead.</article>
+  <article>Support.</article>
+  <article>Support.</article>
+</section>
+```
 
-## Test the limiting region
+The first item spans above two supports from 40rem. Three regions begin at 64rem; the explicit `across` reset makes the arrangement intent clear. Layout and control selections carry forward independently, so include resets when changing the design. Use content and available width to choose those thresholds.
 
-Narrow the canvas progressively. Which important position becomes unusable first? Check text measure, image interpretation, captions, controls, and any component padding.
+## Design for changing counts
 
-When a region is under pressure, you can change its content treatment, choose another recipe or set, revise the grouping, or use a band to change transition timing. A band does not select a new compact composition or fix an unsuitable treatment.
+Automatic allocation derives counts without maintaining classes per source item. It can move an earlier item to another region when the total changes. It does not promise permanent group membership.
 
-Inspect all three responsive states. Compact is a designed arrangement supplied by the recipe/set/flow, not simply the expanded layout squeezed smaller. Stacked is the source-order baseline. [Responsive design](responsive-design.md) explains the choices and their limits.
+Use the source structure to preserve genuine groups. A parent item containing seven related links is different from seven direct participants. An exact physical-count refinement is useful for a known matching count; it is not a substitute for grouping, and an invalid request returns to automatic allocation.
 
-## Judge height as well as width
-
-Decide what should extend below the fold. A long reading section may appropriately exceed the viewport; a short opener may need a more bounded treatment. The least prominent item should not accidentally dictate the height of the whole composition.
-
-Large empty areas can be intentional negative space, but can also signal that a narrow secondary item has made a shared row excessively tall. Consider a shorter secondary treatment or a different composition before forcing equal heights or clipping text.
-
-Three equal expanded regions do not guarantee that a pair plus a remaining item is a good compact design. Four peers may work as two pairs, but that depends on their content. If the supplied compact arrangement remains wrong after reasonable treatment changes, choose another recipe or use an explicitly host-authored alternative. Graph Paper currently has no independently selectable compact recipe.
-
-## Continue alignment deliberately
-
-Use `gp_subgrid` when a semantic wrapper's descendants should share inherited tracks. Use a nested `gp_canvas` when the inner composition needs its own ruler and width-dependent response. Neither is a routine requirement for adding padding or grouping ordinary text.
-
-See [Alignment and nesting](alignment.md) for worked examples. Start with simple items, and introduce another alignment context only when you can explain what it should inherit or rebase.
+Underfilled Three/Four selections stack. A mismatched mosaic stacks rather than picking another map. If that is the wrong design, limit the source or choose a different layout deliberately. There is no general maximum count for ordinary compositions, but readability and focus traversal can establish a much earlier editorial limit.
 
 ## Implementation checklist
 
-This checklist is also the entry point for coding agents. The linked reference is the contract; do not infer additional classes from naming patterns.
+1. Write the source sequence and decide which wrappers represent real groups.
+2. Choose Stack, Repeating, Composition or Mosaic.
+3. Select proportions; use the configurator before inspecting raw bit coordinates.
+4. Check automatic occupancy with the actual and plausible future counts.
+5. Choose traversal and optional spanning endpoints without changing DOM order.
+6. Add viewport transitions and explicit resets; test the limiting region at each boundary.
+7. Choose gutters, vertical spacing and item padding independently.
+8. Continue parent tracks or rebase only where nested content needs its own arrangement.
+9. Test keyboard traversal, large text, long titles, mixed images and static HTML without tooling.
+10. Revisit continuity across neighboring sections, not just the section in isolation.
 
-1. Confirm the target release, modern browser requirements, and chosen build. Do not mix core and legacy compatibility CSS.
-2. Establish logical DOM order. Put a field directly inside a canvas; give it exactly one field modifier.
-3. Put the selected grid, optional compatible set/flow, and at most one optional band on that field. Items must be direct children.
-4. Use the [configurator](configurator.html) to find valid combinations, or the manifest-backed [lookup methods](class-reference.md#find-valid-combinations) for repository tooling. Do not invent a numbered variant, set, or flow.
-5. Supply host typography, components, image treatment, and vertical spacing. Preserve the canvas/field horizontal ruler.
-6. Test source order, item-count mismatch, compact and expanded arrangements, and both sides of actual canvas transition widths. Optional bands require their separate stylesheet.
-7. If adding rules, subgrid, or explicit placement, follow their documented ownership and local-coordinate requirements.
-8. Inspect real content visually. Structural validity does not guarantee useful reading measure, balanced height, or appropriate emphasis.
+Continue with [Composing a site](site-authoring.md), [Responsive design](responsive-design.md) or the [Class reference](class-reference.md).

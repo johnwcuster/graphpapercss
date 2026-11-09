@@ -1,0 +1,22 @@
+/* Specimen presentation only. All placement comes from css/main.css. */
+:root { color-scheme: light; font: 16px/1.55 system-ui, sans-serif; color: #253238; background: #fffefa; }
+* { box-sizing: border-box; }
+body { margin: 0; position: relative; }
+.publication { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem; margin-inline: 4.6875%; border-bottom: 1px solid #83968e; padding-block: 1.25rem .75rem; }
+.publication span:first-child { font: 500 1.5rem Georgia, serif; }
+.publication span:last-child { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: #52625f; }
+/* Space around and between participants comes only from Graph Paper.
+   Optional item padding comes from the core gp_pad utilities. */
+.library-entry { min-width:0; overflow-wrap:anywhere; background:color-mix(in srgb,var(--priority-color,#155b70) 12%,white); border-top:3px solid var(--priority-color,#155b70); }
+.entry-number { display:inline-flex; align-items:center; justify-content:center; min-width:1.75rem; min-height:1.75rem; background:var(--priority-color,#155b70); color:var(--priority-ink,white); font-weight:750; font-size:.8rem; }
+.entry-topic { font-size:.7rem; }
+.library-entry h3 { font:500 1.4rem/1.2 Georgia,serif; margin:.5rem 0 1rem; }
+.library-entry figure { margin:0; }
+.library-entry img { display:block; width:100%; height:auto; }
+.library-entry figcaption, .library-entry footer { font-size:.7rem; }
+.library-entry a { color:inherit; text-underline-offset:.15em; }
+.library-entry a:focus-visible { outline:3px solid #155b70; outline-offset:3px; }
+body.hide-source .entry-number { visibility:hidden; }
+body.show-boundaries .library-entry { outline:2px dashed #135968; outline-offset:-2px; }
+body.show-ruler::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2; background-image: linear-gradient(to right, #976b3b65 1px, transparent 1px); background-size: 1.5625% 100%; }
+.publication-footer { margin-inline: 4.6875%; padding-block: .5rem 1.5rem; font-size: .7rem; color: #52625f; }

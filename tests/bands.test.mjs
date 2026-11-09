@@ -2,9 +2,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { gzipSync } from "node:zlib";
 import { readFile } from "node:fs/promises";
-import { bands } from "../src/manifest/bands.mjs";
-import { bandThresholds, emitBandCss } from "../src/ruler/bands.mjs";
-import { recipes, fields, layoutsFor } from "../src/ruler/geometry.mjs";
+import { bands } from "../src/legacy/0.4/manifest/bands.mjs";
+import { bandThresholds, emitBandCss } from "../src/legacy/0.4/ruler/bands.mjs";
+import { recipes, fields, layoutsFor } from "../src/legacy/0.4/ruler/geometry.mjs";
 
 test("band scale is ordered and every supported geometry meets its declared minimum", () => {
   assert.deepEqual(Object.keys(bands), ["01", "02", "03"]);
@@ -32,6 +32,6 @@ test("wide three-item profile derives the sketched thresholds; unknown bands fai
 test("optional band distribution is deterministic and bounded", async () => {
   const css = emitBandCss();
   assert.equal(css, emitBandCss());
-  assert.equal(await readFile("css/bands.css", "utf8"), `${css}\n`);
-  assert.ok(gzipSync(await readFile("css/bands.min.css")).length < 8000, "optional band prototype exceeds 8KB gzip ceiling");
+  assert.equal(await readFile("css/legacy/0.4/bands.css", "utf8"), `${css}\n`);
+  assert.ok(gzipSync(await readFile("css/legacy/0.4/bands.min.css")).length < 8000, "optional band prototype exceeds 8KB gzip ceiling");
 });

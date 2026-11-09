@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { recipes, layoutsFor } from "../src/ruler/geometry.mjs";
-import { recipeDescription, compositionDescription, suggestComposition, startingPoints } from "../src/ruler/discovery.mjs";
+import { recipes, layoutsFor } from "../src/legacy/0.4/ruler/geometry.mjs";
+import { recipeDescription, compositionDescription, suggestComposition, startingPoints } from "../src/legacy/0.4/ruler/discovery.mjs";
 
 test("every discovery description corresponds to actual geometry and a valid composition", () => {
   for (const [id, recipe] of Object.entries(recipes)) {

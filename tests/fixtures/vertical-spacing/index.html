@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vertical spacing · Graph Paper integration</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script></head>
+<body><header><p class="eyebrow">Integrated · 0.5 candidate</p><h1>Vertical spacing between content items.</h1><p>Compare unspaced content with ruler-bit top margins assigned by actual placement. The top row stays flush. Construction tracks have no row gap and no fixed height.</p><p><a href="../../../docs/configurator.html">Configurator</a></p></header>
+<form class="controls" onsubmit="return false">
+<label>Composition <select id="case"></select></label>
+<label>Gutters <select id="field"><option>neat</option><option>thin</option><option>wide</option><option>ruled</option><option>full</option></select></label>
+<label>Ruler <select id="context"><option value="standalone">Standalone</option><option value="continued">Continue parent tracks</option><option value="rebased">Rebase to 64</option></select></label>
+<label>Content <select id="content"><option value="library">Library documentation</option><option value="equal">Equal-length test records</option><option value="varied">Variable-length test records</option></select></label>
+<label><input type="checkbox" id="padding" checked>One-bit item padding</label><label><input type="checkbox" id="bounds">Item outlines</label>
+<label>Width <input id="width" type="number" min="320" max="2400" step="16" value="1200">px</label>
+<label>Vertical spacing <select id="amount"><option value="0">Zero reset</option><option value="1" selected>One bit</option><option value="2">Two bits</option></select></label>
+<label>View <select id="view"><option value="both">Side by side</option><option value="baseline">Unspaced</option><option value="percent">Spaced</option></select></label>
+</form><main class="comparisons">
+<section data-view="baseline"><h2>Unspaced</h2><p class="description">Layout defaults. Padding is a separate choice.</p><div class="workspace"><div class="stage"><iframe id="baseline" title="Unspaced composition" src="./preview.html?amount=none"></iframe></div></div></section>
+<section data-view="percent"><h2 id="spacing-title">One-bit vertical spacing</h2><p id="spacing-description" class="description">Core composition utility; lower starts receive one bit.</p><div class="workspace"><div class="stage"><iframe id="percent" title="Composition with one-bit item separation" src="./preview.html?amount=1"></iframe></div></div></section>
+</main><p class="note">Both previews keep the requested width and scale to fit. Continued examples occupy half of a parent Neat field; rebased examples establish a local ruler in that same space. Ruled here tests field geometry only; decoration is not enabled. <strong>No measurement markers are added.</strong></p></body></html>
