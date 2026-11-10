@@ -32,7 +32,7 @@
 
   <main class="workspace">
     <section class="preview-area" aria-labelledby="preview-heading">
-      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.5.0</span></header>
+      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.5.1</span></header>
       <p id="load-notice" class="warning" role="status" hidden></p>
       <section class="sequence-strip" aria-label="Preview responsive sequence">
         <div class="sequence-actions"><h2>Viewport transitions</h2><details id="add-transition-menu" class="overlay-menu"><summary><span aria-hidden="true">+</span> Add transition</summary><div id="transition-options" role="group" aria-label="Choose a viewport transition"></div></details></div>
@@ -48,10 +48,24 @@
       </div>
       <section class="markup-section" aria-labelledby="markup-heading">
         <header><h2 id="markup-heading">HTML markup</h2><button id="copy-markup" type="button">Copy HTML</button></header>
-        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.5.0 stylesheet</a> and replace the placeholders with your content.</p>
+        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.5.1 stylesheet</a> or build custom CSS below. Replace the placeholders with your content.</p>
         <pre tabindex="0" aria-label="Graph Paper HTML"><code id="markup"></code></pre>
 
 
+      </section>
+      <section id="css-export" class="markup-section css-export" aria-labelledby="css-export-heading" aria-busy="false">
+        <header><h2 id="css-export-heading">CSS for this sequence</h2><button id="build-css" type="button">Build CSS for this sequence</button></header>
+        <p>Download a standalone stylesheet for these selections. Automatic allocation, nesting, and fallbacks remain available for the included layouts. Load it in place of the full library.</p>
+        <div class="css-export-actions">
+          <label for="css-format">CSS format <select id="css-format"><option value="readable">Readable</option><option value="minified">Minified</option></select></label>
+          <button id="download-css" type="button" disabled>Download CSS</button>
+          <button id="download-html" type="button" disabled>Download matching HTML</button>
+        </div>
+        <p id="css-export-status" role="status">Includes the selections used by your exported HTML.</p>
+        <div id="css-export-preview" hidden>
+          <p>Save both files in the same folder. The HTML links to <code id="css-file-name">graph-paper-custom.css</code>. Add your content and design styles; no configurator JavaScript is needed.</p>
+          <details><summary>Included selections and readable CSS</summary><p id="css-includes"></p><p>Rebuild when adding layouts, viewport steps, gutters, or utilities. Source counts and exact allocation values remain adjustable.</p><pre tabindex="0" aria-label="Custom Graph Paper CSS"><code id="custom-css"></code></pre></details>
+        </div>
       </section>
       <footer class="preview-links"><a href="./configurator-help.html">How to use the configurator</a><button id="copy-link" type="button">Copy exploration link</button></footer>
     </section>

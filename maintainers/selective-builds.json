@@ -1,0 +1,2148 @@
+{
+  "date": "2026-11-10",
+  "scope": "Experimental selective compilation; canonical distributions unchanged",
+  "sizes": {
+    "baseline": {
+      "name": "published-full",
+      "readable": 228484,
+      "minified": 192555,
+      "gzip": 17817,
+      "brotli": 10411,
+      "sha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58"
+    },
+    "profiles": [
+      {
+        "name": "one-composition",
+        "readable": 41284,
+        "registrations": 153,
+        "minified": 31357,
+        "gzip": 3938,
+        "brotli": 3234,
+        "sha256": "41d5941eb3ca5f700ca249b1db765294f129cf7661b40d4b2fa803946f700fdf",
+        "selection": {
+          "layouts": [
+            "stack",
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "hinges": [
+            48,
+            64
+          ],
+          "spacing": [
+            "neat"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        }
+      },
+      {
+        "name": "small-site",
+        "readable": 49138,
+        "registrations": 163,
+        "minified": 38219,
+        "gzip": 4552,
+        "brotli": 3591,
+        "sha256": "9f6e23ba2bde1dbe4b4a6fd7e28d10ac7918da6814ba620c4a334d8ad466a8cb",
+        "selection": {
+          "layouts": [
+            "stack",
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "hinges": [
+            40,
+            48,
+            64,
+            80
+          ],
+          "spacing": [
+            "neat",
+            "thin",
+            "wide"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        }
+      },
+      {
+        "name": "without-four-mosaic",
+        "readable": 104377,
+        "registrations": 177,
+        "minified": 89326,
+        "gzip": 9844,
+        "brotli": 5998,
+        "sha256": "a5978ae34eae9c3c382f56dd7fb882bd5a0a4b53e1ae99d4cc91f2c1dbf6700c",
+        "selection": {
+          "layouts": [
+            "stack",
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "hinges": [
+            30,
+            40,
+            48,
+            64,
+            80,
+            96
+          ],
+          "spacing": [
+            "full",
+            "neat",
+            "thin",
+            "wide",
+            "ruled"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        }
+      },
+      {
+        "name": "repeating",
+        "readable": 33757,
+        "registrations": 94,
+        "minified": 27727,
+        "gzip": 3378,
+        "brotli": 2676,
+        "sha256": "a59b5345df605b95ff7d6495b13c849d3db58f3ea9d01364f888d29342e4db16",
+        "selection": {
+          "layouts": [
+            "stack",
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "hinges": [
+            30,
+            40,
+            48,
+            64,
+            80,
+            96
+          ],
+          "spacing": [
+            "full",
+            "neat",
+            "thin",
+            "wide",
+            "ruled"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        }
+      },
+      {
+        "name": "four-and-mosaic",
+        "readable": 81191,
+        "registrations": 247,
+        "minified": 64472,
+        "gzip": 6766,
+        "brotli": 4925,
+        "sha256": "f84b8b099cd418798bf91a2f16fcb33ac74ab792a392c366c06d5a65fda633df",
+        "selection": {
+          "layouts": [
+            "stack",
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "hinges": [
+            64,
+            80
+          ],
+          "spacing": [
+            "neat",
+            "thin"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        }
+      },
+      {
+        "name": "full",
+        "readable": 228484,
+        "registrations": 350,
+        "minified": 192555,
+        "gzip": 17817,
+        "brotli": 10411,
+        "sha256": "ed8c6e8388ea15bfe716ad34ef1faae86bebce8658b9aa2877e4e09866919b58",
+        "selection": {
+          "layouts": [
+            "stack",
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1",
+            "four-1-1-1-1",
+            "four-6-5-4-3",
+            "four-5-6-4-3",
+            "four-4-5-6-3",
+            "four-4-6-5-3",
+            "four-3-4-5-6",
+            "four-3-4-6-5",
+            "four-3-5-6-4",
+            "four-3-6-5-4",
+            "four-7-6-5-4",
+            "four-6-7-5-4",
+            "four-5-6-7-4",
+            "four-5-7-6-4",
+            "four-4-5-6-7",
+            "four-4-5-7-6",
+            "four-4-6-7-5",
+            "four-4-7-6-5",
+            "four-9-8-7-6",
+            "four-8-9-7-6",
+            "four-7-8-9-6",
+            "four-7-9-8-6",
+            "four-6-7-8-9",
+            "four-6-7-9-8",
+            "four-6-8-9-7",
+            "four-6-9-8-7",
+            "mosaic-6",
+            "mosaic-7",
+            "mosaic-8",
+            "mosaic-9",
+            "mosaic-10",
+            "mosaic-11",
+            "mosaic-12",
+            "mosaic-13"
+          ],
+          "hinges": [
+            30,
+            40,
+            48,
+            64,
+            80,
+            96
+          ],
+          "spacing": [
+            "full",
+            "neat",
+            "thin",
+            "wide",
+            "ruled"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        }
+      }
+    ]
+  },
+  "method": {
+    "rounds": 3,
+    "warmups": 4,
+    "iterations": 12,
+    "units": "milliseconds",
+    "initial": "CSS insertion plus forced style/layout",
+    "source": "Append/remove one participant on every root",
+    "width": "Resize shared workspace 1200/1180px",
+    "limitations": "No network, paint, memory or device frame-rate claim; raw samples under ignored test-results/selective-builds"
+  },
+  "engines": [
+    {
+      "engine": "chromium",
+      "version": "156.0.8078.4",
+      "parity": [
+        {
+          "profile": "one-composition",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 109,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "small-site",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 211,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 211,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 211,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "without-four-mosaic",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 1843,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "repeating",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 174,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "four-and-mosaic",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 109,
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "environment": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro"
+      },
+      "runtime": [
+        {
+          "profile": "one-composition",
+          "roots": 1,
+          "plans": [
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11.900000005960464,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 2.2999999970197678,
+                "p95": 2.5
+              }
+            },
+            "selective": {
+              "initial": 4.0999999940395355,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 0.9000000059604645,
+                "p95": 1.1000000089406967
+              }
+            }
+          }
+        },
+        {
+          "profile": "one-composition",
+          "roots": 20,
+          "plans": [
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 87.29999999701977,
+              "width": {
+                "median": 0.7999999970197678,
+                "p95": 0.8999999910593033
+              },
+              "source": {
+                "median": 51.79999999701977,
+                "p95": 55.3999999910593
+              }
+            },
+            "selective": {
+              "initial": 24.599999994039536,
+              "width": {
+                "median": 0.7000000029802322,
+                "p95": 1.8999999910593033
+              },
+              "source": {
+                "median": 20.900000005960464,
+                "p95": 24.600000008940697
+              }
+            }
+          }
+        },
+        {
+          "profile": "small-site",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11.5,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 1.7999999970197678,
+                "p95": 1.9000000059604645
+              }
+            },
+            "selective": {
+              "initial": 4.200000002980232,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 0.7000000029802322,
+                "p95": 0.800000011920929
+              }
+            }
+          }
+        },
+        {
+          "profile": "small-site",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 85.20000000298023,
+              "width": {
+                "median": 0.7000000029802322,
+                "p95": 1.3999999910593033
+              },
+              "source": {
+                "median": 46.099999994039536,
+                "p95": 51.20000000298023
+              }
+            },
+            "selective": {
+              "initial": 23.399999991059303,
+              "width": {
+                "median": 0.7000000029802322,
+                "p95": 0.7999999970197678
+              },
+              "source": {
+                "median": 18.5,
+                "p95": 21.700000002980232
+              }
+            }
+          }
+        },
+        {
+          "profile": "without-four-mosaic",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11.5,
+              "width": {
+                "median": 0,
+                "p95": 0.19999998807907104
+              },
+              "source": {
+                "median": 1.7000000029802322,
+                "p95": 2
+              }
+            },
+            "selective": {
+              "initial": 6,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 0.9000000059604645,
+                "p95": 1.1000000089406967
+              }
+            }
+          }
+        },
+        {
+          "profile": "without-four-mosaic",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 92.09999999403954,
+              "width": {
+                "median": 0.7999999970197678,
+                "p95": 0.9000000059604645
+              },
+              "source": {
+                "median": 45,
+                "p95": 50.6000000089407
+              }
+            },
+            "selective": {
+              "initial": 41.6000000089407,
+              "width": {
+                "median": 0.7000000029802322,
+                "p95": 2
+              },
+              "source": {
+                "median": 25.100000008940697,
+                "p95": 29.599999994039536
+              }
+            }
+          }
+        },
+        {
+          "profile": "repeating",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11.5,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 1.7999999970197678,
+                "p95": 2
+              }
+            },
+            "selective": {
+              "initial": 3.7000000029802322,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 0.5,
+                "p95": 0.5
+              }
+            }
+          }
+        },
+        {
+          "profile": "repeating",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "summary": {
+            "full": {
+              "initial": 78,
+              "width": {
+                "median": 0.8999999910593033,
+                "p95": 1
+              },
+              "source": {
+                "median": 36.70000000298023,
+                "p95": 40.79999999701977
+              }
+            },
+            "selective": {
+              "initial": 14.700000002980232,
+              "width": {
+                "median": 0.7999999970197678,
+                "p95": 0.9000000059604645
+              },
+              "source": {
+                "median": 9.899999991059303,
+                "p95": 12.900000005960464
+              }
+            }
+          }
+        },
+        {
+          "profile": "four-and-mosaic",
+          "roots": 1,
+          "plans": [
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "summary": {
+            "full": {
+              "initial": 14.699999988079071,
+              "width": {
+                "median": 0,
+                "p95": 0.19999998807907104
+              },
+              "source": {
+                "median": 5.5999999940395355,
+                "p95": 5.799999997019768
+              }
+            },
+            "selective": {
+              "initial": 6.9000000059604645,
+              "width": {
+                "median": 0,
+                "p95": 0.10000000894069672
+              },
+              "source": {
+                "median": 3.3999999910593033,
+                "p95": 3.5
+              }
+            }
+          }
+        },
+        {
+          "profile": "four-and-mosaic",
+          "roots": 20,
+          "plans": [
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "summary": {
+            "full": {
+              "initial": 100.1000000089407,
+              "width": {
+                "median": 0.699999988079071,
+                "p95": 0.7999999970197678
+              },
+              "source": {
+                "median": 126.09999999403954,
+                "p95": 130
+              }
+            },
+            "selective": {
+              "initial": 35.5,
+              "width": {
+                "median": 0.7000000029802322,
+                "p95": 1.5
+              },
+              "source": {
+                "median": 57.8999999910593,
+                "p95": 68.6000000089407
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "engine": "firefox",
+      "version": "157.0",
+      "parity": [
+        {
+          "profile": "one-composition",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 109,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "small-site",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 211,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 211,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 211,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "without-four-mosaic",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 1843,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "repeating",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 174,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "four-and-mosaic",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 109,
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "environment": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro"
+      },
+      "runtime": [
+        {
+          "profile": "one-composition",
+          "roots": 1,
+          "plans": [
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 12,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 2,
+                "p95": 3
+              }
+            },
+            "selective": {
+              "initial": 4,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 1,
+                "p95": 2
+              }
+            }
+          }
+        },
+        {
+          "profile": "one-composition",
+          "roots": 20,
+          "plans": [
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 29,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 22,
+                "p95": 24
+              }
+            },
+            "selective": {
+              "initial": 16,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 13,
+                "p95": 14
+              }
+            }
+          }
+        },
+        {
+          "profile": "small-site",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11,
+              "width": {
+                "median": 0,
+                "p95": 0
+              },
+              "source": {
+                "median": 2,
+                "p95": 2
+              }
+            },
+            "selective": {
+              "initial": 4,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 1,
+                "p95": 1
+              }
+            }
+          }
+        },
+        {
+          "profile": "small-site",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 28,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 21,
+                "p95": 22
+              }
+            },
+            "selective": {
+              "initial": 15,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 11,
+                "p95": 14
+              }
+            }
+          }
+        },
+        {
+          "profile": "without-four-mosaic",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 2,
+                "p95": 3
+              }
+            },
+            "selective": {
+              "initial": 5,
+              "width": {
+                "median": 0,
+                "p95": 0
+              },
+              "source": {
+                "median": 1,
+                "p95": 2
+              }
+            }
+          }
+        },
+        {
+          "profile": "without-four-mosaic",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 35,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 26,
+                "p95": 27
+              }
+            },
+            "selective": {
+              "initial": 18,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 13,
+                "p95": 15
+              }
+            }
+          }
+        },
+        {
+          "profile": "repeating",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "summary": {
+            "full": {
+              "initial": 11,
+              "width": {
+                "median": 0,
+                "p95": 0
+              },
+              "source": {
+                "median": 2,
+                "p95": 2
+              }
+            },
+            "selective": {
+              "initial": 4,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 1,
+                "p95": 1
+              }
+            }
+          }
+        },
+        {
+          "profile": "repeating",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "summary": {
+            "full": {
+              "initial": 25,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 16,
+                "p95": 17
+              }
+            },
+            "selective": {
+              "initial": 10,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 6,
+                "p95": 7
+              }
+            }
+          }
+        },
+        {
+          "profile": "four-and-mosaic",
+          "roots": 1,
+          "plans": [
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "summary": {
+            "full": {
+              "initial": 15,
+              "width": {
+                "median": 0,
+                "p95": 0
+              },
+              "source": {
+                "median": 5,
+                "p95": 6
+              }
+            },
+            "selective": {
+              "initial": 6,
+              "width": {
+                "median": 0,
+                "p95": 0
+              },
+              "source": {
+                "median": 4,
+                "p95": 4
+              }
+            }
+          }
+        },
+        {
+          "profile": "four-and-mosaic",
+          "roots": 20,
+          "plans": [
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "summary": {
+            "full": {
+              "initial": 36,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 46,
+                "p95": 48
+              }
+            },
+            "selective": {
+              "initial": 20,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 30,
+                "p95": 32
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "parity": [
+        {
+          "profile": "one-composition",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 109,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "small-site",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 211,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 211,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 211,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "without-four-mosaic",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 1843,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "repeating",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 174,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "four-and-mosaic",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 109,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 109,
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "environment": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro"
+      },
+      "runtime": [
+        {
+          "profile": "one-composition",
+          "roots": 1,
+          "plans": [
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 30,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 3,
+                "p95": 4
+              }
+            },
+            "selective": {
+              "initial": 4,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 2,
+                "p95": 2
+              }
+            }
+          }
+        },
+        {
+          "profile": "one-composition",
+          "roots": 20,
+          "plans": [
+            "two-3-2",
+            "three-1-2-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 117,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 77,
+                "p95": 78
+              }
+            },
+            "selective": {
+              "initial": 39,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 38,
+                "p95": 39
+              }
+            }
+          }
+        },
+        {
+          "profile": "small-site",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 28,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 3,
+                "p95": 3
+              }
+            },
+            "selective": {
+              "initial": 4,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 1,
+                "p95": 2
+              }
+            }
+          }
+        },
+        {
+          "profile": "small-site",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "two-1-3",
+            "two-3-2",
+            "three-1-2-1",
+            "three-2-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 115,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 69,
+                "p95": 71
+              }
+            },
+            "selective": {
+              "initial": 36,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 32,
+                "p95": 34
+              }
+            }
+          }
+        },
+        {
+          "profile": "without-four-mosaic",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 27,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 3,
+                "p95": 3
+              }
+            },
+            "selective": {
+              "initial": 14,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 1,
+                "p95": 2
+              }
+            }
+          }
+        },
+        {
+          "profile": "without-four-mosaic",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "summary": {
+            "full": {
+              "initial": 126,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 65,
+                "p95": 67
+              }
+            },
+            "selective": {
+              "initial": 61,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 37,
+                "p95": 38
+              }
+            }
+          }
+        },
+        {
+          "profile": "repeating",
+          "roots": 1,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "summary": {
+            "full": {
+              "initial": 28,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 3,
+                "p95": 3
+              }
+            },
+            "selective": {
+              "initial": 4,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 1,
+                "p95": 1
+              }
+            }
+          }
+        },
+        {
+          "profile": "repeating",
+          "roots": 20,
+          "plans": [
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "summary": {
+            "full": {
+              "initial": 102,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 53,
+                "p95": 55
+              }
+            },
+            "selective": {
+              "initial": 23,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 17,
+                "p95": 18
+              }
+            }
+          }
+        },
+        {
+          "profile": "four-and-mosaic",
+          "roots": 1,
+          "plans": [
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "summary": {
+            "full": {
+              "initial": 33,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 8,
+                "p95": 9
+              }
+            },
+            "selective": {
+              "initial": 9,
+              "width": {
+                "median": 0,
+                "p95": 1
+              },
+              "source": {
+                "median": 6,
+                "p95": 6
+              }
+            }
+          }
+        },
+        {
+          "profile": "four-and-mosaic",
+          "roots": 20,
+          "plans": [
+            "four-6-5-4-3",
+            "mosaic-8",
+            "mosaic-13"
+          ],
+          "summary": {
+            "full": {
+              "initial": 150,
+              "width": {
+                "median": 1,
+                "p95": 2
+              },
+              "source": {
+                "median": 176,
+                "p95": 182
+              }
+            },
+            "selective": {
+              "initial": 60,
+              "width": {
+                "median": 2,
+                "p95": 2
+              },
+              "source": {
+                "median": 106,
+                "p95": 108
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "configuratorExport": {
+    "status": "pass",
+    "delivery": "local lazy module worker; readable/minified CSS and matching HTML",
+    "unitTests": 121,
+    "engines": [
+      {
+        "engine": "chromium",
+        "version": "156.0.8078.4",
+        "browserMinifiedComparisons": 2446,
+        "workflow": "actual downloads; paired no-script rendering at ten viewport widths; stale-job rejection; worker-unavailable recovery; existing configurator/accessibility suite"
+      },
+      {
+        "engine": "firefox",
+        "version": "157.0",
+        "browserMinifiedComparisons": 2446,
+        "workflow": "actual downloads; paired no-script rendering at ten viewport widths; stale-job rejection; worker-unavailable recovery; existing configurator/accessibility suite"
+      },
+      {
+        "engine": "webkit",
+        "version": "27.2",
+        "browserMinifiedComparisons": 2446,
+        "workflow": "actual downloads; paired no-script rendering at ten viewport widths; stale-job rejection; worker-unavailable recovery; existing configurator/accessibility suite"
+      }
+    ]
+  }
+}

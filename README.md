@@ -2,12 +2,12 @@
 
 Graph Paper provides section-level composition tools for building site-level spatial continuity, using a canonical 64-bit ruler.
 
-**Version 0.5.0** uses the explicit-layout API. Projects using the 0.4 class vocabulary should follow the [migration guide](docs/migration.md). Pin an exact release in production.
+**Version 0.5.1** uses the explicit-layout API. Projects using the 0.4 class vocabulary should follow the [migration guide](docs/migration.md). Pin an exact release in production.
 
 ## Use Graph Paper
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.min.css">
 <section class="gp_ruler gp_layout--stack
                 gp_md--two-3-2 gp_lg--three-1-2-1
                 gp_spacing--neat gp_vertical-spacing--1">
@@ -20,6 +20,8 @@ Graph Paper provides section-level composition tools for building site-level spa
 The ruler establishes coordinates. Layouts select physical proportions and item arrangements. Viewport prefixes explicitly select changes: the example stacks initially, uses two regions from 48rem, and three from 64rem. Spacing, padding, allocation and traversal can change independently. No runtime JavaScript is required; your project owns typography, colors, components and image treatment.
 
 Start with [Getting started](docs/getting-started.md), explore the [configurator](docs/configurator.html), and look up decisions in the [Class reference](docs/class-reference.md). The learning guides and site layouts use the new core. Previous API material is explicitly labeled as legacy; see [Migration](docs/migration.md). Maintainers can use the detailed [composition contracts](src/core/README.md).
+
+The configurator can also build a standalone stylesheet for your responsive sequence and download readable or minified CSS with matching HTML.
 
 ## Builds
 

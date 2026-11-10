@@ -62,6 +62,14 @@ iframe { display: block; border: 0; max-width: none; background: var(--site-surf
 .markup-section { margin-top: 2rem; }
 .markup-section header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem; }
 .markup-section > p { font-size: .85rem; color: var(--site-muted); margin-top: .6rem; }
+.css-export-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin-block:1rem .6rem; }
+.css-export-actions label { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; font-size:.85rem; }
+#css-export-preview { font-size:.85rem; margin-top:.8rem; overflow-wrap:anywhere; }
+#css-export-preview details { margin-top:.8rem; }
+#css-export-preview summary { padding-block:.5rem; }
+#css-export-preview details p { margin-top:.6rem; }
+#custom-css { white-space:pre; }
+.css-export pre { max-height:32rem; overflow:auto; white-space:pre; overflow-wrap:normal; }
 pre { padding: 1.3rem; background: #eaece5; border-left: 3px solid var(--site-accent); white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; }
 code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 .preview-links { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--site-rule); font-size: .8rem; }

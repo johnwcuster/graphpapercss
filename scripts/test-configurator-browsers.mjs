@@ -175,10 +175,19 @@ try{
  // Check those geometries, short wide windows and normal narrow/mobile flow.
  assert.equal(await page.locator('.rail').evaluate(n=>getComputedStyle(n).position),'sticky');
  assert.equal(await page.locator('#composition-panel').evaluate(n=>getComputedStyle(n).position),'sticky');
- const focusedVisible=async()=>assert.ok(await page.evaluate(()=>{
-  const n=document.activeElement,r=n.getBoundingClientRect();
-  return n!==document.body&&r.height>0&&r.top>=0&&r.bottom<=innerHeight+1;
- }),'focused control remains visible in the available height');
+ const focusedVisible=async()=>{
+  // Native focus scrolling and ResizeObserver-driven preview fitting can land
+  // in different frames, especially in WebKit after a viewport-size change.
+  await page.waitForFunction(()=>{
+   const n=document.activeElement,r=n.getBoundingClientRect();
+   return n!==document.body&&r.height>0&&r.top>=0&&r.bottom<=innerHeight+1;
+  },null,{timeout:2000}).catch(()=>{});
+  const actual=await page.evaluate(()=>{
+   const n=document.activeElement,r=n.getBoundingClientRect();
+   return {visible:n!==document.body&&r.height>0&&r.top>=0&&r.bottom<=innerHeight+1,id:n.id,tag:n.tagName,top:r.top,bottom:r.bottom,height:innerHeight,width:innerWidth};
+  });
+  assert.ok(actual.visible,`focused control remains visible in the available height: ${JSON.stringify(actual)}`);
+ };
  for(const [w,h] of [[720,450],[960,540],[1440,400],[390,844],[320,256]]){
   await page.setViewportSize({width:w,height:h});
   assert.equal(await page.locator('.rail').evaluate(n=>getComputedStyle(n).position),'static');
@@ -333,6 +342,8 @@ try{
  await frame.locator('a').first().focus();await page.keyboard.press('Alt+Shift+KeyG');
  await page.waitForFunction(()=>document.querySelector('.rail').hidden);
  await page.locator('#workbench-show').click();
+ const {checkConfiguratorExports}=await import('./lib/configurator-export-checks.mjs');
+ await checkConfiguratorExports({page,browser,open,ready,origin,publicPath});
  // Every request resolves inside the static docs application.
  const failed=[];const failResponse=response=>{if(response.url().startsWith(origin)&&response.status()>=400)failed.push(response.url());};
  page.on('response',failResponse);

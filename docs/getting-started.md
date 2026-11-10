@@ -2,7 +2,7 @@
 
 Graph Paper provides section-level composition tools for building site-level spatial continuity. It supplies ruler-aligned spatial arrangements while your site supplies typography, content treatments and visual identity.
 
-These instructions describe **Graph Paper 0.5.0**. The 0.4 releases use a different API; see [Migration](migration.md).
+These instructions describe **Graph Paper 0.5.1**. The 0.4 releases use a different API; see [Migration](migration.md).
 
 ## Load one stylesheet
 
@@ -15,7 +15,7 @@ Serve the current build from your project:
 For version-pinned CDN delivery:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.min.css">
 ```
 
 Use `css/main.css` for readable source or `css/main.layer.min.css` when you want the core in the `graph-paper` cascade layer. Choose one. No JavaScript or optional tool is required. Pin an exact release when publishing a production site; do not point the new markup at a 0.4 stylesheet.

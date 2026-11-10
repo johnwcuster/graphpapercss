@@ -12,13 +12,15 @@ The tests exercise the current core and versioned released baselines independent
 | `pnpm test:browsers --engine=webkit` | The same matrix in WebKit |
 | `pnpm test:padding --engine=chromium` | Responsive zero/one/two-bit padding, overlays, nesting, author overrides and no-script rendering |
 | `pnpm test:vertical-spacing --engine=chromium` | Generated comparison profiles and responsive vertical-spacing matrix, nesting, margin restoration and real content |
-| `pnpm test:configurator --engine=chromium` | Public configurator controls, all catalogue selections, exports, URL restoration, keyboard interactions and preview scaling |
+| `pnpm test:configurator --engine=chromium` | Public controls, all catalogue selections, actual worker CSS/HTML downloads, no-script export parity, stale-build/error recovery, URL restoration, keyboard interactions and preview scaling |
 | `pnpm docs:check` | Generated documentation, deployed asset mirrors and local links |
 | `pnpm test:docs --engine=chromium` | Site-wide current/legacy geometry, reading measures, ruler toggle and executed published HTML examples |
 
 The docs script supports `--docs-only` to serve only the static directory. Padding, vertical-spacing, docs and configurator scripts also accept `--engine=webkit`. Run configurator engines sequentially because the harness uses one fixed port. Other browser scripts also start local HTTP servers; check their ports before overlapping runs. Use `pnpm browsers:install` when the required Playwright browsers are absent.
 
 Configurator reflow checks include 720×450 and 960×540 CSS viewports (the available geometry at 200% zoom on common laptop/desktop windows), short wide windows, mobile, and 320×256. They verify that the header scrolls out of view, the panel has no constrained internal scrollport, focus restoration and native tabbing stay visible, and the simulated preview width is preserved. These automated viewport checks complement manual browser-zoom testing; they do not drive the browser's native zoom setting.
+
+The configurator export checks download both actual CSS formats and their matching HTML, serve the pairs without JavaScript, and compare geometry with full CSS across viewport boundaries, exact-count transitions, rules, padding, vertical spacing, and a mosaic. They also delay a real worker request to reject stale output and simulate an unavailable worker without disrupting the full-stylesheet workflow. `node scripts/test-selective-builds.mjs --engine=chromium --format=browser-minified` checks the conservative browser minifier across the wider selective-build matrix; omit `--format` to include readable, CLI-minified and forced-count-fallback comparisons too. The packed-distribution audit follows the worker's static module graph inside the actual archive.
 
 `--quick` on the core browser script is a smoke test; it omits exhaustive profiles and is not a release qualification. Browser evidence must name engines, script options and artifacts tested. Feature-disabled tests in modern engines do not prove older-browser support. Current three-engine qualification and real older-engine observations are recorded in the [qualification checkpoint](../maintainers/qualification.md).
 

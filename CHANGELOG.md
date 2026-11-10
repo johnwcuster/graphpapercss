@@ -1,5 +1,17 @@
 # Release notes
 
+## 0.5.1 — selective CSS downloads
+
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.min.css)
+
+The full CSS builds and authoring API are unchanged from 0.5.0. This patch adds smaller, standalone stylesheet downloads to the configurator.
+
+- Build CSS locally for the layouts, viewport steps, gutters, and utilities in a responsive sequence. Choose readable or minified CSS and download matching HTML. Exported layouts require no JavaScript.
+- Retain automatic allocation, exact refinements, nested rulers, fallbacks, and row-budget safeguards within the included layouts. Changed build requirements prompt a rebuild; source counts and exact values remain adjustable.
+- Load the compiler in a worker only when requested, reject stale results, and retain the full-stylesheet workflow when compilation is unavailable.
+- Preserve focused controls while the preview rescales in short windows, and document custom-build usage and boundaries.
+- Validate actual downloads, no-script rendering, and browser minification in Chromium, Firefox, and WebKit; audit the static worker dependencies in the package archive.
+
 ## 0.5.0 — explicit layouts and ruler-based composition
 
 [Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.0/css/main.min.css)

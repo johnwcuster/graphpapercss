@@ -1,6 +1,6 @@
 # Configurator help
 
-The [configurator](configurator.html) explores **Graph Paper 0.5.0**: one composition, explicit viewport transitions, and copyable Graph Paper HTML. The linked stylesheet is the same core delivered at `css/main.css`. Use the matching stylesheet linked beneath the preview with the exported markup. Existing `grid_*` links open the [0.4 configurator reference](configurator-0.4.html).
+The [configurator](configurator.html) explores **Graph Paper 0.5.1**: one composition, explicit viewport transitions, copyable HTML, and custom CSS downloads. Use the full stylesheet linked beneath the preview or build a standalone stylesheet for your selected sequence. Existing `grid_*` links open the [0.4 configurator reference](configurator-0.4.html).
 
 In narrow or short windows, including when browser zoom reduces the available space, Preview controls and Layout controls scroll with the page. Close Layout controls to reach the preview sooner; reopening them brings their heading into view.
 
@@ -109,11 +109,27 @@ Visual aids show the preview ruler, source labels, and item boundaries. The 0–
 
 ## Copy and share
 
-**Copy HTML** copies layout configuration and placeholder items. Replace those placeholders with your content and load the linked 0.5.0 stylesheet. The result runs without configurator JavaScript. The HTML does not include sample explanations, visual aids, or the simulated preview width. Vertical-spacing classes are included on the composition, and enabled padding utilities are included on the placeholder items; no additional author CSS is required.
+**Copy HTML** copies layout configuration and placeholder items. Replace those placeholders with your content and load the linked 0.5.1 stylesheet. The result runs without configurator JavaScript. The HTML does not include sample explanations, visual aids, or the simulated preview width. Vertical-spacing classes are included on the composition, and enabled padding utilities are included on the placeholder items; no additional author CSS is required.
 
 The stack is implicit unless another base layout is selected. `gp_ruler` establishes shared coordinates; a viewport class such as `gp_md--…` selects a layout from 48rem. Selections carry forward until another transition, while source order stays unchanged. Named refinements use responsive classes. Exact counts use inline custom properties with matching breakpoint prefixes; they require no author-written style tags.
 
 **Copy exploration link** saves item count, transitions, refinements, preview width, and visual aids in the URL. A link is a saved exploration, not a published page or an automatic conversion of a 0.4 recipe.
+
+## Download CSS for a sequence
+
+Below the HTML markup, choose **Build CSS for this sequence**. Compilation runs locally in a worker, loaded only when you request a build. It includes the layouts, gutter modes, viewport steps, and utilities required by your exported HTML. An inherited transition that adds no class or property does not add a CSS breakpoint.
+
+Choose **Readable** or **Minified**, then download the CSS and matching HTML. Save both files in the same folder. The HTML links to `graph-paper-custom.css` or `graph-paper-custom.min.css`, according to your format choice. Replace the placeholder items with your content and add your typography, colors, and component styles. No configurator script or build tool is needed to run the downloaded composition.
+
+Use the custom stylesheet **instead of** the full Graph Paper stylesheet. It is a standalone build for this sequence, not an addon or a bundle containing every library layout. Other compositions on your site need their own choices covered too; the full library remains the simplest option for unrestricted use.
+
+Automatic allocation, exact-count controls, nested rulers, and fallbacks remain available within the included layouts. Source item counts and exact allocation values can change without rebuilding. Mosaics still require their documented exact item count. Named controls remain available at the included viewport steps.
+
+The tool disables downloads when changed selections require a different build. Build again to include those requirements. Preview width, visual aids, and item-count changes do not invalidate the CSS. Downloaded HTML always reflects your current items and configuration.
+
+Open **Included selections and readable CSS** to inspect the build. The readable version keeps descriptive private property names; the minified version shortens private names and conservatively removes whitespace. Public class names and custom properties stay the same. Both preserve the library's allocation machinery, so the readable CSS is complete runnable output rather than a simplified illustration.
+
+If the browser cannot start the compiler worker, use the full stylesheet linked above. The existing preview and Copy HTML workflow remain available.
 
 ## Keyboard and panels
 

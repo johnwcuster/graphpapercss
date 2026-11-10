@@ -1,7 +1,7 @@
-import {verticalSpacingCSS} from './vertical-spacing.mjs';
+import {generateVerticalSpacingCSS} from './vertical-spacing.mjs';
 import {enhancementCondition} from './features.mjs';
 export {enhancementCondition} from './features.mjs';
-import {paddingCSS} from './padding.mjs';
+import {generatePaddingCSS} from './padding.mjs';
 import {mosaicParameters,mosaicRootDeclarations,mosaicChildDeclarations,mosaicRules,mosaicPlacement} from './mosaic-compiler.mjs';
 import {fourDeclarations,fourPlacement} from './four-compiler.mjs';
 import {fourSearchRootScalars,fourSearchRootDeclarations} from './four-search.mjs';
@@ -9,7 +9,7 @@ import {placementScalars,placementDeclarations} from './placement-compiler.mjs';
 import {variable as v,equal as eq,sum} from './expressions.mjs';
 import {layoutCode as coded,layoutMembership,groupedLayoutTerms as grouped} from './metadata.mjs';
 import {ruleScalars,ruleDeclarations,ruleDecoration} from './rule-compiler.mjs';
-import {layouts,hinges,spacingModes,allocationPolicies,directionPolicies,traversalPolicies,arrangementPolicies,controlPolicies,exactCountRegions} from './catalogue.mjs';
+import {layouts as allLayouts,hinges as allHinges,spacingModes as allSpacingModes,allocationPolicies,directionPolicies,traversalPolicies,arrangementPolicies,controlPolicies,exactCountRegions} from './catalogue.mjs';
 import {pairDeclarations,pairPlacement,endpointPlacement} from './pair-compiler.mjs';
 import {threeDeclarations,threePlacement} from './three-compiler.mjs';
 import {compositionCancellationRules,dormantExactCancellationRules,familyScalarGroups} from './family-optimization.mjs';
@@ -29,13 +29,21 @@ function fourParameters(plans){
  --_gp-f-order${i}:calc((1 - ${v('f-widest')}) * ${i} + ${v('f-widest')} * (${grouped(plans,p=>ranking(p).indexOf(i))}));`).join('\n');
 }
 
-export function generateCSS(){
+// Optional selection is an experimental build input, not a new authoring API.
+// Keep canonical numeric layout codes so public tokens retain their meaning.
+export function generateCSS({layouts=allLayouts,hinges=allHinges,spacingModes=allSpacingModes,padding=true,verticalSpacing=true}={}){
  const two=layouts.filter(p=>p.family==='two'),three=layouts.filter(p=>p.family==='three'),four=layouts.filter(p=>p.family==='four'),mosaics=layouts.filter(p=>p.family==='mosaic'),peers=layouts.filter(p=>p.family==='peers');
+ const groups=Object.fromEntries(Object.entries(familyScalarGroups).filter(([family])=>layouts.some(p=>p.family===family)));
+ const omittedScalars=new Set(Object.entries(familyScalarGroups).filter(([family])=>!(family in groups)).flatMap(([,names])=>names));
+ const selectedScalars=scalarNames.filter(n=>!omittedScalars.has(n));
+ const ordinaryScalarNames=['two','three','four'].flatMap(name=>groups[name]??[]);
+ const familyScalarNames=Object.values(groups).flat();
+ const rulesEnabled='ruled' in spacingModes;
  const names=layouts.flatMap(p=>[`gp_layout--${p.id}`,...hinges.map(([,prefix])=>`gp_${prefix}--${p.id}`)]);
  const selector=`:where(${names.map(n=>`.${n}`).join(',')})`;
  const out=[
   '/* Graph Paper CSS. MIT license. */',
-  paddingCSS,
+  padding?generatePaddingCSS(hinges):'',
   '@property --gp-arrangement { syntax:"<integer>"; inherits:false; initial-value:0; }',
   '@property --gp-layout { syntax:"<integer>"; inherits:false; initial-value:0; }',
   '@property --gp-allocation { syntax:"<integer>"; inherits:false; initial-value:0; }',
@@ -51,8 +59,8 @@ export function generateCSS(){
   '@property --_gp-measure-ready { syntax:"<number>"; inherits:true; initial-value:0; }',
   '@property --_gp-tracks { syntax:"<integer>"; inherits:true; initial-value:64; }',
   ...parameters.map(n=>`@property --_gp-${n} { syntax:"<number>"; inherits:true; initial-value:0; }`),
-  ...fourSearchRootScalars.map(n=>`@property --_gp-f-${n} { syntax:"<number>"; inherits:false; initial-value:0; }`),
-  ...[...scalarNames,...[2,3,4,5,6].map(n=>`slot-${n}`)].map(n=>`@property --_gp-${n} { syntax:"<number>"; inherits:false; initial-value:0; }`),
+  ...(four.length?fourSearchRootScalars:[]).map(n=>`@property --_gp-f-${n} { syntax:"<number>"; inherits:false; initial-value:0; }`),
+  ...[...selectedScalars,...[2,3,4,5,6].map(n=>`slot-${n}`)].map(n=>`@property --_gp-${n} { syntax:"<number>"; inherits:false; initial-value:0; }`),
   rule(':where(:root)',[...layouts.map(p=>`--gp-${p.id}:${p.code};`),...Object.entries(arrangementPolicies).map(([n,code])=>`--gp-${n}:${code};`),...Object.entries(allocationPolicies).map(([n,code])=>`--gp-${n}:${code};`),...Object.entries(directionPolicies).map(([n,code])=>`--gp-fewer-${n}:${code};`),...Object.entries(traversalPolicies).map(([n,code])=>`--gp-${n}:${code};`)].join(' ')),
   rule(':where(.gp_ruler,.gp_rebase_64)','display:grid; --gp-ruler-bit:0px; --_gp-measure-ready:0;'),
   rule(':where(.gp_ruler > *,.gp_rebase_64 > *,.gp_continue_tracks > *)','grid-column:1 / -1; min-inline-size:0;'),
@@ -65,7 +73,7 @@ export function generateCSS(){
  const simpleResets=familyScalarNames.map(n=>`--_gp-${n}:initial;`).join(' ');
  // One exact opt-in list encloses shared geometry, guards, and native counting.
  // Ordinary author selectors override the zero-specificity candidate rules.
- out.push(ruleDecoration());
+ if(rulesEnabled)out.push(ruleDecoration());
  out.push(`${selector} {
  display:grid; grid-template-columns:subgrid;
  ${exactCountRegions.map(n=>`--_gp-selected-exact-${n}:var(--gp-exact-count-${n});`).join(' ')}
@@ -82,8 +90,8 @@ export function generateCSS(){
  --_gp-four:${layoutMembership(four)};
  --_gp-f-wide:0;
  --_gp-f-widest:${eq('var(--gp-traversal)',3)};
- ${fourParameters(four)}
- ${mosaicRootDeclarations(mosaics)}
+ ${four.length?fourParameters(four):''}
+ ${mosaics.length?mosaicRootDeclarations(mosaics):'--_gp-m-count:0; --_gp-m-enabled:0;'}
  --_gp-simple:calc(1 - min(1,calc(${v('two')} + ${v('three')} + ${v('four')} + ${v('m-count')})));
  --_gp-weight:calc(1 + ${grouped([...two,...three],p=>p.weights[0]-1)});
  --_gp-weight1:calc(1 + ${grouped(three,p=>p.weights[1]-1)});
@@ -99,7 +107,7 @@ export function generateCSS(){
  &:where(:has(> :nth-child(2))) { --_gp-has-two:1; }
  &:where(:has(> :nth-child(3))) { --_gp-has-three:1; }
  &:where(:has(> :nth-child(4))) { --_gp-has-four:1; }
-${fourSearchRootDeclarations()}
+${four.length?fourSearchRootDeclarations():''}
  & > :where(*) {
   min-inline-size:0;
   --_gp-first:0; --_gp-last:0;
@@ -124,16 +132,16 @@ ${fourSearchRootDeclarations()}
  @supports ${enhancementCondition} {
   & > :where(*) {
    --_gp-n:sibling-count(); --_gp-i:sibling-index();
-${pairDeclarations()}
+${two.length?pairDeclarations():''}
    --_gp-fallback-row:calc(1 + round(down,calc((${v('i')} - 1) / (1 + ${v('repeat-active')} * (${v('c')} - 1))),1));
-${threeDeclarations()}
-${fourDeclarations()}
-${mosaicChildDeclarations()}
-${placementDeclarations([pairPlacement,threePlacement,endpointPlacement,fourPlacement,mosaicPlacement])}
+${three.length?threeDeclarations():''}
+${four.length?fourDeclarations():''}
+${mosaics.length?mosaicChildDeclarations():''}
+${placementDeclarations([...(two.length?[pairPlacement]:[]),...(three.length?[threePlacement]:[]),...(two.length?[endpointPlacement]:[]),...(four.length?[fourPlacement]:[]),...(mosaics.length?[mosaicPlacement]:[])])}
   }
-${mosaicRules(mosaics)}
-${compositionCancellationRules()}
-${dormantExactCancellationRules()}
+${mosaics.length?mosaicRules(mosaics):''}
+${compositionCancellationRules(groups)}
+${dormantExactCancellationRules(groups)}
  @container style(--_gp-m-enabled:1) {
   & > :where(*) { ${mosaicResets} }
  }
@@ -141,7 +149,7 @@ ${dormantExactCancellationRules()}
   & > :where(*) { ${simpleResets} }
  }
  }
-${ruleDeclarations(enhancementCondition)}
+${rulesEnabled?ruleDeclarations(enhancementCondition):''}
 }`);
  out.push(rule(':where(.gp_ruler,.gp_rebase_64)','grid-template-columns:repeat(64,minmax(0,1fr)); --_gp-tracks:64;'));
  const spacingAliases=prefix=>Object.entries(spacingModes).map(([name,[a,b,gap]])=>rule(`:where(.gp_${prefix}spacing--${name})`,`--_gp-inset-start:${a}; --_gp-inset-end:${b}; --_gp-gutter:${gap}; --_gp-f-wide:${['wide','ruled'].includes(name)?1:0}; --_gp-m-space:${name==='neat'?1:name==='thin'?2:0}; --_gp-ruled:${name==='ruled'?1:0};`)).join('\n');
@@ -155,5 +163,5 @@ ${ruleDeclarations(enhancementCondition)}
  const aliases=prefix=>layouts.map(p=>rule(`:where(.${prefix}${p.id})`,`--gp-layout:${token(p.id)};`)).join('\n');
  out.push(aliases('gp_layout--'));
  for(const [rem,prefix] of hinges)out.push(`@media(min-width:${rem}rem) {\n${aliases(`gp_${prefix}--`)}\n${spacingAliases(`${prefix}-`)}\n${Object.entries(controlPolicies).flatMap(([family,options])=>Object.entries(options).map(([name,code])=>rule(`:where(.gp_${prefix}-${family}--${name})`,`--gp-${family}:${code};`))).join('\n')}\n}`);
- return `${out.join('\n')}\n\n${verticalSpacingCSS}`.replace(/[ \t]+$/gm,'');
+ return `${out.join('\n')}\n\n${verticalSpacing?generateVerticalSpacingCSS(hinges):''}`.replace(/[ \t]+$/gm,'');
 }

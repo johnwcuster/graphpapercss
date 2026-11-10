@@ -1,4 +1,5 @@
 import {renderCatalogue} from './catalogue-picker.mjs';
+import {setupCSSExport} from './css-export.mjs';
 import {catalogueKind,familyLayouts,relationship,widthOrder,proportionChoices,chooseNearby,equalLayout} from './catalogue-navigation.mjs';
 import { sourcePalette } from '../assets/graph-paper/tools/shared/source.mjs';
 import {
@@ -28,12 +29,15 @@ const widthLabel = step => step.rem ? `From ${step.rem}rem` : 'Base';
 const paddingLabel = bits => bits ? `${bits} ${bits === 1 ? 'bit' : 'bits'}` : 'None';
 const verticalLabel = bits => bits === null ? 'Layout default' : bits === 0 ? 'Zero' : paddingLabel(bits);
 const announce = message => { $('#announcement').textContent = message; };
+const cssExport=setupCSSExport({getState:()=>state,announce});
 
 function fitPreviewDisplay() {
   // Scale the rendered iframe, not its viewport or its document's font sizes.
   // Queries, ruler geometry, and exported classes continue to use state.width.
   const available = $('#preview-scroll').clientWidth;
   if (!available) return;
+  const focused=document.activeElement,focusRect=focused?.getBoundingClientRect();
+  const keepFocusVisible=$('.preview-area').contains(focused)&&focusRect.height>0&&focusRect.top>=0&&focusRect.bottom<=innerHeight;
   const scale = Math.min(1, available / state.width);
   const width = state.width * scale;
   const height = Number(frame.height) * scale;
@@ -45,6 +49,12 @@ function fitPreviewDisplay() {
   frame.style.transform = `scale(${scale})`;
   $('#ruler-scale').hidden = !state.ruler;
   $('#viewport-caption').textContent = `${state.width}px viewport · ${Math.round(scale * 100)}% display scale`;
+  // A zoom/resize can rescale the preview after native focus scrolling. Keep
+  // an already visible editorial control in view when the preview changes height.
+  if(keepFocusVisible){
+    const rect=focused.getBoundingClientRect();
+    if(rect.top<0||rect.bottom>innerHeight)focused.scrollIntoView({block:'nearest'});
+  }
 }
 
 function persist() {
@@ -146,6 +156,7 @@ function render() {
   }
   editorContext = nextContext;
   $('#markup').textContent = candidateMarkup(state);
+  cssExport.update();
   for (const key of ['ruler', 'source', 'inspector']) $(`#${key}`).checked = state[key];
   previewActive = null;
   updatePreviewSummary();
@@ -407,7 +418,7 @@ async function copy(text, success) {
   try { await navigator.clipboard.writeText(text); announce(success); }
   catch { announce('Clipboard unavailable. Select and copy the HTML markup, or copy the exploration URL from your address bar.'); }
 }
-$('#copy-markup').addEventListener('click', () => copy(candidateMarkup(state), 'HTML copied. Use the matching 0.5.0 stylesheet; padding utilities are included.'));
+$('#copy-markup').addEventListener('click', () => copy(candidateMarkup(state), 'HTML copied. Use the matching 0.5.1 stylesheet; padding utilities are included.'));
 $('#copy-link').addEventListener('click', () => {
   const url = new URL(location.href); url.searchParams.set('state', JSON.stringify(state));
   copy(url.href, 'Exploration link copied.');

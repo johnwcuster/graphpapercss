@@ -16,17 +16,18 @@ export const exactValidationScalars=Object.values(familyScalarGroups).flat()
 // without changing inputs or the automatic allocation it falls back to.
 // Keep all nonzero inputs on the fully validated path, including malformed
 // requests. Unsupported style queries retain the original arithmetic.
-export function dormantExactCancellationRules(){
+export function dormantExactCancellationRules(groups=familyScalarGroups){
+ const scalars=Object.values(groups).flat().filter(n=>exactValidationScalars.includes(n));
  return `@container style(--_gp-exact-l:0) {
-  & > :where(*) { ${exactValidationScalars.map(n=>`--_gp-${n}:initial;`).join(' ')} }
+  & > :where(*) { ${scalars.map(n=>`--_gp-${n}:initial;`).join(' ')} }
  }`;
 }
 // Follow resolved family metadata, including author property overrides. At
 // cascade time, cancel expressions the selected family cannot use. Engines
 // without style queries retain the original arithmetic and safeguards.
-export function compositionCancellationRules(){
- return ['two','three','four'].map(family=>`
+export function compositionCancellationRules(groups=familyScalarGroups){
+ return ['two','three','four'].filter(family=>family in groups).map(family=>`
  @container style(--_gp-${family}:1) {
-  & > :where(*) { ${Object.entries(familyScalarGroups).filter(([name])=>name!==family).flatMap(([,names])=>names).map(n=>`--_gp-${n}:initial;`).join(' ')} }
+  & > :where(*) { ${Object.entries(groups).filter(([name])=>name!==family).flatMap(([,names])=>names).map(n=>`--_gp-${n}:initial;`).join(' ')} }
  }`).join('\n');
 }
