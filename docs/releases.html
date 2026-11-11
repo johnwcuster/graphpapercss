@@ -23,7 +23,8 @@
 </nav>
 <!-- site-navigation:end -->
 <div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
-  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#051-selective-css-downloads">0.5.1 — selective CSS downloads</a></li>
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#052-predefined-cdn-profiles">0.5.2 — predefined CDN profiles</a></li>
+<li><a href="#051-selective-css-downloads">0.5.1 — selective CSS downloads</a></li>
 <li><a href="#050-explicit-layouts-and-ruler-based-composition">0.5.0 — explicit layouts and ruler-based composition</a></li>
 <li><a href="#041-documentation-and-configurator">0.4.1 — documentation and configurator</a></li>
 <li><a href="#040-authoring-defaults-and-response-bands">0.4.0 — authoring defaults and response bands</a></li>
@@ -31,6 +32,17 @@
 <li><a href="#023-previous-released-version">0.2.3 — previous released version</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
 <article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
   <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Release notes</h1></header>
+<h2 id="052-predefined-cdn-profiles">0.5.2 — predefined CDN profiles</h2>
+<p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css">Minified CSS</a></p>
+<p>The full CSS builds and authoring API are unchanged from 0.5.1. Two optional standalone profiles offer smaller pinned CDN delivery without a build process.</p>
+<ul>
+<li><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/repeating.min.css"><code>repeating.min.css</code></a>: Stack and repeating Peers 2–6; six layouts, 3,378 gzip bytes.</li>
+<li><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/two-three.min.css"><code>two-three.min.css</code></a>: Stack, Peers 2–6, and all Two/Three compositions; 69 layouts, 9,844 gzip bytes. Four compositions and mosaics remain in the full library.</li>
+<li>Both profiles retain every viewport step, gutter mode, applicable refinement, padding/vertical-spacing utility, nested ruler, rule and safeguard. Readable and minified files and a capability/size manifest are included in the package.</li>
+<li>The configurator separates CDN delivery from self-hosting, offers full or smallest-compatible coverage, and shows one stylesheet result. It highlights Brotli/gzip sizes with site-wide caching guidance, consolidates full-only cases, and keeps Copy HTML beside the markup. Custom self-hosted CSS uses explicit build and download steps.</li>
+<li>Profiles are complete alternatives: load one instead of combining them with each other or the full library. Full builds retain their existing paths and bytes.</li>
+<li>Generated profile files pass readable/minified and forced-count-fallback geometry comparisons in Chromium, Firefox and WebKit. Package tests include exports, static mirrors and the delivery module graph.</li>
+</ul>
 <h2 id="051-selective-css-downloads">0.5.1 — selective CSS downloads</h2>
 <p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.min.css">Minified CSS</a></p>
 <p>The full CSS builds and authoring API are unchanged from 0.5.0. This patch adds smaller, standalone stylesheet downloads to the configurator.</p>

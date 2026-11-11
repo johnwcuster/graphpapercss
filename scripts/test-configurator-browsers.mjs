@@ -342,6 +342,8 @@ try{
  await frame.locator('a').first().focus();await page.keyboard.press('Alt+Shift+KeyG');
  await page.waitForFunction(()=>document.querySelector('.rail').hidden);
  await page.locator('#workbench-show').click();
+ const {checkConfiguratorProfiles}=await import('./lib/configurator-profiles-checks.mjs');
+ await checkConfiguratorProfiles({page,browser,open,origin,publicPath,choose});
  const {checkConfiguratorExports}=await import('./lib/configurator-export-checks.mjs');
  await checkConfiguratorExports({page,browser,open,ready,origin,publicPath});
  // Every request resolves inside the static docs application.

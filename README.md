@@ -2,12 +2,12 @@
 
 Graph Paper provides section-level composition tools for building site-level spatial continuity, using a canonical 64-bit ruler.
 
-**Version 0.5.1** uses the explicit-layout API. Projects using the 0.4 class vocabulary should follow the [migration guide](docs/migration.md). Pin an exact release in production.
+**Version 0.5.2** uses the explicit-layout API. Projects using the 0.4 class vocabulary should follow the [migration guide](docs/migration.md). Pin an exact release in production.
 
 ## Use Graph Paper
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css">
 <section class="gp_ruler gp_layout--stack
                 gp_md--two-3-2 gp_lg--three-1-2-1
                 gp_spacing--neat gp_vertical-spacing--1">
@@ -21,7 +21,7 @@ The ruler establishes coordinates. Layouts select physical proportions and item 
 
 Start with [Getting started](docs/getting-started.md), explore the [configurator](docs/configurator.html), and look up decisions in the [Class reference](docs/class-reference.md). The learning guides and site layouts use the new core. Previous API material is explicitly labeled as legacy; see [Migration](docs/migration.md). Maintainers can use the detailed [composition contracts](src/core/README.md).
 
-The configurator can also build a standalone stylesheet for your responsive sequence and download readable or minified CSS with matching HTML.
+The configurator can also build a standalone stylesheet for your responsive sequence and download readable or minified CSS. Copy the layout HTML beside the displayed markup.
 
 ## Builds
 
@@ -29,11 +29,15 @@ The configurator can also build a standalone stylesheet for your responsive sequ
 | --- | --- |
 | `css/main.css`, `main.min.css` | Current 0.5 core |
 | `css/main.layer.css`, `main.layer.min.css` | Same core in the `graph-paper` cascade layer |
+| `css/profiles/repeating.css`, `repeating.min.css` | Standalone Stack and Peers 2–6 |
+| `css/profiles/two-three.css`, `two-three.min.css` | Standalone Stack, Peers 2–6, Two and Three compositions |
 | `css/legacy/0.4/main*.css` | Byte-preserved 0.4 reference, including layered forms |
 | `css/legacy/0.4/bands*.css` | Response bands for the 0.4 reference only |
 | `css/legacy/main.css`, `main.min.css` | Frozen 0.2.3 migration/regression baseline |
 
 Choose one core stylesheet. Do not combine versions or add legacy bands to the new core. The old `grid_*`, `set_*`, `flow_*` and `gp_band--*` API is available only with its matching legacy build or a pinned older release. The new core has no compatibility aliases for those classes.
+
+The smaller predefined builds first ship in 0.5.2. Each includes all viewport steps, gutter modes, and applicable controls; load one build instead of the full library. The configurator checks whether it covers your sequence and copies a pinned CDN tag. See [build capabilities and sizes](docs/browser-support.md#predefined-cdn-profiles). Custom downloads remain available for narrower selections.
 
 The optional portable inspector still edits the **0.4 API only**. Its package entry is `graphpapercss/legacy/0.4/inspector`; it is not a 0.5 editor. The standalone configurator supports the current API. Neither tool is required to use the CSS.
 

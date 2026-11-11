@@ -1,6 +1,6 @@
 # Migrating to 0.5
 
-The 0.5 API, introduced in 0.5.0 and unchanged in **0.5.1**, is a deliberate authoring change from the published **0.4.1** release and its byte-identical **0.4.0** CSS. This is not a drop-in class rename. Proportions remain ruler-aligned, but response, occupancy and nesting are expressed differently.
+The 0.5 API, introduced in 0.5.0 and unchanged in **0.5.2**, is a deliberate authoring change from the published **0.4.1** release and its byte-identical **0.4.0** CSS. This is not a drop-in class rename. Proportions remain ruler-aligned, but response, occupancy and nesting are expressed differently.
 
 ## Choose a version boundary
 

@@ -1,9 +1,9 @@
 # Selective compiler feasibility
 
 Measurements dated 10 November 2026. Selective compilation is shared by build
-tooling and configurator downloads; it does not change the authoring contract
-or introduce predefined published distributions. The canonical four CSS
-artifacts remain byte-for-byte unchanged.
+tooling and configurator downloads; it does not change the authoring contract.
+The [predefined profile distributions](profiles.md) use the same implementation.
+The canonical four CSS artifacts remain byte-for-byte unchanged.
 
 ## Approach
 
@@ -136,7 +136,7 @@ individual contributions, prove memory savings or establish a universal speedup.
 Selective compilation is worthwhile without removing design capabilities from
 the full library. The configurator requests the union of choices in a responsive
 sequence; a future project build can request the union across its pages.
-A few predefined profiles can use the same compiler, rather than maintaining
+The predefined profiles use that same compiler rather than maintaining
 separate CSS implementations.
 
 Smaller output is still computational CSS, not a short hand-written diagram of
@@ -201,5 +201,5 @@ pnpm test:package
 ```
 
 Generated CSS, size JSON, parity reports and runtime samples stay under ignored
-`test-results/selective-builds/`. Predefined profile files are not published;
-the configurator generates individual downloads locally.
+`test-results/selective-builds/`. Predefined profiles are maintained separately from these probe outputs; the
+configurator also generates individual downloads locally.

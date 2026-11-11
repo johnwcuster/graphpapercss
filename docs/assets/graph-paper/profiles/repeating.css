@@ -1,0 +1,529 @@
+/* Graph Paper CSS. MIT license. */
+:where(.gp_pad--0) { padding:0; }
+:where(.gp_pad) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+@media(min-width:30rem) {
+:where(.gp_xs-pad--0) { padding:0; }
+:where(.gp_xs-pad--1) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_xs-pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+}
+@media(min-width:40rem) {
+:where(.gp_sm-pad--0) { padding:0; }
+:where(.gp_sm-pad--1) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_sm-pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+}
+@media(min-width:48rem) {
+:where(.gp_md-pad--0) { padding:0; }
+:where(.gp_md-pad--1) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_md-pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+}
+@media(min-width:64rem) {
+:where(.gp_lg-pad--0) { padding:0; }
+:where(.gp_lg-pad--1) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_lg-pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+}
+@media(min-width:80rem) {
+:where(.gp_xl-pad--0) { padding:0; }
+:where(.gp_xl-pad--1) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_xl-pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+}
+@media(min-width:96rem) {
+:where(.gp_2xl-pad--0) { padding:0; }
+:where(.gp_2xl-pad--1) { padding:calc(100% / var(--_gp-tracks)); }
+:where(.gp_2xl-pad--2) { padding:calc(200% / var(--_gp-tracks)); }
+}
+@property --gp-arrangement { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-layout { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-allocation { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-traversal { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-fewer { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-exact-count-left { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-exact-count-center { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-exact-count-center-left { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-exact-count-center-right { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-exact-count-right { syntax:"<integer>"; inherits:false; initial-value:0; }
+@property --gp-xs-exact-count-left { syntax:"*"; inherits:false; }
+@property --gp-xs-exact-count-center { syntax:"*"; inherits:false; }
+@property --gp-xs-exact-count-center-left { syntax:"*"; inherits:false; }
+@property --gp-xs-exact-count-center-right { syntax:"*"; inherits:false; }
+@property --gp-xs-exact-count-right { syntax:"*"; inherits:false; }
+@property --gp-sm-exact-count-left { syntax:"*"; inherits:false; }
+@property --gp-sm-exact-count-center { syntax:"*"; inherits:false; }
+@property --gp-sm-exact-count-center-left { syntax:"*"; inherits:false; }
+@property --gp-sm-exact-count-center-right { syntax:"*"; inherits:false; }
+@property --gp-sm-exact-count-right { syntax:"*"; inherits:false; }
+@property --gp-md-exact-count-left { syntax:"*"; inherits:false; }
+@property --gp-md-exact-count-center { syntax:"*"; inherits:false; }
+@property --gp-md-exact-count-center-left { syntax:"*"; inherits:false; }
+@property --gp-md-exact-count-center-right { syntax:"*"; inherits:false; }
+@property --gp-md-exact-count-right { syntax:"*"; inherits:false; }
+@property --gp-lg-exact-count-left { syntax:"*"; inherits:false; }
+@property --gp-lg-exact-count-center { syntax:"*"; inherits:false; }
+@property --gp-lg-exact-count-center-left { syntax:"*"; inherits:false; }
+@property --gp-lg-exact-count-center-right { syntax:"*"; inherits:false; }
+@property --gp-lg-exact-count-right { syntax:"*"; inherits:false; }
+@property --gp-xl-exact-count-left { syntax:"*"; inherits:false; }
+@property --gp-xl-exact-count-center { syntax:"*"; inherits:false; }
+@property --gp-xl-exact-count-center-left { syntax:"*"; inherits:false; }
+@property --gp-xl-exact-count-center-right { syntax:"*"; inherits:false; }
+@property --gp-xl-exact-count-right { syntax:"*"; inherits:false; }
+@property --gp-2xl-exact-count-left { syntax:"*"; inherits:false; }
+@property --gp-2xl-exact-count-center { syntax:"*"; inherits:false; }
+@property --gp-2xl-exact-count-center-left { syntax:"*"; inherits:false; }
+@property --gp-2xl-exact-count-center-right { syntax:"*"; inherits:false; }
+@property --gp-2xl-exact-count-right { syntax:"*"; inherits:false; }
+@property --_gp-selected-exact-left { syntax:"<integer>"; inherits:false; initial-value:0; }
+
+
+
+
+@property --gp-ruler-bit { syntax:"<length>"; inherits:true; initial-value:0px; }
+@property --_gp-measure-tracks { syntax:"<integer>"; inherits:true; initial-value:64; }
+@property --_gp-measure-ready { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-tracks { syntax:"<integer>"; inherits:true; initial-value:64; }
+
+
+
+
+@property --_gp-m-count { syntax:"<number>"; inherits:true; initial-value:0; }
+
+
+
+@property --_gp-parent { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-inset-start { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-inset-end { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-gutter { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-ruled { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-two { syntax:"<number>"; inherits:true; initial-value:0; }
+
+
+@property --_gp-has-two { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-has-three { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-has-four { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-three { syntax:"<number>"; inherits:true; initial-value:0; }
+
+@property --_gp-repeat { syntax:"<number>"; inherits:true; initial-value:0; }
+
+
+
+
+@property --_gp-exact-l { syntax:"<number>"; inherits:true; initial-value:0; }
+
+
+@property --_gp-above { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-below { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-span-mode { syntax:"<number>"; inherits:true; initial-value:0; }
+@property --_gp-four { syntax:"<number>"; inherits:true; initial-value:0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@property --_gp-inset { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-tail { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-usable { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-c { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-gap { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-content { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-slot { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-repeat-active { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-repeat-start { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-repeat-span { syntax:"<number>"; inherits:false; initial-value:0; }
+
+@property --_gp-i { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-fallback-row { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-first { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-last { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-spanning { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-construction-rows { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-row-safe { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-active { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-start { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-span { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-row { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-rowspan { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-rule-position { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-rule-start-visible { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-rule-end-visible { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-m-enabled { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-simple { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-slot-2 { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-slot-3 { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-slot-4 { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-slot-5 { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-slot-6 { syntax:"<number>"; inherits:false; initial-value:0; }
+:where(:root) { --gp-stack:0; --gp-peers-2:1; --gp-peers-3:2; --gp-peers-4:3; --gp-peers-5:4; --gp-peers-6:5; --gp-across:0; --gp-first-above:1; --gp-last-below:2; --gp-first-above-last-below:3; --gp-closest:0; --gp-stronger:1; --gp-fewer-left:0; --gp-fewer-right:1; --gp-left-to-right:0; --gp-right-to-left:1; --gp-center-first:2; --gp-widest-first:3; }
+:where(.gp_ruler,.gp_rebase_64) { display:grid; --gp-ruler-bit:0px; --_gp-measure-ready:0; }
+:where(.gp_ruler > *,.gp_rebase_64 > *,.gp_continue_tracks > *) { grid-column:1 / -1; min-inline-size:0; }
+:where(.gp_continue_tracks) { display:grid; grid-template-columns:subgrid; }
+
+:where(.gp_rule--start,.gp_rule--end) { position:relative; }
+:where(.gp_rule--start)::before, :where(.gp_rule--end)::after {
+ content:none; position:absolute; inset-block:0; width:0; padding:0;
+ border:0 solid transparent; pointer-events:none;
+ background-image:linear-gradient(var(--gp-rule-color,currentColor),var(--gp-rule-color,currentColor));
+ background-size:var(--gp-rule-width,1px) 100%; background-repeat:no-repeat;
+ background-origin:border-box; background-clip:border-box;
+}
+/* Transparent inherited side borders let translation cancel the owner's
+   border offset. Padding supplies the painted width under either box sizing. */
+:where(.gp_rule--start)::before {
+ border-left-width:inherit; border-left-style:inherit; padding-left:var(--gp-rule-width,1px);
+ left:calc(-1 * var(--gp-ruler-bit));
+ background-position:left top; translate:calc(-100% + var(--gp-rule-width,1px) / 2) 0;
+}
+:where(.gp_rule--end)::after {
+ border-right-width:inherit; border-right-style:inherit; padding-right:var(--gp-rule-width,1px);
+ right:calc(-1 * var(--gp-ruler-bit));
+ background-position:right top; translate:calc(100% - var(--gp-rule-width,1px) / 2) 0;
+}
+
+:where(.gp_layout--stack,.gp_xs--stack,.gp_sm--stack,.gp_md--stack,.gp_lg--stack,.gp_xl--stack,.gp_2xl--stack,.gp_layout--peers-2,.gp_xs--peers-2,.gp_sm--peers-2,.gp_md--peers-2,.gp_lg--peers-2,.gp_xl--peers-2,.gp_2xl--peers-2,.gp_layout--peers-3,.gp_xs--peers-3,.gp_sm--peers-3,.gp_md--peers-3,.gp_lg--peers-3,.gp_xl--peers-3,.gp_2xl--peers-3,.gp_layout--peers-4,.gp_xs--peers-4,.gp_sm--peers-4,.gp_md--peers-4,.gp_lg--peers-4,.gp_xl--peers-4,.gp_2xl--peers-4,.gp_layout--peers-5,.gp_xs--peers-5,.gp_sm--peers-5,.gp_md--peers-5,.gp_lg--peers-5,.gp_xl--peers-5,.gp_2xl--peers-5,.gp_layout--peers-6,.gp_xs--peers-6,.gp_sm--peers-6,.gp_md--peers-6,.gp_lg--peers-6,.gp_xl--peers-6,.gp_2xl--peers-6) {
+ display:grid; grid-template-columns:subgrid;
+ --_gp-selected-exact-left:var(--gp-exact-count-left);    
+ @media(min-width:30rem) { --_gp-selected-exact-left:var(--gp-xs-exact-count-left,var(--gp-exact-count-left));     }
+@media(min-width:40rem) { --_gp-selected-exact-left:var(--gp-sm-exact-count-left,var(--gp-xs-exact-count-left,var(--gp-exact-count-left)));     }
+@media(min-width:48rem) { --_gp-selected-exact-left:var(--gp-md-exact-count-left,var(--gp-sm-exact-count-left,var(--gp-xs-exact-count-left,var(--gp-exact-count-left))));     }
+@media(min-width:64rem) { --_gp-selected-exact-left:var(--gp-lg-exact-count-left,var(--gp-md-exact-count-left,var(--gp-sm-exact-count-left,var(--gp-xs-exact-count-left,var(--gp-exact-count-left)))));     }
+@media(min-width:80rem) { --_gp-selected-exact-left:var(--gp-xl-exact-count-left,var(--gp-lg-exact-count-left,var(--gp-md-exact-count-left,var(--gp-sm-exact-count-left,var(--gp-xs-exact-count-left,var(--gp-exact-count-left))))));     }
+@media(min-width:96rem) { --_gp-selected-exact-left:var(--gp-2xl-exact-count-left,var(--gp-xl-exact-count-left,var(--gp-lg-exact-count-left,var(--gp-md-exact-count-left,var(--gp-sm-exact-count-left,var(--gp-xs-exact-count-left,var(--gp-exact-count-left)))))));     }
+ --_gp-exact-l:var(--_gp-selected-exact-left);    
+ --_gp-parent:var(--_gp-tracks); --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0; --_gp-ruled:0;
+ --_gp-has-two:0; --_gp-has-three:0; --_gp-has-four:0;
+ --_gp-two:calc(0);
+ --_gp-three:calc(0);
+ --_gp-four:calc(0);
+ 
+ 
+
+ --_gp-m-count:0; --_gp-m-enabled:0;
+ --_gp-simple:calc(1 - min(1,calc(var(--_gp-two) + var(--_gp-three) + var(--_gp-four) + var(--_gp-m-count))));
+ 
+ 
+ 
+ --_gp-above:calc(var(--_gp-two) * (max(0,calc(1 - abs(var(--gp-arrangement) - 1))) + max(0,calc(1 - abs(var(--gp-arrangement) - 3)))));
+ --_gp-below:calc(var(--_gp-two) * (max(0,calc(1 - abs(var(--gp-arrangement) - 2))) + max(0,calc(1 - abs(var(--gp-arrangement) - 3)))));
+ --_gp-span-mode:max(var(--_gp-above),var(--_gp-below));
+ --_gp-repeat:calc(max(0,calc(1 - abs(var(--gp-layout) - 1))) * 2 + max(0,calc(1 - abs(var(--gp-layout) - 2))) * 3 + max(0,calc(1 - abs(var(--gp-layout) - 3))) * 4 + max(0,calc(1 - abs(var(--gp-layout) - 4))) * 5 + max(0,calc(1 - abs(var(--gp-layout) - 5))) * 6 + var(--_gp-two) * ((1 - var(--_gp-span-mode)) * var(--_gp-has-two) + var(--_gp-span-mode) * ((1 - var(--_gp-above) * var(--_gp-below)) * var(--_gp-has-three) + var(--_gp-above) * var(--_gp-below) * var(--_gp-has-four))) * 2);
+ 
+ 
+ 
+ 
+ &:where(:has(> :nth-child(2))) { --_gp-has-two:1; }
+ &:where(:has(> :nth-child(3))) { --_gp-has-three:1; }
+ &:where(:has(> :nth-child(4))) { --_gp-has-four:1; }
+
+ & > :where(*) {
+  min-inline-size:0;
+  --_gp-first:0; --_gp-last:0;
+  --_gp-spanning:max(calc(var(--_gp-above) * var(--_gp-first)),calc(var(--_gp-below) * var(--_gp-last)));
+  --_gp-inset:min(var(--_gp-inset-start),max(0,calc(var(--_gp-parent) - 1)));
+  --_gp-tail:min(var(--_gp-inset-end),max(0,calc(var(--_gp-parent) - var(--_gp-inset) - 1)));
+  --_gp-usable:calc(var(--_gp-parent) - var(--_gp-inset) - var(--_gp-tail));
+  --_gp-c:max(1,var(--_gp-repeat),calc(3 * var(--_gp-three)),calc(4 * var(--_gp-four)));
+  --_gp-repeat-active:calc((1 - var(--_gp-spanning)) * clamp(0,calc(var(--_gp-repeat) - 1),1) * clamp(0,calc(var(--_gp-usable) - var(--_gp-c) + 1),1));
+  --_gp-gap:min(var(--_gp-gutter),max(0,round(down,calc((var(--_gp-usable) - var(--_gp-c)) / max(1,calc(var(--_gp-c) - 1))),1)));
+  --_gp-content:calc(var(--_gp-usable) - (var(--_gp-c) - 1) * var(--_gp-gap));
+  --_gp-slot:calc(max(0,calc(1 - abs(var(--_gp-repeat) - 2))) * ((1 - var(--_gp-above)) * var(--_gp-slot-2) + var(--_gp-above) * (1 - var(--_gp-slot-2))) + max(0,calc(1 - abs(var(--_gp-repeat) - 3))) * var(--_gp-slot-3) + max(0,calc(1 - abs(var(--_gp-repeat) - 4))) * var(--_gp-slot-4) + max(0,calc(1 - abs(var(--_gp-repeat) - 5))) * var(--_gp-slot-5) + max(0,calc(1 - abs(var(--_gp-repeat) - 6))) * var(--_gp-slot-6));
+  --_gp-repeat-start:round(nearest,calc(var(--_gp-content) * var(--_gp-slot) / var(--_gp-c)),1);
+  --_gp-repeat-span:calc(round(nearest,calc(var(--_gp-content) * (var(--_gp-slot) + 1) / var(--_gp-c)),1) - var(--_gp-repeat-start));
+  grid-column:calc(1 + var(--_gp-inset) + var(--_gp-repeat-active) * (var(--_gp-repeat-start) + var(--_gp-slot) * var(--_gp-gap))) / span calc((1 - var(--_gp-repeat-active)) * var(--_gp-usable) + var(--_gp-repeat-active) * var(--_gp-repeat-span));
+  grid-row:auto;
+  --_gp-tracks:calc((1 - var(--_gp-repeat-active)) * var(--_gp-usable) + var(--_gp-repeat-active) * var(--_gp-repeat-span));
+ }
+ & > :where(:first-child) { --_gp-first:1; }
+ & > :where(:last-child) { --_gp-last:1; }
+ & > :where(:nth-child(2n + 1)) { --_gp-slot-2:0; }
+& > :where(:nth-child(2n + 2)) { --_gp-slot-2:1; }
+& > :where(:nth-child(3n + 1)) { --_gp-slot-3:0; }
+& > :where(:nth-child(3n + 2)) { --_gp-slot-3:1; }
+& > :where(:nth-child(3n + 3)) { --_gp-slot-3:2; }
+& > :where(:nth-child(4n + 1)) { --_gp-slot-4:0; }
+& > :where(:nth-child(4n + 2)) { --_gp-slot-4:1; }
+& > :where(:nth-child(4n + 3)) { --_gp-slot-4:2; }
+& > :where(:nth-child(4n + 4)) { --_gp-slot-4:3; }
+& > :where(:nth-child(5n + 1)) { --_gp-slot-5:0; }
+& > :where(:nth-child(5n + 2)) { --_gp-slot-5:1; }
+& > :where(:nth-child(5n + 3)) { --_gp-slot-5:2; }
+& > :where(:nth-child(5n + 4)) { --_gp-slot-5:3; }
+& > :where(:nth-child(5n + 5)) { --_gp-slot-5:4; }
+& > :where(:nth-child(6n + 1)) { --_gp-slot-6:0; }
+& > :where(:nth-child(6n + 2)) { --_gp-slot-6:1; }
+& > :where(:nth-child(6n + 3)) { --_gp-slot-6:2; }
+& > :where(:nth-child(6n + 4)) { --_gp-slot-6:3; }
+& > :where(:nth-child(6n + 5)) { --_gp-slot-6:4; }
+& > :where(:nth-child(6n + 6)) { --_gp-slot-6:5; }
+ @supports (width:calc(1px * sibling-count())) and (width:calc(1px * sibling-index())) and (width:calc(1px * mod(3,2))) {
+  & > :where(*) {
+    --_gp-i:sibling-index();
+
+   --_gp-fallback-row:calc(1 + round(down,calc((var(--_gp-i) - 1) / (1 + var(--_gp-repeat-active) * (var(--_gp-c) - 1))),1));
+
+
+
+
+   --_gp-construction-rows:calc(0);
+   --_gp-row-safe:clamp(0,calc(9999 - var(--_gp-construction-rows)),1);
+   --_gp-active:calc(0);
+   --_gp-start:calc((1 - var(--_gp-row-safe)) * var(--_gp-inset) + var(--_gp-row-safe) * ((1 - var(--_gp-active)) * (var(--_gp-inset) + var(--_gp-repeat-active) * (var(--_gp-repeat-start) + var(--_gp-slot) * var(--_gp-gap))) + 0));
+   --_gp-span:calc((1 - var(--_gp-row-safe)) * var(--_gp-usable) + var(--_gp-row-safe) * ((1 - var(--_gp-active)) * ((1 - var(--_gp-repeat-active)) * var(--_gp-usable) + var(--_gp-repeat-active) * var(--_gp-repeat-span)) + 0));
+   --_gp-row:calc((1 - var(--_gp-row-safe)) * var(--_gp-i) + var(--_gp-row-safe) * ((1 - var(--_gp-active)) * var(--_gp-fallback-row) + 0));
+   --_gp-rowspan:calc((1 - var(--_gp-row-safe)) * 1 + var(--_gp-row-safe) * ((1 - var(--_gp-active)) * 1 + 0));
+   grid-column:calc(1 + var(--_gp-start)) / span var(--_gp-span);
+   grid-row:var(--_gp-row) / span var(--_gp-rowspan);
+   --_gp-tracks:var(--_gp-span);
+
+  }
+
+
+@container style(--_gp-exact-l:0) {
+  & > :where(*) {  }
+ }
+ @container style(--_gp-m-enabled:1) {
+  & > :where(*) {  }
+ }
+ @container style(--_gp-simple:1) {
+  & > :where(*) {  }
+ }
+ }
+
+ @container style(--_gp-ruled:1) and style(--_gp-measure-ready:1) {
+  & > :where(.gp_rule--start,.gp_rule--end) {
+   --_gp-rule-position:calc(var(--_gp-inset) + var(--_gp-repeat-active) * (var(--_gp-repeat-start) + var(--_gp-slot) * var(--_gp-gap)));
+   @supports (width:calc(1px * sibling-count())) and (width:calc(1px * sibling-index())) and (width:calc(1px * mod(3,2))) { --_gp-rule-position:var(--_gp-start); }
+   --_gp-rule-start-visible:calc(clamp(0,calc(var(--_gp-gap) - 1),1) * clamp(0,calc(var(--_gp-rule-position) - var(--_gp-inset)),1));
+   --_gp-rule-end-visible:calc(clamp(0,calc(var(--_gp-gap) - 1),1) * clamp(0,calc(var(--_gp-inset) + var(--_gp-usable) - var(--_gp-rule-position) - var(--_gp-tracks)),1));
+  }
+ }
+ @container style(--_gp-rule-start-visible:1) {
+  & > :where(.gp_rule--start)::before { content:""; }
+ }
+ @container style(--_gp-rule-end-visible:1) {
+  & > :where(.gp_rule--end)::after { content:""; }
+ }
+
+}
+:where(.gp_ruler,.gp_rebase_64) { grid-template-columns:repeat(64,minmax(0,1fr)); --_gp-tracks:64; }
+:where(.gp_spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_ruler.gp_ruler--measure,.gp_rebase_64.gp_ruler--measure) { container-type:inline-size; --_gp-measure-ready:1; --_gp-measure-tracks:var(--_gp-tracks); }
+:where(.gp_ruler.gp_ruler--measure > *,.gp_rebase_64.gp_ruler--measure > *) { --gp-ruler-bit:calc(100cqi / var(--_gp-measure-tracks)); }
+:where(.gp_allocation--closest) { --gp-allocation:0; }
+:where(.gp_allocation--stronger) { --gp-allocation:1; }
+:where(.gp_fewer--left) { --gp-fewer:0; }
+:where(.gp_fewer--right) { --gp-fewer:1; }
+:where(.gp_traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_traversal--center-first) { --gp-traversal:2; }
+:where(.gp_traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_arrangement--across) { --gp-arrangement:0; }
+:where(.gp_arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_arrangement--first-above-last-below) { --gp-arrangement:3; }
+:where(.gp_layout--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_layout--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_layout--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_layout--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_layout--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_layout--peers-6) { --gp-layout:var(--gp-peers-6); }
+@media(min-width:30rem) {
+:where(.gp_xs--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_xs--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_xs--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_xs--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_xs--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_xs--peers-6) { --gp-layout:var(--gp-peers-6); }
+:where(.gp_xs-spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_xs-spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_xs-spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_xs-spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_xs-spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_xs-allocation--closest) { --gp-allocation:0; }
+:where(.gp_xs-allocation--stronger) { --gp-allocation:1; }
+:where(.gp_xs-fewer--left) { --gp-fewer:0; }
+:where(.gp_xs-fewer--right) { --gp-fewer:1; }
+:where(.gp_xs-traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_xs-traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_xs-traversal--center-first) { --gp-traversal:2; }
+:where(.gp_xs-traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_xs-arrangement--across) { --gp-arrangement:0; }
+:where(.gp_xs-arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_xs-arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_xs-arrangement--first-above-last-below) { --gp-arrangement:3; }
+}
+@media(min-width:40rem) {
+:where(.gp_sm--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_sm--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_sm--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_sm--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_sm--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_sm--peers-6) { --gp-layout:var(--gp-peers-6); }
+:where(.gp_sm-spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_sm-spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_sm-spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_sm-spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_sm-spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_sm-allocation--closest) { --gp-allocation:0; }
+:where(.gp_sm-allocation--stronger) { --gp-allocation:1; }
+:where(.gp_sm-fewer--left) { --gp-fewer:0; }
+:where(.gp_sm-fewer--right) { --gp-fewer:1; }
+:where(.gp_sm-traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_sm-traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_sm-traversal--center-first) { --gp-traversal:2; }
+:where(.gp_sm-traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_sm-arrangement--across) { --gp-arrangement:0; }
+:where(.gp_sm-arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_sm-arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_sm-arrangement--first-above-last-below) { --gp-arrangement:3; }
+}
+@media(min-width:48rem) {
+:where(.gp_md--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_md--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_md--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_md--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_md--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_md--peers-6) { --gp-layout:var(--gp-peers-6); }
+:where(.gp_md-spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_md-spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_md-spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_md-spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_md-spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_md-allocation--closest) { --gp-allocation:0; }
+:where(.gp_md-allocation--stronger) { --gp-allocation:1; }
+:where(.gp_md-fewer--left) { --gp-fewer:0; }
+:where(.gp_md-fewer--right) { --gp-fewer:1; }
+:where(.gp_md-traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_md-traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_md-traversal--center-first) { --gp-traversal:2; }
+:where(.gp_md-traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_md-arrangement--across) { --gp-arrangement:0; }
+:where(.gp_md-arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_md-arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_md-arrangement--first-above-last-below) { --gp-arrangement:3; }
+}
+@media(min-width:64rem) {
+:where(.gp_lg--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_lg--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_lg--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_lg--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_lg--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_lg--peers-6) { --gp-layout:var(--gp-peers-6); }
+:where(.gp_lg-spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_lg-spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_lg-spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_lg-spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_lg-spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_lg-allocation--closest) { --gp-allocation:0; }
+:where(.gp_lg-allocation--stronger) { --gp-allocation:1; }
+:where(.gp_lg-fewer--left) { --gp-fewer:0; }
+:where(.gp_lg-fewer--right) { --gp-fewer:1; }
+:where(.gp_lg-traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_lg-traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_lg-traversal--center-first) { --gp-traversal:2; }
+:where(.gp_lg-traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_lg-arrangement--across) { --gp-arrangement:0; }
+:where(.gp_lg-arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_lg-arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_lg-arrangement--first-above-last-below) { --gp-arrangement:3; }
+}
+@media(min-width:80rem) {
+:where(.gp_xl--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_xl--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_xl--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_xl--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_xl--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_xl--peers-6) { --gp-layout:var(--gp-peers-6); }
+:where(.gp_xl-spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_xl-spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_xl-spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_xl-spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_xl-spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_xl-allocation--closest) { --gp-allocation:0; }
+:where(.gp_xl-allocation--stronger) { --gp-allocation:1; }
+:where(.gp_xl-fewer--left) { --gp-fewer:0; }
+:where(.gp_xl-fewer--right) { --gp-fewer:1; }
+:where(.gp_xl-traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_xl-traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_xl-traversal--center-first) { --gp-traversal:2; }
+:where(.gp_xl-traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_xl-arrangement--across) { --gp-arrangement:0; }
+:where(.gp_xl-arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_xl-arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_xl-arrangement--first-above-last-below) { --gp-arrangement:3; }
+}
+@media(min-width:96rem) {
+:where(.gp_2xl--stack) { --gp-layout:var(--gp-stack); }
+:where(.gp_2xl--peers-2) { --gp-layout:var(--gp-peers-2); }
+:where(.gp_2xl--peers-3) { --gp-layout:var(--gp-peers-3); }
+:where(.gp_2xl--peers-4) { --gp-layout:var(--gp-peers-4); }
+:where(.gp_2xl--peers-5) { --gp-layout:var(--gp-peers-5); }
+:where(.gp_2xl--peers-6) { --gp-layout:var(--gp-peers-6); }
+:where(.gp_2xl-spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_2xl-spacing--neat) { --_gp-inset-start:2; --_gp-inset-end:2; --_gp-gutter:0;   --_gp-ruled:0; }
+:where(.gp_2xl-spacing--thin) { --_gp-inset-start:2; --_gp-inset-end:3; --_gp-gutter:1;   --_gp-ruled:0; }
+:where(.gp_2xl-spacing--wide) { --_gp-inset-start:3; --_gp-inset-end:3; --_gp-gutter:2;   --_gp-ruled:0; }
+:where(.gp_2xl-spacing--ruled) { --_gp-inset-start:4; --_gp-inset-end:4; --_gp-gutter:2;   --_gp-ruled:1; }
+:where(.gp_2xl-allocation--closest) { --gp-allocation:0; }
+:where(.gp_2xl-allocation--stronger) { --gp-allocation:1; }
+:where(.gp_2xl-fewer--left) { --gp-fewer:0; }
+:where(.gp_2xl-fewer--right) { --gp-fewer:1; }
+:where(.gp_2xl-traversal--left-to-right) { --gp-traversal:0; }
+:where(.gp_2xl-traversal--right-to-left) { --gp-traversal:1; }
+:where(.gp_2xl-traversal--center-first) { --gp-traversal:2; }
+:where(.gp_2xl-traversal--widest-first) { --gp-traversal:3; }
+:where(.gp_2xl-arrangement--across) { --gp-arrangement:0; }
+:where(.gp_2xl-arrangement--first-above) { --gp-arrangement:1; }
+:where(.gp_2xl-arrangement--last-below) { --gp-arrangement:2; }
+:where(.gp_2xl-arrangement--first-above-last-below) { --gp-arrangement:3; }
+}
+
+/* Vertical item spacing; independent of field gutters and padding. */
+@supports (width:calc(1px * sibling-count())) and (width:calc(1px * sibling-index())) and (width:calc(1px * mod(3,2))) {
+:where(.gp_vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+@media(min-width:30rem) {
+:where(.gp_xs-vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_xs-vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_xs-vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+}
+@media(min-width:40rem) {
+:where(.gp_sm-vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_sm-vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_sm-vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+}
+@media(min-width:48rem) {
+:where(.gp_md-vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_md-vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_md-vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+}
+@media(min-width:64rem) {
+:where(.gp_lg-vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_lg-vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_lg-vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+}
+@media(min-width:80rem) {
+:where(.gp_xl-vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_xl-vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_xl-vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+}
+@media(min-width:96rem) {
+:where(.gp_2xl-vertical-spacing--0 > *) { margin-block-start:0; }
+:where(.gp_2xl-vertical-spacing--1 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 100% / var(--_gp-tracks)); }
+:where(.gp_2xl-vertical-spacing--2 > *) { margin-block-start:calc(clamp(0,calc(var(--_gp-row) - 1),1) * 200% / var(--_gp-tracks)); }
+}
+}

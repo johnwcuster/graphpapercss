@@ -1,5 +1,6 @@
 import {renderCatalogue} from './catalogue-picker.mjs';
 import {setupCSSExport} from './css-export.mjs';
+import {setupDelivery} from './delivery.mjs';
 import {catalogueKind,familyLayouts,relationship,widthOrder,proportionChoices,chooseNearby,equalLayout} from './catalogue-navigation.mjs';
 import { sourcePalette } from '../assets/graph-paper/tools/shared/source.mjs';
 import {
@@ -30,6 +31,7 @@ const paddingLabel = bits => bits ? `${bits} ${bits === 1 ? 'bit' : 'bits'}` : '
 const verticalLabel = bits => bits === null ? 'Layout default' : bits === 0 ? 'Zero' : paddingLabel(bits);
 const announce = message => { $('#announcement').textContent = message; };
 const cssExport=setupCSSExport({getState:()=>state,announce});
+const delivery=setupDelivery({getState:()=>state,announce});
 
 function fitPreviewDisplay() {
   // Scale the rendered iframe, not its viewport or its document's font sizes.
@@ -157,6 +159,7 @@ function render() {
   editorContext = nextContext;
   $('#markup').textContent = candidateMarkup(state);
   cssExport.update();
+  delivery.update();
   for (const key of ['ruler', 'source', 'inspector']) $(`#${key}`).checked = state[key];
   previewActive = null;
   updatePreviewSummary();
@@ -418,7 +421,7 @@ async function copy(text, success) {
   try { await navigator.clipboard.writeText(text); announce(success); }
   catch { announce('Clipboard unavailable. Select and copy the HTML markup, or copy the exploration URL from your address bar.'); }
 }
-$('#copy-markup').addEventListener('click', () => copy(candidateMarkup(state), 'HTML copied. Use the matching 0.5.1 stylesheet; padding utilities are included.'));
+$('#copy-markup').addEventListener('click', () => copy(candidateMarkup(state), 'HTML copied. Use the matching 0.5.2 stylesheet; padding utilities are included.'));
 $('#copy-link').addEventListener('click', () => {
   const url = new URL(location.href); url.searchParams.set('state', JSON.stringify(state));
   copy(url.href, 'Exploration link copied.');

@@ -368,7 +368,7 @@ pnpm test:vertical-spacing --engine=chromium
 
 Builds emit canonical unlayered/layered CSS, its size report and diagnostic mapping, generate the maintained integration fixture, validate attributed configurator content, and synchronize docs assets. They verify the versioned legacy build independently and do not change the release version. See the [test guide](../../tests/README.md) for full versus quick checks and utility matrices.
 
-The generated [size report](../../css/size.json) is authoritative. At this checkpoint: 228,484 source bytes; 192,555 minified; 17,817 gzip; 10,411 Brotli. These figures cover the full 102-selection core, not legacy compatibility or prospective selective profiles.
+The generated [size report](../../css/size.json) is authoritative. At this checkpoint: 228,484 source bytes; 192,555 minified; 17,817 gzip; 10,411 Brotli. These figures cover the full 102-selection core. Standalone `repeating` and `two-three` profiles use the same compiler; their capabilities live in [profiles.mjs](profiles.mjs), and their measured sizes and hashes are generated in [the profile manifest](../../css/profiles/manifest.json). Profiles retain the same public contract within their included families and are loaded individually, rather than combined with another library build.
 
 Runtime can be reproduced with `node scripts/benchmark-core-runtime.mjs --engine=chromium` (or `webkit`); reports go to ignored `test-results/runtime/`. Check the script's options before a controlled comparison. Compression does not establish a runtime budget: synchronous computation/layout measurements are machine-specific and exclude paint, GPU and real-device interaction.
 

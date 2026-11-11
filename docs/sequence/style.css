@@ -70,6 +70,18 @@ iframe { display: block; border: 0; max-width: none; background: var(--site-surf
 #css-export-preview details p { margin-top:.6rem; }
 #custom-css { white-space:pre; }
 .css-export pre { max-height:32rem; overflow:auto; white-space:pre; overflow-wrap:normal; }
+.delivery-choices { display:flex; flex-wrap:wrap; gap:.8rem 1.5rem; margin-block:1.2rem; padding:0; border:0; }
+.delivery-choices legend { font-size:.85rem; font-weight:650; margin-bottom:.6rem; }
+.delivery-choices label { display:flex; align-items:flex-start; gap:.5rem; max-width:36ch; font-size:.85rem; cursor:pointer; }
+.delivery-choices input { margin-top:.2rem; flex-shrink:0; }
+.delivery-choices strong { display:block; }
+.delivery-result,.css-export { margin-top:1.2rem; border-top:1px solid var(--site-rule); padding-top:1.2rem; min-width:0; }
+.delivery-result header,.css-export header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.6rem; }
+.delivery-result header span { font-size:.8rem; color:var(--site-muted); }
+.delivery-result p,.css-export > p { font-size:.85rem; margin-top:.6rem; }
+.delivery-result .delivery-compressed { font-size:1.15rem; font-weight:650; color:var(--site-accent); }
+.delivery-context { font-size:.85rem; margin-top:1rem; max-width:80ch; line-height:1.5; }
+#delivery-tag-block { max-width:100%; overflow-wrap:anywhere; }
 pre { padding: 1.3rem; background: #eaece5; border-left: 3px solid var(--site-accent); white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; }
 code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 .preview-links { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--site-rule); font-size: .8rem; }

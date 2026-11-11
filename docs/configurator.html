@@ -32,7 +32,7 @@
 
   <main class="workspace">
     <section class="preview-area" aria-labelledby="preview-heading">
-      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.5.1</span></header>
+      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.5.2</span></header>
       <p id="load-notice" class="warning" role="status" hidden></p>
       <section class="sequence-strip" aria-label="Preview responsive sequence">
         <div class="sequence-actions"><h2>Viewport transitions</h2><details id="add-transition-menu" class="overlay-menu"><summary><span aria-hidden="true">+</span> Add transition</summary><div id="transition-options" role="group" aria-label="Choose a viewport transition"></div></details></div>
@@ -48,23 +48,58 @@
       </div>
       <section class="markup-section" aria-labelledby="markup-heading">
         <header><h2 id="markup-heading">HTML markup</h2><button id="copy-markup" type="button">Copy HTML</button></header>
-        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.5.1 stylesheet</a> or build custom CSS below. Replace the placeholders with your content.</p>
+        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.5.2 stylesheet</a> or choose delivery below. Replace the placeholders with your content.</p>
         <pre tabindex="0" aria-label="Graph Paper HTML"><code id="markup"></code></pre>
 
 
       </section>
-      <section id="css-export" class="markup-section css-export" aria-labelledby="css-export-heading" aria-busy="false">
-        <header><h2 id="css-export-heading">CSS for this sequence</h2><button id="build-css" type="button">Build CSS for this sequence</button></header>
-        <p>Download a standalone stylesheet for these selections. Automatic allocation, nesting, and fallbacks remain available for the included layouts. Load it in place of the full library.</p>
-        <div class="css-export-actions">
-          <label for="css-format">CSS format <select id="css-format"><option value="readable">Readable</option><option value="minified">Minified</option></select></label>
-          <button id="download-css" type="button" disabled>Download CSS</button>
-          <button id="download-html" type="button" disabled>Download matching HTML</button>
+      <section id="delivery" class="markup-section delivery" aria-labelledby="delivery-heading">
+        <header><h2 id="delivery-heading">CSS</h2></header>
+        <fieldset class="delivery-choices"><legend>Stylesheet delivery</legend>
+          <label><input type="radio" name="delivery-method" value="cdn" checked><span><strong>Load from CDN</strong></span></label>
+          <label><input type="radio" name="delivery-method" value="host"><span><strong>Host yourself</strong></span></label>
+        </fieldset>
+        <fieldset id="cdn-coverage" class="delivery-choices"><legend>Coverage</legend>
+          <label><input type="radio" name="cdn-coverage" value="full" checked><span><strong>Full library</strong></span></label>
+          <label><input type="radio" name="cdn-coverage" value="smallest"><span><strong>Smallest predefined build</strong></span></label>
+        </fieldset>
+        <fieldset id="host-coverage" class="delivery-choices" hidden><legend>Coverage</legend>
+          <label><input type="radio" name="host-coverage" value="custom" checked><span><strong>Custom build for this sequence</strong></span></label>
+          <label><input type="radio" name="host-coverage" value="full"><span><strong>Full library</strong></span></label>
+        </fieldset>
+        <p id="delivery-full-only" class="delivery-context" role="status" hidden></p>
+        <div id="predefined-result" class="delivery-result">
+          <header><h3 id="delivery-title">Full library</h3><span id="delivery-layout-count">102 layouts</span></header>
+          <p id="delivery-compressed" class="delivery-compressed">10.4 KB Brotli · 17.8 KB gzip</p>
+          <p id="delivery-raw" class="hint">192.6 KB minified before compression</p>
+          <div id="cdn-output">
+            <pre id="delivery-tag-block" tabindex="0" aria-label="Pinned stylesheet tag"><code id="delivery-tag"></code></pre>
+            <button id="copy-delivery-tag" type="button" aria-describedby="delivery-title delivery-compressed">Copy stylesheet tag</button>
+          </div>
+          <div id="profile-downloads" hidden>
+            <div class="css-export-actions">
+              <label for="profile-format">CSS format <select id="profile-format"><option value="minified">Minified</option><option value="readable">Readable</option></select></label>
+              <button id="download-profile-css" type="button" aria-describedby="profile-file-name profile-download-size">Download CSS</button>
+            </div>
+            <p id="profile-download-size" class="hint"></p>
+            <p><code id="profile-file-name"></code></p>
+            <p id="profile-download-status" role="status"></p>
+          </div>
+          <p class="delivery-reference"><a id="inspect-delivery-css" href="./assets/graph-paper/main.css">Inspect readable CSS</a> · <a href="./browser-support.html#predefined-cdn-profiles">Compare builds</a></p>
         </div>
-        <p id="css-export-status" role="status">Includes the selections used by your exported HTML.</p>
-        <div id="css-export-preview" hidden>
-          <p>Save both files in the same folder. The HTML links to <code id="css-file-name">graph-paper-custom.css</code>. Add your content and design styles; no configurator JavaScript is needed.</p>
-          <details><summary>Included selections and readable CSS</summary><p id="css-includes"></p><p>Rebuild when adding layouts, viewport steps, gutters, or utilities. Source counts and exact allocation values remain adjustable.</p><pre tabindex="0" aria-label="Custom Graph Paper CSS"><code id="custom-css"></code></pre></details>
+        <p id="delivery-coverage-note" class="hint">Smaller builds cover this sequence; the full library supports every layout.</p>
+        <div id="css-export" class="css-export" aria-labelledby="css-export-heading" aria-busy="false" hidden>
+          <header><h3 id="css-export-heading">Custom build for this sequence</h3></header>
+          <div class="css-export-actions">
+            <label for="css-format">CSS format <select id="css-format"><option value="readable">Readable</option><option value="minified">Minified</option></select></label>
+            <button id="build-css" type="button" aria-describedby="css-export-status">1. Build CSS</button>
+            <button id="download-css" type="button" aria-describedby="css-export-status" disabled>2. Download CSS</button>
+          </div>
+          <p id="css-export-status" role="status">Build CSS to enable the download.</p>
+          <div id="css-export-preview" hidden>
+            <p><code id="css-file-name">graph-paper-custom.css</code></p>
+            <details><summary>Included selections and readable CSS</summary><p id="css-includes"></p><p>Rebuild when adding layouts, viewport steps, gutters, or utilities. Source counts and exact allocation values remain adjustable.</p><pre tabindex="0" aria-label="Custom Graph Paper CSS"><code id="custom-css"></code></pre></details>
+          </div>
         </div>
       </section>
       <footer class="preview-links"><a href="./configurator-help.html">How to use the configurator</a><button id="copy-link" type="button">Copy exploration link</button></footer>

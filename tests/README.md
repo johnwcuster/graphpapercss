@@ -13,6 +13,7 @@ The tests exercise the current core and versioned released baselines independent
 | `pnpm test:padding --engine=chromium` | Responsive zero/one/two-bit padding, overlays, nesting, author overrides and no-script rendering |
 | `pnpm test:vertical-spacing --engine=chromium` | Generated comparison profiles and responsive vertical-spacing matrix, nesting, margin restoration and real content |
 | `pnpm test:configurator --engine=chromium` | Public controls, all catalogue selections, actual worker CSS/HTML downloads, no-script export parity, stale-build/error recovery, URL restoration, keyboard interactions and preview scaling |
+| `pnpm test:profiles --engine=chromium` | Actual standalone profile files versus full CSS: readable/minified, forced count-off fallback, nesting, responsive refinements, utilities, rules and row safeguards |
 | `pnpm docs:check` | Generated documentation, deployed asset mirrors and local links |
 | `pnpm test:docs --engine=chromium` | Site-wide current/legacy geometry, reading measures, ruler toggle and executed published HTML examples |
 
@@ -20,11 +21,15 @@ The docs script supports `--docs-only` to serve only the static directory. Paddi
 
 Configurator reflow checks include 720×450 and 960×540 CSS viewports (the available geometry at 200% zoom on common laptop/desktop windows), short wide windows, mobile, and 320×256. They verify that the header scrolls out of view, the panel has no constrained internal scrollport, focus restoration and native tabbing stay visible, and the simulated preview width is preserved. These automated viewport checks complement manual browser-zoom testing; they do not drive the browser's native zoom setting.
 
-The configurator export checks download both actual CSS formats and their matching HTML, serve the pairs without JavaScript, and compare geometry with full CSS across viewport boundaries, exact-count transitions, rules, padding, vertical spacing, and a mosaic. They also delay a real worker request to reject stale output and simulate an unavailable worker without disrupting the full-stylesheet workflow. `node scripts/test-selective-builds.mjs --engine=chromium --format=browser-minified` checks the conservative browser minifier across the wider selective-build matrix; omit `--format` to include readable, CLI-minified and forced-count-fallback comparisons too. The packed-distribution audit follows the worker's static module graph inside the actual archive.
+The configurator export checks download both actual CSS formats and use generated HTML fixtures, serve the pairs without JavaScript, and compare geometry with full CSS across viewport boundaries, exact-count transitions, rules, padding, vertical spacing, and a mosaic. They also delay a real worker request to reject stale output and simulate an unavailable worker without disrupting the full-stylesheet workflow. `node scripts/test-selective-builds.mjs --engine=chromium --format=browser-minified` checks the conservative browser minifier across the wider selective-build matrix; omit `--format` to include readable, CLI-minified and forced-count-fallback comparisons too. The packed-distribution audit follows the worker's static module graph inside the actual archive.
+
+Delivery UI checks cover whole-sequence compatibility, inactive wider layouts, full-only consolidation, compression/cache guidance, pinned stylesheet tags, full-library self-hosted downloads in both formats, clipboard recovery and no-script rendering using actual profile bytes. CDN requests are intercepted locally; tests do not claim a prepared release URL is already published. `pnpm test:profiles` accepts Firefox and WebKit too. The capability manifest, package exports, standalone docs mirrors, generated sizes/hashes and [profile qualification](../maintainers/profiles.md) keep delivery evidence separate from the full-core browser checkpoint.
 
 `--quick` on the core browser script is a smoke test; it omits exhaustive profiles and is not a release qualification. Browser evidence must name engines, script options and artifacts tested. Feature-disabled tests in modern engines do not prove older-browser support. Current three-engine qualification and real older-engine observations are recorded in the [qualification checkpoint](../maintainers/qualification.md).
 
 The core runner also checks the 9,998-construction-row safeguard in every distribution: safe/unsafe neighboring counts, exact inputs, full-width endpoints, nondefault traversal, continued/rebased nesting and restoration. It checks actual visible same-region overlap as well as declared grid coordinates. The limit is shared across engines and is not an item-count cutoff.
+
+The core release group includes the standalone profile matrix after the full core check. Artifact fingerprints include all four full stylesheets, both forms of each predefined profile, and their capability/size manifest.
 
 ## Fixtures and independent oracles
 

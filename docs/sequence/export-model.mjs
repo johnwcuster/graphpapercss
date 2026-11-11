@@ -16,6 +16,7 @@ export function exportSelection(state){
 }
 export const exportKey=state=>JSON.stringify(exportSelection(state));
 export const cssFilename=format=>format==='minified'?'graph-paper-custom.min.css':'graph-paper-custom.css';
-export function downloadableHTML(state,format='readable'){
- return `<!doctype html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>Graph Paper composition</title>\n  <link rel="stylesheet" href="./${cssFilename(format)}">\n</head>\n<body>\n${candidateMarkup(state)}\n</body>\n</html>\n`;
+export function downloadableHTML(state,format='readable',stylesheet=cssFilename(format)){
+ if(!/^[a-z0-9][a-z0-9.-]*\.css$/i.test(stylesheet))throw Error('Expected a local stylesheet filename');
+ return `<!doctype html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>Graph Paper composition</title>\n  <link rel="stylesheet" href="./${stylesheet}">\n</head>\n<body>\n${candidateMarkup(state)}\n</body>\n</html>\n`;
 }

@@ -7,20 +7,24 @@ import {enhancementCondition} from '../src/core/features.mjs';
 import {transform} from 'lightningcss';
 import {compactPrivateProperties} from './lib/compact-core.mjs';
 import {minifyGeneratedCSS} from '../src/core/compact.mjs';
+import {predefinedProfiles} from '../src/core/profiles.mjs';
 
 const engine=process.argv.find(arg=>arg.startsWith('--engine='))?.slice(9)??'chromium';
-const directory=new URL('../test-results/selective-builds/',import.meta.url);
+const predefined=process.argv.includes('--predefined');
+const directory=new URL(predefined?'../test-results/profiles/':'../test-results/selective-builds/',import.meta.url);
 await mkdir(directory,{recursive:true});
 const canonical=await readFile(new URL('../css/main.css',import.meta.url),'utf8');
 const canonicalMin=await readFile(new URL('../css/main.min.css',import.meta.url),'utf8');
 const browser=await launchBrowser(engine);
 const results=[];
 try{
- for(const [profile,options] of Object.entries(selectiveProfiles)){
+ const profiles=predefined?Object.fromEntries(predefinedProfiles.map(p=>[p.id,p.selection])):selectiveProfiles;
+ for(const [profile,options] of Object.entries(profiles)){
   // The full selection is byte-identical, asserted in the unit suite.
   if(profile==='full')continue;
-  const {css,selection}=compileSelection(options);
-  const min=transform({filename:'selection.css',code:Buffer.from(compactPrivateProperties(css).css),minify:true}).code.toString();
+  const selected=compileSelection(options),selection=selected.selection;
+  const css=predefined?await readFile(`css/profiles/${profile}.css`,'utf8'):selected.css;
+  const min=predefined?await readFile(`css/profiles/${profile}.min.css`,'utf8'):transform({filename:'selection.css',code:Buffer.from(compactPrivateProperties(css).css),minify:true}).code.toString();
   const selectedPlans=layouts.filter(p=>selection.layouts.includes(p.id));
   const cases=[];
   const base={width:1440,count:7,spacing:selection.spacing[0],allocation:'closest',fewer:'left',traversal:'left-to-right',arrangement:'across'};
@@ -42,10 +46,10 @@ try{
 
   const profileResults=[];
   const requested=process.argv.find(a=>a.startsWith('--format='))?.slice(9);
-  for(const format of (requested?[requested]:['readable','minified','fallback','browser-minified'])){
-   if(!['readable','minified','fallback','browser-minified'].includes(format))throw Error('Unknown parity format');
-   const fallback=source=>source.replaceAll(enhancementCondition,'(graphpaper-probe-disabled: 1)');
-   const sources=format==='minified'?[canonicalMin,min]:format==='browser-minified'?[canonicalMin,minifyGeneratedCSS(css)]:format==='fallback'?[fallback(canonical),fallback(css)]:[canonical,css];
+  for(const format of (requested?[requested]:predefined?['readable','minified','fallback','fallback-minified']:['readable','minified','fallback','browser-minified'])){
+   if(!['readable','minified','fallback','fallback-minified','browser-minified'].includes(format))throw Error('Unknown parity format');
+   const fallback=source=>{assert.ok(source.includes(enhancementCondition),'count-off condition must actually be replaced');return source.replaceAll(enhancementCondition,'(graphpaper-probe-disabled: 1)');};
+   const sources=format==='minified'?[canonicalMin,min]:format==='browser-minified'?[canonicalMin,minifyGeneratedCSS(css)]:format==='fallback'?[fallback(canonical),fallback(css)]:format==='fallback-minified'?[fallback(canonicalMin),fallback(min)]:[canonical,css];
    const pages=[];
    try{
     for(const source of sources){

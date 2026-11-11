@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {platform,release,arch} from 'node:os';
 import assert from 'node:assert/strict';
 import {launchBrowser} from './lib/browser-launch.mjs';
+import {predefinedProfiles} from '../src/core/profiles.mjs';
 const suite=process.argv.find(a=>a.startsWith('--suite='))?.slice(8)??'core';
 const requested=process.argv.find(a=>a.startsWith('--engine='))?.slice(9);
 const engines=requested?[requested]:['chromium','firefox','webkit'];
@@ -12,7 +13,8 @@ const overrides=process.argv.filter(a=>a.startsWith('--executable=')||a.startsWi
 if(overrides.length)assert.ok(requested&&suite!=='package','Browser overrides require one explicit engine and a browser suite');
 assert.ok(['core','utilities','tools','package'].includes(suite),'Use --suite=core|utilities|tools|package');
 assert.ok(engines.every(e=>['chromium','firefox','webkit'].includes(e)));
-const artifacts=async()=>Object.fromEntries(await Promise.all(['main.css','main.min.css','main.layer.css','main.layer.min.css'].map(async name=>{const bytes=await readFile(`css/${name}`);return[name,{bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}];})));
+const artifactNames=['main.css','main.min.css','main.layer.css','main.layer.min.css',...predefinedProfiles.flatMap(p=>Object.values(p.files).map(path=>path.slice(4))),'profiles/manifest.json'];
+const artifacts=async()=>Object.fromEntries(await Promise.all(artifactNames.map(async name=>{const bytes=await readFile(`css/${name}`);return[name,{bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}];})));
 const initial=await artifacts(),started=new Date().toISOString();
 await mkdir('test-results/release/logs',{recursive:true});
 const report={suite,started,platform:platform(),osRelease:release(),architecture:arch(),artifacts:initial,engines:{},steps:[],passed:false};
@@ -37,8 +39,8 @@ try{
   for(const engine of engines){
    const probe=await launchBrowser(engine);
    try{report.engines[engine]={version:probe.version(),overrides};}finally{await probe.close();}
-   const steps=suite==='core'?['core']:suite==='utilities'?['padding','vertical-spacing','distribution']:['docs','configurator','inspector'];
-   for(const step of steps)await run(`${engine}-${step}`,`scripts/test-${step}-browsers.mjs`,[`--engine=${engine}`,...overrides,...(step==='configurator'?['--docs-only']:[])]);
+   const steps=suite==='core'?['core','profiles']:suite==='utilities'?['padding','vertical-spacing','distribution']:['docs','configurator','inspector'];
+   for(const step of steps)await run(`${engine}-${step}`,step==='profiles'?'scripts/test-selective-builds.mjs':`scripts/test-${step}-browsers.mjs`,[`--engine=${engine}`,...overrides,...(step==='configurator'?['--docs-only']:[]),...(step==='profiles'?['--predefined']:[])]);
   }
  }
  assert.deepEqual(await artifacts(),initial,'CSS artifacts changed during qualification');

@@ -1,6 +1,6 @@
 {
   "name": "graphpapercss",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A small, framework-agnostic CSS library for editorial spatial composition on a canonical 64-bit ruler.",
   "license": "MIT",
   "packageManager": "pnpm@12.6.0",
@@ -26,10 +26,16 @@
     "./css/legacy/0.4/main.layer.min.css": "./css/legacy/0.4/main.layer.min.css",
     "./css/legacy/0.4/bands.css": "./css/legacy/0.4/bands.css",
     "./css/legacy/0.4/bands.min.css": "./css/legacy/0.4/bands.min.css",
-    "./legacy/0.4/inspector": "./tools/inspector/index.js"
+    "./legacy/0.4/inspector": "./tools/inspector/index.js",
+    "./css/profiles/repeating.css": "./css/profiles/repeating.css",
+    "./css/profiles/repeating.min.css": "./css/profiles/repeating.min.css",
+    "./css/profiles/two-three.css": "./css/profiles/two-three.css",
+    "./css/profiles/two-three.min.css": "./css/profiles/two-three.min.css",
+    "./css/profiles/manifest.json": "./css/profiles/manifest.json"
   },
   "files": [
     "css/main*.css",
+    "css/profiles/*",
     "css/legacy/**/*.css",
     "docs/**",
     "tools/inspector/**",
@@ -71,7 +77,8 @@
     "legacy:layouts:build": "node scripts/build-layouts.mjs",
     "test:docs": "node scripts/test-docs-browsers.mjs",
     "test:fallback": "node scripts/test-fallback-browsers.mjs",
-    "test:release": "node scripts/test-release.mjs"
+    "test:release": "node scripts/test-release.mjs",
+    "test:profiles": "node scripts/test-selective-builds.mjs --predefined"
   },
   "devDependencies": {
     "lightningcss": "1.33.0",

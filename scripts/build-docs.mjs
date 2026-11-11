@@ -2,6 +2,19 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { Marked } from 'marked';
 import { markdownPages, siteNavigation, documentPage, htmlLink } from './docs-template.mjs';
 import {layouts} from '../src/core/catalogue.mjs';
+import {deliveryProfiles,profileCDNTag} from '../src/core/profiles.mjs';
+
+const {version}=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8'));
+const profileReport=JSON.parse(await readFile(new URL('../css/profiles/manifest.json',import.meta.url),'utf8'));
+const fullReport=JSON.parse(await readFile(new URL('../css/size.json',import.meta.url),'utf8'));
+function profileTable(){
+ const kb=n=>`${(n/1000).toFixed(1)} KB`;
+ return '| Build | Layouts | Minified | Gzip | Local files | Pinned CDN |\n| --- | --- | ---: | ---: | --- | --- |\n'+deliveryProfiles.map(p=>{
+  const sizes=p.id==='full'?fullReport:{minified:profileReport.profiles[p.id].files.minified.bytes,gzip:profileReport.profiles[p.id].files.minified.gzip};
+  const cdn=profileCDNTag(p.id,version).match(/href="([^"]+)"/)[1];
+  return `| ${p.id==='full'?'Full library':`\`${p.id}\``} | ${p.description} | ${kb(sizes.minified)} | ${kb(sizes.gzip)} | [Readable](assets/graph-paper/${p.files.readable.slice(4)}) · [Minified](assets/graph-paper/${p.files.minified.slice(4)}) | [${version} CSS](${cdn}) |`;
+ }).join('\n');
+}
 
 function layoutCatalogue() {
   const header='| Layout ID | Physical proportions / positions | Occupancy and traversal |\n| --- | --- | --- |';
@@ -22,7 +35,8 @@ async function output(name, content) {
 }
 for (const [source, id] of markdownPages) {
   const markdown = (await readFile(new URL(`../docs/${source}.md`, import.meta.url), 'utf8'))
-    .replace('<!-- layout-catalogue -->', layoutCatalogue());
+    .replace('<!-- layout-catalogue -->', layoutCatalogue())
+    .replace('<!-- delivery-profiles -->',profileTable());
   const headings = new Map(), contents = [];
   const parser = new Marked({ renderer: {
     heading({ tokens, depth, text }) {

@@ -1,5 +1,18 @@
 # Release notes
 
+## 0.5.2 — predefined CDN profiles
+
+[Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css)
+
+The full CSS builds and authoring API are unchanged from 0.5.1. Two optional standalone profiles offer smaller pinned CDN delivery without a build process.
+
+- [`repeating.min.css`](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/repeating.min.css): Stack and repeating Peers 2–6; six layouts, 3,378 gzip bytes.
+- [`two-three.min.css`](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/two-three.min.css): Stack, Peers 2–6, and all Two/Three compositions; 69 layouts, 9,844 gzip bytes. Four compositions and mosaics remain in the full library.
+- Both profiles retain every viewport step, gutter mode, applicable refinement, padding/vertical-spacing utility, nested ruler, rule and safeguard. Readable and minified files and a capability/size manifest are included in the package.
+- The configurator separates CDN delivery from self-hosting, offers full or smallest-compatible coverage, and shows one stylesheet result. It highlights Brotli/gzip sizes with site-wide caching guidance, consolidates full-only cases, and keeps Copy HTML beside the markup. Custom self-hosted CSS uses explicit build and download steps.
+- Profiles are complete alternatives: load one instead of combining them with each other or the full library. Full builds retain their existing paths and bytes.
+- Generated profile files pass readable/minified and forced-count-fallback geometry comparisons in Chromium, Firefox and WebKit. Package tests include exports, static mirrors and the delivery module graph.
+
 ## 0.5.1 — selective CSS downloads
 
 [Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.1/css/main.min.css)

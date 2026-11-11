@@ -4,6 +4,7 @@ import {join,dirname,resolve,relative} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 import {inspectorGraph} from './lib/inspector-graph.mjs';
+import {predefinedProfiles} from '../src/core/profiles.mjs';
 
 // Test the actual publish archive, without installing or publishing anything.
 const destination=await mkdtemp(join(tmpdir(),'graphpaper-distribution-'));
@@ -24,9 +25,12 @@ for(const name of ['css/next','css/compat.css','css/bands.css','src/core','src/l
 // Docs remain deployable as a static directory, including the modern preview
 // and the explicitly versioned reference used by the documentation shell.
 for(const name of ['docs/configurator.html','docs/assets/graph-paper/main.css','docs/assets/graph-paper/src/core/catalogue.mjs','docs/assets/graph-paper/legacy/0.4/main.css'])await access(join(root,name));
+for(const profile of predefinedProfiles)for(const path of Object.values(profile.files)){
+ assert.deepEqual(await readFile(join(root,`docs/assets/graph-paper/${path.slice(4)}`)),await readFile(join(root,path)),`${profile.id}: standalone docs mirror`);
+}
 // Both the ordinary UI and the lazy compiler worker must resolve from a docs-
 // only deployment of the actual archive, without Node builtins or parent source.
-const pending=['docs/sequence/css-export.mjs','docs/sequence/export-worker.mjs'],seen=new Set();
+const pending=['docs/sequence/css-export.mjs','docs/sequence/export-worker.mjs','docs/sequence/delivery.mjs'],seen=new Set();
 while(pending.length){
  const name=pending.pop();if(seen.has(name))continue;seen.add(name);
  assert.ok(name.startsWith('docs/'),'worker/UI dependency stays in static docs');

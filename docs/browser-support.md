@@ -8,13 +8,39 @@ The 0.5 build uses modern native CSS rather than a runtime placement script. The
 | --- | --- |
 | `css/main.css`, `main.min.css` | Current unlayered core |
 | `css/main.layer.css`, `main.layer.min.css` | The same core inside `@layer graph-paper` |
+| `css/profiles/repeating.css`, `repeating.min.css` | Stack and repeating Peers 2–6 |
+| `css/profiles/two-three.css`, `two-three.min.css` | Stack, Peers 2–6 and all Two/Three compositions |
 | `css/legacy/0.4/main*.css` | Byte-preserved 0.4 reference |
 | `css/legacy/0.4/bands*.css` | Optional bands for that 0.4 reference only |
 | `css/legacy/main.css`, `main.min.css` | Original 0.2.3 baseline and its minification |
 
 Load one core. With the layered form, unlayered author rules outrank library declarations in normal cascade order. Both forms retain zero-specificity library selectors. The core does not include compatibility aliases for the previous class vocabulary. See [Migration](migration.md).
 
-The checked-in minification keeps native features and shortens private property names; it does not transpile them into an older-browser implementation. Selective/predefined bundles are not part of this release scope.
+The checked-in minification keeps native features and shortens private property names; it does not transpile them into an older-browser implementation.
+
+## Predefined CDN profiles
+
+Profiles are complete standalone alternatives to the full library. They retain all six viewport steps, all five gutter modes, applicable allocation/traversal/exact-count controls, padding, vertical spacing, ruler continuation, rebasing, rules, and safeguards. The difference is which layout families are available. Browser capability requirements stay the same.
+
+<!-- delivery-profiles -->
+
+The table is generated from the maintained build manifest and build measurements. Sizes use the same minifier and compression settings as the full build. Gzip figures describe compressed file size, not a guarantee of CDN transfer encoding or runtime speed.
+
+Actual transfer depends on CDN compression and caching. Reusing the same pinned URL across pages lets the browser reuse its cached stylesheet. A smaller build may require a separate download on pages using another build; the smallest file for one sequence is not necessarily the best choice for the whole site.
+
+`two-three` limits **composed** columns, not repeating content: Peers still support 2–6 across. It contains all 69 Stack/Peers/Two/Three layouts and excludes Four compositions and mosaics. `repeating` contains six Stack/Peers layouts. The full library contains all 102 layouts.
+
+Load one Graph Paper stylesheet. These builds are not addons; combining them with each other or with the full library can conflict through shared registrations and build-specific private names. Your typography, colors and component styles can load alongside your chosen library stylesheet as usual.
+
+The profile files first ship in **0.5.2**. Pin that or a later release; the earlier 0.5.1 tag does not contain these paths. Version-pinned links become available when the corresponding release tag is published.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/two-three.min.css">
+```
+
+Use the [configurator](configurator.html#delivery) to choose full-library or smallest-compatible CDN delivery and copy its pinned stylesheet tag. When only full covers the sequence, the tool explains why and consolidates the choices. Other compositions on the page must also fit the chosen profile. Layouts excluded from a profile are unavailable, not an alternative design fallback; switch to a broader build when needed.
+
+For a smaller build of just your selected layouts and viewport steps, use the configurator's [custom CSS downloads](configurator-help.html#download-css-for-a-sequence). If your site needs unrestricted catalogue choices, keep `css/main.min.css`. Layered profiles, viewport shards and automatic project scanning are not provided.
 
 ## Understand capability dependencies
 

@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
+import {downloadableHTML} from '../../docs/sequence/export-model.mjs';
 import {defaultState,normalizeState} from '../../docs/sequence/model.mjs';
 
 export async function checkConfiguratorExports({page,browser,open,ready,origin,publicPath}){
  const {version}=JSON.parse(await readFile(new URL('../../package.json',import.meta.url),'utf8'));
- const build=async()=>{await page.locator('#build-css').click();await page.waitForFunction(()=>!document.querySelector('#download-css').disabled);};
+ const custom=async()=>{await page.locator('[name="delivery-method"][value="host"]').check();await page.locator('[name="host-coverage"][value="custom"]').check();};
+ const build=async()=>{await custom();await page.locator('#build-css').click();await page.waitForFunction(()=>!document.querySelector('#download-css').disabled);};
  const download=async selector=>{
   const event=page.waitForEvent('download');await page.locator(selector).click();const file=await event;
   return {name:file.suggestedFilename(),text:await readFile(await file.path(),'utf8')};
@@ -20,13 +22,16 @@ export async function checkConfiguratorExports({page,browser,open,ready,origin,p
  await page.setViewportSize({width:1440,height:1000});await open(state);
  assert.equal(page.workers().length,0,'compiler is lazy');
  assert.equal(await page.locator('#download-css').isDisabled(),true);
- await build();assert.equal(page.workers().length,1,'local compiler worker loaded');
+ await custom();assert.match(await page.locator('#css-export-status').textContent(),/Build CSS to enable/);
+ assert.match(await page.locator('#build-css').textContent(),/1\. Build CSS/);
+ assert.equal(await page.locator('#download-html').count(),0);
+ await build();assert.match(await page.locator('#css-export-status').textContent(),/Ready.*download CSS/);assert.equal(page.workers().length,1,'local compiler worker loaded');
  const fullCSS=await (await page.request.get(`${origin}${publicPath}/assets/graph-paper/main.css`)).text();
  for(const format of ['readable','minified']){
   await page.locator('#css-format').selectOption(format);
-  const css=await download('#download-css'),html=await download('#download-html');
+  const css=await download('#download-css'),html={text:downloadableHTML(state,format)};
   assert.equal(css.name,format==='readable'?'graph-paper-custom.css':'graph-paper-custom.min.css');
-  assert.equal(html.name,'graph-paper-composition.html');assert.ok(html.text.includes(`href="./${css.name}"`));
+  assert.ok(html.text.includes(`href="./${css.name}"`));
   assert.ok(css.text.startsWith(`/* Graph Paper CSS ${version} — custom build.`));assert.match(css.text,/MIT license/);
   assert.ok(css.text.includes('--gp-three-1-2-1:'));assert.ok(!css.text.includes('--gp-two-1-9:'));
   assert.doesNotMatch(html.text,/<script|<style/);
@@ -56,13 +61,14 @@ export async function checkConfiguratorExports({page,browser,open,ready,origin,p
  await page.screenshot({path:fileURLToPath(new URL(`../../test-results/configurator-next/${browser.browserType().name()}-css-export.png`,import.meta.url))});
  // Source changes and exact values are not a frozen-count specialization.
  await page.locator('#add-item').click();await ready();assert.equal(await page.locator('#download-css').isDisabled(),false);
- assert.equal((await download('#download-html')).text.match(/<article/g).length,13);
+ assert.equal((await page.locator('#markup').textContent()).match(/<article/g).length,13);
  // New requirements make downloads unavailable until rebuilt.
  await page.locator('#spacing').selectOption('full');await ready();
  assert.equal(await page.locator('#download-css').isDisabled(),true);assert.match(await page.locator('#css-export-status').textContent(),/Selections changed/);
  await build();assert.match((await download('#download-css')).text,/gp_spacing--full/);
  // Delay a real worker request, change the selection, then release the old job.
  await open();
+ await custom();
  await page.evaluate(()=>{
   const native=Worker.prototype.postMessage;let release;
   Worker.prototype.postMessage=function(data){release=()=>native.call(this,data);};
@@ -78,6 +84,7 @@ export async function checkConfiguratorExports({page,browser,open,ready,origin,p
  try{
   await restricted.addInitScript(()=>{window.Worker=class{constructor(){throw Error('Workers unavailable');}};});
   await restricted.goto(`${origin}${publicPath}/configurator.html`);
+  await restricted.locator('[name="delivery-method"][value="host"]').check();
   await restricted.locator('#build-css').click();
   await restricted.waitForFunction(()=>document.querySelector('#css-export-status').textContent.includes('Could not build'));
   assert.equal(await restricted.locator('#build-css').isDisabled(),false);
