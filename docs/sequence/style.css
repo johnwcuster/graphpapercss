@@ -237,3 +237,6 @@ input[type=range] { min-height:1.5rem; }
 .spacing-controls .transition-spacing { border:0; margin-block:.9rem; padding:0; }
 .proportion-heading { display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; width:100%; }
 .proportion-value { font-size:.95rem; font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+.extension-notice { margin-block:1rem; padding:.85rem 1rem; border-inline-start:4px solid var(--site-accent); background:var(--site-tint); color:var(--site-ink); font-size:.9rem; line-height:1.5; }
+.extension-notice p { margin-top:.35rem; }

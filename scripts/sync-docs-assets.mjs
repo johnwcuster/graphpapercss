@@ -15,7 +15,7 @@ const files = [
 // The 0.5 configurator is a static docs application. Mirror only its arithmetic
 // catalogue/oracle graph and lazy worker compiler. No Node-only distribution
 // or minifier dependencies are needed by the independently hosted docs.
-const coreModules=new Set(),pending=['catalogue.mjs','geometry.mjs','padding.mjs','vertical-spacing.mjs','selection.mjs','compact.mjs','profiles.mjs'];
+const coreModules=new Set(),pending=['catalogue.mjs','geometry.mjs','padding.mjs','vertical-spacing.mjs','selection.mjs','compact.mjs','profiles.mjs','rule-compiler.mjs'];
 while(pending.length){
   const name=pending.pop();if(coreModules.has(name))continue;coreModules.add(name);
   const source=await readFile(new URL(`../src/core/${name}`,import.meta.url),'utf8');
@@ -23,6 +23,7 @@ while(pending.length){
   files.push([`src/core/${name}`,`docs/assets/graph-paper/src/core/${name}`]);
 }
 for(const name of ['main.css','main.min.css'])files.push([`css/${name}`,`docs/assets/graph-paper/${name}`]);
+for(const name of ['column-rules.css','column-rules.min.css','column-rules.layer.css','column-rules.layer.min.css'])files.push([`css/extensions/${name}`,`docs/assets/graph-paper/extensions/${name}`]);
 for(const profile of predefinedProfiles)for(const path of Object.values(profile.files))files.push([path,`docs/assets/graph-paper/${path.slice(4)}`]);
 const pkg=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8'));
 const profiles=JSON.parse(await readFile(new URL('../css/profiles/manifest.json',import.meta.url),'utf8'));

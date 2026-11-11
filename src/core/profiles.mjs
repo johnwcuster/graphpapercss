@@ -22,7 +22,9 @@ export function profileCoverage(id,selection){
  for(const key of ['padding','verticalSpacing'])if(selection[key]&&!supported[key])missing.utilities.push(key);
  return {compatible:Object.values(missing).every(values=>!values.length),missing};
 }
-export function profileCDNTag(id,version){
+export function profileCDNTag(id,version,{columnRules=false}={}){
  if(!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version))throw Error('Expected a pinned release version');
- return `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@${encodeURIComponent(version)}/${deliveryProfile(id).files.minified}">`;
+ const root=`https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@${encodeURIComponent(version)}/css`;
+ const core=`<link rel="stylesheet" href="${root}/${deliveryProfile(id).files.minified.slice(4)}">`;
+ return core+(columnRules?`\n<link rel="stylesheet" href="${root}/extensions/column-rules.min.css">`:'');
 }

@@ -25,13 +25,14 @@
 <div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
   <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#choose-a-delivery-form">Choose a delivery form</a></li>
 <li><a href="#predefined-cdn-profiles">Predefined CDN profiles</a></li>
+<li><a href="#optional-column-rules-build">Optional column-rules build</a></li>
 <li><a href="#understand-capability-dependencies">Understand capability dependencies</a></li>
 <li><a href="#feature-availability-and-support-policy">Feature availability and support policy</a></li>
 <li><a href="#know-the-fallback-contract">Know the fallback contract</a></li>
 <li><a href="#qualified-builds">Qualified builds</a></li>
 <li><a href="#separate-css-from-authoring-tools">Separate CSS from authoring tools</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
 <article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
-  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Browser support and builds</h1><p>The 0.5 build uses modern native CSS rather than a runtime placement script. The support policy targets current evergreen engines with the required capabilities, plus the bounded older-engine fallbacks described below. Engine qualification does not establish support for every device, operating system or older patch version.</p>
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Browser support and builds</h1><p>The 0.6 build uses modern native CSS rather than a runtime placement script. The support policy targets current evergreen engines with the required capabilities, plus the bounded older-engine fallbacks described below. Engine qualification does not establish support for every device, operating system or older patch version.</p>
 </header>
 <h2 id="choose-a-delivery-form">Choose a delivery form</h2>
 <div id="coordinate-table" class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
@@ -73,7 +74,7 @@
 <p>Load one core. With the layered form, unlayered author rules outrank library declarations in normal cascade order. Both forms retain zero-specificity library selectors. The core does not include compatibility aliases for the previous class vocabulary. See <a href="migration.html">Migration</a>.</p>
 <p>The checked-in minification keeps native features and shortens private property names; it does not transpile them into an older-browser implementation.</p>
 <h2 id="predefined-cdn-profiles">Predefined CDN profiles</h2>
-<p>Profiles are complete standalone alternatives to the full library. They retain all six viewport steps, all five gutter modes, applicable allocation/traversal/exact-count controls, padding, vertical spacing, ruler continuation, rebasing, rules, and safeguards. The difference is which layout families are available. Browser capability requirements stay the same.</p>
+<p>Profiles are complete standalone alternatives to the full library. They retain all six viewport steps, all five gutter modes, applicable allocation/traversal/exact-count controls, padding, vertical spacing, ruler continuation, rebasing, and safeguards. Column-rule rendering is optional in 0.6. The difference is which layout families are available. Browser capability requirements stay the same.</p>
 <div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
 <thead>
 <tr>
@@ -88,26 +89,26 @@
 <tbody><tr>
 <td><code>repeating</code></td>
 <td>Stack and repeating Peers 2–6.</td>
-<td align="right">27.7 KB</td>
-<td align="right">3.4 KB</td>
+<td align="right">26.4 KB</td>
+<td align="right">3.0 KB</td>
 <td><a href="assets/graph-paper/profiles/repeating.css">Readable</a> · <a href="assets/graph-paper/profiles/repeating.min.css">Minified</a></td>
-<td><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/repeating.min.css">0.5.2 CSS</a></td>
+<td><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/profiles/repeating.min.css">0.6.0 CSS</a></td>
 </tr>
 <tr>
 <td><code>two-three</code></td>
 <td>Stack, repeating Peers 2–6, and all Two/Three compositions.</td>
-<td align="right">89.3 KB</td>
-<td align="right">9.8 KB</td>
+<td align="right">88.0 KB</td>
+<td align="right">9.5 KB</td>
 <td><a href="assets/graph-paper/profiles/two-three.css">Readable</a> · <a href="assets/graph-paper/profiles/two-three.min.css">Minified</a></td>
-<td><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/two-three.min.css">0.5.2 CSS</a></td>
+<td><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/profiles/two-three.min.css">0.6.0 CSS</a></td>
 </tr>
 <tr>
 <td>Full library</td>
 <td>Every layout, including Four compositions and mosaics.</td>
-<td align="right">192.6 KB</td>
-<td align="right">17.8 KB</td>
+<td align="right">191.3 KB</td>
+<td align="right">17.4 KB</td>
 <td><a href="assets/graph-paper/main.css">Readable</a> · <a href="assets/graph-paper/main.min.css">Minified</a></td>
-<td><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css">0.5.2 CSS</a></td>
+<td><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css">0.6.0 CSS</a></td>
 </tr>
 </tbody></table></div>
 <p>The table is generated from the maintained build manifest and build measurements. Sizes use the same minifier and compression settings as the full build. Gzip figures describe compressed file size, not a guarantee of CDN transfer encoding or runtime speed.</p>
@@ -115,10 +116,13 @@
 <p><code>two-three</code> limits <strong>composed</strong> columns, not repeating content: Peers still support 2–6 across. It contains all 69 Stack/Peers/Two/Three layouts and excludes Four compositions and mosaics. <code>repeating</code> contains six Stack/Peers layouts. The full library contains all 102 layouts.</p>
 <p>Load one Graph Paper stylesheet. These builds are not addons; combining them with each other or with the full library can conflict through shared registrations and build-specific private names. Your typography, colors and component styles can load alongside your chosen library stylesheet as usual.</p>
 <p>The profile files first ship in <strong>0.5.2</strong>. Pin that or a later release; the earlier 0.5.1 tag does not contain these paths. Version-pinned links become available when the corresponding release tag is published.</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/two-three.min.css&quot;&gt;
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/profiles/two-three.min.css&quot;&gt;
 </code></pre>
-<p>Use the <a href="configurator.html#delivery">configurator</a> to choose full-library or smallest-compatible CDN delivery and copy its pinned stylesheet tag. When only full covers the sequence, the tool explains why and consolidates the choices. Other compositions on the page must also fit the chosen profile. Layouts excluded from a profile are unavailable, not an alternative design fallback; switch to a broader build when needed.</p>
+<p>Use the <a href="configurator.html#delivery">configurator</a> to choose full-library or smallest-predefined CDN delivery and copy its pinned stylesheet tag. When only full covers the sequence, the tool explains why and consolidates the choices. Other compositions on the page must also fit the chosen profile. Layouts excluded from a profile are unavailable, not an alternative design fallback; switch to a broader build when needed.</p>
 <p>For a smaller build of just your selected layouts and viewport steps, use the configurator&#39;s <a href="configurator-help.html#download-css-for-a-sequence">custom CSS downloads</a>. If your site needs unrestricted catalogue choices, keep <code>css/main.min.css</code>. Layered profiles, viewport shards and automatic project scanning are not provided.</p>
+<h2 id="optional-column-rules-build">Optional column-rules build</h2>
+<p>The 0.6.0 core and predefined profiles provide ruled field geometry without line rendering. Add <a href="assets/graph-paper/extensions/column-rules.css">column-rules.css</a> or <a href="assets/graph-paper/extensions/column-rules.min.css">column-rules.min.css</a> after the core when lines are needed. Layered counterparts are also available. All require a core from the same release; they do not work alone or with pre-0.6 core. Custom downloads bundle the extension for ruled sequences.</p>
+<p>The extension introduces relative positioning on explicit rule owners and translated absolute pseudo-elements. Core assigns no positioning or z-index. See <a href="class-reference.html#positioning-and-stacking">positioning and stacking</a>.</p>
 <h2 id="understand-capability-dependencies">Understand capability dependencies</h2>
 <p>Basic layout uses CSS Grid, custom properties and native nesting. Continued tracks depend on subgrid. Enhanced allocation relies on typed custom properties, native sibling counting/indexing and CSS arithmetic including <code>abs()</code>, <code>mod()</code> and rounding. Mosaic activation and internal computation gates also use custom-property style queries. Measured rule lengths use inline-size query units in an explicit measurement context.</p>
 <p>These capabilities have distinct availability. A JavaScript feature check or the presence of Grid alone is insufficient to qualify the complete core. The test suite exercises actual geometry and cleanup, not only syntax detection.</p>
@@ -155,10 +159,10 @@
 <td>Source-order stack</td>
 </tr>
 </tbody></table></div>
-<p>Missing more than counting can produce a simpler result. Real Chromium 136 lacks <code>abs()</code> too: every family stacks, including Peers and Two. The equal-pairs fallback is therefore not a blanket promise for every older browser. Real Firefox 137 retains base arithmetic and demonstrates that pair/repeating profile. Both retain tested field geometry and continued/rebased padding.</p>
+<p>Missing more than counting can produce a simpler result. In the earlier 0.5 qualification, real Chromium 136 lacks <code>abs()</code> too: every family stacks, including Peers and Two. The equal-pairs fallback is therefore not a blanket promise for every older browser. Real Firefox 137 retains base arithmetic and demonstrates that pair/repeating profile. Both retain tested field geometry and continued/rebased padding.</p>
 <p>Simulated feature-off tests remain useful for isolating a dependency, but do not establish older-engine support by themselves. Unsupported style queries leave mosaics inactive. Invalid counts and fields stack without selecting another map. Engines missing the broader modern foundation are unqualified; the library makes no universal fallback claim for them.</p>
 <h2 id="qualified-builds">Qualified builds</h2>
-<p>The structural release pass verified the following Playwright engine builds:</p>
+<p>The 0.6.0 structural pass covers these Playwright engine builds:</p>
 <div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
 <thead>
 <tr>
@@ -168,26 +172,20 @@
 </thead>
 <tbody><tr>
 <td>Chromium 156.0.8078.4</td>
-<td>Full source/minified/feature-off core, four distributions, utilities, docs and tools</td>
+<td>Source/minified/feature-off core; predefined profiles; column-rules extension; configurator</td>
 </tr>
 <tr>
 <td>Firefox 157.0</td>
-<td>The same full structural and interaction scope</td>
+<td>The same structural and configurator scope</td>
 </tr>
 <tr>
 <td>WebKit 27.2</td>
-<td>The same full structural and interaction scope</td>
-</tr>
-<tr>
-<td>Firefox 137.0</td>
-<td>Real count-off repeating/equal-pairs fallback across four builds</td>
-</tr>
-<tr>
-<td>Chromium 136.0.7103.25</td>
-<td>Real source-order stack fallback across four builds</td>
+<td>The same structural and configurator scope</td>
 </tr>
 </tbody></table></div>
-<p>The current-engine core matrices each passed 39,145 geometry checks; the real older-engine matrices each passed 204,916 assertions. These are automated engine tests, not certification of all retail Safari/Chrome/Firefox patch versions, mobile devices, screen readers or writing modes. Source/focus order is checked; finished designs still need content-specific accessibility review.</p>
+<p>The current-engine core matrices each exercise 39,145 geometry checks. The separate extension suite compares 5,200 item geometries and rule styles per engine with the released 0.5.2 implementation, including layered builds, profiles, bundled custom CSS, and overlay behavior. Profile tests compare 8,068 cases per engine. The rendered documentation examples are also checked in Chromium.</p>
+<p>Earlier 0.5 qualification tested real Firefox 137.0 and Chromium 136.0.7103.25 across four builds, with 204,916 assertions per engine. Those runs describe the older artifacts; they have not been repeated for 0.6.0. Current feature-off checks preserve the intended fallback contract but are not fresh older-browser qualification.</p>
+<p>These are automated engine tests, not certification of all retail browser patch versions, mobile devices, screen readers or writing modes. Source/focus order is checked; finished designs still need content-specific accessibility review.</p>
 <p>Runtime/performance policy and manual assistive-technology review remain separate release gates. See <a href="validation.html">Validation</a> for reproducible commands.</p>
 <p>Coupled Two/Three/Four compositions reserve at most <strong>9,998 construction rows</strong>, including spanning endpoints. If an allocation exceeds that shared budget, the whole composition stacks in source order across all browsers. This avoids the Firefox row-clamping overlap found during stress testing. Exact requests follow the same safeguard; a safe layout/source change restores composition automatically. The limit applies to construction complexity, not a fixed number of items: a default Three composition can fit at 65 items, stack at 66 and fit again at 67. Browser grid capacity is finite even though source counts are not enumerated in the library.</p>
 <h2 id="separate-css-from-authoring-tools">Separate CSS from authoring tools</h2>

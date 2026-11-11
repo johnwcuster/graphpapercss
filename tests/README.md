@@ -60,3 +60,5 @@ Reports, screenshots, temporary package archives and generated comparison CSS be
 ## Released baseline
 
 `pnpm legacy:test:browsers` runs the 0.4 reference harness. `pnpm test:inspector` and `pnpm test:inspector:package` qualify its scoped portable inspector. Those checks do not validate a 0.5 inspector API. `pnpm test:distribution` checks all four modern stylesheets in a browser; `pnpm test:package` audits the actual publish archive without publishing.
+
+The optional column-rules extension has a dedicated regression suite: `pnpm test:column-rules --engine=chromium` (also Firefox/WebKit). It compares rule painting and layout with the `v0.5.2` release across full, minified, layered, predefined and bundled-custom builds, then verifies core-only positioning neutrality, an overlay extending into the neighboring item, and author positioning overrides. The release tag supplies historical bytes; no duplicate legacy fixture is added. Current artifact bindings are in `maintainers/qualification-0.6.json`; earlier records remain historical.

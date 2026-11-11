@@ -8,7 +8,6 @@ import {fourSearchRootScalars,fourSearchRootDeclarations} from './four-search.mj
 import {placementScalars,placementDeclarations} from './placement-compiler.mjs';
 import {variable as v,equal as eq,sum} from './expressions.mjs';
 import {layoutCode as coded,layoutMembership,groupedLayoutTerms as grouped} from './metadata.mjs';
-import {ruleScalars,ruleDeclarations,ruleDecoration} from './rule-compiler.mjs';
 import {layouts as allLayouts,hinges as allHinges,spacingModes as allSpacingModes,allocationPolicies,directionPolicies,traversalPolicies,arrangementPolicies,controlPolicies,exactCountRegions} from './catalogue.mjs';
 import {pairDeclarations,pairPlacement,endpointPlacement} from './pair-compiler.mjs';
 import {threeDeclarations,threePlacement} from './three-compiler.mjs';
@@ -17,7 +16,7 @@ const token=n=>`var(--gp-${n})`;
 const rule=(selector,body)=>`${selector} { ${body} }`;
 const ordinaryScalarNames=['two','three','four'].flatMap(name=>familyScalarGroups[name]);
 const familyScalarNames=[...ordinaryScalarNames,...familyScalarGroups.mosaic];
-const scalarNames=['inset','tail','usable','c','gap','content','slot','repeat-active','repeat-start','repeat-span','n','i','fallback-row','first','last','spanning',...placementScalars,...familyScalarNames,...ruleScalars,'m-enabled','simple'];
+const scalarNames=['inset','tail','usable','c','gap','content','slot','repeat-active','repeat-start','repeat-span','n','i','fallback-row','first','last','spanning',...placementScalars,...familyScalarNames,'m-enabled','simple'];
 const parameters=[...mosaicParameters,'parent','inset-start','inset-end','gutter','ruled','two','weight','total','has-two','has-three','has-four','three','weight1','repeat','stronger','reverse','rtl','center-first','exact-l','exact-c','exact-r','above','below','span-mode','four','exact-cl','exact-cr','f-wide','f-widest',...[0,1,2,3].flatMap(i=>[`f-w${i}`,`f-slot${i}`,`f-order${i}`])];
 // Selection metadata follows --gp-layout even when an author overrides the
 // class through CSS. Traversal ranks nominal weights, never rounded widths.
@@ -38,7 +37,6 @@ export function generateCSS({layouts=allLayouts,hinges=allHinges,spacingModes=al
  const selectedScalars=scalarNames.filter(n=>!omittedScalars.has(n));
  const ordinaryScalarNames=['two','three','four'].flatMap(name=>groups[name]??[]);
  const familyScalarNames=Object.values(groups).flat();
- const rulesEnabled='ruled' in spacingModes;
  const names=layouts.flatMap(p=>[`gp_layout--${p.id}`,...hinges.map(([,prefix])=>`gp_${prefix}--${p.id}`)]);
  const selector=`:where(${names.map(n=>`.${n}`).join(',')})`;
  const out=[
@@ -73,7 +71,6 @@ export function generateCSS({layouts=allLayouts,hinges=allHinges,spacingModes=al
  const simpleResets=familyScalarNames.map(n=>`--_gp-${n}:initial;`).join(' ');
  // One exact opt-in list encloses shared geometry, guards, and native counting.
  // Ordinary author selectors override the zero-specificity candidate rules.
- if(rulesEnabled)out.push(ruleDecoration());
  out.push(`${selector} {
  display:grid; grid-template-columns:subgrid;
  ${exactCountRegions.map(n=>`--_gp-selected-exact-${n}:var(--gp-exact-count-${n});`).join(' ')}
@@ -149,7 +146,6 @@ ${dormantExactCancellationRules(groups)}
   & > :where(*) { ${simpleResets} }
  }
  }
-${rulesEnabled?ruleDeclarations(enhancementCondition):''}
 }`);
  out.push(rule(':where(.gp_ruler,.gp_rebase_64)','grid-template-columns:repeat(64,minmax(0,1fr)); --_gp-tracks:64;'));
  const spacingAliases=prefix=>Object.entries(spacingModes).map(([name,[a,b,gap]])=>rule(`:where(.gp_${prefix}spacing--${name})`,`--_gp-inset-start:${a}; --_gp-inset-end:${b}; --_gp-gutter:${gap}; --_gp-f-wide:${['wide','ruled'].includes(name)?1:0}; --_gp-m-space:${name==='neat'?1:name==='thin'?2:0}; --_gp-ruled:${name==='ruled'?1:0};`)).join('\n');

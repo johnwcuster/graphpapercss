@@ -26,7 +26,7 @@ export async function checkConfiguratorExports({page,browser,open,ready,origin,p
  assert.match(await page.locator('#build-css').textContent(),/1\. Build CSS/);
  assert.equal(await page.locator('#download-html').count(),0);
  await build();assert.match(await page.locator('#css-export-status').textContent(),/Ready.*download CSS/);assert.equal(page.workers().length,1,'local compiler worker loaded');
- const fullCSS=await (await page.request.get(`${origin}${publicPath}/assets/graph-paper/main.css`)).text();
+ const fullCSS=await (await page.request.get(`${origin}${publicPath}/assets/graph-paper/main.css`)).text()+'\n'+await (await page.request.get(`${origin}${publicPath}/assets/graph-paper/extensions/column-rules.css`)).text();
  for(const format of ['readable','minified']){
   await page.locator('#css-format').selectOption(format);
   const css=await download('#download-css'),html={text:downloadableHTML(state,format)};

@@ -1,6 +1,6 @@
 # Graph Paper compiler and composition contracts
 
-Graph Paper 0.5.0 provides section-level composition tools for building site-level spatial continuity. Its source lives here; generated CSS is delivered from the canonical `css/main*.css` paths. Versioned 0.4 references live under `css/legacy/0.4/`. The package version is 0.5.0; creating and publishing its release tag is a separate owner action.
+Graph Paper 0.6.0 provides section-level composition tools for building site-level spatial continuity. Its source lives here; generated CSS is delivered from the canonical `css/main*.css` paths. Versioned 0.4 references live under `css/legacy/0.4/`. The package version is 0.6.0; creating and publishing its release tag is a separate owner action.
 
 Start with the [configurator](../../docs/configurator.html) for visual selection and [its guide](../../docs/configurator-help.md) for ordinary authoring. This document specifies composition behavior for maintainers and authors using custom CSS. [Release preparation](../../maintainers/release.md) tracks the remaining distribution work.
 
@@ -179,7 +179,7 @@ The core implements Full/Neat/Thin/Wide/Ruled spacing with the reviewed insets a
 </div>
 ```
 
-Ownership is explicit: `gp_rule--end` draws on an item's physical right side; `gp_rule--start` draws on its left. Choose one owner per shared gutter. The configurator uses end ownership for source participants, includes the measurement marker when the sequence needs rules, and exports no style tag or placement script. Rule color defaults to `currentColor`; width defaults to `1px`. The inline styling above is optional.
+With the optional matching-version extension loaded, ownership is explicit: `gp_rule--end` draws on an item's physical right side; `gp_rule--start` draws on its left. Choose one owner per shared gutter. The configurator uses end ownership for source participants, includes the measurement marker when the sequence needs rules, and exports no style tag or placement script. Rule color defaults to `currentColor`; width defaults to `1px`. The inline styling above is optional.
 
 The captured ruler bit positions each line halfway across the two-bit gutter. Continuing layouts inherit that bit; a rebased coordinate root requires its own `gp_ruler--measure`. Without measurement, field geometry still works and decoration stays absent. No query container is silently added to all rulers.
 
@@ -368,7 +368,7 @@ pnpm test:vertical-spacing --engine=chromium
 
 Builds emit canonical unlayered/layered CSS, its size report and diagnostic mapping, generate the maintained integration fixture, validate attributed configurator content, and synchronize docs assets. They verify the versioned legacy build independently and do not change the release version. See the [test guide](../../tests/README.md) for full versus quick checks and utility matrices.
 
-The generated [size report](../../css/size.json) is authoritative. At this checkpoint: 228,484 source bytes; 192,555 minified; 17,817 gzip; 10,411 Brotli. These figures cover the full 102-selection core. Standalone `repeating` and `two-three` profiles use the same compiler; their capabilities live in [profiles.mjs](profiles.mjs), and their measured sizes and hashes are generated in [the profile manifest](../../css/profiles/manifest.json). Profiles retain the same public contract within their included families and are loaded individually, rather than combined with another library build.
+The generated [size report](../../css/size.json) is authoritative. Use the generated report for the current checkpoint. These figures cover the full 102-selection core. Standalone `repeating` and `two-three` profiles use the same compiler; their capabilities live in [profiles.mjs](profiles.mjs), and their measured sizes and hashes are generated in [the profile manifest](../../css/profiles/manifest.json). Profiles retain the same public contract within their included families and are loaded individually, rather than combined with another library build.
 
 Runtime can be reproduced with `node scripts/benchmark-core-runtime.mjs --engine=chromium` (or `webkit`); reports go to ignored `test-results/runtime/`. Check the script's options before a controlled comparison. Compression does not establish a runtime budget: synchronous computation/layout measurements are machine-specific and exclude paint, GPU and real-device interaction.
 
@@ -379,3 +379,11 @@ Coupled Two/Three/Four placements have a shared internal budget of **9,998 const
 Native DOM and focus order are retained; visual column-first traversal still needs content-specific accessibility review. Structural tests do not establish conformance for arbitrary content, right-to-left writing or all assistive technology. Current Chromium, Firefox and WebKit structural qualification and bounded older-engine fallback evidence are recorded in [qualification](../../maintainers/qualification.md). Native-count-off equal pairs require the base arithmetic foundation; the tested Chromium 136 without `abs()` instead stacks all families. These observations do not establish support for every older engine. Runtime policy and manual assistive-technology review remain separate release gates.
 
 Graph Paper does not supply typography, readable measure, image cropping, fixed composition heights, masonry, viewport packing, application shells, automatic minimum useful widths, or an authored container-query class family. Component CSS can select public layout tokens under author-owned conditions. Nested layouts use the explicit continuation/rebase forms above.
+
+## Optional column-rule rendering (0.6.0)
+
+Core no longer emits rule-owner positioning, transforms, or pseudo-elements. `rule-compiler.mjs` emits an optional standalone extension. Its stable reserved metadata contract is enumerated in `rule-interface.mjs` and preserved by both private-name compaction and dependency pruning. These properties are implementation metadata, not author inputs. The same extension works with all matching-version full, profile, and custom cores; do not pair releases independently.
+
+The extension owns the non-inheriting visibility registrations and rule calculations. Core keeps the 56-bit field and explicit ruler measurement. Custom exports concatenate the extension before minification when ruled spacing is selected. Layered distribution wraps the extension in the same `graph-paper` layer. Author-facing positioning and stacking consequences are documented in [Class reference](../../docs/class-reference.md#column-rules-extension).
+
+Earlier structural/performance qualification records describe their named 0.5 artifacts. The 0.6 qualification record binds the new artifacts to fresh structural checks; no new runtime-speed claim follows from this packaging change.

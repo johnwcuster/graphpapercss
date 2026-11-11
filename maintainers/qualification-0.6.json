@@ -1,0 +1,446 @@
+{
+  "version": "0.6.0",
+  "date": "2026-11-11",
+  "scope": "Current core/profile structural matrices and optional extension parity against v0.5.2. Configurator tested in all three engines; rendered documentation in Chromium. No new runtime timing or real older-browser qualification.",
+  "artifacts": {
+    "main.css": {
+      "bytes": 226130,
+      "sha256": "b30e73414da608bb7dca6efef37daaef08e0306804d539bd4cedb9fa2175d7e7"
+    },
+    "main.min.css": {
+      "bytes": 191261,
+      "sha256": "5e46f867198116db40502c7efd8495331d47f32f19f47c32ca7c411608bcc9f0"
+    },
+    "main.layer.css": {
+      "bytes": 226153,
+      "sha256": "bfa143df8b9f3e1d0f550eaf354ab2bf9f9084eeba43e1913ddb2a2b1f9ae731"
+    },
+    "main.layer.min.css": {
+      "bytes": 191281,
+      "sha256": "42be377e6dadd0c1b187951d8feb311fbd8aa36baa5a9f0513acfd49f7900b8d"
+    },
+    "private-names.json": {
+      "bytes": 9490,
+      "sha256": "b095e2294af0e18493c1996a97753fbf9b61e3a4788183e0e9ab5f0ae1801613"
+    },
+    "size.json": {
+      "bytes": 99,
+      "sha256": "6a3523c1fc4c3684e5dd3a2270deb6f508d7e98ba94e31a775477801e0ffc5e6"
+    },
+    "profiles/repeating.css": {
+      "bytes": 31403,
+      "sha256": "3ab9dbecaf8164adb31bcf9f0a322c87db688b5829aec296bea73a9a613feaba"
+    },
+    "profiles/repeating.min.css": {
+      "bytes": 26392,
+      "sha256": "33a58d2ac7198a87349a6fc27fd53494981601909e5af6276affdd080bbea5dd"
+    },
+    "profiles/two-three.css": {
+      "bytes": 102023,
+      "sha256": "0702bc0d04c78bc342aaff0e9762d98455a8a815f2da615c10bc490227a66d4f"
+    },
+    "profiles/two-three.min.css": {
+      "bytes": 88025,
+      "sha256": "a956f93c7173fe3c21e8c37993e90fb0dd334b4b44b0e0e263b7e102e2d2c787"
+    },
+    "profiles/manifest.json": {
+      "bytes": 3806,
+      "sha256": "8f791ead4939b7f3c4ae6caeecff0f287f1b8c7290582f026acb64f78ea7363a"
+    },
+    "extensions/column-rules.css": {
+      "bytes": 2446,
+      "sha256": "fbe8ac25c4f45276d3c34fd3b4d4ea7cc2d53d52c7db0c607399e9b2e7f0816b"
+    },
+    "extensions/column-rules.min.css": {
+      "bytes": 2033,
+      "sha256": "48153f7fd2b6351b373a32ff69161c7615a3c69d27d56ba185319e54eff5ef34"
+    },
+    "extensions/column-rules.layer.css": {
+      "bytes": 2469,
+      "sha256": "e9394fc5cb784caed579a07574cd64a378088796b4eef4b64b841f9d3980bd4d"
+    },
+    "extensions/column-rules.layer.min.css": {
+      "bytes": 2053,
+      "sha256": "7fe592a6b52970558ce352f033044b580940bfc05fd812e988c5a3b7ba0c8ad1"
+    }
+  },
+  "profileManifest": {
+    "schemaVersion": 1,
+    "profiles": {
+      "repeating": {
+        "label": "Repeating",
+        "description": "Stack and repeating Peers 2–6.",
+        "selection": {
+          "layouts": [
+            "stack",
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6"
+          ],
+          "hinges": [
+            30,
+            40,
+            48,
+            64,
+            80,
+            96
+          ],
+          "spacing": [
+            "full",
+            "neat",
+            "thin",
+            "wide",
+            "ruled"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        },
+        "files": {
+          "readable": {
+            "path": "css/profiles/repeating.css",
+            "bytes": 31403,
+            "gzip": 3502,
+            "brotli": 2776,
+            "sha256": "3ab9dbecaf8164adb31bcf9f0a322c87db688b5829aec296bea73a9a613feaba"
+          },
+          "minified": {
+            "path": "css/profiles/repeating.min.css",
+            "bytes": 26392,
+            "gzip": 3034,
+            "brotli": 2370,
+            "sha256": "33a58d2ac7198a87349a6fc27fd53494981601909e5af6276affdd080bbea5dd"
+          }
+        }
+      },
+      "two-three": {
+        "label": "Two/Three compositions",
+        "description": "Stack, repeating Peers 2–6, and all Two/Three compositions.",
+        "selection": {
+          "layouts": [
+            "stack",
+            "peers-2",
+            "peers-3",
+            "peers-4",
+            "peers-5",
+            "peers-6",
+            "two-1-5",
+            "two-1-4",
+            "two-1-3",
+            "two-3-7",
+            "two-1-2",
+            "two-3-5",
+            "two-2-3",
+            "two-5-7",
+            "two-1-1",
+            "two-7-5",
+            "two-3-2",
+            "two-5-3",
+            "two-2-1",
+            "two-7-3",
+            "two-3-1",
+            "two-4-1",
+            "two-5-1",
+            "three-1-1-4",
+            "three-2-3-7",
+            "three-1-2-3",
+            "three-2-5-5",
+            "three-1-3-2",
+            "three-2-7-3",
+            "three-1-4-1",
+            "three-1-1-3",
+            "three-2-3-5",
+            "three-1-2-2",
+            "three-2-5-3",
+            "three-1-3-1",
+            "three-3-2-7",
+            "three-1-1-2",
+            "three-3-4-5",
+            "three-2-3-3",
+            "three-3-5-4",
+            "three-1-2-1",
+            "three-3-7-2",
+            "three-3-2-5",
+            "three-3-3-4",
+            "three-3-4-3",
+            "three-3-5-2",
+            "three-2-1-3",
+            "three-4-3-5",
+            "three-1-1-1",
+            "three-4-5-3",
+            "three-2-3-1",
+            "three-3-2-3",
+            "three-3-3-2",
+            "three-2-1-2",
+            "three-4-3-3",
+            "three-2-2-1",
+            "three-5-2-5",
+            "three-5-3-4",
+            "three-5-4-3",
+            "three-5-5-2",
+            "three-3-1-2",
+            "three-5-2-3",
+            "three-2-1-1",
+            "three-5-3-2",
+            "three-3-2-1",
+            "three-7-2-3",
+            "three-7-3-2",
+            "three-3-1-1",
+            "three-4-1-1"
+          ],
+          "hinges": [
+            30,
+            40,
+            48,
+            64,
+            80,
+            96
+          ],
+          "spacing": [
+            "full",
+            "neat",
+            "thin",
+            "wide",
+            "ruled"
+          ],
+          "padding": true,
+          "verticalSpacing": true
+        },
+        "files": {
+          "readable": {
+            "path": "css/profiles/two-three.css",
+            "bytes": 102023,
+            "gzip": 11072,
+            "brotli": 7071,
+            "sha256": "0702bc0d04c78bc342aaff0e9762d98455a8a815f2da615c10bc490227a66d4f"
+          },
+          "minified": {
+            "path": "css/profiles/two-three.min.css",
+            "bytes": 88025,
+            "gzip": 9454,
+            "brotli": 5773,
+            "sha256": "a956f93c7173fe3c21e8c37993e90fb0dd334b4b44b0e0e263b7e102e2d2c787"
+          }
+        }
+      }
+    }
+  },
+  "engines": [
+    {
+      "engine": "chromium",
+      "version": "156.0.8078.4",
+      "core": {
+        "engine": "chromium",
+        "checks": 39145,
+        "quick": false,
+        "status": "pass"
+      },
+      "columnRules": {
+        "engine": "chromium",
+        "version": "156.0.8078.4",
+        "checks": 5200,
+        "status": "pass",
+        "scope": "0.5.2 rule/geometry parity; standalone, layered, profiles and bundled custom builds; core neutrality; overlay escape; author positioning override"
+      },
+      "profiles": [
+        {
+          "profile": "repeating",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback-minified",
+              "cases": 174,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "two-three",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback-minified",
+              "cases": 1843,
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "comparisons": 8068
+    },
+    {
+      "engine": "firefox",
+      "version": "157.0",
+      "core": {
+        "engine": "firefox",
+        "checks": 39145,
+        "quick": false,
+        "status": "pass"
+      },
+      "columnRules": {
+        "engine": "firefox",
+        "version": "157.0",
+        "checks": 5200,
+        "status": "pass",
+        "scope": "0.5.2 rule/geometry parity; standalone, layered, profiles and bundled custom builds; core neutrality; overlay escape; author positioning override"
+      },
+      "profiles": [
+        {
+          "profile": "repeating",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback-minified",
+              "cases": 174,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "two-three",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback-minified",
+              "cases": 1843,
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "comparisons": 8068
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "core": {
+        "engine": "webkit",
+        "checks": 39145,
+        "quick": false,
+        "status": "pass"
+      },
+      "columnRules": {
+        "engine": "webkit",
+        "version": "27.2",
+        "checks": 5200,
+        "status": "pass",
+        "scope": "0.5.2 rule/geometry parity; standalone, layered, profiles and bundled custom builds; core neutrality; overlay escape; author positioning override"
+      },
+      "profiles": [
+        {
+          "profile": "repeating",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 174,
+              "status": "pass"
+            },
+            {
+              "format": "fallback-minified",
+              "cases": 174,
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "profile": "two-three",
+          "checks": [
+            {
+              "format": "readable",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "minified",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback",
+              "cases": 1843,
+              "status": "pass"
+            },
+            {
+              "format": "fallback-minified",
+              "cases": 1843,
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "comparisons": 8068
+    }
+  ],
+  "olderBrowsers": {
+    "status": "not rerun",
+    "historicalRecord": "qualification-0.5.json",
+    "note": "Feature-off matrices are not real older-engine qualification."
+  }
+}

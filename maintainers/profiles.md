@@ -1,3 +1,5 @@
+> This document records the 0.5.2 profile checkpoint. For current 0.6 artifacts and extension qualification, see [qualification-0.6.json](qualification-0.6.json) and [release preparation](release.md).
+
 # Standalone profile qualification
 
 Prepared for 0.5.2 on 10 November 2026. The four full CSS distributions retain

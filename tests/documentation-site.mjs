@@ -117,7 +117,7 @@ export async function checkDocumentationSite(page,origin,engine,publicPath='/doc
    const examples=(await page.locator('pre code.language-html').allTextContents()).filter(html=>/class="[^"]*gp_ruler/.test(html));
    for(const markup of examples){
     snippets++;
-    await page.setContent(`<link rel="stylesheet" href="${origin}${publicPath}/assets/graph-paper/main.css"><style>*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui}img{max-width:100%;height:auto}figure{margin:0}article,aside,figure,p{min-height:12px}</style>${markup}`,{waitUntil:'load'});
+    await page.setContent(`<link rel="stylesheet" href="${origin}${publicPath}/assets/graph-paper/main.css">${markup.includes('gp_rule--')?`<link rel="stylesheet" href="${origin}${publicPath}/assets/graph-paper/extensions/column-rules.css">`:''}<style>*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui}img{max-width:100%;height:auto}figure{margin:0}article,aside,figure,p{min-height:12px}</style>${markup}`,{waitUntil:'load'});
     for(const width of [320,639,640,767,768,1023,1024,1280]){
      await page.setViewportSize({width,height:1000});
      const data=await page.locator('[class*="gp_layout--"]').evaluateAll(nodes=>nodes.map(n=>({classes:[...n.classList],tracks:Number(getComputedStyle(n).getPropertyValue('--_gp-tracks')),children:[...n.children].map(item=>{const s=getComputedStyle(item);return[s.gridColumnStart,s.gridColumnEnd,s.gridRowStart,s.gridRowEnd];})})));

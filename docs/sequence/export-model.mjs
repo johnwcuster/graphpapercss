@@ -1,4 +1,4 @@
-import {resolvedSteps,sequenceClasses,itemSpacingClasses,candidateInlineStyle,candidateMarkup,thresholds,arrangements} from './model.mjs';
+import {resolvedSteps,sequenceClasses,itemSpacingClasses,candidateInlineStyle,candidateMarkup,thresholds,arrangements,needsColumnRules} from './model.mjs';
 import {spacingModes} from '../assets/graph-paper/src/core/catalogue.mjs';
 
 // Derive the compiler requirements from the same classes and properties used
@@ -12,6 +12,7 @@ export function exportSelection(state){
   spacing:Object.keys(spacingModes).filter(name=>spaces.has(name)),
   padding:itemSpacingClasses(state).length>0,
   verticalSpacing:classes.some(c=>c.includes('vertical-spacing--')),
+  ...(needsColumnRules(state)?{columnRules:true}:{}),
  };
 }
 export const exportKey=state=>JSON.stringify(exportSelection(state));

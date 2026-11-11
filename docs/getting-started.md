@@ -2,7 +2,7 @@
 
 Graph Paper provides section-level composition tools for building site-level spatial continuity. It supplies ruler-aligned spatial arrangements while your site supplies typography, content treatments and visual identity.
 
-These instructions describe **Graph Paper 0.5.2**. The 0.4 releases use a different API; see [Migration](migration.md).
+These instructions describe **Graph Paper 0.6.0**. The 0.4 releases use a different API; see [Migration](migration.md).
 
 ## Load one stylesheet
 
@@ -15,7 +15,7 @@ Serve the current build from your project:
 For version-pinned CDN delivery:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css">
 ```
 
 Use `css/main.css` for readable source or `css/main.layer.min.css` when you want the core in the `graph-paper` cascade layer. Choose one. No JavaScript or optional tool is required. Pin an exact release when publishing a production site; do not point the new markup at a 0.4 stylesheet.
@@ -69,3 +69,7 @@ This stacks below 48rem, uses two regions from 48rem, and three from 64rem. No i
 Resize across both sides of every selected transition. Check source and focus order, text length, image treatment, larger text and the actual composition width. Change grouping or content treatment when a layout cannot express the intended relationship; a new ratio cannot undo a DOM grouping decision.
 
 The library counts **direct element children**, including hidden ones. Comments, text nodes and grandchildren do not increase that count. You do not need a `set_*` class or an author-maintained item-count variable. [Class reference](class-reference.md) covers allocation, traversal, exact counts and fallbacks; [Alignment and nesting](alignment.md) explains wrappers.
+
+## Optional column lines
+
+The 0.6.0 core retains ruled gutter spacing but draws no lines. For column rules, add the matching-version [column-rules extension](class-reference.md#column-rules-extension) after core. The configurator supplies both CDN links, or bundles the extension into a custom download. No extension is needed for ordinary layouts, padding, or vertical spacing.

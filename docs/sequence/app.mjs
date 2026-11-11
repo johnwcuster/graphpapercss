@@ -421,7 +421,7 @@ async function copy(text, success) {
   try { await navigator.clipboard.writeText(text); announce(success); }
   catch { announce('Clipboard unavailable. Select and copy the HTML markup, or copy the exploration URL from your address bar.'); }
 }
-$('#copy-markup').addEventListener('click', () => copy(candidateMarkup(state), 'HTML copied. Use the matching 0.5.2 stylesheet; padding utilities are included.'));
+$('#copy-markup').addEventListener('click', () => copy(candidateMarkup(state), 'HTML copied. Use the matching 0.6.0 stylesheet; padding utilities are included.'));
 $('#copy-link').addEventListener('click', () => {
   const url = new URL(location.href); url.searchParams.set('state', JSON.stringify(state));
   copy(url.href, 'Exploration link copied.');

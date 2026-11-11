@@ -7,7 +7,7 @@ export async function checkComposedIntegration({page,root,set,check,base,fixture
  const families={two:'two-3-2',three:'three-1-2-1',four:'four-6-5-4-3'};
  for(const profile of ['source','minified','cancellation-off','exact-bypass-off']){
   await page.goto(url);
-  const link=page.locator('link[href*="css/"]');
+  const link=page.locator('link[href*="/css/main"]');
   if(profile==='minified')await link.evaluate(n=>new Promise((resolve,reject)=>{n.onload=resolve;n.onerror=reject;n.href=n.href.replace('main.css','main.min.css');}));
   if(profile==='cancellation-off'||profile==='exact-bypass-off'){
    let css=await readFile(new URL('../../css/main.css',import.meta.url),'utf8');

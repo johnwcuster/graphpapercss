@@ -62,3 +62,5 @@ Mosaics support Neat/Thin only. Thin mosaic gutters, padding and vertical-spacin
 ## Keep constrained text honest
 
 A max-width reading box can interrupt the relationship between an item's actual width and its inherited track count. Apply `gp_pad` to an appropriate full-region content layer, before that interruption, or give the constrained reading component ordinary host padding. Do not add an unimplemented helper such as `gp_inset--bit`; the shipped utility is `gp_pad`.
+
+Column lines require the optional [column-rules extension](class-reference.md#column-rules-extension) in 0.6.0. Ruled spacing alone preserves the gutter geometry.

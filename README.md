@@ -7,7 +7,7 @@ Graph Paper provides section-level composition tools for building site-level spa
 ## Use Graph Paper
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css">
 <section class="gp_ruler gp_layout--stack
                 gp_md--two-3-2 gp_lg--three-1-2-1
                 gp_spacing--neat gp_vertical-spacing--1">
@@ -27,8 +27,9 @@ The configurator can also build a standalone stylesheet for your responsive sequ
 
 | Files | Purpose |
 | --- | --- |
-| `css/main.css`, `main.min.css` | Current 0.5 core |
+| `css/main.css`, `main.min.css` | Current 0.6 core |
 | `css/main.layer.css`, `main.layer.min.css` | Same core in the `graph-paper` cascade layer |
+| `css/extensions/column-rules*.css` | Optional column lines; requires a matching-version core build |
 | `css/profiles/repeating.css`, `repeating.min.css` | Standalone Stack and Peers 2–6 |
 | `css/profiles/two-three.css`, `two-three.min.css` | Standalone Stack, Peers 2–6, Two and Three compositions |
 | `css/legacy/0.4/main*.css` | Byte-preserved 0.4 reference, including layered forms |
@@ -38,6 +39,8 @@ The configurator can also build a standalone stylesheet for your responsive sequ
 Choose one core stylesheet. Do not combine versions or add legacy bands to the new core. The old `grid_*`, `set_*`, `flow_*` and `gp_band--*` API is available only with its matching legacy build or a pinned older release. The new core has no compatibility aliases for those classes.
 
 The smaller predefined builds first ship in 0.5.2. Each includes all viewport steps, gutter modes, and applicable controls; load one build instead of the full library. The configurator checks whether it covers your sequence and copies a pinned CDN tag. See [build capabilities and sizes](docs/browser-support.md#predefined-cdn-profiles). Custom downloads remain available for narrower selections.
+
+Core controls spatial arrangement and assigns no positioning or z-index. To draw lines in ruled gutters, load the optional [column-rules extension](docs/class-reference.md#column-rules-extension) after core. Its explicit owners use relative positioning and decorative pseudo-elements. In 0.6.0 this replaces the lines previously included in core; ruled field geometry is unchanged.
 
 The optional portable inspector still edits the **0.4 API only**. Its package entry is `graphpapercss/legacy/0.4/inspector`; it is not a 0.5 editor. The standalone configurator supports the current API. Neither tool is required to use the CSS.
 

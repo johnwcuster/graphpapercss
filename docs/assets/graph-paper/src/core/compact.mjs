@@ -1,6 +1,8 @@
+import {columnRuleProperties} from './rule-interface.mjs';
 // Delivery-only names. Public inputs/tokens and shared ruler metadata stay
-// verbatim. The mapping is build-specific, not author API. Browser-safe.
-export const sharedRulerProperties=new Set(['--_gp-tracks','--_gp-measure-tracks','--_gp-measure-ready']);
+// verbatim, including the reserved column-rule extension interface. The rest
+// of the mapping is build-specific, not author API. Browser-safe.
+export const sharedRulerProperties=new Set(['--_gp-tracks','--_gp-measure-tracks','--_gp-measure-ready',...columnRuleProperties]);
 export function compactPrivateProperties(css){
  if(/--_gp[0-9a-z]+\b/.test(css))throw Error('reserved compact-name namespace collision');
  const names=[...new Set(css.match(/--_gp-[a-z0-9-]+/g)??[])].filter(name=>!sharedRulerProperties.has(name)).sort();

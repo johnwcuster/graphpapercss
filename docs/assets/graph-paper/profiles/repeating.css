@@ -153,9 +153,6 @@
 @property --_gp-span { syntax:"<number>"; inherits:false; initial-value:0; }
 @property --_gp-row { syntax:"<number>"; inherits:false; initial-value:0; }
 @property --_gp-rowspan { syntax:"<number>"; inherits:false; initial-value:0; }
-@property --_gp-rule-position { syntax:"<number>"; inherits:false; initial-value:0; }
-@property --_gp-rule-start-visible { syntax:"<number>"; inherits:false; initial-value:0; }
-@property --_gp-rule-end-visible { syntax:"<number>"; inherits:false; initial-value:0; }
 @property --_gp-m-enabled { syntax:"<number>"; inherits:false; initial-value:0; }
 @property --_gp-simple { syntax:"<number>"; inherits:false; initial-value:0; }
 @property --_gp-slot-2 { syntax:"<number>"; inherits:false; initial-value:0; }
@@ -167,28 +164,6 @@
 :where(.gp_ruler,.gp_rebase_64) { display:grid; --gp-ruler-bit:0px; --_gp-measure-ready:0; }
 :where(.gp_ruler > *,.gp_rebase_64 > *,.gp_continue_tracks > *) { grid-column:1 / -1; min-inline-size:0; }
 :where(.gp_continue_tracks) { display:grid; grid-template-columns:subgrid; }
-
-:where(.gp_rule--start,.gp_rule--end) { position:relative; }
-:where(.gp_rule--start)::before, :where(.gp_rule--end)::after {
- content:none; position:absolute; inset-block:0; width:0; padding:0;
- border:0 solid transparent; pointer-events:none;
- background-image:linear-gradient(var(--gp-rule-color,currentColor),var(--gp-rule-color,currentColor));
- background-size:var(--gp-rule-width,1px) 100%; background-repeat:no-repeat;
- background-origin:border-box; background-clip:border-box;
-}
-/* Transparent inherited side borders let translation cancel the owner's
-   border offset. Padding supplies the painted width under either box sizing. */
-:where(.gp_rule--start)::before {
- border-left-width:inherit; border-left-style:inherit; padding-left:var(--gp-rule-width,1px);
- left:calc(-1 * var(--gp-ruler-bit));
- background-position:left top; translate:calc(-100% + var(--gp-rule-width,1px) / 2) 0;
-}
-:where(.gp_rule--end)::after {
- border-right-width:inherit; border-right-style:inherit; padding-right:var(--gp-rule-width,1px);
- right:calc(-1 * var(--gp-ruler-bit));
- background-position:right top; translate:calc(100% - var(--gp-rule-width,1px) / 2) 0;
-}
-
 :where(.gp_layout--stack,.gp_xs--stack,.gp_sm--stack,.gp_md--stack,.gp_lg--stack,.gp_xl--stack,.gp_2xl--stack,.gp_layout--peers-2,.gp_xs--peers-2,.gp_sm--peers-2,.gp_md--peers-2,.gp_lg--peers-2,.gp_xl--peers-2,.gp_2xl--peers-2,.gp_layout--peers-3,.gp_xs--peers-3,.gp_sm--peers-3,.gp_md--peers-3,.gp_lg--peers-3,.gp_xl--peers-3,.gp_2xl--peers-3,.gp_layout--peers-4,.gp_xs--peers-4,.gp_sm--peers-4,.gp_md--peers-4,.gp_lg--peers-4,.gp_xl--peers-4,.gp_2xl--peers-4,.gp_layout--peers-5,.gp_xs--peers-5,.gp_sm--peers-5,.gp_md--peers-5,.gp_lg--peers-5,.gp_xl--peers-5,.gp_2xl--peers-5,.gp_layout--peers-6,.gp_xs--peers-6,.gp_sm--peers-6,.gp_md--peers-6,.gp_lg--peers-6,.gp_xl--peers-6,.gp_2xl--peers-6) {
  display:grid; grid-template-columns:subgrid;
  --_gp-selected-exact-left:var(--gp-exact-count-left);    
@@ -297,22 +272,6 @@
   & > :where(*) {  }
  }
  }
-
- @container style(--_gp-ruled:1) and style(--_gp-measure-ready:1) {
-  & > :where(.gp_rule--start,.gp_rule--end) {
-   --_gp-rule-position:calc(var(--_gp-inset) + var(--_gp-repeat-active) * (var(--_gp-repeat-start) + var(--_gp-slot) * var(--_gp-gap)));
-   @supports (width:calc(1px * sibling-count())) and (width:calc(1px * sibling-index())) and (width:calc(1px * mod(3,2))) { --_gp-rule-position:var(--_gp-start); }
-   --_gp-rule-start-visible:calc(clamp(0,calc(var(--_gp-gap) - 1),1) * clamp(0,calc(var(--_gp-rule-position) - var(--_gp-inset)),1));
-   --_gp-rule-end-visible:calc(clamp(0,calc(var(--_gp-gap) - 1),1) * clamp(0,calc(var(--_gp-inset) + var(--_gp-usable) - var(--_gp-rule-position) - var(--_gp-tracks)),1));
-  }
- }
- @container style(--_gp-rule-start-visible:1) {
-  & > :where(.gp_rule--start)::before { content:""; }
- }
- @container style(--_gp-rule-end-visible:1) {
-  & > :where(.gp_rule--end)::after { content:""; }
- }
-
 }
 :where(.gp_ruler,.gp_rebase_64) { grid-template-columns:repeat(64,minmax(0,1fr)); --_gp-tracks:64; }
 :where(.gp_spacing--full) { --_gp-inset-start:0; --_gp-inset-end:0; --_gp-gutter:0;   --_gp-ruled:0; }

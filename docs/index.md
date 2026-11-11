@@ -22,6 +22,8 @@ The result is a constrained vocabulary for composition, not a theme or an automa
 
 ## Release status
 
-These pages document **Graph Paper 0.5.2**. Use the matching [0.5.2 stylesheet](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css) with the examples. Earlier 0.4 markup follows a different API; see [Migration](migration.md).
+These pages document **Graph Paper 0.6.0**. Use the matching [0.6.0 stylesheet](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css) with the examples. Earlier 0.4 markup follows a different API; see [Migration](migration.md).
 
 Existing tags remain unchanged. Use [Migration](migration.md) and the [0.4 reference](configurator-0.4.html) for existing pages. Structural qualification covers Chromium, Firefox and WebKit. Runtime policy, manual assistive-technology review and release metadata remain separate gates; the documentation does not claim that release is already complete.
+
+In **0.6.0**, column lines are an [optional extension](class-reference.md#column-rules-extension); core retains spatial geometry without positioning content.

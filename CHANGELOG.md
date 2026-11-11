@@ -1,5 +1,12 @@
 # Release notes
 
+## 0.6.0 — optional column rules
+
+- Column-rule rendering moves from core to `css/extensions/column-rules.css` and `.min.css`, with matching layered variants. Load the extension after a matching-version core build. Existing ruled pages need this additional stylesheet to keep their lines.
+- Core retains the 56-bit ruled field and its two-bit gutters, but assigns no positioning, z-index, transforms, or decorative pseudo-elements. Rule ownership, color, width, measurement, and geometry remain unchanged.
+- The configurator includes both CDN links when ruled spacing is selected. Self-hosted full builds offer a separate extension download; custom builds bundle the required extension.
+- Documentation distinguishes layout geometry from decoration and explains positioning, stacking, pseudo-element ownership, and explicit measurement containment.
+
 ## 0.5.2 — predefined CDN profiles
 
 [Readable CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.css) · [Minified CSS](https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css)

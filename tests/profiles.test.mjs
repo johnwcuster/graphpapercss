@@ -44,10 +44,10 @@ test('profile artifacts match selection, delivery manifest, hashes and compresse
 });
 
 test('profile qualification binds all delivery hashes to current generated artifacts',async()=>{
- const record=JSON.parse(await readFile('maintainers/profiles.json','utf8'));
+ const record=JSON.parse(await readFile('maintainers/qualification-0.6.json','utf8'));
  const manifest=JSON.parse(await readFile('css/profiles/manifest.json','utf8'));
- assert.deepEqual(record.manifest,manifest);
+ assert.deepEqual(record.profileManifest,manifest);
  assert.deepEqual(record.engines.map(e=>e.engine),['chromium','firefox','webkit']);
  for(const engine of record.engines){assert.ok(engine.comparisons>0);assert.ok(engine.profiles.every(p=>p.checks.length===4&&p.checks.every(c=>c.status==='pass')));}
- for(const [name,expected] of Object.entries(record.fullArtifacts))assert.equal(createHash('sha256').update(await readFile('css/'+name)).digest('hex'),expected.sha256);
+ for(const [name,expected] of Object.entries(record.artifacts))assert.equal(createHash('sha256').update(await readFile('css/'+name)).digest('hex'),expected.sha256);
 });

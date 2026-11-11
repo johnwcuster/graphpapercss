@@ -80,7 +80,7 @@ Requests remain present when counts change. Incomplete, invalid or mismatched tu
 
 Use an explicit spacing class in ordinary authoring; the unconfigured field is Full. Responsive forms include `gp_lg-spacing--wide`. Nominal field bits include internal gutters; actual item spans deduct them. On continued rulers, insets and gutters are bounded to preserve nonempty spans. Mosaics support only Neat/Thin and otherwise stack.
 
-Ruled spacing reserves the field; decoration also needs the measured coordinate root and an explicit `gp_rule--end` or `gp_rule--start` owner on a participant. Choose one owner per shared gutter. The library suppresses outer/nonexistent boundaries. Colors and stroke widths are public host choices:
+Ruled spacing reserves the field. Decoration requires the optional [column-rules extension](#column-rules-extension), plus the measured coordinate root and an explicit `gp_rule--end` or `gp_rule--start` owner on a participant. Choose one owner per shared gutter. The library suppresses outer/nonexistent boundaries. Colors and stroke widths are public host choices:
 
 ```css
 .article-group {
@@ -90,6 +90,39 @@ Ruled spacing reserves the field; decoration also needs the measured coordinate 
 ```
 
 Rule color defaults to `currentColor` and width to `1px`. Keep measurement on the ruler that supplies the relevant coordinate rhythm. See [Edges and mixed spacing](edges-and-spacing.md).
+
+## Column rules extension
+
+Core supplies gutter geometry; the optional extension draws the lines. Load it after one **matching-version** full or predefined core build. It is not a standalone layout stylesheet.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/extensions/column-rules.min.css">
+```
+
+```html
+<section class="gp_ruler gp_ruler--measure gp_layout--two-3-2 gp_spacing--ruled">
+  <article class="gp_rule--end">First item.</article>
+  <article class="gp_rule--end">Second item.</article>
+</section>
+```
+
+For layered core, use `column-rules.layer.css` or `column-rules.layer.min.css`; both use the `graph-paper` layer. The configurator includes the extension in CDN links for a ruled sequence. With self-hosted full CSS, download and load both files. Custom downloads bundle the extension when needed, so they still require only one stylesheet.
+
+### Positioning and stacking
+
+**Core assigns no `position`, `z-index`, transforms, or decorative pseudo-elements.** Application layering remains author-controlled. Grid placement, padding, and vertical spacing do not opt content into rule decoration.
+
+Loading the extension gives explicit `gp_rule--start` / `gp_rule--end` owners `position: relative`. Their absolute `::before` / `::after` pseudo-elements paint the lines in the gutter. This has specific consequences:
+
+- An absolutely positioned descendant without a closer containing block anchors to the rule owner. Author positioning rules can override the extension's zero-specificity owner selector.
+- The extension assigns no z-index. Relative positioning with `z-index: auto` does not itself make the owner a stacking context. A translated rule pseudo-element has its own stacking context, which does **not** contain the item's headings, text, menus, or other content.
+- Rule pseudo-elements use `pointer-events: none`. They can visually intersect content extending into the gutter; they are not guaranteed to paint behind that content.
+- Start rules reserve `::before`; end rules reserve `::after`. Avoid using that same pseudo-element for another decoration on the owner.
+
+The positioning applies to marked owners while the extension is loaded, even at widths where the line is suppressed. Existing author styles can independently create stacking contexts. Graph Paper makes no blanket promise that an authored page has none.
+
+`gp_ruler--measure` is a separate, explicit core facility using `container-type: inline-size`. It establishes a size-query context and inline-size containment; it is not added to ordinary rulers. Continuations retain the captured bit, while a rebased ruler needs its own measurement marker for lines. Containment behavior has varied across browser versions; do not treat the marker as a general overlay-isolation guarantee. See the [CSS positioning specification](https://www.w3.org/TR/css-position-3/), [transform specification](https://www.w3.org/TR/css-transforms-2/), and [query-container specification](https://drafts.csswg.org/css-conditional-5/#container-type).
 
 ## Padding and vertical spacing
 

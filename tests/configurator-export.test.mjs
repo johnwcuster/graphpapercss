@@ -34,3 +34,13 @@ test('browser minification preserves arithmetic whitespace and public vocabulary
  assert.ok(minifyGeneratedCSS('/* a comment with an unmatched quote: " */ .a::before { content: "a: b; c"; }').includes('content:"a: b; c"'));
  assert.ok(minifyGeneratedCSS(':where(.outer) :where(.inner) { color: red; }').includes(':where(.outer) :where(.inner)'));
 });
+
+test('rule extension follows actual owner requirements, not an unused ruled field',()=>{
+ const state=defaultState();editSpacing(state,'ruled');
+ assert.equal(exportSelection(state).columnRules,undefined);
+ editSelection(state,{layout:'peers-2'});
+ const selection=exportSelection(state);assert.equal(selection.columnRules,true);
+ assert.match(compileSelection(selection).css,/position:relative/);
+ assert.doesNotMatch(compileSelection({...selection,columnRules:false}).css,/position:relative/);
+ assert.throws(()=>compileSelection({...selection,columnRules:'yes'}),/boolean/);
+});

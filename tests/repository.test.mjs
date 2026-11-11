@@ -98,9 +98,9 @@ test('current guides specify explicit transitions, direct counts and wrapper own
 });
 
 test('release metadata and installation links agree on the current version',async()=>{
- const pkg=JSON.parse(await source('package.json'));assert.equal(pkg.version,'0.5.2');
+ const pkg=JSON.parse(await source('package.json'));assert.equal(pkg.version,'0.6.0');
  for(const path of ['README.md','docs/getting-started.md','docs/index.md','docs/migration.md','docs/configurator-help.md']){
-  const text=await source(path);assert.ok(text.includes('0.5'),path);assert.ok(text.includes(pkg.version),path);
+  const text=await source(path);assert.ok(text.includes(pkg.version),path);
  }
  const changelog=await source('CHANGELOG.md');assert.ok(changelog.startsWith(`# Release notes\n\n## ${pkg.version} —`));
  for(const path of ['README.md','docs/getting-started.md'])assert.ok((await source(path)).includes(`graphpapercss@${pkg.version}/css/main.min.css`));

@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {gzipSync,brotliCompressSync} from 'node:zlib';
 import {transform} from 'lightningcss';
+import {generateColumnRulesCSS} from './rule-compiler.mjs';
 import {generateCSS} from './compiler.mjs';
 import {layouts} from './catalogue.mjs';
 import {compactPrivateProperties} from '../../scripts/lib/compact-core.mjs';
@@ -10,6 +11,7 @@ import {compileSelection} from './selection.mjs';
 // Both delivery forms use the same private-property mapping. Keep the readable
 // source untouched; no browser lowering or compatibility rewriting is applied.
 export function distributionArtifacts(){
+ const extension=generateColumnRulesCSS();
  const css=generateCSS(),compact=compactPrivateProperties(css);
  const minify=source=>transform({filename:'graph-paper.css',code:Buffer.from(source),minify:true}).code.toString();
  const min=minify(compact.css);
@@ -25,6 +27,10 @@ export function distributionArtifacts(){
  }
  profileFiles['css/profiles/manifest.json']=JSON.stringify(profileManifest,null,2)+'\n';
  return {
+  'css/extensions/column-rules.css':extension,
+  'css/extensions/column-rules.min.css':minify(extension),
+  'css/extensions/column-rules.layer.css':layer(extension),
+  'css/extensions/column-rules.layer.min.css':minify(layer(extension)),
   'css/main.css':css,
   'css/main.min.css':min,
   'css/main.layer.css':layer(css),

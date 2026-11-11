@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Migrating to 0.5 — Graph Paper CSS</title>
+<title>Migrating to 0.6 — Graph Paper CSS</title>
 <link rel="stylesheet" href="./assets/graph-paper/main.css"><link rel="stylesheet" href="./docs.css"><link rel="stylesheet" href="./editorial.css"></head>
 <body><a class="site-skip" href="#page-content">Skip to content</a><main class="gp_ruler editorial-sheet editorial-page documentation-page">
 <!-- site-navigation:start -->
@@ -23,7 +23,8 @@
 </nav>
 <!-- site-navigation:end -->
 <div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
-  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#choose-a-version-boundary">Choose a version boundary</a></li>
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#upgrade-from-052">Upgrade from 0.5.2</a></li>
+<li><a href="#choose-a-version-boundary">Choose a version boundary</a></li>
 <li><a href="#translate-the-decisions">Translate the decisions</a></li>
 <li><a href="#re-author-a-small-composition">Re-author a small composition</a></li>
 <li><a href="#revisit-assumptions-about-occupancy">Revisit assumptions about occupancy</a></li>
@@ -31,8 +32,14 @@
 <li><a href="#retest-nesting-and-response">Retest nesting and response</a></li>
 <li><a href="#earlier-023-migration-record">Earlier 0.2.3 migration record</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
 <article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
-  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Migrating to 0.5</h1><p>The 0.5 API, introduced in 0.5.0 and unchanged in <strong>0.5.2</strong>, is a deliberate authoring change from the published <strong>0.4.1</strong> release and its byte-identical <strong>0.4.0</strong> CSS. This is not a drop-in class rename. Proportions remain ruler-aligned, but response, occupancy and nesting are expressed differently.</p>
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Migrating to 0.6</h1><p>The 0.5 API, introduced in 0.5.0 and unchanged in <strong>0.5.2</strong>, is a deliberate authoring change from the published <strong>0.4.1</strong> release and its byte-identical <strong>0.4.0</strong> CSS. This is not a drop-in class rename. Proportions remain ruler-aligned, but response, occupancy and nesting are expressed differently.</p>
 </header>
+<h2 id="upgrade-from-052">Upgrade from 0.5.2</h2>
+<p><strong>0.6.0</strong> preserves layout classes and geometry. Column lines now require the optional extension, loaded after a core stylesheet from the same release:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/extensions/column-rules.min.css&quot;&gt;
+</code></pre>
+<p>Keep existing <code>gp_spacing--ruled</code>, <code>gp_ruler--measure</code>, and rule-owner classes. Without the extension the 56-bit field and gutters remain, but lines and rule-related positioning are absent. Other layouts need no markup changes. Custom CSS exported by the 0.6 configurator already bundles the extension when needed; rebuild older custom exports to adopt this split. See <a href="class-reference.html#column-rules-extension">Column rules and layering</a>.</p>
 <h2 id="choose-a-version-boundary">Choose a version boundary</h2>
 <p>Use the root <code>css/main*.css</code> builds for new markup. To keep an existing 0.4 page running during migration, use a pinned 0.4 release or <code>css/legacy/0.4/main.css</code> with its matching legacy bands if needed. Do not load both cores onto one document. An isolated frame is appropriate for a side-by-side comparison.</p>
 <p>The versioned reference retains original 0.4 CSS bytes, including layered builds and optional bands. The portable inspector remains a 0.4 tool, exposed through <code>graphpapercss/legacy/0.4/inspector</code>; it does not edit the new layout API.</p>

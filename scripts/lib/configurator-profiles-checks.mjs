@@ -12,15 +12,17 @@ export async function checkConfiguratorProfiles({page,browser,open,origin,public
  await open();
  const initial=await page.locator('#markup').textContent();
  assert.equal(page.workers().length,0,'delivery advice needs no compiler worker');
+ assert.equal(await page.locator('#column-rules-requirement').isVisible(),false);
  assert.match(await page.locator('#cdn-coverage').textContent(),/Smallest predefined build/);
  assert.equal(await page.locator('[name="host-coverage"]').count(),2);
  assert.equal(await page.locator('[name="delivery-method"][value="cdn"]').isChecked(),true);
  assert.equal(await page.locator('#delivery-title').textContent(),'Full library');
- assert.match(await page.locator('#delivery-compressed').textContent(),/10\.4 KB Brotli.*17\.8 KB gzip/);
- assert.match(await page.locator('#delivery-raw').textContent(),/192\.6 KB/);
+ const sizes=JSON.parse(await readFile(new URL('../../css/size.json',import.meta.url),'utf8'));
+ assert.equal(await page.locator('#delivery-compressed').textContent(),`${(sizes.brotli/1000).toFixed(1)} KB Brotli · ${(sizes.gzip/1000).toFixed(1)} KB gzip`);
+ assert.ok((await page.locator('#delivery-raw').textContent()).includes(`${(sizes.minified/1000).toFixed(1)} KB`));
  assert.equal(await page.locator('#delivery-coverage-note').textContent(),'Smaller builds cover this sequence; the full library supports every layout.');
  await cdn('smallest');assert.equal(await page.locator('#delivery-title').textContent(),'Repeating');
- assert.equal(await page.locator('#cdn-output pre').count(),1,'one actionable CDN tag');
+ assert.equal(await page.locator('#cdn-output pre').count(),1,'one actionable CDN code block');
  await method('host');assert.equal(await page.locator('#css-export').isVisible(),true);
  await host('full');await method('cdn');assert.equal(await page.locator('#markup').textContent(),initial,'delivery does not edit the composition');
  assert.equal(page.workers().length,0);
@@ -97,5 +99,26 @@ export async function checkConfiguratorProfiles({page,browser,open,origin,public
  assert.equal(await page.locator('#host-smallest-option').count(),0);
  assert.equal(await page.locator('[name="host-coverage"][value="full"]').isChecked(),true);
  assert.equal(await page.locator('#delivery-title').textContent(),'Full library');
+ // Ruled sequences need two matching-version CDN links and an optional
+ // self-hosted extension download; source markup remains unchanged.
+ await open({...defaultState(),spacing:'ruled',steps:[{id:'base',rem:0,layout:'peers-2'}]});
+ assert.match(await page.locator('#delivery-tag').textContent(),new RegExp(`@${version.replaceAll('.','\\.')}/css/extensions/column-rules\\.min\\.css`));
+ assert.equal((await page.locator('#delivery-tag').textContent()).match(/<link/g).length,2);
+ assert.equal(await page.locator('#column-rules-requirement-title').textContent(),'Column-rules extension required');
+ assert.match(await page.locator('#column-rules-requirement-text').textContent(),/both stylesheet links/);
+ await method('host');await host('full');
+ assert.equal(await page.locator('#column-rules-download').isVisible(),true);
+ assert.match(await page.locator('#column-rules-requirement-text').textContent(),/Download both/);
+ for(const format of ['readable','minified']){
+  await page.locator('#profile-format').selectOption(format);
+  const ext=await download('#download-column-rules'),name=`column-rules${format==='minified'?'.min':''}.css`;
+  assert.equal(ext.name,name);
+  assert.equal(ext.text,await (await page.request.get(`${origin}${publicPath}/assets/graph-paper/extensions/${name}`)).text());
+ }
+ await host('custom');
+ assert.equal(await page.locator('#column-rules-requirement-title').textContent(),'Column-rules extension bundled');
+ assert.match(await page.locator('#column-rules-requirement-text').textContent(),/one CSS file/);
+ await page.locator('#spacing').selectOption('neat');
+ await page.waitForFunction(()=>document.querySelector('#column-rules-requirement').hidden);
  console.log('Delivery: contextual CDN/self-host choices, compression/cache guidance, full-only consolidation, real file downloads, no-script parity and clipboard recovery PASS.');
 }

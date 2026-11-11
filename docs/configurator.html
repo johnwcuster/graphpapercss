@@ -32,7 +32,7 @@
 
   <main class="workspace">
     <section class="preview-area" aria-labelledby="preview-heading">
-      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.5.2</span></header>
+      <header class="preview-heading"><h1 id="preview-heading" tabindex="-1">Layout preview</h1><span class="version-label">0.6.0</span></header>
       <p id="load-notice" class="warning" role="status" hidden></p>
       <section class="sequence-strip" aria-label="Preview responsive sequence">
         <div class="sequence-actions"><h2>Viewport transitions</h2><details id="add-transition-menu" class="overlay-menu"><summary><span aria-hidden="true">+</span> Add transition</summary><div id="transition-options" role="group" aria-label="Choose a viewport transition"></div></details></div>
@@ -48,7 +48,7 @@
       </div>
       <section class="markup-section" aria-labelledby="markup-heading">
         <header><h2 id="markup-heading">HTML markup</h2><button id="copy-markup" type="button">Copy HTML</button></header>
-        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.5.2 stylesheet</a> or choose delivery below. Replace the placeholders with your content.</p>
+        <p>Use this HTML with the <a id="core-stylesheet-link" href="./assets/graph-paper/main.css">0.6.0 stylesheet</a> or choose delivery below. Replace the placeholders with your content.</p>
         <pre tabindex="0" aria-label="Graph Paper HTML"><code id="markup"></code></pre>
 
 
@@ -67,11 +67,12 @@
           <label><input type="radio" name="host-coverage" value="custom" checked><span><strong>Custom build for this sequence</strong></span></label>
           <label><input type="radio" name="host-coverage" value="full"><span><strong>Full library</strong></span></label>
         </fieldset>
+        <div id="column-rules-requirement" class="extension-notice" role="status" hidden><strong id="column-rules-requirement-title"></strong><p id="column-rules-requirement-text"></p></div>
         <p id="delivery-full-only" class="delivery-context" role="status" hidden></p>
         <div id="predefined-result" class="delivery-result">
           <header><h3 id="delivery-title">Full library</h3><span id="delivery-layout-count">102 layouts</span></header>
-          <p id="delivery-compressed" class="delivery-compressed">10.4 KB Brotli · 17.8 KB gzip</p>
-          <p id="delivery-raw" class="hint">192.6 KB minified before compression</p>
+          <p id="delivery-compressed" class="delivery-compressed">10.2 KB Brotli · 17.4 KB gzip</p>
+          <p id="delivery-raw" class="hint">191.3 KB minified before compression</p>
           <div id="cdn-output">
             <pre id="delivery-tag-block" tabindex="0" aria-label="Pinned stylesheet tag"><code id="delivery-tag"></code></pre>
             <button id="copy-delivery-tag" type="button" aria-describedby="delivery-title delivery-compressed">Copy stylesheet tag</button>
@@ -83,6 +84,7 @@
             </div>
             <p id="profile-download-size" class="hint"></p>
             <p><code id="profile-file-name"></code></p>
+            <p id="column-rules-download" hidden><button id="download-column-rules" type="button">Download column-rules extension</button></p>
             <p id="profile-download-status" role="status"></p>
           </div>
           <p class="delivery-reference"><a id="inspect-delivery-css" href="./assets/graph-paper/main.css">Inspect readable CSS</a> · <a href="./browser-support.html#predefined-cdn-profiles">Compare builds</a></p>

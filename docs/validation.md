@@ -1,6 +1,6 @@
 # Validation
 
-Validation checks the current 0.5 contracts and preserves the explicitly versioned legacy references. It does not turn any particular composition into a universally appropriate design or an accessibility guarantee for arbitrary content.
+Validation checks the current 0.6 contracts and preserves the explicitly versioned legacy references. It does not turn any particular composition into a universally appropriate design or an accessibility guarantee for arbitrary content.
 
 ## Reproduce the build and package
 
@@ -55,3 +55,5 @@ The 0.4 stylesheet hashes are checked against the preserved reference. Original 
 Runtime benchmarks measure synchronous style/layout work on identified hardware and browser versions; they exclude paint, GPU work and real-device interaction. Record the CSS hash and keep content, options and device matched for comparisons. Compressed transfer size and runtime work are different costs.
 
 Structural and keyboard checks do not replace manual screen-reader, magnification, contrast, source-hierarchy or content review. Native focus order is preserved; visual traversal can still be inappropriate. Current checks focus on horizontal left-to-right writing. The structural matrix includes the shared row-budget safeguard described in [Browser support](browser-support.md): boundary counts, exact requests, endpoint rows, visible non-overlap and restoration across all four builds. Manual assistive-technology review remains a separate release gate.
+
+Column-rule rendering is tested separately from core. Run `pnpm test:column-rules --engine=chromium` (also Firefox/WebKit) to compare with the 0.5.2 decoration and verify core-only positioning neutrality and overlay traversal. Current structural artifact bindings are in the maintainer 0.6 qualification record; earlier 0.5 records do not qualify the new bytes.

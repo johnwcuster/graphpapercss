@@ -25,12 +25,13 @@ test('versioned 0.4 stylesheets retain released bytes after promotion',async()=>
 });
 
 test('structural qualification names the exact current CSS artifacts',async()=>{
- const record=JSON.parse(await readFile('maintainers/qualification-0.5.json','utf8'));
+ const record=JSON.parse(await readFile('maintainers/qualification-0.6.json','utf8'));
  for(const [name,expected] of Object.entries(record.artifacts)){
   const bytes=await readFile('css/'+name);
   assert.equal(bytes.length,expected.bytes,name);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),expected.sha256,`${name}: rerun qualification after changing artifacts`);
  }
  assert.deepEqual(record.engines.map(r=>r.engine),['chromium','firefox','webkit']);
- assert.ok(record.olderBrowsers.every(r=>!r.forcedFeatureOff));
+ for(const engine of record.engines){assert.equal(engine.core.status,'pass');assert.equal(engine.core.quick,false);assert.equal(engine.columnRules.status,'pass');}
+ assert.equal(record.olderBrowsers.status,'not rerun');
 });

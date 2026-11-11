@@ -4,7 +4,7 @@ import {placements} from '../../src/core/geometry.mjs';
 export async function checkResponsiveIntegration({page,root,set,check,base,fixture,url}) {
  for(const file of ['main.css','main.min.css']) {
   await page.goto(url);
-  await page.locator('link[href*="css/"]').evaluate((link,file)=>{link.href=link.href.replace(/main(?:\.min)?\.css/,file);},file);
+  await page.locator('link[href*="/css/main"]').evaluate((link,file)=>{link.href=link.href.replace(/main(?:\.min)?\.css/,file);},file);
   await page.waitForFunction(file=>[...document.styleSheets].some(sheet=>sheet.href?.endsWith(`/css/${file}`)),file);
   for(const [rem,prefix] of hinges)for(const [family,options] of Object.entries(controlPolicies))for(const target of Object.keys(options)) {
    const id=target==='widest-first'?'four-6-5-4-3':target==='center-first'?'three-1-2-1':'two-3-2';

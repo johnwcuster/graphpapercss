@@ -23,7 +23,8 @@
 </nav>
 <!-- site-navigation:end -->
 <div class="gp_layout--stack gp_lg--two-1-3 gp_spacing--wide editorial-field">
-  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#052-predefined-cdn-profiles">0.5.2 — predefined CDN profiles</a></li>
+  <nav class="document-contents" aria-label="On this page"><h2 class="editorial-small-heading">On this page</h2><ul class="editorial-contents"><li><a href="#060-optional-column-rules">0.6.0 — optional column rules</a></li>
+<li><a href="#052-predefined-cdn-profiles">0.5.2 — predefined CDN profiles</a></li>
 <li><a href="#051-selective-css-downloads">0.5.1 — selective CSS downloads</a></li>
 <li><a href="#050-explicit-layouts-and-ruler-based-composition">0.5.0 — explicit layouts and ruler-based composition</a></li>
 <li><a href="#041-documentation-and-configurator">0.4.1 — documentation and configurator</a></li>
@@ -32,6 +33,13 @@
 <li><a href="#023-previous-released-version">0.2.3 — previous released version</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
 <article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
   <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Release notes</h1></header>
+<h2 id="060-optional-column-rules">0.6.0 — optional column rules</h2>
+<ul>
+<li>Column-rule rendering moves from core to <code>css/extensions/column-rules.css</code> and <code>.min.css</code>, with matching layered variants. Load the extension after a matching-version core build. Existing ruled pages need this additional stylesheet to keep their lines.</li>
+<li>Core retains the 56-bit ruled field and its two-bit gutters, but assigns no positioning, z-index, transforms, or decorative pseudo-elements. Rule ownership, color, width, measurement, and geometry remain unchanged.</li>
+<li>The configurator includes both CDN links when ruled spacing is selected. Self-hosted full builds offer a separate extension download; custom builds bundle the required extension.</li>
+<li>Documentation distinguishes layout geometry from decoration and explains positioning, stacking, pseudo-element ownership, and explicit measurement containment.</li>
+</ul>
 <h2 id="052-predefined-cdn-profiles">0.5.2 — predefined CDN profiles</h2>
 <p><a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.css">Readable CSS</a> · <a href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/main.min.css">Minified CSS</a></p>
 <p>The full CSS builds and authoring API are unchanged from 0.5.1. Two optional standalone profiles offer smaller pinned CDN delivery without a build process.</p>

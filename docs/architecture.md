@@ -47,3 +47,9 @@ The layered build contains the same core in `@layer graph-paper`. It is an alter
 An underfilled or unsupported Three/Four composition stacks. An ineligible mosaic stacks without choosing another map. The two-region native-arithmetic-off profile uses equal repeating pairs, retaining explicitly spanning endpoints when applicable. Feature-disabled tests in modern engines do not establish an older-browser support guarantee.
 
 The core needs no runtime JavaScript. The configurator generates HTML and the inspector is optional tooling; neither is part of layout computation. See [Class reference](class-reference.md), [Browser support and builds](browser-support.md), and [Validation](validation.md).
+
+## Layout and layering boundary
+
+Core assigns no positioning, z-index, transforms, or decorative pseudo-elements. The optional [column-rules extension](class-reference.md#column-rules-extension) adds positioning only to explicit rule owners and decoration to their pseudo-elements. It consumes a stable, reserved geometry interface shared by full, predefined, and custom builds. Load the extension after a core from the same release; independently compiled core builds remain alternatives, not addons.
+
+Measurement remains an explicit ruler choice. It supplies the bit length needed by lines and introduces inline-size containment. Ordinary rulers do not acquire that measurement context automatically. Application overlays and layer hierarchies remain author responsibilities.

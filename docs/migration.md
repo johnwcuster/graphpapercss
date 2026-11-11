@@ -1,6 +1,17 @@
-# Migrating to 0.5
+# Migrating to 0.6
 
 The 0.5 API, introduced in 0.5.0 and unchanged in **0.5.2**, is a deliberate authoring change from the published **0.4.1** release and its byte-identical **0.4.0** CSS. This is not a drop-in class rename. Proportions remain ruler-aligned, but response, occupancy and nesting are expressed differently.
+
+## Upgrade from 0.5.2
+
+**0.6.0** preserves layout classes and geometry. Column lines now require the optional extension, loaded after a core stylesheet from the same release:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/extensions/column-rules.min.css">
+```
+
+Keep existing `gp_spacing--ruled`, `gp_ruler--measure`, and rule-owner classes. Without the extension the 56-bit field and gutters remain, but lines and rule-related positioning are absent. Other layouts need no markup changes. Custom CSS exported by the 0.6 configurator already bundles the extension when needed; rebuild older custom exports to adopt this split. See [Column rules and layering](class-reference.md#column-rules-extension).
 
 ## Choose a version boundary
 

@@ -98,6 +98,7 @@
 <p>Mosaics support Neat/Thin only. Thin mosaic gutters, padding and vertical-spacing utilities use assigned-track percentages and do not need measurement. Avoid adding a measured ancestor merely to obtain those utilities.</p>
 <h2 id="keep-constrained-text-honest">Keep constrained text honest</h2>
 <p>A max-width reading box can interrupt the relationship between an item&#39;s actual width and its inherited track count. Apply <code>gp_pad</code> to an appropriate full-region content layer, before that interruption, or give the constrained reading component ordinary host padding. Do not add an unimplemented helper such as <code>gp_inset--bit</code>; the shipped utility is <code>gp_pad</code>.</p>
+<p>Column lines require the optional <a href="class-reference.html#column-rules-extension">column-rules extension</a> in 0.6.0. Ruled spacing alone preserves the gutter geometry.</p>
 
 </article>
 </div>

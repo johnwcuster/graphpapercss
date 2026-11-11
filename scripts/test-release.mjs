@@ -13,7 +13,7 @@ const overrides=process.argv.filter(a=>a.startsWith('--executable=')||a.startsWi
 if(overrides.length)assert.ok(requested&&suite!=='package','Browser overrides require one explicit engine and a browser suite');
 assert.ok(['core','utilities','tools','package'].includes(suite),'Use --suite=core|utilities|tools|package');
 assert.ok(engines.every(e=>['chromium','firefox','webkit'].includes(e)));
-const artifactNames=['main.css','main.min.css','main.layer.css','main.layer.min.css',...predefinedProfiles.flatMap(p=>Object.values(p.files).map(path=>path.slice(4))),'profiles/manifest.json'];
+const artifactNames=['main.css','main.min.css','main.layer.css','main.layer.min.css',...predefinedProfiles.flatMap(p=>Object.values(p.files).map(path=>path.slice(4))),'profiles/manifest.json',...['column-rules.css','column-rules.min.css','column-rules.layer.css','column-rules.layer.min.css'].map(name=>'extensions/'+name)];
 const artifacts=async()=>Object.fromEntries(await Promise.all(artifactNames.map(async name=>{const bytes=await readFile(`css/${name}`);return[name,{bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}];})));
 const initial=await artifacts(),started=new Date().toISOString();
 await mkdir('test-results/release/logs',{recursive:true});
@@ -39,7 +39,7 @@ try{
   for(const engine of engines){
    const probe=await launchBrowser(engine);
    try{report.engines[engine]={version:probe.version(),overrides};}finally{await probe.close();}
-   const steps=suite==='core'?['core','profiles']:suite==='utilities'?['padding','vertical-spacing','distribution']:['docs','configurator','inspector'];
+   const steps=suite==='core'?['core','profiles','column-rules']:suite==='utilities'?['padding','vertical-spacing','distribution']:['docs','configurator','inspector'];
    for(const step of steps)await run(`${engine}-${step}`,step==='profiles'?'scripts/test-selective-builds.mjs':`scripts/test-${step}-browsers.mjs`,[`--engine=${engine}`,...overrides,...(step==='configurator'?['--docs-only']:[]),...(step==='profiles'?['--predefined']:[])]);
   }
  }

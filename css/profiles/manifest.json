@@ -34,17 +34,17 @@
       "files": {
         "readable": {
           "path": "css/profiles/repeating.css",
-          "bytes": 33757,
-          "gzip": 4015,
-          "brotli": 3208,
-          "sha256": "cdd5be250bd1f0273b58e69eb130a83bd87fe44f9e5e554c86cb5f341f0a19c2"
+          "bytes": 31403,
+          "gzip": 3502,
+          "brotli": 2776,
+          "sha256": "3ab9dbecaf8164adb31bcf9f0a322c87db688b5829aec296bea73a9a613feaba"
         },
         "minified": {
           "path": "css/profiles/repeating.min.css",
-          "bytes": 27727,
-          "gzip": 3378,
-          "brotli": 2676,
-          "sha256": "a59b5345df605b95ff7d6495b13c849d3db58f3ea9d01364f888d29342e4db16"
+          "bytes": 26392,
+          "gzip": 3034,
+          "brotli": 2370,
+          "sha256": "33a58d2ac7198a87349a6fc27fd53494981601909e5af6276affdd080bbea5dd"
         }
       }
     },
@@ -144,17 +144,17 @@
       "files": {
         "readable": {
           "path": "css/profiles/two-three.css",
-          "bytes": 104377,
-          "gzip": 11642,
-          "brotli": 7543,
-          "sha256": "42d40cbde81f3d5005ef793d20aca5fe3529979a096556fad34a7e3d6a937df5"
+          "bytes": 102023,
+          "gzip": 11072,
+          "brotli": 7071,
+          "sha256": "0702bc0d04c78bc342aaff0e9762d98455a8a815f2da615c10bc490227a66d4f"
         },
         "minified": {
           "path": "css/profiles/two-three.min.css",
-          "bytes": 89326,
-          "gzip": 9844,
-          "brotli": 5998,
-          "sha256": "a5978ae34eae9c3c382f56dd7fb882bd5a0a4b53e1ae99d4cc91f2c1dbf6700c"
+          "bytes": 88025,
+          "gzip": 9454,
+          "brotli": 5773,
+          "sha256": "a956f93c7173fe3c21e8c37993e90fb0dd334b4b44b0e0e263b7e102e2d2c787"
         }
       }
     }

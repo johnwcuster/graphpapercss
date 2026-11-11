@@ -1,0 +1,41 @@
+@layer graph-paper {
+/* Graph Paper column-rules extension. MIT license. Requires a matching-version Graph Paper core build. */
+@property --_gp-rule-position { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-rule-start-visible { syntax:"<number>"; inherits:false; initial-value:0; }
+@property --_gp-rule-end-visible { syntax:"<number>"; inherits:false; initial-value:0; }
+:where(.gp_rule--start,.gp_rule--end) { position:relative; }
+:where(.gp_rule--start)::before, :where(.gp_rule--end)::after {
+ content:none; position:absolute; inset-block:0; width:0; padding:0;
+ border:0 solid transparent; pointer-events:none;
+ background-image:linear-gradient(var(--gp-rule-color,currentColor),var(--gp-rule-color,currentColor));
+ background-size:var(--gp-rule-width,1px) 100%; background-repeat:no-repeat;
+ background-origin:border-box; background-clip:border-box;
+}
+/* Transparent inherited side borders let translation cancel the owner's
+   border offset. Padding supplies the painted width under either box sizing. */
+:where(.gp_rule--start)::before {
+ border-left-width:inherit; border-left-style:inherit; padding-left:var(--gp-rule-width,1px);
+ left:calc(-1 * var(--gp-ruler-bit));
+ background-position:left top; translate:calc(-100% + var(--gp-rule-width,1px) / 2) 0;
+}
+:where(.gp_rule--end)::after {
+ border-right-width:inherit; border-right-style:inherit; padding-right:var(--gp-rule-width,1px);
+ right:calc(-1 * var(--gp-ruler-bit));
+ background-position:right top; translate:calc(100% - var(--gp-rule-width,1px) / 2) 0;
+}
+
+ @container style(--_gp-ruled:1) and style(--_gp-measure-ready:1) {
+  :where(.gp_rule--start,.gp_rule--end) {
+   --_gp-rule-position:calc(var(--_gp-inset) + var(--_gp-repeat-active) * (var(--_gp-repeat-start) + var(--_gp-slot) * var(--_gp-gap)));
+   @supports (width:calc(1px * sibling-count())) and (width:calc(1px * sibling-index())) and (width:calc(1px * mod(3,2))) { --_gp-rule-position:var(--_gp-start); }
+   --_gp-rule-start-visible:calc(clamp(0,calc(var(--_gp-gap) - 1),1) * clamp(0,calc(var(--_gp-rule-position) - var(--_gp-inset)),1));
+   --_gp-rule-end-visible:calc(clamp(0,calc(var(--_gp-gap) - 1),1) * clamp(0,calc(var(--_gp-inset) + var(--_gp-usable) - var(--_gp-rule-position) - var(--_gp-tracks)),1));
+  }
+ }
+ @container style(--_gp-rule-start-visible:1) {
+  :where(.gp_rule--start)::before { content:""; }
+ }
+ @container style(--_gp-rule-end-visible:1) {
+  :where(.gp_rule--end)::after { content:""; }
+ }
+}

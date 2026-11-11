@@ -1,6 +1,6 @@
 # Browser support and builds
 
-The 0.5 build uses modern native CSS rather than a runtime placement script. The support policy targets current evergreen engines with the required capabilities, plus the bounded older-engine fallbacks described below. Engine qualification does not establish support for every device, operating system or older patch version.
+The 0.6 build uses modern native CSS rather than a runtime placement script. The support policy targets current evergreen engines with the required capabilities, plus the bounded older-engine fallbacks described below. Engine qualification does not establish support for every device, operating system or older patch version.
 
 ## Choose a delivery form
 
@@ -20,7 +20,7 @@ The checked-in minification keeps native features and shortens private property 
 
 ## Predefined CDN profiles
 
-Profiles are complete standalone alternatives to the full library. They retain all six viewport steps, all five gutter modes, applicable allocation/traversal/exact-count controls, padding, vertical spacing, ruler continuation, rebasing, rules, and safeguards. The difference is which layout families are available. Browser capability requirements stay the same.
+Profiles are complete standalone alternatives to the full library. They retain all six viewport steps, all five gutter modes, applicable allocation/traversal/exact-count controls, padding, vertical spacing, ruler continuation, rebasing, and safeguards. Column-rule rendering is optional in 0.6. The difference is which layout families are available. Browser capability requirements stay the same.
 
 <!-- delivery-profiles -->
 
@@ -35,12 +35,18 @@ Load one Graph Paper stylesheet. These builds are not addons; combining them wit
 The profile files first ship in **0.5.2**. Pin that or a later release; the earlier 0.5.1 tag does not contain these paths. Version-pinned links become available when the corresponding release tag is published.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.5.2/css/profiles/two-three.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/profiles/two-three.min.css">
 ```
 
-Use the [configurator](configurator.html#delivery) to choose full-library or smallest-compatible CDN delivery and copy its pinned stylesheet tag. When only full covers the sequence, the tool explains why and consolidates the choices. Other compositions on the page must also fit the chosen profile. Layouts excluded from a profile are unavailable, not an alternative design fallback; switch to a broader build when needed.
+Use the [configurator](configurator.html#delivery) to choose full-library or smallest-predefined CDN delivery and copy its pinned stylesheet tag. When only full covers the sequence, the tool explains why and consolidates the choices. Other compositions on the page must also fit the chosen profile. Layouts excluded from a profile are unavailable, not an alternative design fallback; switch to a broader build when needed.
 
 For a smaller build of just your selected layouts and viewport steps, use the configurator's [custom CSS downloads](configurator-help.html#download-css-for-a-sequence). If your site needs unrestricted catalogue choices, keep `css/main.min.css`. Layered profiles, viewport shards and automatic project scanning are not provided.
+
+## Optional column-rules build
+
+The 0.6.0 core and predefined profiles provide ruled field geometry without line rendering. Add [column-rules.css](assets/graph-paper/extensions/column-rules.css) or [column-rules.min.css](assets/graph-paper/extensions/column-rules.min.css) after the core when lines are needed. Layered counterparts are also available. All require a core from the same release; they do not work alone or with pre-0.6 core. Custom downloads bundle the extension for ruled sequences.
+
+The extension introduces relative positioning on explicit rule owners and translated absolute pseudo-elements. Core assigns no positioning or z-index. See [positioning and stacking](class-reference.md#positioning-and-stacking).
 
 ## Understand capability dependencies
 
@@ -66,23 +72,25 @@ When the common Grid/subgrid/nesting/typed-property/arithmetic foundation is ava
 | Three/Four | Source-order stack |
 | Mosaic | Source-order stack |
 
-Missing more than counting can produce a simpler result. Real Chromium 136 lacks `abs()` too: every family stacks, including Peers and Two. The equal-pairs fallback is therefore not a blanket promise for every older browser. Real Firefox 137 retains base arithmetic and demonstrates that pair/repeating profile. Both retain tested field geometry and continued/rebased padding.
+Missing more than counting can produce a simpler result. In the earlier 0.5 qualification, real Chromium 136 lacks `abs()` too: every family stacks, including Peers and Two. The equal-pairs fallback is therefore not a blanket promise for every older browser. Real Firefox 137 retains base arithmetic and demonstrates that pair/repeating profile. Both retain tested field geometry and continued/rebased padding.
 
 Simulated feature-off tests remain useful for isolating a dependency, but do not establish older-engine support by themselves. Unsupported style queries leave mosaics inactive. Invalid counts and fields stack without selecting another map. Engines missing the broader modern foundation are unqualified; the library makes no universal fallback claim for them.
 
 ## Qualified builds
 
-The structural release pass verified the following Playwright engine builds:
+The 0.6.0 structural pass covers these Playwright engine builds:
 
 | Engine build | Qualification |
 | --- | --- |
-| Chromium 156.0.8078.4 | Full source/minified/feature-off core, four distributions, utilities, docs and tools |
-| Firefox 157.0 | The same full structural and interaction scope |
-| WebKit 27.2 | The same full structural and interaction scope |
-| Firefox 137.0 | Real count-off repeating/equal-pairs fallback across four builds |
-| Chromium 136.0.7103.25 | Real source-order stack fallback across four builds |
+| Chromium 156.0.8078.4 | Source/minified/feature-off core; predefined profiles; column-rules extension; configurator |
+| Firefox 157.0 | The same structural and configurator scope |
+| WebKit 27.2 | The same structural and configurator scope |
 
-The current-engine core matrices each passed 39,145 geometry checks; the real older-engine matrices each passed 204,916 assertions. These are automated engine tests, not certification of all retail Safari/Chrome/Firefox patch versions, mobile devices, screen readers or writing modes. Source/focus order is checked; finished designs still need content-specific accessibility review.
+The current-engine core matrices each exercise 39,145 geometry checks. The separate extension suite compares 5,200 item geometries and rule styles per engine with the released 0.5.2 implementation, including layered builds, profiles, bundled custom CSS, and overlay behavior. Profile tests compare 8,068 cases per engine. The rendered documentation examples are also checked in Chromium.
+
+Earlier 0.5 qualification tested real Firefox 137.0 and Chromium 136.0.7103.25 across four builds, with 204,916 assertions per engine. Those runs describe the older artifacts; they have not been repeated for 0.6.0. Current feature-off checks preserve the intended fallback contract but are not fresh older-browser qualification.
+
+These are automated engine tests, not certification of all retail browser patch versions, mobile devices, screen readers or writing modes. Source/focus order is checked; finished designs still need content-specific accessibility review.
 
 Runtime/performance policy and manual assistive-technology review remain separate release gates. See [Validation](validation.md) for reproducible commands.
 

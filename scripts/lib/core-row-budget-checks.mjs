@@ -4,7 +4,7 @@ export async function checkRowBudgetIntegration({page,root,set,check,base,url}){
  for(const asset of ['main.css','main.min.css','main.layer.css','main.layer.min.css']){
   console.log(`Row-budget boundaries: ${asset}`);
   await page.goto(url);
-  await page.locator('link[href*="css/"]').evaluate((n,asset)=>new Promise((resolve,reject)=>{
+  await page.locator('link[href*="/css/main"]').evaluate((n,asset)=>new Promise((resolve,reject)=>{
    const href=new URL(`/css/${asset}`,n.href).href;
    if(n.href===href&&n.sheet)return resolve();
    n.onload=resolve;n.onerror=reject;n.href=href;

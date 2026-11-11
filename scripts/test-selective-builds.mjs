@@ -13,8 +13,11 @@ const engine=process.argv.find(arg=>arg.startsWith('--engine='))?.slice(9)??'chr
 const predefined=process.argv.includes('--predefined');
 const directory=new URL(predefined?'../test-results/profiles/':'../test-results/selective-builds/',import.meta.url);
 await mkdir(directory,{recursive:true});
-const canonical=await readFile(new URL('../css/main.css',import.meta.url),'utf8');
-const canonicalMin=await readFile(new URL('../css/main.min.css',import.meta.url),'utf8');
+const extension=await readFile('css/extensions/column-rules.css','utf8'),extensionMin=await readFile('css/extensions/column-rules.min.css','utf8');
+const canonicalCore=await readFile(new URL('../css/main.css',import.meta.url),'utf8');
+const canonical=canonicalCore+'\n'+extension;
+const canonicalMinCore=await readFile(new URL('../css/main.min.css',import.meta.url),'utf8');
+const canonicalMin=canonicalMinCore+'\n'+extensionMin;
 const browser=await launchBrowser(engine);
 const results=[];
 try{
@@ -23,8 +26,9 @@ try{
   // The full selection is byte-identical, asserted in the unit suite.
   if(profile==='full')continue;
   const selected=compileSelection(options),selection=selected.selection;
-  const css=predefined?await readFile(`css/profiles/${profile}.css`,'utf8'):selected.css;
-  const min=predefined?await readFile(`css/profiles/${profile}.min.css`,'utf8'):transform({filename:'selection.css',code:Buffer.from(compactPrivateProperties(css).css),minify:true}).code.toString();
+  const core=predefined?await readFile(`css/profiles/${profile}.css`,'utf8'):selected.css;
+  const css=core+'\n'+extension;
+  const min=(predefined?await readFile(`css/profiles/${profile}.min.css`,'utf8'):transform({filename:'selection.css',code:Buffer.from(compactPrivateProperties(core).css),minify:true}).code.toString())+'\n'+extensionMin;
   const selectedPlans=layouts.filter(p=>selection.layouts.includes(p.id));
   const cases=[];
   const base={width:1440,count:7,spacing:selection.spacing[0],allocation:'closest',fewer:'left',traversal:'left-to-right',arrangement:'across'};

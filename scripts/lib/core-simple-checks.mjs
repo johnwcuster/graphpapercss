@@ -5,7 +5,7 @@ import {privateNames} from './core-private-names.mjs';
 export async function checkSimpleIntegration({page,root,set,check,base,fixture,url}) {
  for(const profile of ['source','minified','fast-query-off']) {
   await page.goto(url);
-  const link=page.locator('link[href*="css/"]');
+  const link=page.locator('link[href*="/css/main"]');
   if(profile==='minified')await link.evaluate(link=>new Promise((resolve,reject)=>{link.onload=resolve;link.onerror=reject;link.href=link.href.replace('main.css','main.min.css');}));
   if(profile==='fast-query-off') {
    await link.evaluate(link=>link.disabled=true);

@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {catalogue,layouts,spacingModes,hinges,controlPolicies,exactCountRegions} from '../src/core/catalogue.mjs';
 import {placements,allocationCounts,threeRegionCounts,exactCountsEligible,pairExactCountsEligible} from '../src/core/geometry.mjs';
+import {generateColumnRulesCSS} from '../src/core/rule-compiler.mjs';
+import {sharedRulerProperties} from '../src/core/compact.mjs';
 import {generateCSS} from '../src/core/compiler.mjs';
 import {dormantExactCancellationRules,exactValidationScalars} from '../src/core/family-optimization.mjs';
 import {rankedAllocations} from './oracles/three-allocation.mjs';
@@ -99,7 +101,7 @@ test('delivery compaction preserves public vocabulary and round-trips registrati
  assert.equal(new Set(Object.values(compact.properties)).size,Object.keys(compact.properties).length);
  assert.equal(compact.css.replace(/--_gp[0-9a-z]+\b/g,name=>inverse[name]),source);
  for(const pattern of [/--gp-[a-z0-9-]+/g,/--_gp-(?:tracks|measure-tracks|measure-ready)\b/g,/\.gp_[a-z0-9_-]+/g])assert.deepEqual(compact.css.match(pattern),source.match(pattern));
- assert.ok((compact.css.match(/--_gp-[a-z0-9-]+/g)??[]).every(name=>['--_gp-tracks','--_gp-measure-tracks','--_gp-measure-ready'].includes(name)));
+ assert.ok((compact.css.match(/--_gp-[a-z0-9-]+/g)??[]).every(name=>sharedRulerProperties.has(name)));
  assert.throws(()=>compactPrivateProperties('--_gp0:0;--_gp-a:1;'),/collision/);
  const min=await readFile(new URL('../css/main.min.css',import.meta.url));
  assert.equal(min.toString().replace(/--_gp[0-9a-z]+\b/g,name=>inverse[name]),transform({filename:'next.css',code:Buffer.from(source),minify:true}).code.toString());
@@ -360,8 +362,11 @@ test('Ruled fields use 56 whole bits and preserve wide-family rounding without e
  for(const plan of layouts.filter(p=>p.family==='mosaic'))assert.deepEqual(placements({id:plan.id,count:plan.count,spacing:'ruled'}),placements({id:'stack',count:plan.count,spacing:'ruled'}));
 });
 
-test('column rules use explicit measured ownership and non-inheriting conditional metadata',()=>{
- const css=generateCSS();
+test('column rules are optional; core assigns no positioning, transforms or z-index',()=>{
+ const core=generateCSS();
+ assert.doesNotMatch(core,/(?:^|[;{\s])(?:position|z-index|translate|transform|isolation)\s*:/);
+ assert.doesNotMatch(core,/::before|::after/);
+ const css=generateColumnRulesCSS();
  for(const name of ['rule-position','rule-start-visible','rule-end-visible'])assert.ok(css.includes(`@property --_gp-${name} { syntax:"<number>"; inherits:false; initial-value:0; }`));
  assert.ok(css.includes('@container style(--_gp-ruled:1) and style(--_gp-measure-ready:1)'));
  assert.ok(css.includes('clamp(0,calc(var(--_gp-gap) - 1),1)'));
@@ -409,4 +414,17 @@ test('vertical spacing amounts and viewport overrides follow mosaic defaults at 
  }
  assert.ok(css.includes('* 200% / var(--_gp-tracks)'));
  assert.ok(!css.includes('@property --gp-vertical-spacing'));
+});
+
+test('all standalone cores preserve the reserved column-rule interface without positioning',async()=>{
+ const {compileSelection}=await import('../src/core/selection.mjs');
+ const {columnRuleProperties}=await import('../src/core/rule-interface.mjs');
+ const {deliveryProfiles,profileCDNTag}=await import('../src/core/profiles.mjs');
+ for(const profile of deliveryProfiles){
+  const css=compileSelection(profile.selection).css,compact=compactPrivateProperties(css);
+  for(const name of columnRuleProperties)assert.equal(compact.properties[name],undefined,name);
+  assert.doesNotMatch(css,/(?:^|[;{\s])(?:position|z-index|translate|transform|isolation)\s*:/);
+ }
+ const tag=profileCDNTag('repeating','0.6.0',{columnRules:true});
+ assert.equal((tag.match(/<link/g)??[]).length,2);assert.match(tag,/@0\.6\.0\/css\/extensions\/column-rules\.min\.css/);
 });

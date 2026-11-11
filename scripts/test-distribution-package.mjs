@@ -28,6 +28,7 @@ for(const name of ['docs/configurator.html','docs/assets/graph-paper/main.css','
 for(const profile of predefinedProfiles)for(const path of Object.values(profile.files)){
  assert.deepEqual(await readFile(join(root,`docs/assets/graph-paper/${path.slice(4)}`)),await readFile(join(root,path)),`${profile.id}: standalone docs mirror`);
 }
+for(const name of ['column-rules.css','column-rules.min.css','column-rules.layer.css','column-rules.layer.min.css'])assert.deepEqual(await readFile(join(root,'css/extensions',name)),await readFile(join(root,'docs/assets/graph-paper/extensions',name)));
 // Both the ordinary UI and the lazy compiler worker must resolve from a docs-
 // only deployment of the actual archive, without Node builtins or parent source.
 const pending=['docs/sequence/css-export.mjs','docs/sequence/export-worker.mjs','docs/sequence/delivery.mjs'],seen=new Set();

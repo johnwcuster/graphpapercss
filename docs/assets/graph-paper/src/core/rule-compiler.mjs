@@ -1,10 +1,11 @@
+import {enhancementCondition} from './features.mjs';
 import {variable as v} from './expressions.mjs';
 
 // Non-inheriting owner metadata. Ordinary content does not acquire rule work.
 export const ruleScalars=['rule-position','rule-start-visible','rule-end-visible'];
 export function ruleDeclarations(enhancementCondition){return `
  @container style(--_gp-ruled:1) and style(--_gp-measure-ready:1) {
-  & > :where(.gp_rule--start,.gp_rule--end) {
+  :where(.gp_rule--start,.gp_rule--end) {
    --_gp-rule-position:calc(${v('inset')} + ${v('repeat-active')} * (${v('repeat-start')} + ${v('slot')} * ${v('gap')}));
    @supports ${enhancementCondition} { --_gp-rule-position:${v('start')}; }
    --_gp-rule-start-visible:calc(clamp(0,calc(${v('gap')} - 1),1) * clamp(0,calc(${v('rule-position')} - ${v('inset')}),1));
@@ -12,10 +13,10 @@ export function ruleDeclarations(enhancementCondition){return `
   }
  }
  @container style(--_gp-rule-start-visible:1) {
-  & > :where(.gp_rule--start)::before { content:""; }
+  :where(.gp_rule--start)::before { content:""; }
  }
  @container style(--_gp-rule-end-visible:1) {
-  & > :where(.gp_rule--end)::after { content:""; }
+  :where(.gp_rule--end)::after { content:""; }
  }
 `;}
 
@@ -41,3 +42,11 @@ export function ruleDecoration(){return `
  background-position:right top; translate:calc(100% - var(--gp-rule-width,1px) / 2) 0;
 }
 `;}
+
+// Standalone extension: consumes the stable rule-interface metadata from core.
+// No generated layout selectors or build-specific compact property names.
+export function generateColumnRulesCSS(){
+ return '/* Graph Paper column-rules extension. MIT license. Requires a matching-version Graph Paper core build. */\n'
+  +ruleScalars.map(n=>`@property --_gp-${n} { syntax:"<number>"; inherits:false; initial-value:0; }`).join('\n')
+  +ruleDecoration()+ruleDeclarations(enhancementCondition);
+}

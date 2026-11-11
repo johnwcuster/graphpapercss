@@ -7,7 +7,7 @@ import {privateNames} from './core-private-names.mjs';
 export async function checkParentCacheIntegration({page,root,set,check,base,url}){
  for(const profile of ['source','minified','queries-off']){
   await page.goto(url);
-  const link=page.locator('link[href*="css/"]');
+  const link=page.locator('link[href*="/css/main"]');
   if(profile==='minified')await link.evaluate(n=>new Promise((resolve,reject)=>{n.onload=resolve;n.onerror=reject;n.href=n.href.replace('main.css','main.min.css');}));
   if(profile==='queries-off'){
    const css=await readFile(new URL('../../css/main.css',import.meta.url),'utf8');

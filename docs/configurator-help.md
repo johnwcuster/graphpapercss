@@ -1,6 +1,6 @@
 # Configurator help
 
-The [configurator](configurator.html) explores **Graph Paper 0.5.2**: one composition, explicit viewport transitions, copyable HTML, and custom CSS downloads. Use the full stylesheet linked beneath the preview or build a standalone stylesheet for your selected sequence. Existing `grid_*` links open the [0.4 configurator reference](configurator-0.4.html).
+The [configurator](configurator.html) explores **Graph Paper 0.6.0**: one composition, explicit viewport transitions, copyable HTML, and custom CSS downloads. Use the full stylesheet linked beneath the preview or build a standalone stylesheet for your selected sequence. Existing `grid_*` links open the [0.4 configurator reference](configurator-0.4.html).
 
 In narrow or short windows, including when browser zoom reduces the available space, Preview controls and Layout controls scroll with the page. Close Layout controls to reach the preview sooner; reopening them brings their heading into view.
 
@@ -109,7 +109,7 @@ Visual aids show the preview ruler, source labels, and item boundaries. The 0–
 
 ## Copy and share
 
-**Copy HTML** copies layout configuration and placeholder items. Replace those placeholders with your content and load the linked 0.5.2 stylesheet. The result runs without configurator JavaScript. The HTML does not include sample explanations, visual aids, or the simulated preview width. Vertical-spacing classes are included on the composition, and enabled padding utilities are included on the placeholder items; no additional author CSS is required.
+**Copy HTML** copies layout configuration and placeholder items. Replace those placeholders with your content and load the matching 0.6.0 CSS delivery. The result runs without configurator JavaScript. The HTML does not include sample explanations, visual aids, or the simulated preview width. Vertical-spacing classes are included on the composition, and enabled padding utilities are included on the placeholder items; no additional author CSS is required.
 
 The stack is implicit unless another base layout is selected. `gp_ruler` establishes shared coordinates; a viewport class such as `gp_md--…` selects a layout from 48rem. Selections carry forward until another transition, while source order stays unchanged. Named refinements use responsive classes. Exact counts use inline custom properties with matching breakpoint prefixes; they require no author-written style tags.
 
@@ -156,3 +156,7 @@ Use Tab to reach controls, arrow keys for native radio groups and selects, and E
 This tool edits **one standalone composition**. It does not edit content, source grouping, nested layouts, sticky behavior, typography, or image crops. Those decisions remain in your markup and content styles. The library supports shared tracks and rebased rulers, but this configurator does not author their nesting.
 
 The [portable on-page inspector](configurator-help-0.4.html#on-page) still targets the 0.4 API. It is not a 0.5 editor. The learning and reference documentation describes the new API. Browsers missing base CSS arithmetic can show a source-order stack instead of the ordinary equal-pairs fallback; the preview reports that limitation. The older configurator and its help are explicitly versioned references only.
+
+## Column rules in 0.6.0
+
+Ruled spacing retains the 56-bit field. Lines come from the optional [column-rules extension](class-reference.md#column-rules-extension). Selecting ruled column gutters shows an extension notice in the CSS section. The CSS notice distinguishes separate core/extension files from a bundled custom download. For a ruled sequence, CDN output includes both matching-version stylesheet links; load core first. **Host yourself → Full library** offers a separate extension download. **Custom build for this sequence** bundles the extension into the downloaded CSS. Loading core alone leaves the gutters in place without lines or rule-owner positioning.

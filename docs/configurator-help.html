@@ -37,9 +37,10 @@
 <li><a href="#choose-stylesheet-delivery">Choose stylesheet delivery</a></li>
 <li><a href="#download-css-for-a-sequence">Download CSS for a sequence</a></li>
 <li><a href="#keyboard-and-panels">Keyboard and panels</a></li>
-<li><a href="#scope">Scope</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
+<li><a href="#scope">Scope</a></li>
+<li><a href="#column-rules-in-060">Column rules in 0.6.0</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
 <article id="page-content" tabindex="-1" class="editorial-document" aria-labelledby="page-heading">
-  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Configurator help</h1><p>The <a href="configurator.html">configurator</a> explores <strong>Graph Paper 0.5.2</strong>: one composition, explicit viewport transitions, copyable HTML, and custom CSS downloads. Use the full stylesheet linked beneath the preview or build a standalone stylesheet for your selected sequence. Existing <code>grid_*</code> links open the <a href="configurator-0.4.html">0.4 configurator reference</a>.</p>
+  <header><p class="editorial-eyebrow">Graph Paper CSS · Documentation</p><h1 id="page-heading">Configurator help</h1><p>The <a href="configurator.html">configurator</a> explores <strong>Graph Paper 0.6.0</strong>: one composition, explicit viewport transitions, copyable HTML, and custom CSS downloads. Use the full stylesheet linked beneath the preview or build a standalone stylesheet for your selected sequence. Existing <code>grid_*</code> links open the <a href="configurator-0.4.html">0.4 configurator reference</a>.</p>
 <p>In narrow or short windows, including when browser zoom reduces the available space, Preview controls and Layout controls scroll with the page. Close Layout controls to reach the preview sooner; reopening them brings their heading into view.</p>
 </header>
 <h2 id="start-with-source-order">Start with source order</h2>
@@ -101,7 +102,7 @@
 <p>The timeline shows each selected layout and its width range; the highlighted segment is active in the preview. Gutters, vertical spacing, and padding are shown in Layout controls. The preview caption reports the simulated viewport width and display scale.</p>
 <p>Visual aids show the preview ruler, source labels, and item boundaries. The 0–64-bit caption appears only while the preview ruler is enabled. They are inspection tools and are omitted from the exported markup. The separate ruler toggle in site navigation shows the documentation page&#39;s ruler.</p>
 <h2 id="copy-and-share">Copy and share</h2>
-<p><strong>Copy HTML</strong> copies layout configuration and placeholder items. Replace those placeholders with your content and load the linked 0.5.2 stylesheet. The result runs without configurator JavaScript. The HTML does not include sample explanations, visual aids, or the simulated preview width. Vertical-spacing classes are included on the composition, and enabled padding utilities are included on the placeholder items; no additional author CSS is required.</p>
+<p><strong>Copy HTML</strong> copies layout configuration and placeholder items. Replace those placeholders with your content and load the matching 0.6.0 CSS delivery. The result runs without configurator JavaScript. The HTML does not include sample explanations, visual aids, or the simulated preview width. Vertical-spacing classes are included on the composition, and enabled padding utilities are included on the placeholder items; no additional author CSS is required.</p>
 <p>The stack is implicit unless another base layout is selected. <code>gp_ruler</code> establishes shared coordinates; a viewport class such as <code>gp_md--…</code> selects a layout from 48rem. Selections carry forward until another transition, while source order stays unchanged. Named refinements use responsive classes. Exact counts use inline custom properties with matching breakpoint prefixes; they require no author-written style tags.</p>
 <p><strong>Copy exploration link</strong> saves item count, transitions, refinements, preview width, and visual aids in the URL. A link is a saved exploration, not a published page or an automatic conversion of a 0.4 recipe.</p>
 <h2 id="choose-stylesheet-delivery">Choose stylesheet delivery</h2>
@@ -125,6 +126,8 @@
 <h2 id="scope">Scope</h2>
 <p>This tool edits <strong>one standalone composition</strong>. It does not edit content, source grouping, nested layouts, sticky behavior, typography, or image crops. Those decisions remain in your markup and content styles. The library supports shared tracks and rebased rulers, but this configurator does not author their nesting.</p>
 <p>The <a href="configurator-help-0.4.html#on-page">portable on-page inspector</a> still targets the 0.4 API. It is not a 0.5 editor. The learning and reference documentation describes the new API. Browsers missing base CSS arithmetic can show a source-order stack instead of the ordinary equal-pairs fallback; the preview reports that limitation. The older configurator and its help are explicitly versioned references only.</p>
+<h2 id="column-rules-in-060">Column rules in 0.6.0</h2>
+<p>Ruled spacing retains the 56-bit field. Lines come from the optional <a href="class-reference.html#column-rules-extension">column-rules extension</a>. Selecting ruled column gutters shows an extension notice in the CSS section. The CSS notice distinguishes separate core/extension files from a bundled custom download. For a ruled sequence, CDN output includes both matching-version stylesheet links; load core first. <strong>Host yourself → Full library</strong> offers a separate extension download. <strong>Custom build for this sequence</strong> bundles the extension into the downloaded CSS. Loading core alone leaves the gutters in place without lines or rule-owner positioning.</p>
 
 </article>
 </div>

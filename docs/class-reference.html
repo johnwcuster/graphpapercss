@@ -28,6 +28,7 @@
 <li><a href="#allocation-and-traversal">Allocation and traversal</a></li>
 <li><a href="#exact-physical-counts">Exact physical counts</a></li>
 <li><a href="#gutters-and-fields">Gutters and fields</a></li>
+<li><a href="#column-rules-extension">Column rules extension</a></li>
 <li><a href="#padding-and-vertical-spacing">Padding and vertical spacing</a></li>
 <li><a href="#counts-fallback-and-source-order">Counts, fallback and source order</a></li>
 <li><a href="#layout-catalogue">Layout catalogue</a></li></ul><p class="editorial-tool-link"><a href="./configurator.html">Explore in the configurator</a></p></nav>
@@ -211,13 +212,35 @@
 </tr>
 </tbody></table></div>
 <p>Use an explicit spacing class in ordinary authoring; the unconfigured field is Full. Responsive forms include <code>gp_lg-spacing--wide</code>. Nominal field bits include internal gutters; actual item spans deduct them. On continued rulers, insets and gutters are bounded to preserve nonempty spans. Mosaics support only Neat/Thin and otherwise stack.</p>
-<p>Ruled spacing reserves the field; decoration also needs the measured coordinate root and an explicit <code>gp_rule--end</code> or <code>gp_rule--start</code> owner on a participant. Choose one owner per shared gutter. The library suppresses outer/nonexistent boundaries. Colors and stroke widths are public host choices:</p>
+<p>Ruled spacing reserves the field. Decoration requires the optional <a href="#column-rules-extension">column-rules extension</a>, plus the measured coordinate root and an explicit <code>gp_rule--end</code> or <code>gp_rule--start</code> owner on a participant. Choose one owner per shared gutter. The library suppresses outer/nonexistent boundaries. Colors and stroke widths are public host choices:</p>
 <pre><code class="language-css">.article-group {
   --gp-rule-color: #52625f;
   --gp-rule-width: 1px;
 }
 </code></pre>
 <p>Rule color defaults to <code>currentColor</code> and width to <code>1px</code>. Keep measurement on the ruler that supplies the relevant coordinate rhythm. See <a href="edges-and-spacing.html">Edges and mixed spacing</a>.</p>
+<h2 id="column-rules-extension">Column rules extension</h2>
+<p>Core supplies gutter geometry; the optional extension draws the lines. Load it after one <strong>matching-version</strong> full or predefined core build. It is not a standalone layout stylesheet.</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/main.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/johnwcuster/graphpapercss@0.6.0/css/extensions/column-rules.min.css&quot;&gt;
+</code></pre>
+<pre><code class="language-html">&lt;section class=&quot;gp_ruler gp_ruler--measure gp_layout--two-3-2 gp_spacing--ruled&quot;&gt;
+  &lt;article class=&quot;gp_rule--end&quot;&gt;First item.&lt;/article&gt;
+  &lt;article class=&quot;gp_rule--end&quot;&gt;Second item.&lt;/article&gt;
+&lt;/section&gt;
+</code></pre>
+<p>For layered core, use <code>column-rules.layer.css</code> or <code>column-rules.layer.min.css</code>; both use the <code>graph-paper</code> layer. The configurator includes the extension in CDN links for a ruled sequence. With self-hosted full CSS, download and load both files. Custom downloads bundle the extension when needed, so they still require only one stylesheet.</p>
+<h3 id="positioning-and-stacking">Positioning and stacking</h3>
+<p><strong>Core assigns no <code>position</code>, <code>z-index</code>, transforms, or decorative pseudo-elements.</strong> Application layering remains author-controlled. Grid placement, padding, and vertical spacing do not opt content into rule decoration.</p>
+<p>Loading the extension gives explicit <code>gp_rule--start</code> / <code>gp_rule--end</code> owners <code>position: relative</code>. Their absolute <code>::before</code> / <code>::after</code> pseudo-elements paint the lines in the gutter. This has specific consequences:</p>
+<ul>
+<li>An absolutely positioned descendant without a closer containing block anchors to the rule owner. Author positioning rules can override the extension&#39;s zero-specificity owner selector.</li>
+<li>The extension assigns no z-index. Relative positioning with <code>z-index: auto</code> does not itself make the owner a stacking context. A translated rule pseudo-element has its own stacking context, which does <strong>not</strong> contain the item&#39;s headings, text, menus, or other content.</li>
+<li>Rule pseudo-elements use <code>pointer-events: none</code>. They can visually intersect content extending into the gutter; they are not guaranteed to paint behind that content.</li>
+<li>Start rules reserve <code>::before</code>; end rules reserve <code>::after</code>. Avoid using that same pseudo-element for another decoration on the owner.</li>
+</ul>
+<p>The positioning applies to marked owners while the extension is loaded, even at widths where the line is suppressed. Existing author styles can independently create stacking contexts. Graph Paper makes no blanket promise that an authored page has none.</p>
+<p><code>gp_ruler--measure</code> is a separate, explicit core facility using <code>container-type: inline-size</code>. It establishes a size-query context and inline-size containment; it is not added to ordinary rulers. Continuations retain the captured bit, while a rebased ruler needs its own measurement marker for lines. Containment behavior has varied across browser versions; do not treat the marker as a general overlay-isolation guarantee. See the <a href="https://www.w3.org/TR/css-position-3/">CSS positioning specification</a>, <a href="https://www.w3.org/TR/css-transforms-2/">transform specification</a>, and <a href="https://drafts.csswg.org/css-conditional-5/#container-type">query-container specification</a>.</p>
 <h2 id="padding-and-vertical-spacing">Padding and vertical spacing</h2>
 <div class="editorial-table" tabindex="0" role="region" aria-label="Reference table"><table>
 <thead>

@@ -1,6 +1,7 @@
 // Selective compilation shared by build tooling and the configurator worker.
 // Full distribution generation is unchanged.
 import {layouts,hinges,spacingModes} from './catalogue.mjs';
+import {generateColumnRulesCSS} from './rule-compiler.mjs';
 import {generateCSS} from './compiler.mjs';
 import {sharedRulerProperties} from './compact.mjs';
 
@@ -41,10 +42,10 @@ export function compileSelection(options={}){
  const steps=options.hinges??hinges.map(([rem])=>rem);
  if(!Array.isArray(steps)||new Set(steps).size!==steps.length||steps.some(rem=>!hinges.some(([r])=>r===rem)))throw Error('Unknown or duplicate viewport hinges');
  const spaces=selected(options.spacing??Object.keys(spacingModes),Object.keys(spacingModes),'spacing modes');
- for(const key of ['padding','verticalSpacing'])if(options[key]!==undefined&&typeof options[key]!=='boolean')throw Error(`Expected boolean ${key}`);
+ for(const key of ['padding','verticalSpacing','columnRules'])if(options[key]!==undefined&&typeof options[key]!=='boolean')throw Error(`Expected boolean ${key}`);
  const normalized={layouts:layouts.filter(p=>ids.has(p.id)),hinges:hinges.filter(([rem])=>steps.includes(rem)),spacingModes:Object.fromEntries(Object.entries(spacingModes).filter(([name])=>spaces.has(name))),padding:options.padding??true,verticalSpacing:options.verticalSpacing??true};
- const generated=generateCSS(normalized);
+ const generated=generateCSS(normalized)+(options.columnRules?'\n'+generateColumnRulesCSS():'');
  return {css:options.prune===false?generated:prunePrivateDeclarations(generated),
-  selection:{layouts:normalized.layouts.map(p=>p.id),hinges:normalized.hinges.map(([rem])=>rem),spacing:Object.keys(normalized.spacingModes),padding:normalized.padding,verticalSpacing:normalized.verticalSpacing}};
+  selection:{layouts:normalized.layouts.map(p=>p.id),hinges:normalized.hinges.map(([rem])=>rem),spacing:Object.keys(normalized.spacingModes),padding:normalized.padding,verticalSpacing:normalized.verticalSpacing,...(options.columnRules!==undefined?{columnRules:options.columnRules}:{})}};
 }
 
